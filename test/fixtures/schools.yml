@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  teacher_id: one
+  full_name: MyString
+  abbreviation: MyString
+  location: MyString
+  moto: MyString
+
+two:
+  teacher_id: two
+  full_name: MyString
+  abbreviation: MyString
+  location: MyString
+  moto: MyString
