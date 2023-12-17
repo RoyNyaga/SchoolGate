@@ -69,4 +69,6 @@ group :test do
 end
 
 # Added Gems
-gem 'devise', '~> 4.9', '>= 4.9.3'
+gem "devise", "~> 4.9", ">= 4.9.3"
+gem "bootstrap"
+gem "sassc-rails"
