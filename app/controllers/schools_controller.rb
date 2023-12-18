@@ -21,7 +21,7 @@ class SchoolsController < ApplicationController
 
   # POST /schools or /schools.json
   def create
-    @school = School.new(school_params)
+    @school = current_teacher.schools.build(school_params)
 
     respond_to do |format|
       if @school.save
@@ -65,6 +65,6 @@ class SchoolsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def school_params
-      params.require(:school).permit(:teacher_id_id, :full_name, :abbreviation, :location, :moto)
+      params.require(:school).permit(:full_name, :abbreviation, :town, :address, :moto)
     end
 end

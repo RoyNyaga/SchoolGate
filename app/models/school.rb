@@ -1,3 +1,3 @@
 class School < ApplicationRecord
-  belongs_to :teacher_id
+  belongs_to :teacher
 end

@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_17_135919) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_18_143433) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "school_classes", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.string "name"
+    t.integer "level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_id"], name: "index_school_classes_on_school_id"
+  end
 
   create_table "schools", force: :cascade do |t|
     t.bigint "teacher_id", null: false
@@ -49,6 +58,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_17_135919) do
     t.index ["teacher_id"], name: "index_workers_on_teacher_id"
   end
 
+  add_foreign_key "school_classes", "schools"
   add_foreign_key "schools", "teachers"
   add_foreign_key "workers", "schools"
   add_foreign_key "workers", "teachers"
