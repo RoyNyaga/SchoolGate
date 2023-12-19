@@ -1,9 +1,13 @@
 <nav class="navbar navbar-light bg-dark fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand">Navbar</a>
-    <form class="d-flex">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
+    <a class="navbar-brand text-white" id="test">Navbar</a>
+    <div class="d-flex">
+      <% if teacher_signed_in? %>
+        <%= link_to "Schools", schools_path, class: "navba-link" %>
+        <%=button_to "Log Out", destroy_teacher_session_path, method: :delete, class: "navba-link" %>
+      <% else %>
+        <%= link_to "Log In", new_teacher_session_path, class: "navba-link" %>
+      <% end %>
+    </div>
   </div>
 </nav>

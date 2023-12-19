@@ -3,7 +3,7 @@ class SchoolsController < ApplicationController
 
   # GET /schools or /schools.json
   def index
-    @schools = School.all
+    @schools = current_teacher.schools
   end
 
   # GET /schools/1 or /schools/1.json
