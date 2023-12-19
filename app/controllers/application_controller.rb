@@ -9,7 +9,10 @@ class ApplicationController < ActionController::Base
   end
 
   def check_for_current_school
-    redirect_to schools_path unless session[:current_school_id]
+    unless session[:current_school_id]
+      redirect_to schools_path
+      return
+    end
   end
 
   private
