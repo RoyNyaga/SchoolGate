@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   resources :school_classes
   resources :workers
-  resources :schools
   devise_for :teachers
   get 'pages/home'
   root to: "pages#home"
@@ -13,4 +12,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  resources :schools do
+    member do 
+      get :setting_landing
+    end
+  end
 end

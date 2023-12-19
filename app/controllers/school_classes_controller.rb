@@ -1,5 +1,6 @@
 class SchoolClassesController < ApplicationController
   before_action :set_school_class, only: %i[ show edit update destroy ]
+  before_action :set_current_school
 
   # GET /school_classes or /school_classes.json
   def index
@@ -68,5 +69,9 @@ class SchoolClassesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def school_class_params
       params.require(:school_class).permit(:school_id, :name, :level)
+    end
+
+    def set_current_school
+      @current_school ||= School.find(session[:current_school_id]) if session[:current_school_id]
     end
 end

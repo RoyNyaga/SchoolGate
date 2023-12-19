@@ -1,0 +1,6 @@
+<div>
+  <ul>
+    <li><%= link_to "School Manager", setting_landing_school_path(@current_school.id) %></li>
+    <li><%= link_to "Manage Classes", school_classes_path(school_id: @school.id) %></li>
+  </ul>
+</div>

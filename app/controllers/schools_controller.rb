@@ -1,5 +1,5 @@
 class SchoolsController < ApplicationController
-  before_action :set_school, only: %i[ show edit update destroy ]
+  before_action :set_school, only: %i[ show edit update destroy school_setting_landing ]
 
   # GET /schools or /schools.json
   def index
@@ -8,6 +8,7 @@ class SchoolsController < ApplicationController
 
   # GET /schools/1 or /schools/1.json
   def show
+    session[:current_school_id] = @school.id
   end
 
   # GET /schools/new
@@ -55,6 +56,9 @@ class SchoolsController < ApplicationController
       format.html { redirect_to schools_url, notice: "School was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def setting_landing
   end
 
   private
