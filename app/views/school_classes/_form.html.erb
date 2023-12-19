@@ -2,7 +2,6 @@
   <% if school_class.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(school_class.errors.count, "error") %> prohibited this school_class from being saved:</h2>
-
       <ul>
         <% school_class.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,22 +9,17 @@
       </ul>
     </div>
   <% end %>
-
   <div>
-    <%= form.label :school_id, style: "display: block" %>
-    <%= form.text_field :school_id %>
+    <%= form.hidden_field :school_id, value: @school.id %>
   </div>
-
   <div>
     <%= form.label :name, style: "display: block" %>
     <%= form.text_field :name %>
   </div>
-
   <div>
     <%= form.label :level, style: "display: block" %>
     <%= form.number_field :level %>
   </div>
-
   <div>
     <%= form.submit %>
   </div>

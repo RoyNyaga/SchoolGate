@@ -3,7 +3,8 @@ class SchoolClassesController < ApplicationController
 
   # GET /school_classes or /school_classes.json
   def index
-    @school_classes = SchoolClass.all
+    @school = School.find(params[:school_id])
+    @school_classes = @school.school_classes
   end
 
   # GET /school_classes/1 or /school_classes/1.json
@@ -13,6 +14,7 @@ class SchoolClassesController < ApplicationController
   # GET /school_classes/new
   def new
     @school_class = SchoolClass.new
+    @school = School.find(params[:school_id])
   end
 
   # GET /school_classes/1/edit

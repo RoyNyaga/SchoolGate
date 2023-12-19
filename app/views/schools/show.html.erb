@@ -1,10 +1,17 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @school %>
-
-<div>
-  <%= link_to "Edit this school", edit_school_path(@school) %> |
-  <%= link_to "Back to schools", schools_path %>
-
-  <%= button_to "Destroy this school", @school, method: :delete %>
-</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <h3>left side bar</h3>
+      <p><%= link_to "Manage Classes", school_classes_path(school_id: @school.id) %>
+      </div>
+      <div class="col-md-9">
+        <p style="color: green"><%= notice %></p>
+        <%= render @school %>
+        <div>
+          <%= link_to "Edit this school", edit_school_path(@school) %> |
+          <%= link_to "Back to schools", schools_path %>
+          <%= button_to "Destroy this school", @school, method: :delete %>
+        </div>
+      </div>
+    </div>
+  </div>

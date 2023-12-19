@@ -1,7 +1,5 @@
 <p style="color: green"><%= notice %></p>
-
 <h1>School classes</h1>
-
 <div id="school_classes">
   <% @school_classes.each do |school_class| %>
     <%= render school_class %>
@@ -10,5 +8,4 @@
     </p>
   <% end %>
 </div>
-
-<%= link_to "New school class", new_school_class_path %>
+<%= link_to "New school class", new_school_class_path(school_id: @school.id) %>
