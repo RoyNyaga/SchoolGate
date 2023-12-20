@@ -1,10 +1,12 @@
 class SchoolsController < ApplicationController
+  layout 'school_layout'
   before_action :set_school, only: %i[ show edit update destroy ]
   before_action :check_for_current_school, except: %i[show index]
 
   # GET /schools or /schools.json
   def index
     @schools = current_teacher.schools
+    render layout: "application"
   end
 
   # GET /schools/1 or /schools/1.json

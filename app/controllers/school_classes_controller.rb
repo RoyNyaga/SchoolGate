@@ -1,4 +1,5 @@
 class SchoolClassesController < ApplicationController
+  layout 'school_layout'
   before_action :set_school_class, only: %i[ show edit update destroy ]
   before_action :set_current_school
   before_action :check_for_current_school
