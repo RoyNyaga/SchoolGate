@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render "shared/school_left_sidebar" %>
+    </div>
+    <div class="col-md-9">
+      <%= render "shared/school_top_navbar" %>
+      <div>
+        <%= render partial: "school_classes/form", 
+        layout: "layouts/modal_layout", 
+        locals: { school_class: @school_class }%>
+      </div>
+    </div>
+  </div>
+</div>

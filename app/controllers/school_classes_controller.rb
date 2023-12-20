@@ -15,7 +15,6 @@ class SchoolClassesController < ApplicationController
   # GET /school_classes/new
   def new
     @school_class = SchoolClass.new
-    @school = School.find(params[:school_id])
   end
 
   # GET /school_classes/1/edit

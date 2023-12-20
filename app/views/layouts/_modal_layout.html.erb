@@ -1,0 +1,16 @@
+<div class="modal fade" style="background: #16080599;" id="customModal" tabindex="-1" aria-labelledby="customModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background: white; border: 2px solid orange;">
+      <div class="modal-header">
+        <button type="button" class="btn-close text-white" style="font-weight: 900;" data-bs-dismiss="modal" aria-label="Close">X</button>
+      </div>
+      <div class="modal-body">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Button trigger modal -->
+<button type="button" class="modal-contact-us-btn" data-bs-toggle="modal" data-bs-target="#customModal">
+  Add A Class
+</button>

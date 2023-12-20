@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   resources :schools do
-    member do 
-      get :setting_landing
+    collection do 
+      get :classes
     end
   end
 end

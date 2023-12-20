@@ -1,5 +1,5 @@
 class SchoolsController < ApplicationController
-  before_action :set_school, only: %i[ show edit update destroy school_setting_landing ]
+  before_action :set_school, only: %i[ show edit update destroy ]
   before_action :check_for_current_school, except: %i[show index]
 
   # GET /schools or /schools.json
@@ -59,7 +59,8 @@ class SchoolsController < ApplicationController
     end
   end
 
-  def setting_landing
+  def classes
+    @school_class = SchoolClass.new
   end
 
   private
