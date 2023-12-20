@@ -14,13 +14,13 @@
   </div>
   <div>
     <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, class: "general-input-styles" %>
   </div>
   <div>
     <%= form.label :level, style: "display: block" %>
-    <%= form.number_field :level %>
+    <%= form.number_field :level, class: "general-input-styles" %>
   </div>
-  <div>
-    <%= form.submit %>
+  <div class="py-4">
+    <%= form.submit class: "general-btn" %>
   </div>
 <% end %>
