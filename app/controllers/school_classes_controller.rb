@@ -30,7 +30,7 @@ class SchoolClassesController < ApplicationController
     respond_to do |format|
       if @school_class.save
         format.html { redirect_to school_class_url(@school_class), notice: "School class was successfully created." }
-        format.json { render :show, status: :created, location: @school_class }
+        format.json { render :show, status: :created, location: @school_class } 
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @school_class.errors, status: :unprocessable_entity }

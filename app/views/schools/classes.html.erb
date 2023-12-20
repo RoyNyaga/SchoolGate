@@ -5,4 +5,13 @@
         layout: "layouts/modal_layout", 
         locals: { school_class: @school_class }%>
   </div>
+  <h1>School classes</h1>
+  <div id="school_classes">
+    <% @school_classes.each do |school_class| %>
+      <%= render partial: "school_classes/school_class", locals: { school_class: school_class } %>
+      <p>
+        <%= link_to "Show this school class", school_class %>
+      </p>
+    <% end %>
+  </div>
 </div>

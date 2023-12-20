@@ -63,6 +63,7 @@ class SchoolsController < ApplicationController
 
   def classes
     @school_class = SchoolClass.new
+    @school_classes = current_school.school_classes
   end
 
   private
