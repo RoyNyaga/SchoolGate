@@ -1,6 +1,7 @@
 class SchoolClassesController < ApplicationController
   before_action :set_school_class, only: %i[ show edit update destroy ]
   before_action :set_current_school
+  before_action :check_for_current_school
 
   # GET /school_classes or /school_classes.json
   def index
