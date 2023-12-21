@@ -2,7 +2,6 @@
   <% if student.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
-
       <ul>
         <% student.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,68 +9,56 @@
       </ul>
     </div>
   <% end %>
-
   <div>
-    <%= form.label :school_id, style: "display: block" %>
-    <%= form.text_field :school_id %>
+    <%= form.hidden_field :school_id, value: current_school.id %>
   </div>
-
-  <div>
-    <%= form.label :school_class_id, style: "display: block" %>
-    <%= form.text_field :school_class_id %>
+  <div class="row">
+    <div class="col-md-8">
+      <%= form.label :full_name, style: "display: block" %>
+      <%= form.text_field :full_name, class: "general-input-styles" %>
+    </div>
+    <div class="col-md-4">
+      <%= form.label :date_of_birth, style: "display: block" %>
+      <%= form.date_field :date_of_birth, class: "general-input-styles" %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :school_class_id, style: "display: block" %>
+      <%= form.collection_select :school_class_id, current_school.school_classes, :id, :name %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :fathers_name, style: "display: block" %>
+      <%= form.text_field :fathers_name, class: "general-input-styles" %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :fathers_contact, style: "display: block" %>
+      <%= form.text_field :fathers_contact, class: "general-input-styles" %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :mothers_name, style: "display: block" %>
+      <%= form.text_field :mothers_name, class: "general-input-styles" %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :mothers_contact, style: "display: block" %>
+      <%= form.text_field :mothers_contact, class: "general-input-styles" %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :guidance_name, style: "display: block" %>
+      <%= form.text_field :guidance_name, class: "general-input-styles" %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :guidance_contact, style: "display: block" %>
+      <%= form.text_field :guidance_contact, class: "general-input-styles" %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :address, style: "display: block" %>
+      <%= form.text_field :address, class: "general-input-styles" %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :subjects, style: "display: block" %>
+      <%= form.text_field :subjects, class: "general-input-styles" %>
+    </div>
   </div>
-
-  <div>
-    <%= form.label :full_name, style: "display: block" %>
-    <%= form.text_field :full_name %>
-  </div>
-
-  <div>
-    <%= form.label :fathers_name, style: "display: block" %>
-    <%= form.text_field :fathers_name %>
-  </div>
-
-  <div>
-    <%= form.label :fathers_contact, style: "display: block" %>
-    <%= form.text_field :fathers_contact %>
-  </div>
-
-  <div>
-    <%= form.label :mothers_name, style: "display: block" %>
-    <%= form.text_field :mothers_name %>
-  </div>
-
-  <div>
-    <%= form.label :mothers_contact, style: "display: block" %>
-    <%= form.text_field :mothers_contact %>
-  </div>
-
-  <div>
-    <%= form.label :guidance_name, style: "display: block" %>
-    <%= form.text_field :guidance_name %>
-  </div>
-
-  <div>
-    <%= form.label :guidance_contact, style: "display: block" %>
-    <%= form.text_field :guidance_contact %>
-  </div>
-
-  <div>
-    <%= form.label :date_of_birth, style: "display: block" %>
-    <%= form.date_field :date_of_birth %>
-  </div>
-
-  <div>
-    <%= form.label :address, style: "display: block" %>
-    <%= form.text_field :address %>
-  </div>
-
-  <div>
-    <%= form.label :subjects, style: "display: block" %>
-    <%= form.text_field :subjects %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="py-3">
+    <%= form.submit class: "general-btn" %>
   </div>
 <% end %>

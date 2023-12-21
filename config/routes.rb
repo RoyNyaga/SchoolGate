@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :schools do
     collection do 
       get :classes
+      get :students
     end
   end
 end

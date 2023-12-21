@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
+  layout 'school_layout'
   before_action :set_student, only: %i[ show edit update destroy ]
 
   # GET /students or /students.json

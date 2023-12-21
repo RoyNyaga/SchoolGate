@@ -1,5 +1,6 @@
 class SchoolClass < ApplicationRecord
   belongs_to :school
+  has_many :students
 
   validates :name, presence: true, uniqueness: { scope: :school_id, 
     message: ": Every Class Should be Unique" }

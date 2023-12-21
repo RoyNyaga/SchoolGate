@@ -1,0 +1,8 @@
+<div id="school-main-div">
+  <%= render "shared/school_manager_navbar" %>
+  <div>
+    <%= render partial: "students/form", 
+        layout: "layouts/modal_layout", 
+        locals: { student: @student, action_name: "Add Student", action_title: "Create A New Student" }%>
+  </div>
+</div>

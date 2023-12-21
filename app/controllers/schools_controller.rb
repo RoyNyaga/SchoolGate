@@ -66,6 +66,11 @@ class SchoolsController < ApplicationController
     @school_classes = current_school.school_classes
   end
 
+  def students
+    @student = Student.new
+    @students = current_school.students
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_school
