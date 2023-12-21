@@ -5,4 +5,24 @@
         layout: "layouts/modal_layout", 
         locals: { student: @student, action_name: "Add Student", action_title: "Create A New Student" }%>
   </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">full names</th>
+        <th scope="col">address</th>
+        <th scope="col">subjects</th>
+        <th scope="col">class</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @students.each do |student| %>
+        <tr>
+          <td><%= student.full_name %></td>
+          <td><%= student.address %></td>
+          <td><%= student.subjects %></td>
+          <td><%= student.school_class.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
