@@ -1,0 +1,37 @@
+<%= form_with(model: subject) do |form| %>
+  <% if subject.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(subject.errors.count, "error") %> prohibited this subject from being saved:</h2>
+
+      <ul>
+        <% subject.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :school_id, style: "display: block" %>
+    <%= form.text_field :school_id %>
+  </div>
+
+  <div>
+    <%= form.label :school_class_id, style: "display: block" %>
+    <%= form.text_field :school_class_id %>
+  </div>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :coefficient, style: "display: block" %>
+    <%= form.text_field :coefficient %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
