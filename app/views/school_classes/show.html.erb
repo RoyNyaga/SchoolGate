@@ -9,7 +9,23 @@
       <%= button_to "Destroy this school class", @school_class, method: :delete %>
     </div>
   </div>
-  <div class="py-5">
-    <h5>Subjects</h5>
+  <div class="row">
+    <div class="col-md-4 py-5">
+      <h5>Subjects</h5>
+      <div>
+        <%= render partial: "subjects/form", 
+        layout: "layouts/modal_layout", 
+        locals: { subject: @subject, action_name: "Add Subject", action_title: "Create Subject" }%>
+      </div>
+      <% @subjects.each do |subject| %>
+        <p><%= link_to subject.name, subject %></p>
+      <% end %>
+    </div>
+    <div class="col-md-4 py-5">
+      <h5>Students</h5>
+    </div>
+    <div class="col-md-4 py-5">
+      <h5>Teachers</h5>
+    </div>
   </div>
 </div>

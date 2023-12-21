@@ -1,10 +1,9 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @subject %>
-
-<div>
-  <%= link_to "Edit this subject", edit_subject_path(@subject) %> |
-  <%= link_to "Back to subjects", subjects_path %>
-
-  <%= button_to "Destroy this subject", @subject, method: :delete %>
-</div>
+<div id="school-main-div">
+  <%= render "shared/school_manager_navbar" %>
+  <%= render @subject %>
+  <div>
+    <%= link_to "Edit this subject", edit_subject_path(@subject) %> |
+    <%= link_to "Back to subjects", subjects_path %>
+    <%= button_to "Destroy this subject", @subject, method: :delete %>
+  </div>
+  <div>

@@ -12,11 +12,13 @@ class SchoolClassesController < ApplicationController
 
   # GET /school_classes/1 or /school_classes/1.json
   def show
+    @subject = Subject.new
+    @subjects = @school_class.subjects
   end
 
   # GET /school_classes/new
   def new
-    @school_class = SchoolClass.new
+    @school_class = SchoolClass.new 
   end
 
   # GET /school_classes/1/edit

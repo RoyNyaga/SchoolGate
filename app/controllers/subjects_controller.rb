@@ -1,4 +1,5 @@
 class SubjectsController < ApplicationController
+  layout 'school_layout'
   before_action :set_subject, only: %i[ show edit update destroy ]
 
   # GET /subjects or /subjects.json
