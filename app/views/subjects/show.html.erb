@@ -1,5 +1,6 @@
 <div id="school-main-div">
   <%= render "shared/school_manager_navbar" %>
+  <%= link_to @school_class.name, @school_class %> / <%= link_to @subject.name, @subject %>
   <%= render @subject %>
   <div>
     <%= link_to "Edit this subject", edit_subject_path(@subject) %> |
