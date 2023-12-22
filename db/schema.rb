@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_21_011327) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_21_235936) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -77,6 +77,18 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_21_011327) do
     t.index ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
   end
 
+  create_table "teachings", force: :cascade do |t|
+    t.bigint "teacher_id", null: false
+    t.bigint "subject_id", null: false
+    t.bigint "school_class_id", null: false
+    t.boolean "is_class_master"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_class_id"], name: "index_teachings_on_school_class_id"
+    t.index ["subject_id"], name: "index_teachings_on_subject_id"
+    t.index ["teacher_id"], name: "index_teachings_on_teacher_id"
+  end
+
   create_table "workers", force: :cascade do |t|
     t.bigint "teacher_id", null: false
     t.bigint "school_id", null: false
@@ -94,6 +106,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_21_011327) do
   add_foreign_key "students", "schools"
   add_foreign_key "subjects", "school_classes"
   add_foreign_key "subjects", "schools"
+  add_foreign_key "teachings", "school_classes"
+  add_foreign_key "teachings", "subjects"
+  add_foreign_key "teachings", "teachers"
   add_foreign_key "workers", "schools"
   add_foreign_key "workers", "teachers"
 end
