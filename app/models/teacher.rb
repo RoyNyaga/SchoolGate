@@ -24,4 +24,5 @@ class Teacher < ApplicationRecord
   def subjects_for_class(school_class)
     class_subjects.where(school_class_id: school_class.id)
   end
+  
 end
