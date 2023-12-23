@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
+  resources :workers
   resources :teachings
   resources :subjects
   resources :students
   resources :school_classes
-  resources :workers
   devise_for :teachers
   get 'pages/home'
   root to: "pages#home"

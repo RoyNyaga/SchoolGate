@@ -65,6 +65,6 @@ class WorkersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def worker_params
-      params.require(:worker).permit(:teacher_id, :school_id, :permission, :monthly_rate)
+      params.require(:worker).permit(:school_id, :teacher_id, :permission, :agreed_salary, :job_description)
     end
 end

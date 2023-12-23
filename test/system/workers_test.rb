@@ -14,7 +14,8 @@ class WorkersTest < ApplicationSystemTestCase
     visit workers_url
     click_on "New worker"
 
-    fill_in "Monthly rate", with: @worker.monthly_rate
+    fill_in "Agreed salary", with: @worker.agreed_salary
+    fill_in "Job description", with: @worker.job_description
     fill_in "Permission", with: @worker.permission
     fill_in "School", with: @worker.school_id
     fill_in "Teacher", with: @worker.teacher_id
@@ -28,7 +29,8 @@ class WorkersTest < ApplicationSystemTestCase
     visit worker_url(@worker)
     click_on "Edit this worker", match: :first
 
-    fill_in "Monthly rate", with: @worker.monthly_rate
+    fill_in "Agreed salary", with: @worker.agreed_salary
+    fill_in "Job description", with: @worker.job_description
     fill_in "Permission", with: @worker.permission
     fill_in "School", with: @worker.school_id
     fill_in "Teacher", with: @worker.teacher_id
