@@ -2,7 +2,6 @@
   <% if teaching.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(teaching.errors.count, "error") %> prohibited this teaching from being saved:</h2>
-
       <ul>
         <% teaching.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,27 +9,22 @@
       </ul>
     </div>
   <% end %>
-
   <div>
     <%= form.label :teacher_id, style: "display: block" %>
     <%= form.text_field :teacher_id %>
   </div>
-
   <div>
     <%= form.label :subject_id, style: "display: block" %>
     <%= form.text_field :subject_id %>
   </div>
-
   <div>
     <%= form.label :school_class_id, style: "display: block" %>
     <%= form.text_field :school_class_id %>
   </div>
-
   <div>
     <%= form.label :is_class_master, style: "display: block" %>
     <%= form.check_box :is_class_master %>
   </div>
-
   <div>
     <%= form.submit %>
   </div>
