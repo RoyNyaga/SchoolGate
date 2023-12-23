@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_23_091018) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_23_095400) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -89,17 +89,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_23_091018) do
     t.index ["teacher_id"], name: "index_teachings_on_teacher_id"
   end
 
-  create_table "workers", force: :cascade do |t|
+  create_table "workings", force: :cascade do |t|
     t.bigint "school_id", null: false
     t.bigint "teacher_id", null: false
     t.integer "permission", default: 0
     t.float "agreed_salary", default: 0.0
     t.string "job_description"
-    t.integer "status"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["school_id"], name: "index_workers_on_school_id"
-    t.index ["teacher_id"], name: "index_workers_on_teacher_id"
+    t.index ["school_id"], name: "index_workings_on_school_id"
+    t.index ["teacher_id"], name: "index_workings_on_teacher_id"
   end
 
   add_foreign_key "school_classes", "schools"
@@ -111,6 +111,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_23_091018) do
   add_foreign_key "teachings", "school_classes"
   add_foreign_key "teachings", "subjects"
   add_foreign_key "teachings", "teachers"
-  add_foreign_key "workers", "schools"
-  add_foreign_key "workers", "teachers"
+  add_foreign_key "workings", "schools"
+  add_foreign_key "workings", "teachers"
 end

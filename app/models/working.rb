@@ -1,4 +1,4 @@
-class Worker < ApplicationRecord
+class Working < ApplicationRecord
   belongs_to :school
   belongs_to :teacher
 end
