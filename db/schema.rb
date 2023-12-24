@@ -19,7 +19,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_24_134203) do
     t.bigint "teacher_id", null: false
     t.bigint "school_id", null: false
     t.integer "permission", default: 0
-    t.float "proposed_salary"
+    t.float "proposed_salary", default: 0.0
     t.text "job_description"
     t.integer "status", default: 0
     t.datetime "created_at", null: false
