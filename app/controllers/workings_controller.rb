@@ -5,6 +5,7 @@ class WorkingsController < ApplicationController
   # GET /workings or /workings.json
   def index
     @workings = Working.all
+    @invitation = Invitation.new
   end
 
   # GET /workings/1 or /workings/1.json

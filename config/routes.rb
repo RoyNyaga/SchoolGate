@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'invitations/new'
   resources :workings
   resources :teachings
   resources :subjects
@@ -22,4 +21,6 @@ Rails.application.routes.draw do
       get :students
     end
   end
+
+  resources :invitations
 end

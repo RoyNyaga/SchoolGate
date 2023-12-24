@@ -1,5 +1,16 @@
 <div id="school-main-div">
   <%= render "shared/school_manager_navbar" %>
+  <div class="row">
+    <div class="col-md-3">
+      <h3>Invitations</h3>
+      <div>
+        <%= render partial: "invitations/form", 
+        layout: "layouts/modal_layout", 
+        locals: { invitation: @invitation, action_name: "Invite Teacher", action_title: "Invite This Teacher" }%>
+      </div>
+    </div>
+    <div class="col-md-9"></div>
+  </div>
   <h1>Workings</h1>
   <div id="workings">
     <% @workings.each do |working| %>
