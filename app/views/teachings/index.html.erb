@@ -1,7 +1,4 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Teachings</h1>
-
 <div id="teachings">
   <% @teachings.each do |teaching| %>
     <%= render teaching %>
@@ -10,5 +7,4 @@
     </p>
   <% end %>
 </div>
-
 <%= link_to "New teaching", new_teaching_path %>

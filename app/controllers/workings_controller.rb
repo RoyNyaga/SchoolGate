@@ -1,4 +1,5 @@
 class WorkingsController < ApplicationController
+  layout 'school_layout'
   before_action :set_working, only: %i[ show edit update destroy ]
 
   # GET /workings or /workings.json
