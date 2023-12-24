@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'invitations/new'
   resources :workings
   resources :teachings
   resources :subjects
