@@ -13,21 +13,23 @@
     <%= form.hidden_field :school_id, value: current_school.id %>
   </div>
   <div>
+    <%= form.hidden_field :sender_id, value: current_teacher.id %>
+  </div>
+  <div>
     <%= form.label :teacher_id, style: "display: block" %>
-    <%= form.text_field :teacher_id %>
-    <%= form.collection_select :teacher_id, Teacher.all, :id, :name %>
+    <%= form.collection_select :teacher_id, Teacher.all, :id, :name, { prompt: "Select Teacher" }, { class: "general-input-styles" } %>
   </div>
   <div>
     <%= form.label :permission, style: "display: block" %>
-    <%= form.select :permission, Working.permissions.map { |k,v| [k.humanize, v] } %>
+    <%= form.select :permission, Working.permissions.map { |k,v| [k.humanize, v] }, { prompt: "Select Permission" }, { class: "general-input-styles" } %>
   </div>
   <div>
-    <%= form.label :agreed_salary, style: "display: block" %>
-    <%= form.number :agreed_salary %>
+    <%= form.label :proposed_salary, style: "display: block" %>
+    <%= form.number_field :proposed_salary, class: "general-input-styles" %>
   </div>
   <div>
     <%= form.label :job_description, style: "display: block" %>
-    <%= form.text_field :job_description %>
+    <%= form.text_field :job_description, class: "general-input-styles" %>
   </div>
   <div>
     <%= form.submit %>

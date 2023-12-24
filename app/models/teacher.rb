@@ -9,6 +9,8 @@ class Teacher < ApplicationRecord
   has_many :workings, dependent: :destroy
   has_many :employers, through: :workings, dependent: :destroy, source: "school"
   has_many :invitations, dependent: :destroy
+  has_many :sent_invitations, class_name: "Invitation", foreign_key: "sender_id"
+
   validates :phone_number, uniqueness: true
 
   def email_required?
@@ -26,5 +28,4 @@ class Teacher < ApplicationRecord
   def subjects_for_class(school_class)
     class_subjects.where(school_class_id: school_class.id)
   end
-  
 end

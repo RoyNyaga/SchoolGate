@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_24_134203) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_24_143938) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "invitations", force: :cascade do |t|
-    t.bigint "sent_by_id", null: false
+    t.bigint "sender_id", null: false
     t.bigint "teacher_id", null: false
     t.bigint "school_id", null: false
     t.integer "permission", default: 0
@@ -25,7 +25,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_24_134203) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["school_id"], name: "index_invitations_on_school_id"
-    t.index ["sent_by_id"], name: "index_invitations_on_sent_by_id"
+    t.index ["sender_id"], name: "index_invitations_on_sender_id"
     t.index ["teacher_id"], name: "index_invitations_on_teacher_id"
   end
 
@@ -88,6 +88,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_24_134203) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "phone_number", null: false
+    t.string "name", default: "", null: false
     t.index ["phone_number"], name: "index_teachers_on_phone_number", unique: true
     t.index ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
   end
