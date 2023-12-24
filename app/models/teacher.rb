@@ -6,8 +6,8 @@ class Teacher < ApplicationRecord
   has_many :schools
   has_many :teachings, dependent: :destroy
   has_many :class_subjects, through: :teachings, source: "subject"
-  has_many :workings
-  has_many :employers, through: workings, dependent: destroy
+  has_many :workings, dependent: :destroy
+  has_many :employers, through: :workings, dependent: :destroy, source: "school"
   validates :phone_number, uniqueness: true
 
   def email_required?

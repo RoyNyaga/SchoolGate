@@ -1,7 +1,7 @@
 class SchoolClass < ApplicationRecord
   belongs_to :school
-  has_many :students
-  has_many :subjects
+  has_many :students, dependent: :destroy
+  has_many :subjects, dependent: :destroy
 
   validates :name, presence: true, uniqueness: { scope: :school_id, 
     message: ": Every Class Should be Unique" }
