@@ -20,13 +20,13 @@ class InvitationsController < ApplicationController
 
   def accept
     @invitation.update(status: Invitation.statuses["accepted"])
-    flash[:success] = "Successfully Accepted Invitation"
     Working.create(school_id: @invitation.school_id,
                    teacher_id: @invitation.teacher_id,
                    permission: @invitation.permission,
                    agreed_salary: @invitation.proposed_salary,
                    job_description: @invitation.job_description)
 
+    flash[:success] = "Successfully Accepted Invitation"
     redirect_to request.referer
   end
 
