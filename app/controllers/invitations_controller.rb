@@ -1,4 +1,6 @@
 class InvitationsController < ApplicationController
+  before_action :set_invitation, only: [:accept, :reject]
+
   def new
   end
 
@@ -16,11 +18,29 @@ class InvitationsController < ApplicationController
     end
   end
 
+  def accept
+    @invitation.update(status: Invitation.statuses["accepted"])
+    flash[:success] = "Successfully Accepted Invitation"
+    Working.create(school_id: @invitation.school_id,
+                   teacher_id: @invitation.teacher_id,
+                   permission: @invitation.permission,
+                   agreed_salary: @invitation.proposed_salary,
+                   job_description: @invitation.job_description)
+
+    redirect_to request.referer
+  end
+
+  def reject
+    @invitation.update(status: Invitation.statuses["rejected"])
+    flash[:success] = "Successfully Rejected Invitation"
+    redirect_to request.referer
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_invitation
-    @invitation = invitation.find(params[:id])
+    @invitation = Invitation.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

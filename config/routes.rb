@@ -27,5 +27,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :invitations
+  resources :invitations do
+    member do
+      put :accept
+      put :reject
+    end
+  end
 end
