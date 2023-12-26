@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_24_143938) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_26_094143) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,20 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_24_143938) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["teacher_id"], name: "index_schools_on_teacher_id"
+  end
+
+  create_table "sequences", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "school_class_id", null: false
+    t.bigint "teacher_id", null: false
+    t.integer "type", null: false
+    t.string "academic_year_start", null: false
+    t.string "academic_year_end", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_class_id"], name: "index_sequences_on_school_class_id"
+    t.index ["school_id"], name: "index_sequences_on_school_id"
+    t.index ["teacher_id"], name: "index_sequences_on_teacher_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -122,6 +136,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_24_143938) do
   add_foreign_key "invitations", "teachers"
   add_foreign_key "school_classes", "schools"
   add_foreign_key "schools", "teachers"
+  add_foreign_key "sequences", "school_classes"
+  add_foreign_key "sequences", "schools"
+  add_foreign_key "sequences", "teachers"
   add_foreign_key "students", "school_classes"
   add_foreign_key "students", "schools"
   add_foreign_key "subjects", "school_classes"

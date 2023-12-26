@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :sequences
   resources :workings
   resources :teachings
   resources :subjects

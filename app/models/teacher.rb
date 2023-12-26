@@ -10,6 +10,7 @@ class Teacher < ApplicationRecord
   has_many :employers, through: :workings, dependent: :destroy, source: "school"
   has_many :invitations, dependent: :destroy
   has_many :sent_invitations, class_name: "Invitation", foreign_key: "sender_id"
+  has_many :sequences, dependent: :destroy
 
   validates :phone_number, uniqueness: true
 

@@ -9,6 +9,9 @@
   </div>
   <div>
     <h5>Teachers</h5>
+    <% @subject.teachers.each do |teacher| %>
+      <p><%= teacher.name %></p>
+    <% end %>
     <%= render partial: "teachings/form", 
         layout: "layouts/modal_layout", 
         locals: { teaching: Teaching.new, action_name: "Assign Teacher", action_title: "Assign Teacher #{@subject.name}" }%>
