@@ -1,10 +1,10 @@
 class SubjectsController < ApplicationController
-  layout 'school_layout'
+  layout "school_layout"
   before_action :set_subject, only: %i[ show edit update destroy ]
 
   # GET /subjects or /subjects.json
   def index
-    @subjects = Subject.all
+    @subjects = current_teacher.class_subjects
   end
 
   # GET /subjects/1 or /subjects/1.json
@@ -60,13 +60,14 @@ class SubjectsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_subject
-      @subject = Subject.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def subject_params
-      params.require(:subject).permit(:school_id, :school_class_id, :name, :coefficient)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_subject
+    @subject = Subject.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def subject_params
+    params.require(:subject).permit(:school_id, :school_class_id, :name, :coefficient)
+  end
 end

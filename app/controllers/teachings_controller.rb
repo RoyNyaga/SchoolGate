@@ -1,4 +1,5 @@
 class TeachingsController < ApplicationController
+  layout "school_layout"
   before_action :set_teaching, only: %i[ show edit update destroy ]
 
   # GET /teachings or /teachings.json
@@ -58,13 +59,14 @@ class TeachingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_teaching
-      @teaching = Teaching.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def teaching_params
-      params.require(:teaching).permit(:teacher_id, :subject_id, :school_class_id, :is_class_master)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_teaching
+    @teaching = Teaching.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def teaching_params
+    params.require(:teaching).permit(:teacher_id, :subject_id, :school_class_id, :is_class_master)
+  end
 end
