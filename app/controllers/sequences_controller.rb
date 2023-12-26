@@ -8,6 +8,8 @@ class SequencesController < ApplicationController
 
   # GET /sequences/1 or /sequences/1.json
   def show
+    @school_class = SchoolClass.find(id: params[:school_class])
+    @teacher = Teacher.find(id: params[:teacher_id])
   end
 
   # GET /sequences/new
@@ -58,13 +60,14 @@ class SequencesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_sequence
-      @sequence = Sequence.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def sequence_params
-      params.require(:sequence).permit(:school_id, :school_class_id, :teacher_id, :type, :academic_year_start, :academic_year_end)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_sequence
+    @sequence = Sequence.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def sequence_params
+    params.require(:sequence).permit(:school_id, :school_class_id, :teacher_id, :type, :academic_year_start, :academic_year_end)
+  end
 end

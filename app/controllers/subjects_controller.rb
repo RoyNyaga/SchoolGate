@@ -1,6 +1,6 @@
 class SubjectsController < ApplicationController
   layout "school_layout"
-  before_action :set_subject, only: %i[ show edit update destroy ]
+  before_action :set_subject, only: %i[ show edit update destroy for_teacher ]
 
   # GET /subjects or /subjects.json
   def index
@@ -57,6 +57,9 @@ class SubjectsController < ApplicationController
       format.html { redirect_to subjects_url, notice: "Subject was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def for_teacher
   end
 
   private

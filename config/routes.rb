@@ -2,13 +2,18 @@ Rails.application.routes.draw do
   resources :sequences
   resources :workings
   resources :teachings
-  resources :subjects
+  resources :subjects do
+    member do
+      get :for_teacher
+    end
+  end
   resources :students
   resources :school_classes
   devise_for :teachers
   resources :teachers do
     collection do
       get :invitations
+      get :subjects
     end
   end
   get "pages/home"
