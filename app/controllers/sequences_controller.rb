@@ -8,12 +8,11 @@ class SequencesController < ApplicationController
 
   # GET /sequences/1 or /sequences/1.json
   def show
-    @school_class = SchoolClass.find(id: params[:school_class])
-    @teacher = Teacher.find(id: params[:teacher_id])
   end
 
   # GET /sequences/new
   def new
+    @school_class = SchoolClass.find(params[:school_class_id])
     @sequence = Sequence.new
   end
 

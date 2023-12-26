@@ -1,4 +1,4 @@
 <div id="school-main-div">
   <%= render @subject %>
-  <%= link_to "Create Sequence", new_sequence_path %>
+  <%= link_to "Create Sequence", new_sequence_path(school_class_id: @subject.school_class_id) %>
 </div>
