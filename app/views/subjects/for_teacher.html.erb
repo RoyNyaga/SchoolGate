@@ -1,4 +1,11 @@
 <div id="school-main-div">
   <%= render @subject %>
   <%= link_to "Create Sequence", new_sequence_path(school_class_id: @subject.school_class_id, subject_id: @subject.id) %>
+  <div class="row">
+    <% @sequences.each do |sequence| %>
+      <div class="col-md-3">
+        <%= render partial: "sequences/sequence", locals: { sequence: sequence } %>
+      </div>
+    <% end %>
+  </div>
 </div>

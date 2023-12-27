@@ -61,6 +61,7 @@ class SubjectsController < ApplicationController
   end
 
   def for_teacher
+    @sequences = current_teacher.sequences
   end
 
   private

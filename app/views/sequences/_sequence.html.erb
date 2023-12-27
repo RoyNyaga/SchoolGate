@@ -1,26 +1,8 @@
-<div id="<%= dom_id sequence %>">
-  <p>
-    <strong>School:</strong>
-    <%= sequence.school_id %>
-  </p>
-  <p>
-    <strong>School class:</strong>
-    <%= sequence.school_class_id %>
-  </p>
-  <p>
-    <strong>Teacher:</strong>
-    <%= sequence.teacher_id %>
-  </p>
-  <p>
-    <strong>Type:</strong>
-    <%= sequence.seq_num %>
-  </p>
-  <p>
-    <strong>Academic year start:</strong>
-    <%= sequence.academic_year_start %>
-  </p>
-  <p>
-    <strong>Academic year end:</strong>
-    <%= sequence.academic_year_end %>
-  </p>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h6 class="card-title"><%= sequence.seq_num.humanize %> | <%= sequence.academic_year_start %> / <%= sequence.academic_year_end %></h6>
+    <h6 class="card-subtitle mb-2 text-muted">Teacher: <%= sequence.teacher.name %></h6>
+    <%= link_to "View", sequence, class: "card-link" %>
+    <%= link_to "Edit", edit_sequence_path(sequence), class: "card-link" %>
+  </div>
 </div>

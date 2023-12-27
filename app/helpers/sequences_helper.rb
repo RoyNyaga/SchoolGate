@@ -6,4 +6,8 @@ module SequencesHelper
       form.number_field :mark, name: "sequence[marks][][mark]", step: "any"
     end
   end
+
+  def generate_sequence_years
+    [Date.today.year + 1, Date.today.year, Date.today.year - 1]
+  end
 end

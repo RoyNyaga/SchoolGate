@@ -23,17 +23,15 @@
   </div>
   <div>
     <%= form.label :seq_num, style: "display: block" %>
-    <%= form.select :seq_num, Sequence.seq_nums.map { |k,v| [k.humanize, k] }, { prompt: "Select Sequence type" }, { class: "general-input-styles" } %>
+    <%= form.select :seq_num, Sequence.seq_nums.map { |k,v| [k.humanize, k] }, {include_blank: 'Select Sequence Number'}, { class: "general-input-styles" } %>
   </div>
   <div>
     <%= form.label :academic_year_start, style: "display: block" %>
-    <%#= form.text_field :academic_year_start %>
-    <%= select_year(Date.today, start_year: Date.today.year + 1, end_year: Date.today.year - 1, field_name: 'academic_year_start', prefix: 'sequence') %>
+    <%= form.select :academic_year_start, generate_sequence_years.map { |v| [v,v] }, {include_blank: 'Select start Year'}, { class: "general-input-styles" } %>
   </div>
   <div>
     <%= form.label :academic_year_end, style: "display: block" %>
-    <%#= form.text_field :academic_year_end %>
-    <%= select_year(Date.today, start_year: Date.today.year + 1, end_year: Date.today.year - 1, field_name: "academic_year_end", prefix: 'sequence' ) %>
+    <%= form.select :academic_year_end, generate_sequence_years.map { |v| [v,v] }, {include_blank: 'Select End Year'}, { class: "general-input-styles" } %>
   </div>
   <table class="table table-hover">
     <thead>
