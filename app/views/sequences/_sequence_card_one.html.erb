@@ -1,1 +1,20 @@
-<h1>Here we are</h1>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Rank</th>
+      <th scope="col">Name</th>
+      <th scope="col">mark</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% num = 1%>
+    <% sequence.hashed_marks.each do |mark| %>
+      <tr>
+        <td><%= num %></td>
+        <td><%= mark["name"] %></td>
+        <td><%= mark["mark"] %></td>
+      </tr>
+      <% num += 1 %>
+    <% end %>
+  </tbody>
+</table>
