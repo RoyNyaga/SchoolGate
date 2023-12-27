@@ -8,7 +8,7 @@
   </thead>
   <tbody>
     <% num = 1%>
-    <% sequence.hashed_marks.each do |mark| %>
+    <% sequence.sort_by_mark_desc.each do |mark| %>
       <tr>
         <td><%= num %></td>
         <td><%= mark["name"] %></td>

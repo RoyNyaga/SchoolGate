@@ -14,6 +14,10 @@ class Sequence < ApplicationRecord
     }
   end
 
+  def sort_by_mark_desc
+    hashed_marks.sort_by { |item| -item["mark"] }
+  end
+
   def title
     "#{seq_num.humanize} #{academic_year_start} / #{academic_year_end}"
   end
