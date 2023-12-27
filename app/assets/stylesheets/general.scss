@@ -32,11 +32,11 @@ label{
 }
 
 .canvas-custom-class{
-  width: 50%;
+  width: 50% !important;
 }
 
 @media screen and (max-width: 700px) {
   .canvas-custom-class{
-    width: 90%;
+    width: 90% !important;
   }
 }
