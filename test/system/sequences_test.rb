@@ -19,7 +19,7 @@ class SequencesTest < ApplicationSystemTestCase
     fill_in "School class", with: @sequence.school_class_id
     fill_in "School", with: @sequence.school_id
     fill_in "Teacher", with: @sequence.teacher_id
-    fill_in "Type", with: @sequence.type
+    fill_in "Type", with: @sequence.seq_num
     click_on "Create Sequence"
 
     assert_text "Sequence was successfully created"
@@ -35,7 +35,7 @@ class SequencesTest < ApplicationSystemTestCase
     fill_in "School class", with: @sequence.school_class_id
     fill_in "School", with: @sequence.school_id
     fill_in "Teacher", with: @sequence.teacher_id
-    fill_in "Type", with: @sequence.type
+    fill_in "Type", with: @sequence.seq_num
     click_on "Update Sequence"
 
     assert_text "Sequence was successfully updated"

@@ -22,8 +22,8 @@
     <%= form.hidden_field :subject_id, value: @subject.id %>
   </div>
   <div>
-    <%= form.label :type, style: "display: block" %>
-    <%= form.select :type, Sequence.types.map { |k,v| [k.humanize, v] }, { prompt: "Select Sequence type" }, { class: "general-input-styles" } %>
+    <%= form.label :seq_num, style: "display: block" %>
+    <%= form.select :seq_num, Sequence.seq_nums.map { |k,v| [k.humanize, k] }, { prompt: "Select Sequence type" }, { class: "general-input-styles" } %>
   </div>
   <div>
     <%= form.label :academic_year_start, style: "display: block" %>

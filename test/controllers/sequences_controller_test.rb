@@ -17,7 +17,7 @@ class SequencesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create sequence" do
     assert_difference("Sequence.count") do
-      post sequences_url, params: { sequence: { academic_year_end: @sequence.academic_year_end, academic_year_start: @sequence.academic_year_start, school_class_id: @sequence.school_class_id, school_id: @sequence.school_id, teacher_id: @sequence.teacher_id, type: @sequence.type } }
+      post sequences_url, params: { sequence: { academic_year_end: @sequence.academic_year_end, academic_year_start: @sequence.academic_year_start, school_class_id: @sequence.school_class_id, school_id: @sequence.school_id, teacher_id: @sequence.teacher_id, type: @sequence.seq_num } }
     end
 
     assert_redirected_to sequence_url(Sequence.last)
@@ -34,7 +34,7 @@ class SequencesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update sequence" do
-    patch sequence_url(@sequence), params: { sequence: { academic_year_end: @sequence.academic_year_end, academic_year_start: @sequence.academic_year_start, school_class_id: @sequence.school_class_id, school_id: @sequence.school_id, teacher_id: @sequence.teacher_id, type: @sequence.type } }
+    patch sequence_url(@sequence), params: { sequence: { academic_year_end: @sequence.academic_year_end, academic_year_start: @sequence.academic_year_start, school_class_id: @sequence.school_class_id, school_id: @sequence.school_id, teacher_id: @sequence.teacher_id, type: @sequence.seq_num } }
     assert_redirected_to sequence_url(@sequence)
   end
 

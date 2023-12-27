@@ -20,6 +20,8 @@ class SequencesController < ApplicationController
 
   # GET /sequences/1/edit
   def edit
+    @school_class = @sequence.school_class
+    @subject = @sequence.subject
   end
 
   # POST /sequences or /sequences.json
@@ -69,7 +71,7 @@ class SequencesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def sequence_params
-    params.require(:sequence).permit(:school_id, :school_class_id, :teacher_id, :type, :subject_id,
+    params.require(:sequence).permit(:school_id, :school_class_id, :teacher_id, :seq_num, :subject_id,
                                      :academic_year_start, :academic_year_end, marks: [:id, :name, :mark])
   end
 end
