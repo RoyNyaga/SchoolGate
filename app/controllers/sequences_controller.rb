@@ -1,4 +1,5 @@
 class SequencesController < ApplicationController
+  before_action :check_for_current_school
   before_action :set_sequence, only: %i[ show edit update destroy ]
 
   # GET /sequences or /sequences.json
@@ -13,6 +14,7 @@ class SequencesController < ApplicationController
   # GET /sequences/new
   def new
     @school_class = SchoolClass.find(params[:school_class_id])
+    @subject = Subject.find(params[:subject_id])
     @sequence = Sequence.new
   end
 
@@ -22,17 +24,17 @@ class SequencesController < ApplicationController
 
   # POST /sequences or /sequences.json
   def create
-    @sequence = Sequence.new(sequence_params)
+    # @sequence = Sequence.new(sequence_params)
 
-    respond_to do |format|
-      if @sequence.save
-        format.html { redirect_to sequence_url(@sequence), notice: "Sequence was successfully created." }
-        format.json { render :show, status: :created, location: @sequence }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @sequence.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @sequence.save
+    #     format.html { redirect_to sequence_url(@sequence), notice: "Sequence was successfully created." }
+    #     format.json { render :show, status: :created, location: @sequence }
+    #   else
+    #     format.html { render :new, status: :unprocessable_entity }
+    #     format.json { render json: @sequence.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /sequences/1 or /sequences/1.json
@@ -67,6 +69,7 @@ class SequencesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def sequence_params
-    params.require(:sequence).permit(:school_id, :school_class_id, :teacher_id, :type, :academic_year_start, :academic_year_end)
+    params.require(:sequence).permit(:school_id, :school_class_id, :teacher_id, :type, :subject_id,
+                                     :academic_year_start, :academic_year_end, marks: [:id, :name, :mark])
   end
 end

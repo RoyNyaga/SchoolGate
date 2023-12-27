@@ -1,5 +1,6 @@
 class SchoolClassesController < ApplicationController
-  layout 'school_layout'
+  layout "school_layout"
+  before_action :check_for_current_school
   before_action :set_school_class, only: %i[ show edit update destroy ]
   before_action :set_current_school
   before_action :check_for_current_school
@@ -18,7 +19,7 @@ class SchoolClassesController < ApplicationController
 
   # GET /school_classes/new
   def new
-    @school_class = SchoolClass.new 
+    @school_class = SchoolClass.new
   end
 
   # GET /school_classes/1/edit
@@ -32,7 +33,7 @@ class SchoolClassesController < ApplicationController
     respond_to do |format|
       if @school_class.save
         format.html { redirect_to school_class_url(@school_class), notice: "School class was successfully created." }
-        format.json { render :show, status: :created, location: @school_class } 
+        format.json { render :show, status: :created, location: @school_class }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @school_class.errors, status: :unprocessable_entity }
@@ -64,17 +65,18 @@ class SchoolClassesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_school_class
-      @school_class = SchoolClass.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def school_class_params
-      params.require(:school_class).permit(:school_id, :name, :level)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_school_class
+    @school_class = SchoolClass.find(params[:id])
+  end
 
-    def set_current_school
-      @current_school ||= School.find(session[:current_school_id]) if session[:current_school_id]
-    end
+  # Only allow a list of trusted parameters through.
+  def school_class_params
+    params.require(:school_class).permit(:school_id, :name, :level)
+  end
+
+  def set_current_school
+    @current_school ||= School.find(session[:current_school_id]) if session[:current_school_id]
+  end
 end

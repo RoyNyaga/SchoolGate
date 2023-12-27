@@ -2,7 +2,6 @@
   <% if sequence.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(sequence.errors.count, "error") %> prohibited this sequence from being saved:</h2>
-
       <ul>
         <% sequence.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,37 +9,54 @@
       </ul>
     </div>
   <% end %>
-
   <div>
-    <%= form.label :school_id, style: "display: block" %>
-    <%= form.text_field :school_id %>
+    <%= form.hidden_field :school_id, value: current_school.id %>
   </div>
-
   <div>
-    <%= form.label :school_class_id, style: "display: block" %>
-    <%= form.text_field :school_class_id %>
+    <%= form.hidden_field :school_class_id, value: @school_class.id %>
   </div>
-
   <div>
-    <%= form.label :teacher_id, style: "display: block" %>
-    <%= form.text_field :teacher_id %>
+    <%= form.hidden_field :teacher_id, value: current_teacher.id %>
   </div>
-
+  <div>
+    <%= form.hidden_field :subject_id, value: @subject.id %>
+  </div>
   <div>
     <%= form.label :type, style: "display: block" %>
     <%= form.number_field :type %>
   </div>
-
   <div>
     <%= form.label :academic_year_start, style: "display: block" %>
-    <%= form.text_field :academic_year_start %>
+    <%#= form.text_field :academic_year_start %>
+    <%= select_year(Date.today, start_year: Date.today.year + 1, end_year: Date.today.year - 1, field_name: 'academic_year_start', prefix: 'sequence') %>
   </div>
-
   <div>
     <%= form.label :academic_year_end, style: "display: block" %>
-    <%= form.text_field :academic_year_end %>
+    <%#= form.text_field :academic_year_end %>
+    <%= select_year(Date.today, start_year: Date.today.year + 1, end_year: Date.today.year - 1, field_name: "academic_year_end", prefix: 'sequence' ) %>
   </div>
-
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Name</th>
+        <th scope="col">mark</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% num = 1%>
+      <% @school_class.students.each do |student| %>
+        <%= form.hidden_field :id, name: "sequence[marks][][id]", value: student.id %>
+        <%= form.hidden_field :id, name: "sequence[marks][][name]", value: student.full_name %>
+        <tr>
+          <td><%= num %></td>
+          <td><%= student.full_name %></td>
+          <td><%= form.number_field :mark, name: "sequence[marks][][mark]", step: "any" %></td>
+        </tr>
+        <% num += 1 %>
+      <% end %>
+    </tbody>
+  </table>
   <div>
     <%= form.submit %>
   </div>

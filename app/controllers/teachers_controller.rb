@@ -1,5 +1,6 @@
 class TeachersController < ApplicationController
   layout "school_layout"
+  before_action :check_for_current_school
 
   def invitations
     @pending = current_teacher.invitations.pending

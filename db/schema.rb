@@ -60,8 +60,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_164715) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "marks", default: [], array: true
+    t.bigint "subject_id", null: false
     t.index ["school_class_id"], name: "index_sequences_on_school_class_id"
     t.index ["school_id"], name: "index_sequences_on_school_id"
+    t.index ["subject_id"], name: "index_sequences_on_subject_id"
     t.index ["teacher_id"], name: "index_sequences_on_teacher_id"
   end
 
@@ -139,6 +141,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_164715) do
   add_foreign_key "schools", "teachers"
   add_foreign_key "sequences", "school_classes"
   add_foreign_key "sequences", "schools"
+  add_foreign_key "sequences", "subjects"
   add_foreign_key "sequences", "teachers"
   add_foreign_key "students", "school_classes"
   add_foreign_key "students", "schools"

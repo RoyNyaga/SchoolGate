@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController
-  layout 'school_layout'
+  layout "school_layout"
+  before_action :check_for_current_school
   before_action :set_student, only: %i[ show edit update destroy ]
 
   # GET /students or /students.json
@@ -59,13 +60,14 @@ class StudentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_student
-      @student = Student.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def student_params
-      params.require(:student).permit(:school_id, :school_class_id, :full_name, :fathers_name, :fathers_contact, :mothers_name, :mothers_contact, :guidance_name, :guidance_contact, :date_of_birth, :address, :subjects)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_student
+    @student = Student.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def student_params
+    params.require(:student).permit(:school_id, :school_class_id, :full_name, :fathers_name, :fathers_contact, :mothers_name, :mothers_contact, :guidance_name, :guidance_contact, :date_of_birth, :address, :subjects)
+  end
 end

@@ -1,5 +1,6 @@
 class SchoolsController < ApplicationController
-  layout 'school_layout'
+  layout "school_layout"
+  before_action :check_for_current_school
   before_action :set_school, only: %i[ show edit update destroy ]
   before_action :check_for_current_school, except: %i[show index]
 
@@ -72,13 +73,14 @@ class SchoolsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_school
-      @school = School.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def school_params
-      params.require(:school).permit(:full_name, :abbreviation, :town, :address, :moto)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_school
+    @school = School.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def school_params
+    params.require(:school).permit(:full_name, :abbreviation, :town, :address, :moto)
+  end
 end

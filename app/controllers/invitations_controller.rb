@@ -1,4 +1,5 @@
 class InvitationsController < ApplicationController
+  before_action :check_for_current_school
   before_action :set_invitation, only: [:accept, :reject]
 
   def new

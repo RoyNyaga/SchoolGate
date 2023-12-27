@@ -1,5 +1,6 @@
 class WorkingsController < ApplicationController
-  layout 'school_layout'
+  layout "school_layout"
+  before_action :check_for_current_school
   before_action :set_working, only: %i[ show edit update destroy ]
 
   # GET /workings or /workings.json
@@ -60,13 +61,14 @@ class WorkingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_working
-      @working = Working.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def working_params
-      params.require(:working).permit(:school_id, :teacher_id, :permission, :agreed_salary, :job_description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_working
+    @working = Working.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def working_params
+    params.require(:working).permit(:school_id, :teacher_id, :permission, :agreed_salary, :job_description)
+  end
 end
