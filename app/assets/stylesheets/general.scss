@@ -30,3 +30,13 @@ label{
 .general-btn:hover{
   background-color: #222527;
 }
+
+.canvas-custom-class{
+  width: 50%;
+}
+
+@media screen and (max-width: 700px) {
+  .canvas-custom-class{
+    width: 90%;
+  }
+}

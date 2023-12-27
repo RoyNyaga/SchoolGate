@@ -9,4 +9,8 @@ class Sequence < ApplicationRecord
   def hashed_marks
     self.marks.map { |m| eval(m) }
   end
+
+  def title
+    "#{seq_num.humanize} #{academic_year_start} / #{academic_year_end}"
+  end
 end
