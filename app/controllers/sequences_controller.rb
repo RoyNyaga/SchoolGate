@@ -24,17 +24,17 @@ class SequencesController < ApplicationController
 
   # POST /sequences or /sequences.json
   def create
-    # @sequence = Sequence.new(sequence_params)
+    @sequence = Sequence.new(sequence_params)
 
-    # respond_to do |format|
-    #   if @sequence.save
-    #     format.html { redirect_to sequence_url(@sequence), notice: "Sequence was successfully created." }
-    #     format.json { render :show, status: :created, location: @sequence }
-    #   else
-    #     format.html { render :new, status: :unprocessable_entity }
-    #     format.json { render json: @sequence.errors, status: :unprocessable_entity }
-    #   end
-    # end
+    respond_to do |format|
+      if @sequence.save
+        format.html { redirect_to sequence_url(@sequence), notice: "Sequence was successfully created." }
+        format.json { render :show, status: :created, location: @sequence }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @sequence.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # PATCH/PUT /sequences/1 or /sequences/1.json
