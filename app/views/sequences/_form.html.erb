@@ -51,7 +51,7 @@
         <tr>
           <td><%= num %></td>
           <td><%= student.full_name %></td>
-          <td><%= form.number_field :mark, name: "sequence[marks][][mark]", step: "any" %></td>
+          <td><%= generate_student_marks_input(form, sequence, student) %></td>
         </tr>
         <% num += 1 %>
       <% end %>
