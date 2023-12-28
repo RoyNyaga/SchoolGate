@@ -61,7 +61,7 @@ class SubjectsController < ApplicationController
   end
 
   def for_teacher
-    @sequences = current_teacher.sequences
+    @sequences = current_teacher.sequences.where(subject_id: @subject.id)
   end
 
   private

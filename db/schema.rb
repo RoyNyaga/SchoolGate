@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_27_101621) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_28_120806) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -122,6 +122,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_27_101621) do
     t.index ["teacher_id"], name: "index_teachings_on_teacher_id"
   end
 
+  create_table "terms", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.integer "term_type", default: 1, null: false
+    t.string "academic_year_start"
+    t.string "academic_year_end"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_id"], name: "index_terms_on_school_id"
+  end
+
   create_table "workings", force: :cascade do |t|
     t.bigint "school_id", null: false
     t.bigint "teacher_id", null: false
@@ -150,6 +160,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_27_101621) do
   add_foreign_key "teachings", "school_classes"
   add_foreign_key "teachings", "subjects"
   add_foreign_key "teachings", "teachers"
+  add_foreign_key "terms", "schools"
   add_foreign_key "workings", "schools"
   add_foreign_key "workings", "teachers"
 end
