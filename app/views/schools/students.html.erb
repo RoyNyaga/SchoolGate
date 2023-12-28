@@ -29,6 +29,7 @@
     <thead>
       <tr>
         <th scope="col">No</th>
+        <th scope="col">subject</th>
         <th scope="col">seq 1</th>
         <th scope="col">seq 2</th>
         <th scope="col">Avg/20</th>
@@ -42,13 +43,28 @@
     </thead>
     <tbody>
       <% @students.each do |student| %>
-        <%= sequences = Sequence.where(school_class_id: student.school_class_id) %>
-        <tr>
-          <td><%= student.full_name %></td>
-          <td><%= student.address %></td>
-          <td><%= student.subjects %></td>
-          <td><%= student.school_class.name %></td>
-        </tr>
+        <% num = 1 %>
+        <% subjects = student.school_class.subjects %>
+        <% subjects.each do |subject| %>
+          <% first_seq, second_seq = Term.first_term.first.sequences.where(subject_id: subject.id).order(:seq_num) %>
+          <% first_seq_mark = student.sequence_mark_per_subject(first_seq.hashed_marks)["mark"] %>
+          <% second_seq_mark = student.sequence_mark_per_subject(second_seq.hashed_marks)["mark"]%>
+          <% average_mark = (first_seq_mark + second_seq_mark) / 2 %>
+          <tr>
+            <td><%= num %></td>
+            <td><%= subject.name %></td>
+            <td><%= first_seq_mark  %></td>
+            <td><%= second_seq_mark %></td>
+            <td><%= average_mark %></td>
+            <td><%= subject.coefficient %></td>
+            <td><%= average_mark * subject.coefficient %></td>
+            <td>To Do</td>
+            <td>To Do</td>
+            <td><%= subject.teachers.first.name %></td>
+            <td>To Do</td>
+          </tr>
+          <% num += 1%>
+        <% end %>
       <% end %>
     </tbody>
   </table>

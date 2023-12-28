@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :report_cards
   resources :terms
   resources :sequences
   resources :workings

@@ -8,4 +8,5 @@ class School < ApplicationRecord
   has_many :invitations, dependent: :destroy
   has_many :sequences, dependent: :destroy
   has_many :terms
+  has_many :report_cards
 end

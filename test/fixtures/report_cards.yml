@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  school: one
+  school_class: one
+  term: one
+  average: 1.5
+  rank: 1
+  class_average: 1
+  passed_subjects: 1
+
+two:
+  school: two
+  school_class: two
+  term: two
+  average: 1.5
+  rank: 1
+  class_average: 1
+  passed_subjects: 1
