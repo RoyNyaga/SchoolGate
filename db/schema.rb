@@ -37,6 +37,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_28_145619) do
     t.integer "rank"
     t.integer "class_average"
     t.integer "passed_subjects"
+    t.text "details", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["school_class_id"], name: "index_report_cards_on_school_class_id"

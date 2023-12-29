@@ -8,6 +8,7 @@ class CreateReportCards < ActiveRecord::Migration[7.1]
       t.integer :rank
       t.integer :class_average
       t.integer :passed_subjects
+      t.text :details, array: true, default: []
 
       t.timestamps
     end
