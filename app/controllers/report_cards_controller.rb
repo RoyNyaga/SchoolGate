@@ -1,8 +1,10 @@
 class ReportCardsController < ApplicationController
+  layout "school_layout"
   before_action :set_report_card, only: %i[ show edit update destroy ]
 
   # GET /report_cards or /report_cards.json
   def index
+    @term = Term.new
     @report_cards = ReportCard.all
   end
 
@@ -58,13 +60,14 @@ class ReportCardsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_report_card
-      @report_card = ReportCard.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def report_card_params
-      params.require(:report_card).permit(:school_id, :school_class_id, :term_id, :average, :rank, :class_average, :passed_subjects)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_report_card
+    @report_card = ReportCard.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def report_card_params
+    params.require(:report_card).permit(:school_id, :school_class_id, :term_id, :average, :rank, :class_average, :passed_subjects)
+  end
 end
