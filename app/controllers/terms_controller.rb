@@ -25,8 +25,8 @@ class TermsController < ApplicationController
 
     respond_to do |format|
       if @term.save
-        format.html { redirect_to term_url(@term), notice: "Term was successfully created." }
-        format.json { render :show, status: :created, location: @term }
+        flash[:success] = "Successfully created a term"
+        redirect_to request.referer
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @term.errors, status: :unprocessable_entity }
@@ -58,13 +58,14 @@ class TermsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_term
-      @term = Term.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def term_params
-      params.require(:term).permit(:term_type, :academic_year_start, :academic_year_end, :school_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_term
+    @term = Term.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def term_params
+    params.require(:term).permit(:term_type, :academic_year_start, :academic_year_end, :school_id)
+  end
 end

@@ -27,11 +27,11 @@
   </div>
   <div>
     <%= form.label :academic_year_start, style: "display: block" %>
-    <%= form.select :academic_year_start, generate_sequence_years.map { |v| [v,v] }, {include_blank: 'Select start Year'}, { class: "general-input-styles" } %>
+    <%= form.select :academic_year_start, generate_years.map { |v| [v,v] }, {include_blank: 'Select start Year'}, { class: "general-input-styles" } %>
   </div>
   <div>
     <%= form.label :academic_year_end, style: "display: block" %>
-    <%= form.select :academic_year_end, generate_sequence_years.map { |v| [v,v] }, {include_blank: 'Select End Year'}, { class: "general-input-styles" } %>
+    <%= form.select :academic_year_end, generate_years.map { |v| [v,v] }, {include_blank: 'Select End Year'}, { class: "general-input-styles" } %>
   </div>
   <table class="table table-hover">
     <thead>

@@ -7,7 +7,7 @@ module SequencesHelper
     end
   end
 
-  def generate_sequence_years
+  def generate_years
     [Date.today.year + 1, Date.today.year, Date.today.year - 1]
   end
 end
