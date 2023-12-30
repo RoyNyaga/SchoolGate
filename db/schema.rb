@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_28_145619) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_30_114556) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -142,7 +142,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_28_145619) do
 
   create_table "terms", force: :cascade do |t|
     t.bigint "school_id", null: false
-    t.integer "term_type", default: 1, null: false
+    t.integer "term_type", null: false
     t.string "academic_year_start"
     t.string "academic_year_end"
     t.datetime "created_at", null: false

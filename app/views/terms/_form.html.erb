@@ -9,21 +9,19 @@
       </ul>
     </div>
   <% end %>
-  <div>
+  <div class="py-2">
     <%= form.label :term_type, style: "display: block" %>
-    <%= form.number_field :term_type %>
     <%= form.select :term_type, Term.term_types.map { |k,v| [k.humanize, k] }, {include_blank: 'Select Term Number'}, { class: "general-input-styles" } %>
   </div>
-  <div>
+  <div class="py-2">
     <%= form.label :academic_year_start, style: "display: block" %>
-    <%= form.select :academic_year_start, generate_years.map { |v| [v,v] }, {include_blank: 'Select End Year'}, { class: "general-input-styles" } %>
+    <%= form.select :academic_year_start, generate_years.map { |v| [v,v] }, {include_blank: 'Select start Year'}, { class: "general-input-styles" } %>
   </div>
-  <div>
+  <div class="py-2">
     <%= form.label :academic_year_end, style: "display: block" %>
     <%= form.select :academic_year_end, generate_years.map { |v| [v,v] }, {include_blank: 'Select End Year'}, { class: "general-input-styles" } %>
   </div>
-  <div>
-    <%= form.label :school_id, style: "display: block" %>
+  <div class="py-2">
     <%= form.hidden_field :school_id, value: current_school.id %>
   </div>
   <div>

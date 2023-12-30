@@ -23,14 +23,12 @@ class TermsController < ApplicationController
   def create
     @term = Term.new(term_params)
 
-    respond_to do |format|
-      if @term.save
-        flash[:success] = "Successfully created a term"
-        redirect_to request.referer
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @term.errors, status: :unprocessable_entity }
-      end
+    if @term.save
+      flash[:success] = "Successfully created a term"
+      redirect_to request.referer
+    else
+      flash.now[:error] = "There was an issue while saving this Term"
+      render :new
     end
   end
 
