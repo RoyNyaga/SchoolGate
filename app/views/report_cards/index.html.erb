@@ -5,7 +5,14 @@
         layout: "layouts/modal_layout", 
         locals: { term: @term, action_name: "New Term", action_title: "Create A New Term" }%>
   <div class="row">
-    <div class="col-md-3"></div>
+    <% @terms.each do |term| %>
+      <div class="col-md-3">
+        <%= render term %>
+        <p>
+          <%= link_to "Show this term", term %>
+        </p>
+      </div>
+    <% end %>
   </div>
   <div id="report_cards">
     <% @report_cards.each do |report_card| %>

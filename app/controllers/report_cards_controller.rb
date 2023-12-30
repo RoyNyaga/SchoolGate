@@ -6,6 +6,7 @@ class ReportCardsController < ApplicationController
   def index
     @term = Term.new
     @report_cards = ReportCard.all
+    @terms = current_school.terms
   end
 
   # GET /report_cards/1 or /report_cards/1.json

@@ -4,4 +4,8 @@ class Term < ApplicationRecord
   has_many :report_cards
 
   enum term_type: { first_term: 1, second_term: 2, third_term: 3 }
+
+  def title
+    "#{term_type.humanize} #{academic_year_start} / #{academic_year_end}"
+  end
 end
