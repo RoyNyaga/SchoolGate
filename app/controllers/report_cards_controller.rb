@@ -7,6 +7,7 @@ class ReportCardsController < ApplicationController
     @term = Term.new
     @report_cards = ReportCard.all
     @terms = current_school.terms
+    @report_card = ReportCard.new
   end
 
   # GET /report_cards/1 or /report_cards/1.json
@@ -58,6 +59,9 @@ class ReportCardsController < ApplicationController
       format.html { redirect_to report_cards_url, notice: "Report card was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def create_bulk_report_cards
   end
 
   private
