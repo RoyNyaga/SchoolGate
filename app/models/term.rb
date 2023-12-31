@@ -9,11 +9,9 @@ class Term < ApplicationRecord
     "#{term_type.humanize} #{academic_year_start} / #{academic_year_end}"
   end
 
-  def subject_rank_per_student(subject_id)
+  def sum_sequence_subject_marks(subject_id, first_seq, second_seq) # returns an array of marks hases with the sum of first sequence and second sequence marks
     first_seq, second_seq = sequences.where(subject_id: subject.id).order(:seq_num)
-  end
 
-  def sum_sequence_subject_marks(first_seq, second_seq)
     result = []
     first_seq_marks = first_seq.hashed_marks
     second_seq_marks = second_seq.hashed_marks
