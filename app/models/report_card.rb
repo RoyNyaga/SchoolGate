@@ -22,10 +22,10 @@ class ReportCard < ApplicationRecord
         sequence_averages = @term.calc_sequence_averages(sequence_marks)
         first_seq_mark = student.sequence_mark_per_subject(first_seq.hashed_marks)
         second_seq_mark = student.sequence_mark_per_subject(second_seq.hashed_marks)
-        score = average_mark * subject.coefficient
-        total_score += score
         total_coefficient += subject.coefficient
         average_mark = (first_seq_mark + second_seq_mark) / 2
+        score = average_mark * subject.coefficient
+        total_score += score
         subject_detail[:name] = subject.name
         subject_detail[:first_seq_mark] = first_seq_mark
         subject_detail[:second_seq_mark] = second_seq_mark
@@ -39,6 +39,10 @@ class ReportCard < ApplicationRecord
 
         details << subject_detail
       end
+
+      report_card_object[:total_score] = total_score
+      report_card_object[:total_coefficient] = total_coefficient
+      report_card_object[:average] = (total_score / total_coefficient)
       report_card_object[:subject_details] = details
       bulk_report << report_card_object
     end
