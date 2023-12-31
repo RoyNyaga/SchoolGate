@@ -11,7 +11,7 @@ class ReportCard < ApplicationRecord
     @subjects = @school_class.subjects
     bulk_report = []
     @students.each do |student|
-      report_card_object = { school_id: @school.id, school_class_id: @school_class.id, term: @term.id }
+      report_card_object = { school_id: @school.id, school_class_id: @school_class.id, term: @term.id, student_id: student.id }
       details = []
       @subjects.each do |subject|
         subject_detail = {}
