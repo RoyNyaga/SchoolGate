@@ -11,4 +11,10 @@ class Student < ApplicationRecord
     sequence_mark = sequence_mark_per_subject(marks)
     all_marks.index(sequence_mark) + 1
   end
+
+  def sequence_rank(sequence_averages)
+    mark = sequence_mark_per_subject(sequence_averages)
+    arr = sequence_averages.map { |mark| mark["mark"] }.uniq
+    arr.index(mark) + 1
+  end
 end
