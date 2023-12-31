@@ -25,3 +25,6 @@ Things you may want to cover:
 
 # Boostrap related articles
 - https://dev.to/coorasse/rails-7-bootstrap-5-and-importmaps-without-nodejs-4g8
+
+# Jobs and Ques
+- https://gorails.com/episodes/solid-queue-rails
