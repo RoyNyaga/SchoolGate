@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_31_122808) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_31_155824) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,6 +41,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_31_122808) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "student_id", null: false
+    t.float "total_score", default: 0.0
+    t.float "total_coefficient", default: 0.0
     t.index ["school_class_id"], name: "index_report_cards_on_school_class_id"
     t.index ["school_id"], name: "index_report_cards_on_school_id"
     t.index ["student_id"], name: "index_report_cards_on_student_id"
