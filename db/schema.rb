@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_30_114556) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_31_122808) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,8 +40,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_114556) do
     t.text "details", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "student_id", null: false
     t.index ["school_class_id"], name: "index_report_cards_on_school_class_id"
     t.index ["school_id"], name: "index_report_cards_on_school_id"
+    t.index ["student_id"], name: "index_report_cards_on_student_id"
     t.index ["term_id"], name: "index_report_cards_on_term_id"
   end
 
@@ -167,6 +169,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_114556) do
   add_foreign_key "invitations", "teachers"
   add_foreign_key "report_cards", "school_classes"
   add_foreign_key "report_cards", "schools"
+  add_foreign_key "report_cards", "students"
   add_foreign_key "report_cards", "terms"
   add_foreign_key "school_classes", "schools"
   add_foreign_key "schools", "teachers"
