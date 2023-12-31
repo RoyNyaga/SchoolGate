@@ -46,7 +46,10 @@
         <% num = 1 %>
         <% subjects = student.school_class.subjects %>
         <% subjects.each do |subject| %>
-          <% first_seq, second_seq = Term.first_term.first.sequences.where(subject_id: subject.id).order(:seq_num) %>
+          <% @term = Term.first_term.first %>
+          <% first_seq, second_seq = @term.sequences.where(subject_id: subject.id).order(:seq_num) %>
+          <% sequence_marks = @term.sum_sequence_subject_marks(subject.id)%>
+          <% sequence_averages = @term.calc_sequence_averages(sequence_marks) %>
           <% first_seq_mark = student.sequence_mark_per_subject(first_seq.hashed_marks) %>
           <% second_seq_mark = student.sequence_mark_per_subject(second_seq.hashed_marks) %>
           <% average_mark = (first_seq_mark + second_seq_mark) / 2 %>
@@ -59,7 +62,7 @@
             <td><%= subject.coefficient %></td>
             <td><%= average_mark * subject.coefficient %></td>
             <td>To Do</td>
-            <td>To Do</td>
+            <td><%= student.sequence_rank(sequence_averages) %></td>
             <td><%= subject.teachers.first.name %></td>
             <td>To Do</td>
           </tr>

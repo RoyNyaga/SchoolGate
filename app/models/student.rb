@@ -14,7 +14,7 @@ class Student < ApplicationRecord
 
   def sequence_rank(sequence_averages)
     mark = sequence_mark_per_subject(sequence_averages)
-    arr = sequence_averages.map { |mark| mark["mark"] }.uniq
+    arr = sequence_averages.map { |mark| mark["mark"] }.uniq.sort.reverse
     arr.index(mark) + 1
   end
 end

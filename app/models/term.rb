@@ -9,8 +9,15 @@ class Term < ApplicationRecord
     "#{term_type.humanize} #{academic_year_start} / #{academic_year_end}"
   end
 
-  def sum_sequence_subject_marks # returns an array of marks hases with the sum of first sequence and second sequence marks
-    first_seq, second_seq = sequences.where(subject_id: subject.id).order(:seq_num)
+  def sum_sequence_subject_marks(subject_id) # returns an array of marks hases with the sum of first sequence and second sequence marks
+    first_seq, second_seq = sequences.where(subject_id: subject_id).order(:seq_num)
+    subject = Subject.find(subject_id)
+    puts "This is the subject - #{subject.name}"
+    puts "This is the subject - #{subject.name}"
+    puts "This is the subject - #{subject.name}"
+    puts "This is the subject - #{subject.name}"
+    puts "This is the subject - #{subject.name}"
+    puts "This is the subject - #{subject.name}"
 
     result = []
     first_seq_marks = first_seq.hashed_marks
@@ -34,11 +41,11 @@ class Term < ApplicationRecord
         result << second_seq_mark
       end
     end
-
+    # binding.break
     result
   end
 
-  def sequence_averages
-    sum_sequence_subject_marks.map { |mark| { "id" => mark["id"], "name" => mark["name"], "mark" => mark["mark"] / 2 } }
+  def calc_sequence_averages(sequence_marks)
+    sequence_marks.map { |mark| { "id" => mark["id"], "name" => mark["name"], "mark" => mark["mark"] / 2 } }
   end
 end

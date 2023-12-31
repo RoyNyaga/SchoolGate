@@ -16,6 +16,8 @@ class ReportCard < ApplicationRecord
       @subjects.each do |subject|
         subject_detail = {}
         first_seq, second_seq = @term.sequences.where(subject_id: subject.id).order(:seq_num)
+        sequence_marks = @term.sum_sequence_subject_marks(subject.id)
+        sequence_averages = @term.calc_sequence_averages(sequence_marks)
         first_seq_mark = student.sequence_mark_per_subject(first_seq.hashed_marks)
         second_seq_mark = student.sequence_mark_per_subject(second_seq.hashed_marks)
         average_mark = (first_seq_mark + second_seq_mark) / 2
@@ -26,7 +28,7 @@ class ReportCard < ApplicationRecord
         subject_detail[:coefficient] = subject.coefficient
         subject_detail[:score] = average_mark * subject.coefficient
         subject_detail[:grade] = "To Do"
-        subject_detail[:rank] = "To Do"
+        subject_detail[:rank] = student.sequence_rank(sequence_averages)
         subject_detail[:teacher] = subject.teachers.first.name
         subject_detail[:remark] = "Good"
         details << subject_detail
