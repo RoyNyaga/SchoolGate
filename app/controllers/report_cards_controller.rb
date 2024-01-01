@@ -61,7 +61,9 @@ class ReportCardsController < ApplicationController
     end
   end
 
-  def create_bulk_report_cards
+  def bulk_create
+
+    # ReportCard.generate_school_class_report_cards(school_class_id, term_id)
   end
 
   private

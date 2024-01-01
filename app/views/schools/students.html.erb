@@ -48,7 +48,7 @@
         <% subjects.each do |subject| %>
           <% @term = Term.first_term.first %>
           <% first_seq, second_seq = @term.sequences.where(subject_id: subject.id).order(:seq_num) %>
-          <% sequence_marks = @term.sum_sequence_subject_marks(subject.id)%>
+          <% sequence_marks = @term.sum_sequence_subject_marks(subject.id) %>
           <% sequence_averages = @term.calc_sequence_averages(sequence_marks) %>
           <% first_seq_mark = student.sequence_mark_per_subject(first_seq.hashed_marks) %>
           <% second_seq_mark = student.sequence_mark_per_subject(second_seq.hashed_marks) %>

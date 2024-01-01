@@ -28,3 +28,6 @@ Things you may want to cover:
 
 # Jobs and Ques
 - https://gorails.com/episodes/solid-queue-rails
+
+# PDF generation
+- https://prawnpdf.org/manual.pdf

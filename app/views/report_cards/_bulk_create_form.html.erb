@@ -1,0 +1,41 @@
+<%= form_with(model: report_card) do |form| %>
+  <% if report_card.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(report_card.errors.count, "error") %> prohibited this report_card from being saved:</h2>
+      <ul>
+        <% report_card.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= form.hidden_field :school_id, value: current_school.id %>
+  </div>
+  <div>
+    <%= form.label :school_class_id, style: "display: block" %>
+    <%= form.collection_select :school_class_id, current_school.school_classes, :id, :name, { prompt: "Select Class" }, { class: "general-input-styles" } %>
+  </div>
+  <div>
+    <%= form.hidden_field :term_id, value: term.id %>
+  </div>
+  <div>
+    <%= form.label :average, style: "display: block" %>
+    <%= form.text_field :average %>
+  </div>
+  <div>
+    <%= form.label :rank, style: "display: block" %>
+    <%= form.number_field :rank %>
+  </div>
+  <div>
+    <%= form.label :class_average, style: "display: block" %>
+    <%= form.number_field :class_average %>
+  </div>
+  <div>
+    <%= form.label :passed_subjects, style: "display: block" %>
+    <%= form.number_field :passed_subjects %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

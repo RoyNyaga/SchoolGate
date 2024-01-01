@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :report_cards
+  resources :report_cards do
+    collection do
+      post :bulk_create
+    end
+  end
   resources :terms
   resources :sequences
   resources :workings
