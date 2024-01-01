@@ -9,12 +9,13 @@ class ReportCard < ApplicationRecord
     @term = Term.find(term_id)
     @students = @school_class.students
     @subjects = @school_class.subjects
-    bulk_report = []
+    @bulk_report = []
     @students.each do |student|
       total_score = 0
       total_coefficient = 0
       report_card_object = { school_id: @school.id, school_class_id: @school_class.id, term: @term.id, student_id: student.id }
       details = []
+      passed_subjects = 0
       @subjects.each do |subject|
         subject_detail = {}
         first_seq, second_seq = @term.sequences.where(subject_id: subject.id).order(:seq_num)
@@ -26,6 +27,7 @@ class ReportCard < ApplicationRecord
         average_mark = (first_seq_mark + second_seq_mark) / 2
         score = average_mark * subject.coefficient
         total_score += score
+        passed_subjects += 1 if average_mark >= 10 # assuming that we are working on 20. In the future, passed mark could be a setting at the level of the school and class
         subject_detail[:name] = subject.name
         subject_detail[:first_seq_mark] = first_seq_mark
         subject_detail[:second_seq_mark] = second_seq_mark
@@ -43,9 +45,18 @@ class ReportCard < ApplicationRecord
       report_card_object[:total_score] = total_score
       report_card_object[:total_coefficient] = total_coefficient
       report_card_object[:average] = (total_score / total_coefficient)
+      report_card_object[:passed_subjects] = passed_subjects
       report_card_object[:subject_details] = details
-      bulk_report << report_card_object
+      @bulk_report << report_card_object
     end
-    p bulk_report
+
+    rank_report_card
+    p @bulk_report
+  end
+
+  def self.rank_report_card
+    averages = @bulk_report.map { |r| r[:average] }.uniq.sort.reverse
+    # binding.break
+    @bulk_report.each { |r| r[:rank] = averages.index(r[:average]) + 1 }
   end
 end

@@ -31,3 +31,6 @@ Things you may want to cover:
 
 # PDF generation
 - https://prawnpdf.org/manual.pdf
+
+# Debuggin
+- binding.break
