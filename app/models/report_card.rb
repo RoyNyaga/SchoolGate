@@ -54,7 +54,7 @@ class ReportCard < ApplicationRecord
     add_class_average
     @bulk_report
 
-    # ReportCard.insert_all @bulk_report
+    ReportCard.insert_all @bulk_report
   end
 
   def self.rank_report_card
@@ -65,5 +65,6 @@ class ReportCard < ApplicationRecord
 
   def self.add_class_average
     average = @bulk_report.map { |r| r[:average] }.sum / @bulk_report.size
+    @bulk_report.each { |r| r[:class_average] = average }
   end
 end
