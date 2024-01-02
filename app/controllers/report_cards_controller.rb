@@ -73,7 +73,7 @@ class ReportCardsController < ApplicationController
     end
   end
 
-  def pdf_test
+  def pdf_download
     report_pdf = Prawn::Document.new
     # subject_table = Prawn::Table
     report_pdf.bounding_box([20, 730], width: 500, height: 650) do

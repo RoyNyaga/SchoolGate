@@ -5,6 +5,10 @@
     <%= render partial: "report_cards/bulk_create_form", 
         layout: "layouts/modal_layout", 
         locals: { report_card: @report_card, term: term, action_name: "Generate Report", action_title: "Generate Report Cards Per Class" }%>
-    <%= link_to "pdf link", pdf_test_report_cards_path %>
+    <div class="report-cards-per-class">
+      <% term.classes_with_report_cards.each do |school_class| %>
+        <p><%= link_to "#{school_class.name} - View PDF", pdf_download_report_cards_path(school_class_id: school_class.id, term_id: term.id) %></p>
+      <% end %>
+    </div>
   </div>
 </div>
