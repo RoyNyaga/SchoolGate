@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_31_155824) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_02_141459) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -35,7 +35,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_31_155824) do
     t.bigint "term_id", null: false
     t.float "average"
     t.integer "rank"
-    t.integer "class_average"
+    t.float "class_average"
     t.integer "passed_subjects"
     t.text "details", default: [], array: true
     t.datetime "created_at", null: false
