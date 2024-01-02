@@ -52,9 +52,9 @@ class ReportCard < ApplicationRecord
 
     rank_report_card
     add_class_average
-    p @bulk_report
+    @bulk_report
 
-    ReportCard.insert_all @bulk_report
+    # ReportCard.insert_all @bulk_report
   end
 
   def self.rank_report_card

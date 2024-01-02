@@ -62,15 +62,38 @@ class ReportCardsController < ApplicationController
   end
 
   def bulk_create
-    if params[:report_card][:school_class_id].blank?
-      flash[:error] = "Please provide a valid class"
-      redirect_to request.referer
-    else
-      @school_class = SchoolClass.find(params[:report_card][:school_class_id])
-      flash[:success] = "Successfully generated Report Cards for #{@school_class.name}"
-      redirect_to request.referer
-      ReportCard.generate_school_class_report_cards(params[:report_card][:school_class_id], params[:report_card][:term_id])
+    report_pdf = Prawn::Document.new
+    report_pdf.bounding_box([200, report_pdf.cursor - 100], width: 200, height: 100) do
+      report_pdf.text "here is my text"
+      report_pdf.transparent(0.5) { report_pdf.stroke_bounds }
     end
+    if params[:preview].present?
+      send_data(report_pdf.render, filename: "test-file", type: "application/pdf", disposition: "inline")
+    end
+
+    # if params[:report_card][:school_class_id].blank?
+    #   flash[:error] = "Please provide a valid class"
+    #   redirect_to request.referer
+    # else
+    #   @school_class = SchoolClass.find(params[:report_card][:school_class_id])
+    #   flash[:success] = "Successfully generated Report Cards for #{@school_class.name}"
+    #   redirect_to request.referer
+    #   ReportCard.generate_school_class_report_cards(params[:report_card][:school_class_id], params[:report_card][:term_id])
+    # end
+  end
+
+  def pdf_test
+    report_pdf = Prawn::Document.new
+    # subject_table = Prawn::Table
+    report_pdf.bounding_box([20, 730], width: 500, height: 650) do
+      report_pdf.text "here is my text"
+      report_pdf.table([["short", "short", "loooooooooooooooooooong"],
+                        ["short", "loooooooooooooooooooong", "short"],
+                        ["loooooooooooooooooooong", "short", "short"]])
+      report_pdf.transparent(1) { report_pdf.stroke_bounds }
+    end
+
+    send_data(report_pdf.render, filename: "test-file", type: "application/pdf", disposition: "inline")
   end
 
   private

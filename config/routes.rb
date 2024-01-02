@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :report_cards do
     collection do
       post :bulk_create
+      get :pdf_test
     end
   end
   resources :terms

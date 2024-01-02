@@ -1,0 +1,2 @@
+class PdfGeneratorService
+end

@@ -5,5 +5,6 @@
     <%= render partial: "report_cards/bulk_create_form", 
         layout: "layouts/modal_layout", 
         locals: { report_card: @report_card, term: term, action_name: "Generate Report", action_title: "Generate Report Cards Per Class" }%>
+    <%= link_to "pdf link", pdf_test_report_cards_path %>
   </div>
 </div>
