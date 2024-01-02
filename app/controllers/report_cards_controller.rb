@@ -74,17 +74,19 @@ class ReportCardsController < ApplicationController
   end
 
   def pdf_download
-    report_pdf = Prawn::Document.new
-    # subject_table = Prawn::Table
-    report_pdf.bounding_box([20, 730], width: 500, height: 650) do
-      report_pdf.text "here is my text"
-      report_pdf.table([["short", "short", "loooooooooooooooooooong"],
-                        ["short", "loooooooooooooooooooong", "short"],
-                        ["loooooooooooooooooooong", "short", "short"]])
-      report_pdf.transparent(1) { report_pdf.stroke_bounds }
-    end
-
-    send_data(report_pdf.render, filename: "test-file", type: "application/pdf", disposition: "inline")
+    # report_pdf = Prawn::Document.new
+    # # subject_table = Prawn::Table
+    # report_pdf.bounding_box([20, 730], width: 500, height: 650) do
+    #   report_pdf.text "here is my text"
+    #   report_pdf.table([["short", "short", "loooooooooooooooooooong"],
+    #                     ["short", "loooooooooooooooooooong", "short"],
+    #                     ["loooooooooooooooooooong", "short", "short"]])
+    #   report_pdf.transparent(1) { report_pdf.stroke_bounds }
+    # end
+    @report_cards = ReportCard.where(term_id: params[:term_id], school_class: params[:school_class_id])
+    pdf_file = PdfGeneratorService.new(report_cards: @report_cards)
+    binding.break
+    # send_data(report_pdf.render, filename: "test-file", type: "application/pdf", disposition: "inline")
   end
 
   private
