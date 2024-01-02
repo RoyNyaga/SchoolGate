@@ -13,7 +13,7 @@ class ReportCard < ApplicationRecord
     @students.each do |student|
       total_score = 0
       total_coefficient = 0
-      report_card_object = { school_id: @school.id, school_class_id: @school_class.id, term: @term.id, student_id: student.id }
+      report_card_object = { school_id: @school.id, school_class_id: @school_class.id, term_id: @term.id, student_id: student.id }
       details = []
       passed_subjects = 0
       @subjects.each do |subject|
@@ -38,25 +38,32 @@ class ReportCard < ApplicationRecord
         subject_detail[:rank] = student.sequence_rank(sequence_averages)
         subject_detail[:teacher] = subject.teachers.first.name
         subject_detail[:remark] = "Good"
-
-        details << subject_detail
+        # binding.break
+        details << subject_detail.to_s
       end
 
       report_card_object[:total_score] = total_score
       report_card_object[:total_coefficient] = total_coefficient
       report_card_object[:average] = (total_score / total_coefficient)
       report_card_object[:passed_subjects] = passed_subjects
-      report_card_object[:subject_details] = details
+      report_card_object[:details] = details
       @bulk_report << report_card_object
     end
 
     rank_report_card
+    add_class_average
     p @bulk_report
+
+    ReportCard.insert_all @bulk_report
   end
 
   def self.rank_report_card
     averages = @bulk_report.map { |r| r[:average] }.uniq.sort.reverse
     # binding.break
     @bulk_report.each { |r| r[:rank] = averages.index(r[:average]) + 1 }
+  end
+
+  def self.add_class_average
+    average = @bulk_report.map { |r| r[:average] }.sum / @bulk_report.size
   end
 end

@@ -63,11 +63,11 @@ class ReportCardsController < ApplicationController
 
   def bulk_create
     if params[:report_card][:school_class_id].blank?
-      flash.now[:error] = "Please provide a valid class"
+      flash[:error] = "Please provide a valid class"
       redirect_to request.referer
     else
       @school_class = SchoolClass.find(params[:report_card][:school_class_id])
-      flash.now[:success] = "Successfully generated Report Cards for #{@school_class.name}"
+      flash[:success] = "Successfully generated Report Cards for #{@school_class.name}"
       redirect_to request.referer
       ReportCard.generate_school_class_report_cards(params[:report_card][:school_class_id], params[:report_card][:term_id])
     end

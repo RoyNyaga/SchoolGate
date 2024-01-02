@@ -34,3 +34,6 @@ Things you may want to cover:
 
 # Debuggin
 - binding.break
+
+# Articles
+- https://rubyhero.dev/good-practices-with-active-record
