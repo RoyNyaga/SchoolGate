@@ -84,9 +84,9 @@ class ReportCardsController < ApplicationController
     #   report_pdf.transparent(1) { report_pdf.stroke_bounds }
     # end
     @report_cards = ReportCard.where(term_id: params[:term_id], school_class: params[:school_class_id])
-    pdf_file = PdfGeneratorService.new(report_cards: @report_cards)
-    binding.break
-    # send_data(report_pdf.render, filename: "test-file", type: "application/pdf", disposition: "inline")
+    pdf_file = PdfGeneratorService.new(@report_cards)
+    # binding.break
+    send_data(pdf_file.generate_pdf.render, filename: "test-file", type: "application/pdf", disposition: "inline")
   end
 
   private

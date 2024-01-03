@@ -37,3 +37,6 @@ Things you may want to cover:
 
 # Articles
 - https://rubyhero.dev/good-practices-with-active-record
+
+# Domain name
+- SchoolGate

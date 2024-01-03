@@ -2,6 +2,7 @@ class ReportCard < ApplicationRecord
   belongs_to :school
   belongs_to :school_class
   belongs_to :term
+  belongs_to :student
 
   def self.generate_school_class_report_cards(school_class_id, term_id)
     @school_class = SchoolClass.find(school_class_id)
