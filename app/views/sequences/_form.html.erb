@@ -22,16 +22,13 @@
     <%= form.hidden_field :subject_id, value: @subject.id %>
   </div>
   <div>
+    <%= form.collection_select :term_id, 
+    current_school.terms, :id, :term_type, { prompt: "Select Term" },
+     { class: "general-input-styles", required: true } %>
+  </div>
+  <div>
     <%= form.label :seq_num, style: "display: block" %>
     <%= form.select :seq_num, Sequence.seq_nums.map { |k,v| [k.humanize, k] }, {include_blank: 'Select Sequence Number'}, { class: "general-input-styles" } %>
-  </div>
-  <div>
-    <%= form.label :academic_year_start, style: "display: block" %>
-    <%= form.select :academic_year_start, generate_years.map { |v| [v,v] }, {include_blank: 'Select start Year'}, { class: "general-input-styles" } %>
-  </div>
-  <div>
-    <%= form.label :academic_year_end, style: "display: block" %>
-    <%= form.select :academic_year_end, generate_years.map { |v| [v,v] }, {include_blank: 'Select End Year'}, { class: "general-input-styles" } %>
   </div>
   <table class="table table-hover">
     <thead>

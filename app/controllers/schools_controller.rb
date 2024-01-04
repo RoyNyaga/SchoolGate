@@ -6,7 +6,7 @@ class SchoolsController < ApplicationController
 
   # GET /schools or /schools.json
   def index
-    @schools = current_teacher.schools
+    @schools = School.joins(:workings).where(workings: { teacher_id: current_teacher.id }).distinct
     render layout: "application"
   end
 

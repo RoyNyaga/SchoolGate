@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_02_141459) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_04_041306) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,8 +75,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_02_141459) do
     t.bigint "school_class_id", null: false
     t.bigint "teacher_id", null: false
     t.integer "seq_num", null: false
-    t.string "academic_year_start", null: false
-    t.string "academic_year_end", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "marks", default: [], array: true
