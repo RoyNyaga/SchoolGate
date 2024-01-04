@@ -66,16 +66,16 @@ class PdfGeneratorService
 
         @pdf.move_down 30
         @pdf.table([
-          ["Terminal Average", "#{report_card.average.round(2)} / 20"],
-          ["Rank", "#{report_card.rank} Out of #{report_cards.count}"],
-          ["Class Average", "#{report_card.class_average.round(2)} / 20"],
-        ])
+          ["<b>Terminal Average</b>", "#{report_card.average.round(2)} / 20"],
+          ["<b>Rank</b>", "#{report_card.rank} Out of #{report_cards.count}"],
+          ["<b>Class Average</b>", "#{report_card.class_average.round(2)} / 20"],
+        ], cell_style: { :font => "Times-Roman", :size => 10, inline_format: true })
         @pdf.stroke_horizontal_rule
         @pdf.table([
           ["1st Term Average #{report_card.average.round(2)} / 20 \n Passed In  #{report_card.passed_subjects} subjects",
            "2nd Term Average #{report_card.average.round(2)} / 20 \n Passed In  #{report_card.passed_subjects} subjects",
            "3rd Term Average #{report_card.average.round(2)} / 20 \n Passed In  #{report_card.passed_subjects} subjects"],
-        ], :width => 549)
+        ], width: 549, cell_style: { :font => "Times-Roman", :size => 10, inline_format: true })
 
         nested_table = @pdf.make_table([
           [{ :content => "<b>Disciplinary Records</b>", :colspan => 4 }],
