@@ -3,6 +3,14 @@ class Teacher < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  has_many :schools
+  has_many :teachings, dependent: :destroy
+  has_many :class_subjects, through: :teachings, source: "subject"
+  has_many :workings, dependent: :destroy
+  has_many :employers, through: :workings, dependent: :destroy, source: "school"
+  has_many :invitations, dependent: :destroy
+  has_many :sent_invitations, class_name: "Invitation", foreign_key: "sender_id"
+  has_many :sequences, dependent: :destroy
 
   validates :phone_number, uniqueness: true
 
@@ -16,5 +24,9 @@ class Teacher < ApplicationRecord
 
   def will_save_change_to_email?
     false
+  end
+
+  def subjects_for_class(school_class)
+    class_subjects.where(school_class_id: school_class.id)
   end
 end

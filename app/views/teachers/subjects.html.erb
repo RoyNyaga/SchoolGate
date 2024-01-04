@@ -1,0 +1,13 @@
+<div id="school-main-div">
+  <h1 class="text-center">Subjects</h1>
+  <div class="row">
+    <div id="subjects" class="col-md-4">
+      <% @subjects.each do |subject| %>
+        <%= render subject %>
+        <p>
+          <%= link_to "Show this subject", for_teacher_subject_path(subject) %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>

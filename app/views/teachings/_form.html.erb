@@ -1,0 +1,29 @@
+<%= form_with(model: teaching) do |form| %>
+  <% if teaching.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(teaching.errors.count, "error") %> prohibited this teaching from being saved:</h2>
+      <ul>
+        <% teaching.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= form.label :teacher_id, style: "display: block" %>
+    <%= form.collection_select :teacher_id, current_school.workers, :id, :name, { prompt: "Select Teacher" }, { class: "general-input-styles" } %>
+  </div>
+  <div>
+    <%= form.hidden_field :subject_id, value: @subject.id %>
+  </div>
+  <div>
+    <%= form.hidden_field :school_class_id, value: @subject.school_class_id %>
+  </div>
+  <div>
+    <%= form.label :is_class_master, style: "display: block" %>
+    <%= form.check_box :is_class_master %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,58 @@
+<%= form_with(model: sequence) do |form| %>
+  <% if sequence.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(sequence.errors.count, "error") %> prohibited this sequence from being saved:</h2>
+      <ul>
+        <% sequence.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= form.hidden_field :school_id, value: current_school.id %>
+  </div>
+  <div>
+    <%= form.hidden_field :school_class_id, value: @school_class.id %>
+  </div>
+  <div>
+    <%= form.hidden_field :teacher_id, value: current_teacher.id %>
+  </div>
+  <div>
+    <%= form.hidden_field :subject_id, value: @subject.id %>
+  </div>
+  <div>
+    <%= form.collection_select :term_id, 
+    current_school.terms, :id, :term_type, { prompt: "Select Term" },
+     { class: "general-input-styles", required: true } %>
+  </div>
+  <div>
+    <%= form.label :seq_num, style: "display: block" %>
+    <%= form.select :seq_num, Sequence.seq_nums.map { |k,v| [k.humanize, k] }, {include_blank: 'Select Sequence Number'}, { class: "general-input-styles" } %>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Name</th>
+        <th scope="col">mark</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% num = 1%>
+      <% @school_class.students.each do |student| %>
+        <%= form.hidden_field :id, name: "sequence[marks][][id]", value: student.id %>
+        <%= form.hidden_field :id, name: "sequence[marks][][name]", value: student.full_name %>
+        <tr>
+          <td><%= num %></td>
+          <td><%= student.full_name %></td>
+          <td><%= generate_student_marks_input(form, sequence, student) %></td>
+        </tr>
+        <% num += 1 %>
+      <% end %>
+    </tbody>
+  </table>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

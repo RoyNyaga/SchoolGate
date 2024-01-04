@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="#">SecEdu</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="#">.</a>
+        </li>
+      </ul>
+      <div class="d-md-flex">
+        <% if teacher_signed_in? %>
+          <%= link_to "Schools", schools_path, class: "nav-link" %>
+          <%= link_to "Invitations", invitations_teachers_path, class: "nav-link" %>
+          <%=button_to "Log Out", destroy_teacher_session_path, method: :delete, class: "nav-link" %>
+        <% else %>
+          <%= link_to "Log In", new_teacher_session_path, class: "nav-link" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>

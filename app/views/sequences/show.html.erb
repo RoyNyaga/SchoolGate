@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @sequence %>
+
+<div>
+  <%= link_to "Edit this sequence", edit_sequence_path(@sequence) %> |
+  <%= link_to "Back to sequences", sequences_path %>
+
+  <%= button_to "Destroy this sequence", @sequence, method: :delete %>
+</div>

@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  school: one
+  school_class: one
+  full_name: MyString
+  fathers_name: MyString
+  fathers_contact: MyString
+  mothers_name: MyString
+  mothers_contact: MyString
+  guidance_name: MyString
+  guidance_contact: MyString
+  date_of_birth: 2023-12-21
+  address: MyString
+  subjects: MyString
+
+two:
+  school: two
+  school_class: two
+  full_name: MyString
+  fathers_name: MyString
+  fathers_contact: MyString
+  mothers_name: MyString
+  mothers_contact: MyString
+  guidance_name: MyString
+  guidance_contact: MyString
+  date_of_birth: 2023-12-21
+  address: MyString
+  subjects: MyString

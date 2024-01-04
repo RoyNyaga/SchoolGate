@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  term_type: 1
+  academic_year_start: MyString
+  academic_year_end: MyString
+  school: one
+
+two:
+  term_type: 1
+  academic_year_start: MyString
+  academic_year_end: MyString
+  school: two

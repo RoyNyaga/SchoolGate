@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  school: one
+  school_class: one
+  name: MyString
+  coefficient: MyString
+
+two:
+  school: two
+  school_class: two
+  name: MyString
+  coefficient: MyString

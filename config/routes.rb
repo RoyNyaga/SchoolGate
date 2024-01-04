@@ -1,6 +1,29 @@
 Rails.application.routes.draw do
+  resources :report_cards do
+    collection do
+      post :bulk_create
+      get :pdf_download
+    end
+  end
+  resources :terms
+  resources :sequences
+  resources :workings
+  resources :teachings
+  resources :subjects do
+    member do
+      get :for_teacher
+    end
+  end
+  resources :students
+  resources :school_classes
   devise_for :teachers
-  get 'pages/home'
+  resources :teachers do
+    collection do
+      get :invitations
+      get :subjects
+    end
+  end
+  get "pages/home"
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -10,4 +33,17 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  resources :schools do
+    collection do
+      get :classes
+      get :students
+    end
+  end
+
+  resources :invitations do
+    member do
+      put :accept
+      put :reject
+    end
+  end
 end

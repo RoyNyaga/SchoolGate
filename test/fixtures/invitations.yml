@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sent_by: one
+  teacher: one
+  school_id: one
+  permission: 1
+  proposed_salary: 1.5
+  job_description: MyText
+  status: 1
+
+two:
+  sent_by: two
+  teacher: two
+  school_id: two
+  permission: 1
+  proposed_salary: 1.5
+  job_description: MyText
+  status: 1

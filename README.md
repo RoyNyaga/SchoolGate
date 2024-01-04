@@ -25,3 +25,18 @@ Things you may want to cover:
 
 # Boostrap related articles
 - https://dev.to/coorasse/rails-7-bootstrap-5-and-importmaps-without-nodejs-4g8
+
+# Jobs and Ques
+- https://gorails.com/episodes/solid-queue-rails
+
+# PDF generation
+- https://prawnpdf.org/manual.pdf
+
+# Debuggin
+- binding.break
+
+# Articles
+- https://rubyhero.dev/good-practices-with-active-record
+
+# Domain name
+- SchoolGate

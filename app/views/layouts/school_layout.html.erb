@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SecEduApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,100;1,300;1,400;1,500;1,600;1,700&family=Noto+Serif+Display:ital,wght@1,200&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="sidebar"><br>
+      <br>
+      <br>
+      <%= link_to "School Manager", classes_schools_path %>
+      <%= link_to "Manage Classes", classes_schools_path %>
+      <%= link_to "Invitations", invitations_teachers_path %>
+      <%= link_to "Your Subjects", subjects_teachers_path %>
+    </div>
+    <div class="content">
+      <%= render "shared/navbar" %>
+      <%= render "shared/flash_messages" %>
+      <%= yield %>
+    </div>
+  </body>
+</html>

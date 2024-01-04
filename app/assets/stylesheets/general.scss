@@ -1,0 +1,42 @@
+#school-main-div{
+  padding-left: 250px;
+  padding-top: 50px;
+}
+
+.general-input-styles{
+  font-family: 'Josefin Sans', sans-serif;
+  width: 100%;
+  height: 35px;
+  padding: 5px;
+  background: #ffffff2a;
+  border: 2px solid #022130;
+  color: #022130;
+  font-size: 1.1em;
+  border-radius: 5px;
+  margin-top: 7px;
+}
+
+label{
+  color: #022130;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.general-btn{
+  background-color: #6d757d;
+  color: white;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.general-btn:hover{
+  background-color: #222527;
+}
+
+.canvas-custom-class{
+  width: 50% !important;
+}
+
+@media screen and (max-width: 700px) {
+  .canvas-custom-class{
+    width: 90% !important;
+  }
+}

@@ -1,0 +1,30 @@
+<%= form_with(model: term) do |form| %>
+  <% if term.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(term.errors.count, "error") %> prohibited this term from being saved:</h2>
+      <ul>
+        <% term.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="py-2">
+    <%= form.label :term_type, style: "display: block" %>
+    <%= form.select :term_type, Term.term_types.map { |k,v| [k.humanize, k] }, {include_blank: 'Select Term Number'}, { class: "general-input-styles" } %>
+  </div>
+  <div class="py-2">
+    <%= form.label :academic_year_start, style: "display: block" %>
+    <%= form.select :academic_year_start, generate_years.map { |v| [v,v] }, {include_blank: 'Select start Year'}, { class: "general-input-styles" } %>
+  </div>
+  <div class="py-2">
+    <%= form.label :academic_year_end, style: "display: block" %>
+    <%= form.select :academic_year_end, generate_years.map { |v| [v,v] }, {include_blank: 'Select End Year'}, { class: "general-input-styles" } %>
+  </div>
+  <div class="py-2">
+    <%= form.hidden_field :school_id, value: current_school.id %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

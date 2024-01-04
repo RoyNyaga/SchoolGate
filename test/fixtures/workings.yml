@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  school: one
+  teacher: one
+  permission: 1
+  agreed_salary: 1.5
+  job_description: MyString
+
+two:
+  school: two
+  teacher: two
+  permission: 1
+  agreed_salary: 1.5
+  job_description: MyString

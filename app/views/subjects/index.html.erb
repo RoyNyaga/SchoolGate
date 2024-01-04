@@ -1,0 +1,12 @@
+<div id="school-main-div">
+  <h1>Subjects</h1>
+  <div id="subjects">
+    <% @subjects.each do |subject| %>
+      <%= render subject %>
+      <p>
+        <%= link_to "Show this subject", subject %>
+      </p>
+    <% end %>
+  </div>
+  <%= link_to "New subject", new_subject_path %>
+</div>
