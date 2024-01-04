@@ -29,15 +29,15 @@ class PdfGeneratorService
 
       table << ["", "", "", "", "Total", report_card.total_coefficient, report_card.total_score, "", "", "", ""]
 
-      @pdf.bounding_box([2, 730], width: 550, height: 650) do
+      @pdf.bounding_box([2, 730], width: 550) do
         @pdf.move_down 10
         @pdf.font "Times-Roman" do
           @pdf.text @school.full_name, size: 13, style: :bold, align: :center
         end
 
         @pdf.font("Courier") do
-          @pdf.text "Ministry Of Secondary Education", align: :center
-          @pdf.text "P.O BOX 423 Tiko", align: :center
+          @pdf.text "Ministry Of Secondary Education", align: :center, size: 10
+          @pdf.text "P.O BOX 423 Tiko", align: :center, size: 10
         end
 
         @pdf.float do
@@ -64,7 +64,7 @@ class PdfGeneratorService
 
         @pdf.table(table, width: 549, cell_style: { :font => "Times-Roman", :size => 10, inline_format: true, inline_format: true })
 
-        @pdf.move_down 30
+        @pdf.move_down 20
         @pdf.table([
           ["<b>Terminal Average</b>", "#{report_card.average.round(2)} / 20"],
           ["<b>Rank</b>", "#{report_card.rank} Out of #{report_cards.count}"],
