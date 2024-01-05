@@ -1,8 +1,10 @@
 <div id="school-main-div">
   <%= render "shared/school_manager_navbar" %>
-  <h1>School Statistics Goes Here</h1>
-  <%= render @school %>
-  <%= link_to "Edit this school", edit_school_path(@school) %> |
-  <%= link_to "Back to schools", schools_path %>
-  <%= button_to "Destroy this school", @school, method: :delete %>
+  <h1 class="text-center">School Statistics Goes Here</h1>
+  <div class="section-div">
+    <%= render @school %>
+    <%= link_to "Edit this school", edit_school_path(@school) %> |
+    <%= link_to "Back to schools", schools_path %>
+    <%= button_to "Destroy this school", @school, method: :delete %>
+  </div>
 </div>

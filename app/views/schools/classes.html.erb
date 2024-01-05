@@ -6,7 +6,7 @@
         locals: { school_class: @school_class, action_name: "Add Class", action_title: "Create A New Class" }%>
   </div>
   <h1>School classes</h1>
-  <div id="school_classes">
+  <div class="section-div" id="school_classes">
     <% @school_classes.each do |school_class| %>
       <%= render partial: "school_classes/school_class", locals: { school_class: school_class } %>
       <p>
