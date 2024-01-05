@@ -1,6 +1,14 @@
 .nav-link{
   color: white;
   padding: 10px 20px;
+  font-size: 1.2em;
+}
+
+.nav-link:hover{
+  border-radius: 20px;
+  border: 1px solid white;
+  background: rgb(158, 156, 156);
+  color: white;
 }
 
 #school-top-navbar{
@@ -49,6 +57,14 @@
   background: white;
 }
 
+.navbar-brand{
+  border: 2px solid white;
+    padding: 5px 20px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 900;
+}
+
 @media screen and (max-width: 700px) {
   .sidebar {
     width: 100%;
@@ -59,9 +75,14 @@
   div.content {margin-left: 0;}
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 425px) {
   .sidebar a {
     text-align: center;
     float: none;
+  }
+
+  .navbar-brand{
+    border: 2px solid white;
+    padding: 5px 10px;
   }
 }
