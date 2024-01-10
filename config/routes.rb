@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :fees
   resources :report_cards do
     collection do
       post :bulk_create

@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  school: one
+  school_class: one
+  teacher: one
+  student: one
+  academic_year_start: MyString
+  academic_year_end: MyString
+  installments: MyString
+  installment_num: 1
+  total_feee_paid: 1.5
+  is_completed: false
+
+two:
+  school: two
+  school_class: two
+  teacher: two
+  student: two
+  academic_year_start: MyString
+  academic_year_end: MyString
+  installments: MyString
+  installment_num: 1
+  total_feee_paid: 1.5
+  is_completed: false
