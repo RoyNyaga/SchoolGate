@@ -13,4 +13,9 @@ class School < ApplicationRecord
 
   store_accessor :school_fees_settings, :level_1_fees, :level_2_fees, :level_3_fees, :level_4_fees,
                  :level_5_fees, :level_6_fees, :level_7_fees
+
+  scope :without_settings_attr, -> {
+      select(:full_name, :id, :teacher_id, :abbreviation, :town,
+             :address, :moto)
+    }
 end
