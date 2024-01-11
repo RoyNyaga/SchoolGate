@@ -19,8 +19,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_11_112426) do
     t.bigint "school_class_id", null: false
     t.bigint "teacher_id", null: false
     t.bigint "student_id", null: false
-    t.string "academic_year_start", null: false
-    t.string "academic_year_end", null: false
+    t.string "academic_year", null: false
     t.text "installments", default: [], array: true
     t.integer "installment_num", default: 1
     t.float "total_fee_paid", default: 0.0
