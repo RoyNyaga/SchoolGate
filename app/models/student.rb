@@ -4,6 +4,8 @@ class Student < ApplicationRecord
   has_many :report_cards
   has_many :fees, dependent: :destroy
 
+  before_save :create_fees
+
   def sequence_mark_per_subject(marks)
     marks.find { |student| student["id"] == id.to_s }["mark"]
   end
@@ -18,5 +20,9 @@ class Student < ApplicationRecord
     mark = sequence_mark_per_subject(sequence_averages)
     arr = sequence_averages.map { |mark| mark["mark"] }.uniq.sort.reverse
     arr.index(mark) + 1
+  end
+
+  def create_fees
+    fees.create(school_id: school_id, school_class_id: school_class_id)
   end
 end
