@@ -2,6 +2,7 @@ class Student < ApplicationRecord
   belongs_to :school
   belongs_to :school_class
   has_many :report_cards
+  has_many :fees, dependent: :destroy
 
   def sequence_mark_per_subject(marks)
     marks.find { |student| student["id"] == id.to_s }["mark"]

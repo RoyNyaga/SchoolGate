@@ -7,6 +7,7 @@ class School < ApplicationRecord
   has_many :workers, through: :workings, dependent: :destroy, source: "teacher"
   has_many :invitations, dependent: :destroy
   has_many :sequences, dependent: :destroy
-  has_many :terms
-  has_many :report_cards
+  has_many :terms, dependent: :destroy
+  has_many :report_cards, dependent: :destroy
+  has_many :fees, dependent: :destroy
 end
