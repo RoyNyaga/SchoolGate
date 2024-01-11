@@ -8,7 +8,7 @@ module TimeManipulation
       start_year = current_date.month >= 8 ? current_date.year : current_date.year - 1
       end_year = start_year + 1
 
-      "#{start_year}-#{end_year}"
+      "#{start_year}/#{end_year}"
     end
   end
 

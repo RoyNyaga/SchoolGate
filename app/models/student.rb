@@ -1,10 +1,12 @@
 class Student < ApplicationRecord
+  include TimeManipulation
+
   belongs_to :school
   belongs_to :school_class
   has_many :report_cards
   has_many :fees, dependent: :destroy
 
-  before_save :create_fees
+  after_save :create_fees
 
   def sequence_mark_per_subject(marks)
     marks.find { |student| student["id"] == id.to_s }["mark"]
@@ -23,6 +25,6 @@ class Student < ApplicationRecord
   end
 
   def create_fees
-    fees.create(school_id: school_id, school_class_id: school_class_id)
+    fees.create(school_id: school_id, school_class_id: school_class_id, academic_year: generate_current_academic_year)
   end
 end
