@@ -7,7 +7,7 @@ class CreateFees < ActiveRecord::Migration[7.1]
       t.references :student, null: false, foreign_key: true
       t.string :academic_year, null: false
       t.text :installments, array: true, default: []
-      t.integer :installment_num, default: 1
+      t.integer :installment_num, default: 0
       t.float :total_fee_paid, default: 0.0
       t.boolean :is_completed, default: false
 

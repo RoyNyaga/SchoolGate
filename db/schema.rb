@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_11_112426) do
     t.bigint "student_id", null: false
     t.string "academic_year", null: false
     t.text "installments", default: [], array: true
-    t.integer "installment_num", default: 1
+    t.integer "installment_num", default: 0
     t.float "total_fee_paid", default: 0.0
     t.boolean "is_completed", default: false
     t.datetime "created_at", null: false
