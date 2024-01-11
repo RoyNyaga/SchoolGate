@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_10_232751) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_11_112426) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -86,6 +86,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_10_232751) do
     t.string "moto"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.json "school_fees_settings", default: {}
     t.index ["teacher_id"], name: "index_schools_on_teacher_id"
   end
 
