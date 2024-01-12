@@ -13,6 +13,10 @@ class SchoolClass < ApplicationRecord
 
   before_save :name_to_lowercase
 
+  def generate_fee_string
+    "level_#{level}_fees"
+  end
+
   private
 
   def name_to_lowercase
