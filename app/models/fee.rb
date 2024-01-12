@@ -6,7 +6,7 @@ class Fee < ApplicationRecord
   validates :academic_year, presence: true
   validates :student_id, uniqueness: { scope: :school_class_id,
                                        message: "Two Fees can't exist for the same student in the same class" }
-  validate :fee_not_above_required_feed
+  validate :fee_not_above_required_fee
 
   enum installment_num: { no_installment: 0, first_installment: 1, second_installment: 2, third_installment: 3, forth_installment: 4,
                           fifth_installment: 5, sith_installment: 6 }
@@ -25,5 +25,15 @@ class Fee < ApplicationRecord
 
   def complete?
     total_fee_paid >= school.send(school_class.generate_fee_string).to_i
+  end
+
+  private
+
+  def fee_not_above_required_fee
+    required_fee = school.send(school_class.generate_fee_string)
+    error.add(:installment, "total fee paid (#{total_fee_paid} fcfa) is above the required class fee which is 
+    #{required_fee} 
+    fcfa. We hope you know what you are doing?, please visit the school 
+    seting page under school fees setting for this class to update this toal fee.") if total_fee_paid > required_fee
   end
 end
