@@ -13,6 +13,12 @@ class Fee < ApplicationRecord
 
   before_save :set_other_field_values
 
+  def self.installment_by_num(num)
+    installments = { "1" => "First", "2" => "Second", "3" => "Third",
+                     "4" => "Forth", "5" => "Fifth", "6" => "Sith" }
+    installments[num.to_s]
+  end
+
   def set_other_field_values
     self.total_fee_paid = calc_total_fees
     self.is_completed = complete?
@@ -24,7 +30,11 @@ class Fee < ApplicationRecord
   end
 
   def complete?
-    total_fee_paid >= school.send(school_class.generate_fee_string).to_i
+    total_fee_paid >= required_fee
+  end
+
+  def required_fee
+    school.send(school_class.generate_fee_string).to_i
   end
 
   def percent_complete

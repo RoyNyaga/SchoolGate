@@ -1,18 +1,41 @@
-<div id="<%= dom_id fee %>">
-  <p>
-    <strong>Installments:</strong>
-    <%= fee.installments %>
-  </p>
-  <p>
-    <strong>Installment num:</strong>
-    <%= fee.installment_num %>
-  </p>
-  <p>
-    <strong>Total feee paid:</strong>
-    <%= fee.total_fee_paid %>
-  </p>
-  <p>
-    <strong>Is completed:</strong>
-    <%= fee.is_completed %>
-  </p>
+<div class="" id="<%= dom_id fee %>">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <div class="d-flex justify-content-between">
+        <p><strong>Academic Year</strong></p>
+        <p><%= fee.academic_year %></p>
+      </div>
+      <div class="d-flex justify-content-between">
+        <p><strong>Class</strong></p>
+        <p><%= fee.school_class.name %></p>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <p><strong>Progress</strong></p>
+        </div>
+        <div class="col-4 col-md-3">
+          <%= fee.installment_num.humanize %>
+        </div>
+        <div class="col-5 col-md-6">
+          <div class="progress">
+            <%= generate_progress_bar(@percent_complete) %>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between my-3">
+        <p><strong>Installments</strong></p>
+        <div>
+          <% num = 1%>
+          <% fee.installments.each do |i| %>
+            <p><%= Fee.installment_by_num(num) %> - <%= i %> frs</p>
+            <% num += 1 %>
+          <% end %>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between my-3">
+        <p><strong>Total Fee Paid</strong></p>
+        <p><%= fee.total_fee_paid %> frs</p>
+      </div>
+    </div>
+  </div>
 </div>

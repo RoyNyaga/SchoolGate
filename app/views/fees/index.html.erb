@@ -14,8 +14,8 @@
         <td>
           <div class="text-center"><%= number_to_currency(fee.total_fee_paid, unit: "", precision: 0) %>frs,</div>
           <div class="progress">
-            <% percent_complete =  fee.percent_complete %>
-            <%= generate_progress_bar(percent_complete) %>
+            <% @percent_complete =  fee.percent_complete %>
+            <%= generate_progress_bar(@percent_complete) %>
           </div>
           <div>
             <%= render partial: "fees/fee", layout: "layouts/drawer_layout", 
