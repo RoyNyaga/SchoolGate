@@ -1,9 +1,9 @@
-<a data-bs-toggle="offcanvas" href="#<%= item_id %>" role="button" aria-controls="<%= item_id %>">
+<a data-bs-toggle="offcanvas" href="#<%= item_id %>_drawer" role="button" aria-controls="<%= item_id %>_drawer">
   <%= btn_text %>
 </a>
-<div class="offcanvas offcanvas-<%= position %> canvas-custom-class" tabindex="-1" id="<%= item_id %>" aria-labelledby="<%= item_id %>Label">
+<div class="offcanvas offcanvas-<%= position %> canvas-custom-class" tabindex="-1" id="<%= item_id %>_drawer" aria-labelledby="<%= item_id %>_drawerLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="<%= item_id %>Label"><%= title %></h5>
+    <h5 class="offcanvas-title" id="<%= item_id %>_drawerLabel"><%= title %></h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">

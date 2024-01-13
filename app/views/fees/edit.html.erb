@@ -1,10 +1,4 @@
 <h1>Editing fee</h1>
-
-<%= render "form", fee: @fee %>
-
-<br>
-
-<div>
-  <%= link_to "Show this fee", @fee %> |
-  <%= link_to "Back to fees", fees_path %>
-</div>
+<%= turbo_frame_tag dom_id(@fee) do %>
+  <%= render "form", fee: @fee %>
+<% end %>

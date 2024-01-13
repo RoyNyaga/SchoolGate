@@ -10,7 +10,7 @@
     <% @fees.each do |fee| %>
       <tr>
         <td><%= fee.student.full_name %></td>
-        <td><%= fee.student.school_class.name %> / <%= fee.school.send(fee.school_class.generate_fee_string) %></td>
+        <td><%= fee.school_class.name %> / <%= fee.school.send(fee.school_class.generate_fee_string) %></td>
         <td>
           <div class="text-center"><%= number_to_currency(fee.total_fee_paid, unit: "", precision: 0) %>frs,</div>
           <div class="progress">

@@ -37,6 +37,10 @@ class Fee < ApplicationRecord
     school.send(school_class.generate_fee_string).to_i
   end
 
+  def balance
+    required_fee - total_fee_paid
+  end
+
   def percent_complete
     (total_fee_paid.to_f / school.send(school_class.generate_fee_string).to_f) * 100
   end

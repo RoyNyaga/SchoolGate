@@ -3,7 +3,7 @@ class FeesController < ApplicationController
 
   # GET /fees or /fees.json
   def index
-    @fees = Fee.all
+    @fees = Fee.all.includes(:school, :school_class, :student)
   end
 
   # GET /fees/1 or /fees/1.json
@@ -58,13 +58,14 @@ class FeesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_fee
-      @fee = Fee.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def fee_params
-      params.require(:fee).permit(:school_id, :school_class_id, :teacher_id, :student_id, :academic_year_start, :academic_year_end, :installments, :installment_num, :total_feee_paid, :is_completed)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_fee
+    @fee = Fee.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def fee_params
+    params.require(:fee).permit(:school_id, :school_class_id, :teacher_id, :student_id, :academic_year_start, :academic_year_end, :installments, :installment_num, :total_feee_paid, :is_completed)
+  end
 end
