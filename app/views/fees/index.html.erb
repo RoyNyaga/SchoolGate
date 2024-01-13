@@ -1,14 +1,49 @@
-<p style="color: green"><%= notice %></p>
-
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">St names</th>
+      <th scope="col">class / required fee</th>
+      <th scope="col">Current Fee Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @fees.each do |fee| %>
+      <tr>
+        <td><%= fee.student.full_name %></td>
+        <td><%= fee.student.school_class.name %> / <%= fee.school.send(fee.school_class.generate_fee_string) %></td>
+        <td>
+          <div class="progress">
+            <% percent_complete =  fee.percent_complete %>
+            <% if percent_complete <= 25 %>
+              <div class="progress-bar bg-danger text-dark fee-progress-fonts" role="progressbar" aria-label="Example with label" style="width: <%= fee.percent_complete %>%;" aria-valuenow="<%= fee.percent_complete %>" aria-valuemin="0" aria-valuemax="100">
+                <%= fee.percent_complete %> % complete
+              </div>
+            <% elsif percent_complete <= 50 %>
+              <div class="progress-bar bg-warning text-dark fee-progress-fonts" role="progressbar" aria-label="Example with label" style="width: <%= fee.percent_complete %>%;" aria-valuenow="<%= fee.percent_complete %>" aria-valuemin="0" aria-valuemax="100">
+                <%= fee.percent_complete %> % complete
+              </div>
+            <% elsif percent_complete <= 75 %>
+              <div class="progress-bar bg-info text-dark fee-progress-fonts" role="progressbar" aria-label="Example with label" style="width: <%= fee.percent_complete %>%;" aria-valuenow="<%= fee.percent_complete %>" aria-valuemin="0" aria-valuemax="100">
+                <%= fee.percent_complete %> % complete
+              </div>
+            <% elsif percent_complete <= 99 %>
+              <div class="progress-bar bg-success text-dark fee-progress-fonts" role="progressbar" aria-label="Example with label" style="width: <%= fee.percent_complete %>%;" aria-valuenow="<%= fee.percent_complete %>" aria-valuemin="0" aria-valuemax="100">
+                <%= fee.percent_complete %> % complete
+              </div>
+            <% elsif percent_complete >= 100 %>
+              <div class="progress-bar text-dark fee-progress-fonts" role="progressbar" aria-label="Example with label" style="width: <%= fee.percent_complete %>%;" aria-valuenow="<%= fee.percent_complete %>" aria-valuemin="0" aria-valuemax="100">
+                <%= fee.percent_complete %> % complete
+              </div>
+            <% end %>
+          </div>
+          <div class="text-center"><%= number_to_currency(fee.total_fee_paid, unit: "", precision: 0) %>frs,</div>
+          <div>
+            <%= render partial: "fees/fee", layout: "layouts/drawer_layout", 
+              locals: { fee: fee, title: "Fee History of #{fee.student.full_name}", item_id: fee.id, position: "end", btn_text: "View" } %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <h1>Fees</h1>
-
-<div id="fees">
-  <% @fees.each do |fee| %>
-    <%= render fee %>
-    <p>
-      <%= link_to "Show this fee", fee %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New fee", new_fee_path %>

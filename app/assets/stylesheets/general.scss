@@ -54,6 +54,11 @@ label{
   border: 2px solid white;
   border-radius: 20px;
 }
+
+.fee-progress-fonts{
+  font-size: 1.3em;
+}
+
 @media screen and (max-width: 700px) {
   .canvas-custom-class{
     width: 90% !important;

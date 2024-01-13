@@ -16,7 +16,7 @@ class Fee < ApplicationRecord
   def set_other_field_values
     self.total_fee_paid = calc_total_fees
     self.is_completed = complete?
-    seelf.installment_num = installments.count
+    self.installment_num = installments.count
   end
 
   def calc_total_fees
@@ -27,10 +27,14 @@ class Fee < ApplicationRecord
     total_fee_paid >= school.send(school_class.generate_fee_string).to_i
   end
 
+  def percent_complete
+    (total_fee_paid.to_f / school.send(school_class.generate_fee_string).to_f) * 100
+  end
+
   private
 
   def fee_not_above_required_fee
-    required_fee = school.send(school_class.generate_fee_string)
+    required_fee = school.send(school_class.generate_fee_string).to_i
     error.add(:installment, "total fee paid (#{total_fee_paid} fcfa) is above the required class fee which is 
     #{required_fee} 
     fcfa. We hope you know what you are doing?, please visit the school 

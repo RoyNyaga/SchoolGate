@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_11_112426) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_13_094335) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_11_112426) do
     t.bigint "school_id", null: false
     t.bigint "school_class_id", null: false
     t.bigint "student_id", null: false
-    t.text "updator_ids", default: [], array: true
+    t.text "update_records", default: [], array: true
     t.string "academic_year", null: false
     t.text "installments", default: [], array: true
     t.integer "installment_num", default: 0

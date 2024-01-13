@@ -9,37 +9,20 @@
     <thead>
       <tr>
         <th scope="col">full names</th>
-        <th scope="col">address</th>
-        <th scope="col">subjects</th>
         <th scope="col">class</th>
+        <th scope="col">Date of birth</th>
+        <th scope="col">Desciplinary Actions</th>
       </tr>
     </thead>
     <tbody>
       <% @students.each do |student| %>
         <tr>
           <td><%= student.full_name %></td>
-          <td><%= student.address %></td>
-          <td><%= student.subjects %></td>
           <td><%= student.school_class.name %></td>
+          <td><%= student.date_of_birth %></td>
+          <td>Here</td>
         </tr>
       <% end %>
     </tbody>
-  </table>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">No</th>
-        <th scope="col">subject</th>
-        <th scope="col">seq 1</th>
-        <th scope="col">seq 2</th>
-        <th scope="col">Avg/20</th>
-        <th scope="col">Coef</th>
-        <th scope="col">Score</th>
-        <th scope="col">Grade</th>
-        <th scope="col">Rank</th>
-        <th scope="col">Teacher</th>
-        <th scope="col">Remark/Sign</th>
-      </tr>
-    </thead>
   </table>
 </div>
