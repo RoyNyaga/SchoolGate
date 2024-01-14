@@ -2,7 +2,6 @@
   <% if fee.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(fee.errors.count, "error") %> prohibited this fee from being saved:</h2>
-
       <ul>
         <% fee.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,57 +9,21 @@
       </ul>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :school_id, style: "display: block" %>
-    <%= form.text_field :school_id %>
-  </div>
-
-  <div>
-    <%= form.label :school_class_id, style: "display: block" %>
-    <%= form.text_field :school_class_id %>
-  </div>
-
-  <div>
-    <%= form.label :teacher_id, style: "display: block" %>
-    <%= form.text_field :teacher_id %>
-  </div>
-
-  <div>
-    <%= form.label :student_id, style: "display: block" %>
-    <%= form.text_field :student_id %>
-  </div>
-
-  <div>
-    <%= form.label :academic_year_start, style: "display: block" %>
-    <%= form.text_field :academic_year_start %>
-  </div>
-
-  <div>
-    <%= form.label :academic_year_end, style: "display: block" %>
-    <%= form.text_field :academic_year_end %>
-  </div>
-
+  <%= form.hidden_field :school_id, value: fee.school_id %>
+  <%= form.hidden_field :school_class_id, value: fee.school_class_id %>
+  <%= form.hidden_field :student_id,  value: fee.student_id %>
+  <%= form.hidden_field :academic_year, value: fee.academic_year %>
   <div>
     <%= form.label :installments, style: "display: block" %>
-    <%= form.text_field :installments %>
+    <div class="row">
+      <div class="col-md-9 mx-auto">
+        <% fee.installments.each_with_index do |amount, i| %>
+          <%= generate_installment_input_field(form, amount) %>
+        <% end %>
+        <span>Add</span>
+      </div>
+    </div>
   </div>
-
-  <div>
-    <%= form.label :installment_num, style: "display: block" %>
-    <%= form.number_field :installment_num %>
-  </div>
-
-  <div>
-    <%= form.label :total_feee_paid, style: "display: block" %>
-    <%= form.text_field :total_feee_paid %>
-  </div>
-
-  <div>
-    <%= form.label :is_completed, style: "display: block" %>
-    <%= form.check_box :is_completed %>
-  </div>
-
   <div>
     <%= form.submit %>
   </div>
