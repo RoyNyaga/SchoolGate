@@ -13,18 +13,30 @@
   <%= form.hidden_field :school_class_id, value: fee.school_class_id %>
   <%= form.hidden_field :student_id,  value: fee.student_id %>
   <%= form.hidden_field :academic_year, value: fee.academic_year %>
-  <div>
+  <div data-controller="fees">
+    <div class="text-center">
+      <%= total_fee_paid_span(fee.percent_complete, number_to_currency(fee.total_fee_paid, unit: "frs", precision: 0, format: "%n %u")) %>
+      Out of
+      <span class="badge bg-primary"><%= number_to_currency(fee.required_fee, unit: "frs", precision: 0, format: "%n %u") %></span>
+    </div>
     <%= form.label :installments, style: "display: block" %>
     <div class="row">
       <div class="col-md-9 mx-auto">
-        <% fee.installments.each_with_index do |amount, i| %>
-          <%= generate_installment_input_field(form, amount) %>
-        <% end %>
-        <span>Add</span>
+        <div id="fee-installments-inputs">
+          <% fee.installments.each_with_index do |amount, i| %>
+            <%= generate_installment_input_field(form, amount) %>
+          <% end %>
+        </div>
+        <br>
+        <div class="text-center">
+          <span>Total Added</span> - <span id="sumDiv"><%= fee.total_fee_paid %></span>
+        </div>
+        <br>
+        <span data-action="click->fees#addFeeInput">Add</span>
       </div>
     </div>
   </div>
   <div>
-    <%= form.submit %>
+    <%= form.submit id: "fee-submit-btn" %>
   </div>
 <% end %>
