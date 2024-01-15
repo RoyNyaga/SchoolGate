@@ -45,3 +45,7 @@ Things you may want to cover:
 - delete the postmaster.pid file in the directory ls ~/../../usr/local/var/postgresql@14
 - Also make sure port number in ls ~/../../usr/local/var/postgresql@14/postgresql.conf is set to 5432 or the default value.
 - Restart postgres server.
+
+###
+- stimulus generate command
+`bin/rails generate stimulus contraller_name_in_plural`
