@@ -1,5 +1,9 @@
-<div class="container-fluid p-0 m-0">
-  <% flash.each do |message_type, message| %>
-    <%= content_tag(:div, message, class: "text-center alert alert-#{message_type}") %>
-  <% end %>
-</div>
+  <%#= content_tag(:div, "this is message", class: "flash__message text-center alert alert-success") %>
+<%# end %>
+<% flash.each do |message_type, message| %>
+  <div class="flash__message_<%= message_type %>"
+  data-controller="removals"
+  data-action="animationend->removals#remove">
+    <%= message %>
+  </div>
+<% end %>

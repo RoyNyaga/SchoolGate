@@ -27,12 +27,12 @@
             <%= generate_installment_input_field(form, amount) %>
           <% end %>
         </div>
-        <br>
+        <div>
+          <span data-action="click->fees#addFeeInput">Add</span>
+        </div>
         <div class="text-center">
           <span>Total Added</span> - <span id="sumDiv"><%= fee.total_fee_paid %></span>
         </div>
-        <br>
-        <span data-action="click->fees#addFeeInput">Add</span>
       </div>
     </div>
   </div>

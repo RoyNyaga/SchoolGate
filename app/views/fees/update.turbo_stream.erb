@@ -1,0 +1,3 @@
+<%= turbo_stream.replace @fee, partial: "fees/fee", locals: { fee: @fee, percent_complete: @fee.percent_complete, 
+title: "Fee History of #{@fee.student.full_name}",  item_id: @fee.id, position: "end", btn_text: "View" }  %>
+<%= turbo_stream.prepend "#{@fee.id}_drawer_flash_message", partial: "shared/flash_messages" %>

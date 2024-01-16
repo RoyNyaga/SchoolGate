@@ -14,12 +14,13 @@
         <td>
           <div class="text-center"><%= number_to_currency(fee.total_fee_paid, unit: "", precision: 0) %>frs,</div>
           <div class="progress">
-            <% @percent_complete =  fee.percent_complete %>
-            <%= generate_progress_bar(@percent_complete) %>
+            <% percent_complete =  fee.percent_complete %>
+            <%= generate_progress_bar(percent_complete) %>
           </div>
           <div>
             <%= render partial: "fees/fee", layout: "layouts/drawer_layout", 
-              locals: { fee: fee, title: "Fee History of #{fee.student.full_name}", item_id: fee.id, position: "end", btn_text: "View" } %>
+              locals: { fee: fee, percent_complete: percent_complete, title: "Fee History of #{fee.student.full_name}", 
+              item_id: fee.id, position: "end", btn_text: "View" } %>
           </div>
         </td>
       </tr>

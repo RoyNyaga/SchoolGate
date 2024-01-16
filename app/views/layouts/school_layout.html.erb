@@ -22,7 +22,9 @@
       <%= render partial: "shared/sidebar_nav_links", 
         layout: "layouts/drawer_layout", 
         locals: { item_id: "0000000", title: "", position: "start", btn_text: "Open" }%>
-      <%= render "shared/flash_messages" %>
+      <div id="main-flash" class="flash">
+        <%= render "shared/flash_messages" %>
+      </div>
       <%= yield %>
     </div>
   </body>

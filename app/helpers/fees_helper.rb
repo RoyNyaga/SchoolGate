@@ -14,6 +14,7 @@ module FeesHelper
     elsif percent_complete <= 99
       "bg-success"
     elsif percent_complete >= 100
+      "bg-primary"
     end
   end
 

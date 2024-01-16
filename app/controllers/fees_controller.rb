@@ -36,15 +36,24 @@ class FeesController < ApplicationController
 
   # PATCH/PUT /fees/1 or /fees/1.json
   def update
-    respond_to do |format|
-      if @fee.update(fee_params)
-        format.html { redirect_to fee_url(@fee), notice: "Fee was successfully updated." }
-        format.json { render :show, status: :ok, location: @fee }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @fee.errors, status: :unprocessable_entity }
+    @fee.attributes = fee_params
+    if @fee.valid?
+      # @fee.update_records << { updator: current_teacher.name, changes: params[:fee][:installments] date: Date.today }
+      # @fee.save
+      respond_to do |format|
+        format.html { redirect_to fee_url(@fee), success: "Fee was successfully updated." }
+        format.turbo_stream { flash.now[:success] = "Fee was successfully updated." }
       end
     end
+    # respond_to do |format|
+    #     @fee.
+    #     format.html { redirect_to fee_url(@fee), notice: "Fee was successfully updated." }
+    #     format.json { render :show, status: :ok, location: @fee }
+    #   else
+    #     format.html { render :edit, status: :unprocessable_entity }
+    #     format.json { render json: @fee.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # DELETE /fees/1 or /fees/1.json
@@ -66,6 +75,7 @@ class FeesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def fee_params
-    params.require(:fee).permit(:school_id, :school_class_id, :teacher_id, :student_id, :academic_year_start, :academic_year_end, :installments, :installment_num, :total_feee_paid, :is_completed)
+    params.require(:fee).permit(:school_id, :school_class_id, :teacher_id, :student_id, :academic_year, :installment_num,
+                                :total_fee_paid, :is_completed, installments: [])
   end
 end

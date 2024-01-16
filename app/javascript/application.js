@@ -5,6 +5,18 @@ import "bootstrap"
 import "@hotwired/turbo-rails"
 import "controllers"
 
+const leftSideBar = document.querySelector(".sidebar")
+if (leftSideBar) {
+  console.log("one")
+  const sideBarWidth = leftSideBar.clientWidth;
+  const bodyWidth = document.body.clientWidth;
+  const mainContentDiv = document.querySelector("#main-content-div")
+  console.log(mainContentDiv)
+  console.log("body width", bodyWidth)
+  console.log("sidebar with: ", sideBarWidth)
+  console.log(bodyWidth - sideBarWidth)
+  mainContentDiv.style.width = `${bodyWidth - sideBarWidth}px`
+}
 
 document.addEventListener('turbo:load', function () {
   const leftSideBar = document.querySelector(".sidebar")
