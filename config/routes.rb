@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :fees
+  resources :fees do
+    collection do
+      get :statistics
+    end
+  end
   resources :report_cards do
     collection do
       post :bulk_create

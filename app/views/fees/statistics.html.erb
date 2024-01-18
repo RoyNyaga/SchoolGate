@@ -1,0 +1,11 @@
+<div class="container-fluid">
+  <%= render "shared/school_manager_navbar" %>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="text-center section-div">
+        <h5>Total</h5>
+        <h5><%= number_to_currency(@overall_fee_paid, unit: "frs", precision: 0, format: "%n %u") %></h5>
+      </div>
+    </div>
+  </div>
+</div>

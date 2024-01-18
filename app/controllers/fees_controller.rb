@@ -1,4 +1,5 @@
 class FeesController < ApplicationController
+  layout "school_layout"
   before_action :set_fee, only: %i[ show edit update destroy ]
 
   # GET /fees or /fees.json
@@ -57,6 +58,11 @@ class FeesController < ApplicationController
       format.html { redirect_to fees_url, notice: "Fee was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def statistics
+    @fees = Fee.all
+    @overall_fee_paid = @fees.map(&:total_fee_paid).sum
   end
 
   private
