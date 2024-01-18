@@ -7,5 +7,10 @@
         <h5><%= number_to_currency(@overall_fee_paid, unit: "frs", precision: 0, format: "%n %u") %></h5>
       </div>
     </div>
+    <div class="col-md-3">
+      <div class="section-div">
+        <%= pie_chart [["Complete", 20], ["Incomplete", 40]] %>
+      </div>
+    </div>
   </div>
 </div>

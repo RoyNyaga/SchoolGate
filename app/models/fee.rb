@@ -13,10 +13,20 @@ class Fee < ApplicationRecord
 
   before_save :set_other_field_values
 
+  scope :completed, -> { where(is_completed: true) }
+  scope :incompleted, -> { where(is_completed: false) }
+
   def self.installment_by_num(num)
     installments = { "1" => "First", "2" => "Second", "3" => "Third",
                      "4" => "Forth", "5" => "Fifth", "6" => "Sith" }
     installments[num.to_s]
+  end
+
+  def self.calc_complete_and_incomplete_percent
+    complete = completed.count.to_f
+    incomplete = incompleted.count.to_f
+    total = complete + incomplete
+    { complete_percent: ((complete / total) * 100).round(2), incomplete_percent: ((incomplete / total) * 100).round(2) }
   end
 
   def set_other_field_values
