@@ -9,7 +9,23 @@
     </div>
     <div class="col-md-3">
       <div class="section-div">
-        <%= pie_chart [["Complete", 20], ["Incomplete", 40]] %>
+        <%= pie_chart complete_incomplete_pie_charts_path, 
+        loading: "We are fetching your data .....", colors: ["blue", "orange"], 
+        title: "% Complete Fees Vs % InComplete Fees", suffix: "%"  %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="section-div">
+        <%= pie_chart incomplete_fee_per_installment_bar_charts_path, 
+        loading: "We are fetching your data .....", colors: ["green", "pink", "purple", "voilet"], 
+        title: "Incomplete Fee Vs Installment"  %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="section-div">
+        <%= pie_chart complete_fee_per_installment_bar_charts_path, 
+        loading: "We are fetching your data .....", colors: ["green", "pink", "purple", "voilet"], 
+        title: "Complete Fee Vs Installment"  %>
       </div>
     </div>
   </div>

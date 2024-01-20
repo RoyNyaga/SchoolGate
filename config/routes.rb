@@ -51,4 +51,12 @@ Rails.application.routes.draw do
       put :reject
     end
   end
+
+  resources :charts, except: [:index, :show, :update, :edit, :new, :destroy, :create] do
+    collection do
+      get :complete_incomplete_pie
+      get :incomplete_fee_per_installment_bar
+      get :complete_fee_per_installment_bar
+    end
+  end
 end
