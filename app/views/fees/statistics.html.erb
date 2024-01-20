@@ -28,5 +28,19 @@
         title: "Complete Fee Vs Installment"  %>
       </div>
     </div>
+    <div class="col-md-8">
+      <div class="section-div">
+        <%= column_chart incomplete_fee_per_class_charts_path, 
+        loading: "We are fetching your data .....", colors: ["green", "pink", "purple", "voilet", "orange"], 
+        title: "Incomplete Fee Vs Class"  %>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="section-div">
+        <%= column_chart complete_fee_per_class_charts_path, 
+        loading: "We are fetching your data .....", colors: ["green", "pink", "purple", "voilet", "orange"], 
+        title: "Complete Fee Vs Class"  %>
+      </div>
+    </div>
   </div>
 </div>

@@ -57,6 +57,8 @@ Rails.application.routes.draw do
       get :complete_incomplete_pie
       get :incomplete_fee_per_installment_bar
       get :complete_fee_per_installment_bar
+      get :incomplete_fee_per_class
+      get :complete_fee_per_class
     end
   end
 end
