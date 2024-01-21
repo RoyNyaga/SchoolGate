@@ -23,8 +23,12 @@
     <div class="row">
       <div class="col-md-9 mx-auto">
         <div id="fee-installments-inputs">
-          <% fee.installments.each_with_index do |amount, i| %>
-            <%= generate_installment_input_field(form, amount) %>
+          <% if fee.installments.empty? %>
+            <%= generate_installment_input_field(form, 0) %>
+          <% else %>
+            <% fee.installments.each_with_index do |amount, i| %>
+              <%= generate_installment_input_field(form, "") %>
+            <% end %>
           <% end %>
         </div>
         <div>
