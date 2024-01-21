@@ -12,12 +12,6 @@ class Charts::DataParsing
       end
       class_data["data"] = data
       main_data << class_data
-      p "this is main data"
-      p "this is main data"
-      p "this is main data"
-      p "this is main data"
-      p "this is main data"
-      p main_data
     end
     main_data
   end

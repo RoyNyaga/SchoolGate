@@ -1,6 +1,9 @@
-<a data-bs-toggle="offcanvas" href="#<%= item_id %>_drawer" role="button" aria-controls="<%= item_id %>_drawer">
-  <%= btn_text %>
-</a>
+<% btn_visibility ||= false # setting default visibility values%>
+<% if btn_visibility %>
+  <a data-bs-toggle="offcanvas" href="#<%= item_id %>_drawer" role="button" aria-controls="<%= item_id %>_drawer">
+    <%= btn_text %>
+  </a>
+<% end %>
 <div class="offcanvas offcanvas-<%= position %> canvas-custom-class" tabindex="-1" id="<%= item_id %>_drawer" aria-labelledby="<%= item_id %>_drawerLabel">
   <div id="<%= item_id %>_drawer_flash_message" class="flash">
     <%= render "shared/flash_messages" %>
