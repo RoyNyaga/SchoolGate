@@ -42,5 +42,12 @@
         title: "Complete Fee Vs Class"  %>
       </div>
     </div>
+    <div class="col-md-8">
+      <div class="section-div">
+        <%= line_chart revenue_per_class_over_time_line_chart_charts_path, 
+        loading: "We are fetching your data .....", colors: ["green", "pink", "purple", "voilet", "orange"], 
+        title: "Revenu over time"  %>
+      </div>
+    </div>
   </div>
 </div>

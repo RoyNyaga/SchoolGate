@@ -31,4 +31,11 @@ class ChartsController < ApplicationController
     end
     render json: data
   end
+
+  def revenue_per_class_over_time_line_chart
+    main_data = {}
+    @school_classes = current_school.school_classes
+    data = Charts::DataParsing.revenue_per_class_over_time(@school_classes)
+    render json: data
+  end
 end

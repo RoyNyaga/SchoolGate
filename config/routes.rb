@@ -59,6 +59,7 @@ Rails.application.routes.draw do
       get :complete_fee_per_installment_bar
       get :incomplete_fee_per_class
       get :complete_fee_per_class
+      get :revenue_per_class_over_time_line_chart
     end
   end
 end
