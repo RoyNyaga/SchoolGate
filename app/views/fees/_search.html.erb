@@ -1,7 +1,7 @@
 <%= form_with url: search_fees_path, method: :get do |form| %>
   <div class="row section-div" id="main-search-section">
     <div class="col-md-4">
-      <%= form.select :academic_year, [["2023/2024", "2023/2024"]], { prompt: "Year" }, { class: "general-input-styles" } %>
+      <%= form.select :academic_year, @academic_year_list, { prompt: "Year" }, { class: "general-input-styles" } %>
     </div>
     <div class="col-md-8">
       <%= form.text_field :student_name, class: "general-input-styles", placeholder: "Enter Student Name" %>

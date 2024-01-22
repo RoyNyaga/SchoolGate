@@ -56,6 +56,10 @@ class Fee < ApplicationRecord
     percent.round(2)
   end
 
+  def self.academic_year_list_per_school(current_school)
+    current_school.fees.group(:academic_year).count.keys
+  end
+
   private
 
   def fee_not_above_required_fee

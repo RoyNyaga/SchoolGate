@@ -4,7 +4,8 @@ class FeesController < ApplicationController
 
   # GET /fees or /fees.json
   def index
-    @fees = Fee.all.includes(:school, :school_class, :student)
+    @academic_year_list = Fee.academic_year_list_per_school(current_school)
+    @fees = current_school.fees.includes(:school, :school_class, :student)
   end
 
   # GET /fees/1 or /fees/1.json
