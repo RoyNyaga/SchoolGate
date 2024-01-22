@@ -31,11 +31,16 @@ export default class extends Controller {
     const advancedSearchInputDiv = document.querySelector("#advanced-search-input-fields")
     const lessOptionBtn = document.querySelector("#less-option-search-btn")
     advancedSearchInputDiv.classList.remove("d-none")
-    lessOptionBtn.remove("d-none")
+    lessOptionBtn.classList.remove("d-none")
     e.target.classList.add("d-none")
   }
 
-  lessSearchOptions(){
-
+  lessSearchOptions(e){
+    const advancedSearchInputDiv = document.querySelector("#advanced-search-input-fields")
+    const moreOptionBtn = document.querySelector("#more-option-search-btn")
+    advancedSearchInputDiv.classList.add("d-none")
+    console.log(moreOptionBtn)
+    moreOptionBtn.classList.remove("d-none")
+    e.target.classList.add("d-none")
   }
 }
