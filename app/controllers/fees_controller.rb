@@ -65,6 +65,9 @@ class FeesController < ApplicationController
     @overall_fee_paid = @fees.map(&:total_fee_paid).sum
   end
 
+  def search
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

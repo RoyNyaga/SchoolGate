@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :fees do
     collection do
       get :statistics
+      get :search
     end
   end
   resources :report_cards do

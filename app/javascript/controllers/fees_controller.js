@@ -26,4 +26,16 @@ export default class extends Controller {
 
     sumDiv.textContent = `${sum} frs`
   }
+
+  moreSearchOptions(e){
+    const advancedSearchInputDiv = document.querySelector("#advanced-search-input-fields")
+    const lessOptionBtn = document.querySelector("#less-option-search-btn")
+    advancedSearchInputDiv.classList.remove("d-none")
+    lessOptionBtn.remove("d-none")
+    e.target.classList.add("d-none")
+  }
+
+  lessSearchOptions(){
+
+  }
 }
