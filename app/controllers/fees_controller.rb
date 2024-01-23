@@ -72,6 +72,7 @@ class FeesController < ApplicationController
     sql += " AND lower(students.full_name) like '%#{params[:student_name].downcase}%'" if params[:student_name].present?
     sql += " AND percentage_complete > #{params[:percent_complete_greater_than]}" if params[:percent_complete_greater_than].present?
     sql += " AND percentage_complete < #{params[:percent_complete_lesser_than]}" if params[:percent_complete_lesser_than].present?
+    sql += " AND school_class_id = #{params[:school_class_id]}" if params[:school_class_id].present?
     @fees = Fee.joins(:student).where(sql)
     respond_to do |format|
       # format.html { render "fees#index", success: "Fee was successfully updated." }

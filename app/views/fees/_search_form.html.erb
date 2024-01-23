@@ -16,7 +16,7 @@
     </div>
     <div class="col-md-6">
       <%= form.label :select_class %>
-      <%= form.text_field :school_class, class: "general-input-styles", placeholder: "Class" %>
+      <%= form.collection_select :school_class_id, current_school.school_classes, :id, :name, { prompt: "Select Class" }, { class: "general-input-styles" } %>
     </div>
     <div class="col-md-6">
       <%= form.label :percent_complete_greater_than%>
