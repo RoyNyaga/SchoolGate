@@ -15,7 +15,7 @@
   <%= form.hidden_field :academic_year, value: fee.academic_year %>
   <div data-controller="fees">
     <div class="text-center">
-      <%= total_fee_paid_span(fee.percent_complete, number_to_currency(fee.total_fee_paid, unit: "frs", precision: 0, format: "%n %u")) %>
+      <%= total_fee_paid_span(fee.percentage_complete, number_to_currency(fee.total_fee_paid, unit: "frs", precision: 0, format: "%n %u")) %>
       Out of
       <span class="badge bg-primary"><%= number_to_currency(fee.required_fee, unit: "frs", precision: 0, format: "%n %u") %></span>
     </div>

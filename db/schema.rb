@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_13_094335) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_23_021055) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,6 +26,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_13_094335) do
     t.boolean "is_completed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "percentage_complete", default: 0.0
     t.index ["school_class_id"], name: "index_fees_on_school_class_id"
     t.index ["school_id"], name: "index_fees_on_school_id"
     t.index ["student_id"], name: "index_fees_on_student_id"

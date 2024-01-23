@@ -5,8 +5,8 @@
   <td>
     <div class="text-center"><%= number_to_currency(fee.total_fee_paid, unit: "frs", precision: 0, format: "%n %u") %></div>
     <div class="progress">
-      <% percent_complete =  fee.percent_complete %>
-      <%= generate_progress_bar(percent_complete) %>
+      <% percentage_complete =  fee.percentage_complete %>
+      <%= generate_progress_bar(percentage_complete) %>
     </div>
   </td>
   <td>
@@ -17,5 +17,5 @@
 </tr>
 <% # keeping the drawer out of the table to avoid issues when rerendering the card after updating a fee%>
 <%= render partial: "fees/fee", layout: "layouts/drawer_layout", 
-              locals: { fee: fee, percent_complete: percent_complete, title: "Fee History of #{fee.student.full_name}", 
+              locals: { fee: fee, percentage_complete: percentage_complete, title: "Fee History of #{fee.student.full_name}", 
               item_id: fee.id, position: "end", btn_text: "View", btn_visibility: false } %>

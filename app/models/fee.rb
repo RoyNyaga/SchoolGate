@@ -33,6 +33,7 @@ class Fee < ApplicationRecord
     self.total_fee_paid = calc_total_fees
     self.is_completed = complete?
     self.installment_num = installments.count
+    self.percentage_complete = calc_percentage_complete
   end
 
   def calc_total_fees
@@ -51,7 +52,7 @@ class Fee < ApplicationRecord
     required_fee - total_fee_paid
   end
 
-  def percent_complete
+  def calc_percentage_complete
     percent = (total_fee_paid.to_f / school.send(school_class.generate_fee_string).to_f) * 100
     percent.round(2)
   end
