@@ -67,6 +67,10 @@ class FeesController < ApplicationController
   end
 
   def search
+    sql = "fees.school_id = #{current_school.id}"
+    sql += " AND academic_year = '#{params[:academic_year]}'" if params[:academic_year].present?
+    sql += " AND lower(students.full_name) like '%#{params[:student_name].downcase}%'" if params[:student_name].present?
+    @fees = Fee.joins(:student).where(sql)
   end
 
   private
