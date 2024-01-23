@@ -43,7 +43,7 @@ class FeesController < ApplicationController
       @fee.update_records << { updator: current_teacher.name, changes: params[:fee][:installments], date: Date.today.to_s }.to_s
       @fee.save
       respond_to do |format|
-        format.html { redirect_to fee_url(@fee), success: "Fee was successfully updated." }
+        # format.html { redirect_to fee_url(@fee), success: "Fee was successfully updated." }
         format.turbo_stream { flash.now[:success] = "Fee was successfully updated." }
       end
     else
@@ -71,6 +71,10 @@ class FeesController < ApplicationController
     sql += " AND academic_year = '#{params[:academic_year]}'" if params[:academic_year].present?
     sql += " AND lower(students.full_name) like '%#{params[:student_name].downcase}%'" if params[:student_name].present?
     @fees = Fee.joins(:student).where(sql)
+    respond_to do |format|
+      # format.html { render "fees#index", success: "Fee was successfully updated." }
+      format.turbo_stream { flash.now[:success] = "#{@fees.count} Results Found" }
+    end
   end
 
   private
