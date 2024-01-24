@@ -1,0 +1,8 @@
+<%= render "shared/school_manager_navbar" %>
+<%= link_to "View Yearly Stats", statistics_fees_path %>
+<div class="row col-md-5 mx-auto">
+  <%= render "search_form" %>
+</div>
+<div id="fees-index-table-div">
+  <%= render partial: "fees_index_table", locals: { fees: @fees } %>
+</div>

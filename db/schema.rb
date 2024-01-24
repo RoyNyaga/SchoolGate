@@ -10,9 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_04_041306) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_23_021055) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "fees", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "school_class_id", null: false
+    t.bigint "student_id", null: false
+    t.text "update_records", default: [], array: true
+    t.string "academic_year", null: false
+    t.text "installments", default: [], array: true
+    t.integer "installment_num", default: 0
+    t.integer "total_fee_paid", default: 0
+    t.boolean "is_completed", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float "percentage_complete", default: 0.0
+    t.index ["school_class_id"], name: "index_fees_on_school_class_id"
+    t.index ["school_id"], name: "index_fees_on_school_id"
+    t.index ["student_id"], name: "index_fees_on_student_id"
+  end
 
   create_table "invitations", force: :cascade do |t|
     t.bigint "sender_id", null: false
@@ -67,6 +85,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_04_041306) do
     t.string "moto"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.json "school_fees_settings", default: {}
     t.index ["teacher_id"], name: "index_schools_on_teacher_id"
   end
 
@@ -165,6 +184,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_04_041306) do
     t.index ["teacher_id"], name: "index_workings_on_teacher_id"
   end
 
+  add_foreign_key "fees", "school_classes"
+  add_foreign_key "fees", "schools"
+  add_foreign_key "fees", "students"
   add_foreign_key "invitations", "schools"
   add_foreign_key "invitations", "teachers"
   add_foreign_key "report_cards", "school_classes"

@@ -6,7 +6,7 @@ class SchoolsController < ApplicationController
 
   # GET /schools or /schools.json
   def index
-    @schools = School.joins(:workings).where(workings: { teacher_id: current_teacher.id }).distinct
+    @schools = School.without_settings_attr.joins(:workings).where(workings: { teacher_id: current_teacher.id }).distinct
     render layout: "application"
   end
 
@@ -81,6 +81,7 @@ class SchoolsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def school_params
-    params.require(:school).permit(:full_name, :abbreviation, :town, :address, :moto)
+    params.require(:school).permit(:full_name, :abbreviation, :town, :address, :moto, :level_1_fees, :level_2_fees,
+                                   :level_3_fees, :level_4_fees, :level_5_fees, :level_6_fees, :level_7_fees)
   end
 end

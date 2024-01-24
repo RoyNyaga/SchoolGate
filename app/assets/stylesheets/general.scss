@@ -9,7 +9,11 @@ h1{
 }
 
 #school-main-div{
-  padding-left: 250px;
+ 
+}
+
+#main-content-div{
+  float: right;
 }
 
 .general-input-styles{
@@ -46,11 +50,72 @@ label{
 
 .section-div{
   background: #fefefe;
-  padding: 20px;
+  padding: 10px;
   border: 2px solid white;
   border-radius: 20px;
 }
-@media screen and (max-width: 700px) {
+
+.fee-progress-fonts{
+  font-size: 1.3em;
+}
+
+@keyframes appear-then-fade {
+  0%, 100% {
+    opacity:0
+  }
+  5%, 60% {
+    opacity:1
+  }
+}
+
+.flash {
+  position:fixed;
+  top: 93%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  max-width: 100%;
+  width: max-content;
+
+  &__message_success {
+    animation: appear-then-fade 4s both;
+    border-radius: 999px;
+    background: rgb(2, 102, 2);
+    color: white;
+    padding: 10px;
+    @media screen and (max-width: 425px) {
+      padding: 2;
+    }
+  }
+
+  &__message_error {
+    animation: appear-then-fade 4s both;
+    border-radius: 999px;
+    background: rgb(119, 2, 2);
+    color: white;
+    padding: 10px;
+    @media screen and (max-width: 425px) {
+      padding: 2;
+    }
+  }
+  
+  &__message_notice {
+    animation: appear-then-fade 4s both;
+    border-radius: 999px;
+    background: rgb(2, 102, 2);
+    color: white;
+    padding: 10px;
+    @media screen and (max-width: 425px) {
+      padding: 2;
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
   .canvas-custom-class{
     width: 90% !important;
   }

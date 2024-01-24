@@ -67,63 +67,71 @@
 #   end
 # end
 
-marks = ["{\"id\"=>\"4\", \"name\"=>\"Allan Powlowski Marquardt\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"5\", \"name\"=>\"Melynda Bernier Kemmer DDS\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"6\", \"name\"=>\"Roland Kertzmann Dickens\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"7\", \"name\"=>\"Beatris Haley Hirthe\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"8\", \"name\"=>\"Sen. Alessandra Ondricka Davis\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"9\", \"name\"=>\"Katheleen Dickens Von\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"10\", \"name\"=>\"Fr. Helaine Nolan Lynch\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"11\", \"name\"=>\"Loyd Ritchie Harvey\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"12\", \"name\"=>\"Lajuana Goyette Kuphal\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"13\", \"name\"=>\"Ms. Marcelino Gleichner Lowe\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"14\", \"name\"=>\"Bill Lehner Lynch\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"15\", \"name\"=>\"Miss Whitney Koepp McClure\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"16\", \"name\"=>\"Angel Walter Nader\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"17\", \"name\"=>\"Rodger Kreiger Hansen\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"18\", \"name\"=>\"Pres. Jamie Moore Strosin\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"19\", \"name\"=>\"Kyong Grant Breitenberg\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"20\", \"name\"=>\"Gilda Hermann D'Amore\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"21\", \"name\"=>\"Kirstie Anderson Pagac\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"22\", \"name\"=>\"Ms. Moon Koelpin Block\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"23\", \"name\"=>\"Venus Funk Brekke Ret.\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"24\", \"name\"=>\"Valentin Reichert Nolan DVM\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"25\", \"name\"=>\"Rolf Larson Greenfelder\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"26\", \"name\"=>\"Celeste Kessler Kemmer IV\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"27\", \"name\"=>\"Sammy Cronin Miller\", \"mark\"=>\"#{rand(1..20)}\"}",
-         "{\"id\"=>\"28\", \"name\"=>\"Rep. Ronnie Monahan Gutkowski\", \"mark\"=>\"#{rand(1..20)}\"}"]
+# marks = ["{\"id\"=>\"4\", \"name\"=>\"Allan Powlowski Marquardt\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"5\", \"name\"=>\"Melynda Bernier Kemmer DDS\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"6\", \"name\"=>\"Roland Kertzmann Dickens\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"7\", \"name\"=>\"Beatris Haley Hirthe\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"8\", \"name\"=>\"Sen. Alessandra Ondricka Davis\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"9\", \"name\"=>\"Katheleen Dickens Von\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"10\", \"name\"=>\"Fr. Helaine Nolan Lynch\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"11\", \"name\"=>\"Loyd Ritchie Harvey\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"12\", \"name\"=>\"Lajuana Goyette Kuphal\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"13\", \"name\"=>\"Ms. Marcelino Gleichner Lowe\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"14\", \"name\"=>\"Bill Lehner Lynch\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"15\", \"name\"=>\"Miss Whitney Koepp McClure\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"16\", \"name\"=>\"Angel Walter Nader\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"17\", \"name\"=>\"Rodger Kreiger Hansen\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"18\", \"name\"=>\"Pres. Jamie Moore Strosin\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"19\", \"name\"=>\"Kyong Grant Breitenberg\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"20\", \"name\"=>\"Gilda Hermann D'Amore\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"21\", \"name\"=>\"Kirstie Anderson Pagac\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"22\", \"name\"=>\"Ms. Moon Koelpin Block\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"23\", \"name\"=>\"Venus Funk Brekke Ret.\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"24\", \"name\"=>\"Valentin Reichert Nolan DVM\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"25\", \"name\"=>\"Rolf Larson Greenfelder\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"26\", \"name\"=>\"Celeste Kessler Kemmer IV\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"27\", \"name\"=>\"Sammy Cronin Miller\", \"mark\"=>\"#{rand(1..20)}\"}",
+#          "{\"id\"=>\"28\", \"name\"=>\"Rep. Ronnie Monahan Gutkowski\", \"mark\"=>\"#{rand(1..20)}\"}"]
 
-subjects = @school.subjects.where(school_class_id: 3) # subjects for form one
+# subjects = @school.subjects.where(school_class_id: 3) # subjects for form one
 
-subjects.each do |subject|
-  [1, 2].each do |v|
-    marks = ["{\"id\"=>\"4\", \"name\"=>\"Allan Powlowski Marquardt\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"5\", \"name\"=>\"Melynda Bernier Kemmer DDS\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"6\", \"name\"=>\"Roland Kertzmann Dickens\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"7\", \"name\"=>\"Beatris Haley Hirthe\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"8\", \"name\"=>\"Sen. Alessandra Ondricka Davis\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"9\", \"name\"=>\"Katheleen Dickens Von\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"10\", \"name\"=>\"Fr. Helaine Nolan Lynch\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"11\", \"name\"=>\"Loyd Ritchie Harvey\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"12\", \"name\"=>\"Lajuana Goyette Kuphal\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"13\", \"name\"=>\"Ms. Marcelino Gleichner Lowe\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"14\", \"name\"=>\"Bill Lehner Lynch\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"15\", \"name\"=>\"Miss Whitney Koepp McClure\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"16\", \"name\"=>\"Angel Walter Nader\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"17\", \"name\"=>\"Rodger Kreiger Hansen\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"18\", \"name\"=>\"Pres. Jamie Moore Strosin\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"19\", \"name\"=>\"Kyong Grant Breitenberg\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"20\", \"name\"=>\"Gilda Hermann D'Amore\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"21\", \"name\"=>\"Kirstie Anderson Pagac\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"22\", \"name\"=>\"Ms. Moon Koelpin Block\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"23\", \"name\"=>\"Venus Funk Brekke Ret.\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"24\", \"name\"=>\"Valentin Reichert Nolan DVM\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"25\", \"name\"=>\"Rolf Larson Greenfelder\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"26\", \"name\"=>\"Celeste Kessler Kemmer IV\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"27\", \"name\"=>\"Sammy Cronin Miller\", \"mark\"=>\"#{rand(1..20)}\"}",
-             "{\"id\"=>\"28\", \"name\"=>\"Rep. Ronnie Monahan Gutkowski\", \"mark\"=>\"#{rand(1..20)}\"}"]
+# subjects.each do |subject|
+#   [1, 2].each do |v|
+#     marks = ["{\"id\"=>\"4\", \"name\"=>\"Allan Powlowski Marquardt\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"5\", \"name\"=>\"Melynda Bernier Kemmer DDS\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"6\", \"name\"=>\"Roland Kertzmann Dickens\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"7\", \"name\"=>\"Beatris Haley Hirthe\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"8\", \"name\"=>\"Sen. Alessandra Ondricka Davis\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"9\", \"name\"=>\"Katheleen Dickens Von\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"10\", \"name\"=>\"Fr. Helaine Nolan Lynch\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"11\", \"name\"=>\"Loyd Ritchie Harvey\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"12\", \"name\"=>\"Lajuana Goyette Kuphal\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"13\", \"name\"=>\"Ms. Marcelino Gleichner Lowe\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"14\", \"name\"=>\"Bill Lehner Lynch\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"15\", \"name\"=>\"Miss Whitney Koepp McClure\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"16\", \"name\"=>\"Angel Walter Nader\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"17\", \"name\"=>\"Rodger Kreiger Hansen\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"18\", \"name\"=>\"Pres. Jamie Moore Strosin\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"19\", \"name\"=>\"Kyong Grant Breitenberg\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"20\", \"name\"=>\"Gilda Hermann D'Amore\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"21\", \"name\"=>\"Kirstie Anderson Pagac\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"22\", \"name\"=>\"Ms. Moon Koelpin Block\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"23\", \"name\"=>\"Venus Funk Brekke Ret.\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"24\", \"name\"=>\"Valentin Reichert Nolan DVM\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"25\", \"name\"=>\"Rolf Larson Greenfelder\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"26\", \"name\"=>\"Celeste Kessler Kemmer IV\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"27\", \"name\"=>\"Sammy Cronin Miller\", \"mark\"=>\"#{rand(1..20)}\"}",
+#              "{\"id\"=>\"28\", \"name\"=>\"Rep. Ronnie Monahan Gutkowski\", \"mark\"=>\"#{rand(1..20)}\"}"]
 
-    Sequence.create(school_id: @school.id, subject_id: subject.id, school_class_id: 3, teacher_id: subject.teachers.first.id,
-                    seq_num: v, term_id: 4, marks: marks)
-  end
+#     Sequence.create(school_id: @school.id, subject_id: subject.id, school_class_id: 3, teacher_id: subject.teachers.first.id,
+#                     seq_num: v, term_id: 4, marks: marks)
+#   end
+# end
+
+fees_hash = { "1" => ["100000", "150000"], "2" => ["50000", "100000"], "3" => ["150000"], "4" => ["200000"],
+              "5" => ["250000"], "6" => ["50000", "100000", "100000"], "7" => ["80000", "120000"] }
+
+Student.all.each do |student|
+  student.fees.create(school_id: student.school_id, school_class_id: student.school_class_id,
+                      academic_year: Student.generate_current_academic_year, installments: fees_hash["#{rand(1..7)}"])
 end

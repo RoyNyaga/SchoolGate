@@ -3,7 +3,8 @@ class SchoolClass < ApplicationRecord
   has_many :students, dependent: :destroy
   has_many :subjects, dependent: :destroy
   has_many :sequences, dependent: :destroy
-  has_many :report_cards
+  has_many :report_cards, dependent: :destroy
+  has_many :fees, dependent: :destroy
 
   validates :name, presence: true, uniqueness: { scope: :school_id,
                                                  message: ": Every Class Should be Unique" }
@@ -11,6 +12,10 @@ class SchoolClass < ApplicationRecord
                                                   message: ": Every Class should have a unique Level" }
 
   before_save :name_to_lowercase
+
+  def generate_fee_string
+    "level_#{level}_fees"
+  end
 
   private
 

@@ -1,0 +1,35 @@
+<%= form_with url: search_fees_path do |form| %>
+  <div class="row section-div" id="main-search-section">
+    <div class="col-md-4">
+      <%= form.select :academic_year, @academic_year_list, { prompt: "Year" }, { class: "general-input-styles" } %>
+    </div>
+    <div class="col-md-8">
+      <%= form.text_field :student_name, class: "general-input-styles", placeholder: "Enter Student Name" %>
+    </div>
+  </div>
+  <div class="row section-div d-none" id="advanced-search-input-fields">
+    <div class="col-md-6">
+      <%= form.number_field :student_uniqu_id, class: "general-input-styles", placeholder: "student Uniqu ID" %>
+    </div>
+    <div class="col-dm-12">
+      <h6 class="text-center mt-3">Class Based Search</h6>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :select_class %>
+      <%= form.collection_select :school_class_id, current_school.school_classes, :id, :name, { prompt: "Select Class" }, { class: "general-input-styles" } %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :percent_complete_greater_than%>
+      <%= form.number_field :percent_complete_greater_than, class: "general-input-styles", placeholder: "" %>
+    </div>
+    <div class="col-md-6 my-2">
+      <%= form.label :percent_complete_lesser_than %>
+      <%= form.number_field :percent_complete_lesser_than, class: "general-input-styles", placeholder: "" %>
+    </div>
+  </div>
+  <div class="d-flex justify-content-between" data-controller="fees">
+    <%= form.submit "Search" %>
+    <span id="more-option-search-btn" class="bg-white" data-action="click->fees#moreSearchOptions">More Options</span>
+    <span id="less-option-search-btn" class="bg-white d-none bg-white" data-action="click->fees#lessSearchOptions">Less Options</span>
+  </div>
+<% end %>

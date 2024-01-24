@@ -17,7 +17,9 @@
     <br>
     <br>
     <br>
-    <%= render "shared/flash_messages" %>
+    <div id="main-flash" class="flash">
+      <%= render "shared/flash_messages" %>
+    </div>
     <%= yield %>
   </body>
 </html>

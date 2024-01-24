@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :fees do
+    collection do
+      get :statistics
+      post :search
+    end
+  end
   resources :report_cards do
     collection do
       post :bulk_create
@@ -44,6 +50,17 @@ Rails.application.routes.draw do
     member do
       put :accept
       put :reject
+    end
+  end
+
+  resources :charts, except: [:index, :show, :update, :edit, :new, :destroy, :create] do
+    collection do
+      get :complete_incomplete_pie
+      get :incomplete_fee_per_installment_bar
+      get :complete_fee_per_installment_bar
+      get :incomplete_fee_per_class
+      get :complete_fee_per_class
+      get :revenue_per_class_over_time_line_chart
     end
   end
 end
