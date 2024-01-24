@@ -9,7 +9,8 @@ class Student < ApplicationRecord
   after_save :create_fees
 
   def sequence_mark_per_subject(marks)
-    marks.find { |student| student["id"] == id.to_s }["mark"]
+    mark = marks.find { |student| student["id"] == id.to_s }
+    mark["mark"] unless mark.nil?
   end
 
   def rank_per_subject(marks)
