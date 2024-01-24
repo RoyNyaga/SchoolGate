@@ -133,5 +133,5 @@ fees_hash = { "1" => ["100000", "150000"], "2" => ["50000", "100000"], "3" => ["
 
 Student.all.each do |student|
   student.fees.create(school_id: student.school_id, school_class_id: student.school_class_id,
-                      academic_year: student.generate_current_academic_year, installments: fees_hash["#{rand(1..7)}"])
+                      academic_year: Student.generate_current_academic_year, installments: fees_hash["#{rand(1..7)}"])
 end

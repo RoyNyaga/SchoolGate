@@ -62,7 +62,12 @@ class FeesController < ApplicationController
   end
 
   def statistics
-    @fees = Fee.all
+    @academic_year = if params[:academic_year].present?
+        params[:academic_year]
+      else
+        Fee.generate_current_academic_year
+      end
+    @fees = Fee.where(academic_year: @academic_year)
     @overall_fee_paid = @fees.map(&:total_fee_paid).sum
   end
 

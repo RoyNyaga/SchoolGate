@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <%= render "shared/school_manager_navbar" %>
+  <%= link_to "Back To Fees", fees_path %>
   <div class="row">
     <div class="col-md-3">
       <div class="text-center section-div">
@@ -9,42 +9,42 @@
     </div>
     <div class="col-md-3">
       <div class="section-div">
-        <%= pie_chart complete_incomplete_pie_charts_path, 
+        <%= pie_chart complete_incomplete_pie_charts_path(academic_year: @academic_year), 
         loading: "We are fetching your data .....", colors: ["blue", "orange"], 
         title: "% Complete Fees Vs % InComplete Fees", suffix: "%"  %>
       </div>
     </div>
     <div class="col-md-6">
       <div class="section-div">
-        <%= pie_chart incomplete_fee_per_installment_bar_charts_path, 
+        <%= pie_chart incomplete_fee_per_installment_bar_charts_path(academic_year: @academic_year), 
         loading: "We are fetching your data .....", colors: ["green", "pink", "purple", "voilet"], 
         title: "Incomplete Fee Vs Installment"  %>
       </div>
     </div>
     <div class="col-md-4">
       <div class="section-div">
-        <%= pie_chart complete_fee_per_installment_bar_charts_path, 
+        <%= pie_chart complete_fee_per_installment_bar_charts_path(academic_year: @academic_year), 
         loading: "We are fetching your data .....", colors: ["green", "pink", "purple", "voilet"], 
         title: "Complete Fee Vs Installment"  %>
       </div>
     </div>
     <div class="col-md-8">
       <div class="section-div">
-        <%= column_chart incomplete_fee_per_class_charts_path, 
+        <%= column_chart incomplete_fee_per_class_charts_path(academic_year: @academic_year), 
         loading: "We are fetching your data .....", colors: ["green", "pink", "purple", "voilet", "orange"], 
         title: "Incomplete Fee Vs Class"  %>
       </div>
     </div>
     <div class="col-md-8">
       <div class="section-div">
-        <%= column_chart complete_fee_per_class_charts_path, 
+        <%= column_chart complete_fee_per_class_charts_path(academic_year: @academic_year), 
         loading: "We are fetching your data .....", colors: ["green", "pink", "purple", "voilet", "orange"], 
         title: "Complete Fee Vs Class"  %>
       </div>
     </div>
     <div class="col-md-8">
       <div class="section-div">
-        <%= line_chart revenue_per_class_over_time_line_chart_charts_path, 
+        <%= line_chart revenue_per_class_over_time_line_chart_charts_path(academic_year: @academic_year), 
         loading: "We are fetching your data .....", colors: ["green", "pink", "purple", "voilet", "orange"], 
         title: "Revenu over time"  %>
       </div>
