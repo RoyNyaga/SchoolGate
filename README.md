@@ -52,3 +52,6 @@ Things you may want to cover:
 
 ## UI repo
 - https://github.com/fonkwe/SchoolGate-
+
+## google location implementation
+- https://www.youtube.com/watch?v=J39KJ5jzH3E
