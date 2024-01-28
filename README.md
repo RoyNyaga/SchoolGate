@@ -42,7 +42,8 @@ Things you may want to cover:
 - SchoolGate
 
 ### For postgres issues when it crashes on development when computer was not put off.
-- delete the postmaster.pid file in the directory ls ~/../../usr/local/var/postgresql@14
+- delete the postmaster.pid file in the directory ls ~/../../usr/local/var/postgresql@14 using the command
+`rm ~/../../usr/local/var/postgresql@14/postmaster.pid`
 - Also make sure port number in ls ~/../../usr/local/var/postgresql@14/postgresql.conf is set to 5432 or the default value.
 - Restart postgres server.
 
