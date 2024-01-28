@@ -58,11 +58,26 @@
       <%= form.text_field :subjects, class: "general-input-styles" %>
     </div>
     <div class="col-md-6">
-      <%= form.label :location, style: "display: block" %>
-      <%= form.text_field :location, class: "general-input-styles" %>
+      <%= form.label :town, style: "display: block" %>
+      <%= form.text_field :town, class: "general-input-styles" %>
     </div>
   </div>
   <div class="py-3">
     <%= form.submit class: "general-btn" %>
   </div>
 <% end %>
+<script async
+    src=<%= google_map_src %>></script>
+<script>
+  var autocomplete;
+  var student_town_input_field = document.querySelector("#student_town");
+    function initAutocomplete(){
+     autocomplete = new google.maps.places.Autocomplete(
+       student_town_input_field,
+       {
+        types: ["(regions)"],
+        fields: ["name"],
+       }
+     )
+   }
+</script>
