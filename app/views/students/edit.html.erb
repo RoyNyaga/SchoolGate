@@ -1,9 +1,8 @@
 <h1>Editing student</h1>
-
-<%= render "form", student: @student %>
-
+<div class="section-div">
+  <%= render "form", student: @student %>
+</div>
 <br>
-
 <div>
   <%= link_to "Show this student", @student %> |
   <%= link_to "Back to students", students_path %>
