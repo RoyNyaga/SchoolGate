@@ -121,7 +121,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_26_221528) do
     t.string "subjects"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "location"
+    t.string "town"
     t.string "unique_identification"
     t.string "portal_code"
     t.string "first_name"
