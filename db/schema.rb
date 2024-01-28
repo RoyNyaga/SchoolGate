@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_23_021055) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_26_221528) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -121,6 +121,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_23_021055) do
     t.string "subjects"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "location"
+    t.string "unique_identification"
+    t.string "portal_code"
+    t.string "first_name"
+    t.string "last_name"
+    t.text "previous_classes", default: [], array: true
     t.index ["school_class_id"], name: "index_students_on_school_class_id"
     t.index ["school_id"], name: "index_students_on_school_id"
   end
