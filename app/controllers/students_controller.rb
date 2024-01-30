@@ -50,19 +50,11 @@ class StudentsController < ApplicationController
   end
 
   def update_photo
-    # # Convert the blob string to an IO object
-    # blob_io = StringIO.new(Base64.decode64(params[:student][:photo]))
-    # blob_io.class.class_eval { attr_accessor :original_filename, :content_type }
-    # blob_io.original_filename = "image.jpg" # Set a default filename
-    # blob_io.content_type = "image/jpeg" # Set the content type
-
-    # # Attach the blob to the Active Storage image_file
-    # @student.photo.attach(io: blob_io, filename: blob_io.original_filename, content_type: blob_io.content_type)
-    # @student.save
-    binding.break
-    # respond_to do |format|
-    #   format.json { render :edit, status: :ok, location: @student }
-    # end
+    if @student.update(photo_params)
+      render json: { status: "OK" }
+    else
+      render json: { status: "failed", error: @student.errors.full_messages }
+    end
   end
 
   # DELETE /students/1 or /students/1.json
@@ -87,5 +79,9 @@ class StudentsController < ApplicationController
     params.require(:student).permit(:school_id, :school_class_id, :fathers_name, :fathers_contact,
                                     :mothers_name, :mothers_contact, :guidance_name, :guidance_contact, :date_of_birth, :address, :subjects,
                                     :town, :first_name, :last_name, :photo)
+  end
+
+  def photo_params
+    params.require(:student).permit(:photo)
   end
 end
