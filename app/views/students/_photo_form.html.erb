@@ -1,0 +1,12 @@
+<div data-controller="students">
+  <div>
+    <span id="save-photo-btn">Save Photo</span>
+  </div>
+  <form id="student-photo-update-form" method="post" action=<%= update_photo_student_path(@student) %>>
+    <input type="file" id="photo-input-field" data-action="change->students#previewPhoto">
+    <input type="string" class="d-none" id="crop_data">
+  </form>
+  <div>
+    <img id="preview-image" src="" alt="">
+  </div>
+</div>
