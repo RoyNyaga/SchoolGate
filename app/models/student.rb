@@ -1,12 +1,13 @@
 class Student < ApplicationRecord
   include TimeManipulation
+  has_one_attached :photo
 
   belongs_to :school
   belongs_to :school_class
   has_many :report_cards
   has_many :fees, dependent: :destroy
 
-  after_save :create_fees
+  after_create :create_fees
 
   def sequence_mark_per_subject(marks)
     mark = marks.find { |student| student["id"] == id.to_s }
