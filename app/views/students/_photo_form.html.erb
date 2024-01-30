@@ -2,10 +2,10 @@
   <div>
     <span id="save-photo-btn">Save Photo</span>
   </div>
-  <form id="student-photo-update-form" method="post" action=<%= update_photo_student_path(@student) %>>
-    <input type="file" id="photo-input-field" data-action="change->students#previewPhoto">
-    <input type="string" class="d-none" id="crop_data">
-  </form>
+  <%= form_with url: update_photo_student_path(@student), id: "student-photo-upload-form" do |form| %>
+    <%= form.label :select_a_file %>
+    <%= form.file_field :photo, data: { action: "change->students#previewPhoto" } %>
+  <% end %>
   <div>
     <img id="preview-image" src="" alt="">
   </div>

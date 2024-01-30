@@ -13,12 +13,6 @@
     <%= form.hidden_field :school_id, value: current_school.id %>
   </div>
   <div class="row">
-    <div class="col-md-4">
-      <%= form.label :photo %>
-      <%= render partial: "students/photo_form", 
-        layout: "layouts/modal_layout", 
-        locals: { student: student, modal_id: "student_edit_#{student.id}", action_name: "Upload Photo", action_title: "" }%>
-    </div>
     <div class="col-md-8">
       <%= form.label :full_name, style: "display: block" %>
       <%= form.text_field :full_name, class: "general-input-styles" %>
