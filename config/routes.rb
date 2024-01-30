@@ -20,7 +20,11 @@ Rails.application.routes.draw do
       get :for_teacher
     end
   end
-  resources :students
+  resources :students do
+    member do
+      put :update_photo
+    end
+  end
   resources :school_classes
   devise_for :teachers
   resources :teachers do
