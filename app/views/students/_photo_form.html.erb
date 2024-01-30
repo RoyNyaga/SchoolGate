@@ -1,12 +1,12 @@
 <div data-controller="students">
   <div>
-    <span id="save-photo-btn">Save Photo</span>
+    <span id="save-photo-btn" class="d-none" data-students-target="savePhotoBtn">Save Photo</span>
   </div>
   <%= form_with url: update_photo_student_path(@student), id: "student-photo-upload-form" do |form| %>
     <%= form.label :select_a_file %>
     <%= form.file_field :photo, data: { action: "change->students#previewPhoto" } %>
   <% end %>
   <div>
-    <img id="preview-image" src="" alt="">
+    <%= image_tag "", id: "source", data: { students_target: "source" } %>
   </div>
 </div>
