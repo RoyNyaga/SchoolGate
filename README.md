@@ -56,3 +56,6 @@ Things you may want to cover:
 
 ## google location implementation
 - https://www.youtube.com/watch?v=J39KJ5jzH3E
+
+## import maps article
+- https://www.theodinproject.com/lessons/ruby-on-rails-importmaps#importmap-considerations
