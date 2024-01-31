@@ -1,14 +1,16 @@
 import { Controller } from "@hotwired/stimulus"
 import Cropper from 'cropperjs'
 export default class extends Controller {
-  static targets = ["source", "photoForm"];
+  static targets = ["source", "photoForm", "profileImage", "clearPhotoBtn", "savePhotoBtn", "uploadInputField"];
 
   connect() {
-    console.log("this is source target", this.sourceTarget)
   }
 
   previewPhoto = (e) => {
-    const saveBtn = document.querySelector("#save-photo-btn");
+    if (this.cropper && this.cropper.cropper) {
+      this.clearPhoto()
+    }
+
     let reader, file;
     const files = e.target.files;
     var done = function (url) {
@@ -37,18 +39,19 @@ export default class extends Controller {
       responsive: true,
     });
 
-    saveBtn.classList.remove("d-none") // Display the save button
+    this.savePhotoBtnTarget.classList.remove("d-none") // Display the save button
+    this.clearPhotoBtnTarget.classList.remove("d-none")
   }
 
   savePhoto = () => {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    console.log("this.profileImageTarget", this.profileImageTarget)
     // const action = document.querySelector("#student-photo-upload-form").action
 
     const canvas = this.cropper.getCroppedCanvas({
       width: 600,
       height: 600,
     });
-
 
     canvas.toBlob((blob) => {
       const formData = new FormData();
@@ -64,20 +67,58 @@ export default class extends Controller {
 
       fetch(this.photoFormTarget.action, options)
         .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
+          if (response.status == 500) {
+            throw new Error('There was an internal server Error')
           }
-          console.log("this is the response", response)
-          return response.json(); // Parse response body as JSON
+          return response.json();
         })
         .then(data => {
-          // Handle response data
-          console.log('Response:', data);
+          if (data.success) {
+            this.closePhotoFormModal(data.modal_id)
+            this.updateImage(data.image_url)
+            this.flashMessage("success", data.message)
+            this.clearPhoto(true)
+          } else {
+            const errorMessage = `Error!, ${data.message.join(",")}`
+            this.flashMessage("error", errorMessage)
+            this.closePhotoFormModal(data.modal_id)
+          }
         })
         .catch(error => {
-          // Handle errors
-          console.error('There was a problem with the fetch operation:', error);
+          this.flashMessage("error", error)
         });
     })
   }
+
+  triggerClearPhoto = () => {
+    this.clearPhoto(true)
+  }
+
+  clearPhoto = (with_input = false) => {
+      this.cropper.destroy()
+      this.sourceTarget.src = ""
+      this.savePhotoBtnTarget.classList.add("d-none")
+      this.clearPhotoBtnTarget.classList.add("d-none")
+      with_input ? this.uploadInputFieldTarget.value = "" : null
+  }
+
+  closePhotoFormModal = (modalId) => {
+    const modal = document.querySelector(`#${modalId}`)
+    const b_modal_instance = bootstrap.Modal.getInstance(modal)
+    b_modal_instance.hide()
+  }
+
+  updateImage = (url) => {
+    this.profileImageTarget.src = url
+  }
+
+  flashMessage = (type, message) => {
+    const flashMessageParent = document.querySelector("#custom-flash")
+    const messageClassName = `flash__message_${type}`
+    const flashMessageChild = document.createElement("div")
+    flashMessageChild.className = messageClassName
+    flashMessageChild.innerText = message
+    flashMessageParent.appendChild(flashMessageChild)
+  }
 }
+
