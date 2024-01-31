@@ -1,4 +1,6 @@
 class TeachersController < ApplicationController
+  before_action :set_teacher, only: [:edit]
+
   def invitations
     @pending = current_teacher.invitations.pending
     @accepted = current_teacher.invitations.accepted
@@ -9,5 +11,12 @@ class TeachersController < ApplicationController
     @subjects = current_teacher.class_subjects
   end
 
+  def edit
+  end
+
   private
+
+  def set_teacher
+    @teacher = Teacher.find(params[:id])
+  end
 end
