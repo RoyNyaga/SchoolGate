@@ -1,14 +1,18 @@
+<div class="flash" id="custom-flash">
+</div>
 <h1>Editing student</h1>
-<div class="row">
+<div data-controller="students" class="row">
   <div class="col-md-2">
     <div>
       <% if @student.photo.attached? %>
-        <%= image_tag url_for(@student.photo), class: "img-fluid" %>
+        <%= image_tag url_for(@student.photo), class: "img-fluid", data: { students_target: "profileImage" } %>
+      <% else %>
+        <%= image_tag "user_image.webp", class: "img-fluid", data: { students_target: "profileImage" }, alt: "your photo is missing" %>
       <% end %>
     </div>
     <%= render partial: "students/photo_form", 
         layout: "layouts/modal_layout", 
-        locals: { student: @student, modal_id: "student_edit_#{@student.id}", action_name: student_photo_action_name(@student), action_title: "" }%>
+        locals: { student: @student, modal_id: generate_modal_id("photo_form", record: @student), action_name: student_photo_action_name(@student), action_title: "" }%>
   </div>
   <div class="col-md-8">
     <div class="section-div">
