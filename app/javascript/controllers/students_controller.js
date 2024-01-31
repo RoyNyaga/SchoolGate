@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 import Cropper from 'cropperjs'
 export default class extends Controller {
-  static targets = ["source", "photoForm", "profileImage", "clearPhotoBtn", "savePhotoBtn", "uploadInputField"];
+  static targets = ["source", "photoForm", "profileImage", "clearPhotoBtn", "savePhotoBtn", "uploadInputField", "info"];
 
   connect() {
   }
@@ -19,6 +19,9 @@ export default class extends Controller {
 
     if (files && files.length > 0) {
       file = files[0];
+      if (file.size > 2200000){
+       this.updateInfo("text-warning", "We recommend photos less than 2.2mb for best experience")
+      }
 
       if (URL) {
         done(URL.createObjectURL(file));
@@ -87,7 +90,7 @@ export default class extends Controller {
         .catch(error => {
           this.flashMessage("error", error)
         });
-    })
+    }, 'image/jpeg', 0.7) // compressing to 0.7 % and changing file type to jpeg
   }
 
   triggerClearPhoto = () => {
@@ -100,6 +103,7 @@ export default class extends Controller {
       this.savePhotoBtnTarget.classList.add("d-none")
       this.clearPhotoBtnTarget.classList.add("d-none")
       with_input ? this.uploadInputFieldTarget.value = "" : null
+      this.updateInfo("text-warning", "")
   }
 
   closePhotoFormModal = (modalId) => {
@@ -119,6 +123,11 @@ export default class extends Controller {
     flashMessageChild.className = messageClassName
     flashMessageChild.innerText = message
     flashMessageParent.appendChild(flashMessageChild)
+  }
+
+  updateInfo = (type, message) => {
+    this.infoTarget.className = type
+    this.infoTarget.innerText = message
   }
 }
 
