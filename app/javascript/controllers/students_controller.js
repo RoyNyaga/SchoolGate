@@ -40,6 +40,8 @@ export default class extends Controller {
       viewMode: 3,
       preview: '.preview',
       responsive: true,
+      minCropBoxWidth: 200, // Minimum crop box width
+      minCropBoxHeight: 200, // Minimum crop box height
     });
 
     this.savePhotoBtnTarget.classList.remove("d-none") // Display the save button
