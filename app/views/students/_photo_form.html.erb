@@ -1,13 +1,13 @@
 <div>
   <div class="d-flex justify-content-between">
-    <button id="save-photo-btn" class="general-btn d-none" data-action="click->students#savePhoto" data-students-target="savePhotoBtn">Save Photo</button>
-    <button id="clear-photo-btn" class="general-btn d-none" data-action="click->students#triggerClearPhoto" data-students-target="clearPhotoBtn">Clear</button>
+    <button id="save-photo-btn" class="general-btn d-none" data-action="click->photoUploads#savePhoto" data-photoUploads-target="savePhotoBtn">Save Photo</button>
+    <button id="clear-photo-btn" class="general-btn d-none" data-action="click->photoUploads#triggerClearPhoto" data-photoUploads-target="clearPhotoBtn">Clear</button>
   </div>
-  <span id="notification-span" data-students-target="info"></span>
-  <%= form_with url: update_photo_student_path(@student), id: "student-photo-upload-form", data: { students_target: "photoForm"} do |form| %>
-    <%= form.file_field :photo, data: { action: "change->students#previewPhoto", students_target: "uploadInputField" } %>
+  <span id="notification-span" data-photoUploads-target="info"></span>
+  <%= form_with url: url, id: "photo-upload-form", data: { photoUploads_target: "photoForm"} do |form| %>
+    <%= form.file_field :photo, data: { action: "change->photoUploads#previewPhoto", photoUploads_target: "uploadInputField" } %>
   <% end %>
   <div>
-    <%= image_tag "", id: "source", data: { students_target: "source" } %>
+    <%= image_tag "", id: "source", data: { photoUploads_target: "source" } %>
   </div>
 </div>

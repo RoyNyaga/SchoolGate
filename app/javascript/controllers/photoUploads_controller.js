@@ -1,9 +1,13 @@
 import { Controller } from "@hotwired/stimulus"
 import Cropper from 'cropperjs'
+
+// Connects to data-controller="photo-uploads"
 export default class extends Controller {
-  static targets = ["source", "photoForm", "profileImage", "clearPhotoBtn", "savePhotoBtn", "uploadInputField", "info"];
+  static targets = ["source", "photoForm", "image", "clearPhotoBtn", "savePhotoBtn", "uploadInputField", "info"];
 
   connect() {
+    console.log("photo upload connected")
+    console.log(this.imageTarget)
   }
 
   previewPhoto = (e) => {
@@ -50,7 +54,7 @@ export default class extends Controller {
 
   savePhoto = () => {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    console.log("this.profileImageTarget", this.profileImageTarget)
+    console.log("this.imageTarget", this.imageTarget)
 
     const canvas = this.cropper.getCroppedCanvas({
       width: 600,
@@ -114,7 +118,7 @@ export default class extends Controller {
   }
 
   updateImage = (url) => {
-    this.profileImageTarget.src = url
+    this.imageTarget.src = url
   }
 
   flashMessage = (type, message) => {
@@ -131,4 +135,3 @@ export default class extends Controller {
     this.infoTarget.innerText = message
   }
 }
-
