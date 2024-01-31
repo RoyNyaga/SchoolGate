@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
+  include ApplicationHelper # this is to enable us access the generate_modal_id helper method from this controller
   layout "school_layout"
   before_action :check_for_current_school
   before_action :set_student, only: %i[ show edit update destroy update_photo ]
@@ -51,9 +52,11 @@ class StudentsController < ApplicationController
 
   def update_photo
     if @student.update(photo_params)
-      render json: { status: "OK" }
+      render json: { image_url: url_for(@student.photo),
+                     modal_id: generate_modal_id("photo_form", record: @student),
+                     message: "Successfully Updated Photo", success: true }, status: :ok
     else
-      render json: { status: "failed", error: @student.errors.full_messages }
+      render json: { message: @student.errors.full_messages, success: false }, status: :unprocessable_entity
     end
   end
 
