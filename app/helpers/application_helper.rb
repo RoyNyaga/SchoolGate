@@ -1,6 +1,11 @@
 module ApplicationHelper
-  def genModalId(action_name)
+  def generate_modal_id(type, record: nil)
     action_name.strip.downcase.gsub(" ", "-")
+    if record
+      "#{record.class.name.downcase}_#{type}_modal_#{record.id}"
+    else
+      "#{type}_modal"
+    end
   end
 
   def google_map_src
