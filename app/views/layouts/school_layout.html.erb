@@ -12,20 +12,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,100;1,300;1,400;1,500;1,600;1,700&family=Noto+Serif+Display:ital,wght@1,200&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <%= render "shared/navbar" %>
-    <%= render "shared/sidebar" %>
-    <div id="main-content-div">
-      <br>
-      <br>
-      <br>
-      <br>
-      <%= render partial: "shared/sidebar_nav_links", 
-        layout: "layouts/drawer_layout", 
-        locals: { item_id: "0000000", title: "", position: "start", btn_text: "Open" }%>
-      <div id="main-flash" class="flash">
-        <%= render "shared/flash_messages" %>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-2 p-0">
+          <%= render "shared/sidebar" %>
+        </div>
+        <div class="col-md-10 p-0">
+          <%= render "shared/navbar" %>
+          <br>
+          <br>
+          <br>
+          <br>
+          <%= render partial: "shared/sidebar_nav_links", 
+                    layout: "layouts/drawer_layout", 
+                    locals: { item_id: "0000000", title: "", position: "start", btn_text: "Open", btn_visibility: true }%>
+          <div id="main-flash" class="flash">
+            <%= render "shared/flash_messages" %>
+          </div>
+          <%= yield %>
+        </div>
       </div>
-      <%= yield %>
     </div>
   </body>
 </html>

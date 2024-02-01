@@ -3,7 +3,8 @@
   <div>
     <%= render partial: "school_classes/form", 
         layout: "layouts/modal_layout", 
-        locals: { school_class: @school_class, action_name: "Add Class", action_title: "Create A New Class" }%>
+        locals: { school_class: @school_class, action_name: "Add Class", action_title: "Create A New Class",
+        modal_id: generate_modal_id("class_create_form") }%>
   </div>
   <h1>School classes</h1>
   <div class="section-div" id="school_classes">
