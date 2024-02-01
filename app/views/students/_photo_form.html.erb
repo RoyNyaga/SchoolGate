@@ -5,7 +5,9 @@
   </div>
   <span id="notification-span" data-photoUploads-target="info"></span>
   <%= form_with url: url, id: "photo-upload-form", data: { photoUploads_target: "photoForm"} do |form| %>
-    <%= form.file_field :photo, data: { action: "change->photoUploads#previewPhoto", photoUploads_target: "uploadInputField" } %>
+    <%= form.file_field :photo, data: { action: "change->photoUploads#previewPhoto",
+     photoUploads_target: "uploadInputField" },
+     accept: "image/jpeg, image/png, image/gpg" %>
   <% end %>
   <div>
     <%= image_tag "", id: "source", data: { photoUploads_target: "source" } %>
