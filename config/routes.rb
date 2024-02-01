@@ -32,6 +32,10 @@ Rails.application.routes.draw do
       get :invitations
       get :subjects
     end
+
+    member do
+      put :update_photo
+    end
   end
   get "pages/home"
   root to: "pages#home"
