@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  include PhotoUploadHelper # this is to enable us access the generate_modal_id helper method from this controller
+  include ApplicationHelper # this is to enable us access the generate_modal_id helper method from this controller
   layout "school_layout"
   before_action :check_for_current_school
   before_action :set_student, only: %i[ show edit update destroy update_photo ]

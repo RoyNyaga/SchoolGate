@@ -1,5 +1,5 @@
 class TeachersController < ApplicationController
-  include PhotoUploadHelper # this is to enable us access the generate_modal_id helper method from this controller
+  include ApplicationHelper # this is to enable us access the generate_modal_id helper method from this controller
   before_action :set_teacher, only: [:edit, :update_photo]
 
   def invitations

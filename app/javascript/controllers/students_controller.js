@@ -57,8 +57,9 @@ export default class extends Controller {
     });
 
     canvas.toBlob((blob) => {
+      const recordTypeName = this.photoFormTarget.attributes.getNamedItem("data-record-name").value;
       const formData = new FormData();
-      formData.append('student[photo]', blob);
+      formData.append(`${recordTypeName}[photo]`, blob);
       const options = {
         method: 'PUT',
         headers: {
