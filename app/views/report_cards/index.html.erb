@@ -3,7 +3,8 @@
   <h1 class="text-center">Report cards</h1>
   <%= render partial: "terms/form", 
         layout: "layouts/modal_layout", 
-        locals: { term: @term, action_name: "New Term", action_title: "Create A New Term" }%>
+        locals: { term: @term, action_name: "New Term", action_title: "Create A New Term",
+        modal_id: generate_modal_id("terms_create_form") }%>
   <div class="row">
     <% @terms.each do |term| %>
       <div class="col-md-3">
