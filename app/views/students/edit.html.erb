@@ -10,7 +10,7 @@
         <%= image_tag "user_photo.webp", class: "img-fluid", data: { photoUploads_target: "image" }, alt: "your photo is missing" %>
       <% end %>
     </div>
-    <%= render partial: "students/photo_form", 
+    <%= render partial: "shared/photo_form", 
         layout: "layouts/modal_layout", 
         locals: { record: @student, modal_id: generate_modal_id("photo_form", record: @student), 
         action_name: student_photo_action_name(@student),

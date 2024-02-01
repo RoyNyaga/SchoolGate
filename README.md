@@ -28,6 +28,7 @@ Things you may want to cover:
 
 # Jobs and Ques
 - https://gorails.com/episodes/solid-queue-rails
+- https://gorails.com/episodes/mission-control-jobs-rails?autoplay=1
 
 # PDF generation
 - https://prawnpdf.org/manual.pdf
@@ -59,3 +60,6 @@ Things you may want to cover:
 
 ## import maps article
 - https://www.theodinproject.com/lessons/ruby-on-rails-importmaps#importmap-considerations
+
+## performance inspection tools
+- honeybadger

@@ -50,7 +50,6 @@ export default class extends Controller {
 
   savePhoto = () => {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    console.log("this.profileImageTarget", this.profileImageTarget)
 
     const canvas = this.cropper.getCroppedCanvas({
       width: 600,
