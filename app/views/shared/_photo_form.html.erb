@@ -4,7 +4,8 @@
     <button id="clear-photo-btn" class="general-btn d-none" data-action="click->photoUploads#triggerClearPhoto" data-photoUploads-target="clearPhotoBtn">Clear</button>
   </div>
   <span id="notification-span" data-photoUploads-target="info"></span>
-  <%= form_with url: url, id: "photo-upload-form", data: { photoUploads_target: "photoForm"} do |form| %>
+  <%= form_with url: url, id: "photo-upload-form", data: { photoUploads_target: "photoForm", 
+  record_name: record.class.name.downcase } do |form| %>
     <%= form.file_field :photo, data: { action: "change->photoUploads#previewPhoto",
      photoUploads_target: "uploadInputField" },
      accept: "image/jpeg, image/png, image/gpg" %>
