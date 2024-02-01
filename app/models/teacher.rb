@@ -16,6 +16,8 @@ class Teacher < ApplicationRecord
 
   validates :phone_number, uniqueness: true
 
+  before_save :set_full_name #This method is defined int he application_record
+
   def email_required?
     false
   end

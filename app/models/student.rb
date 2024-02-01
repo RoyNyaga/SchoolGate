@@ -8,6 +8,7 @@ class Student < ApplicationRecord
   has_many :fees, dependent: :destroy
 
   after_create :create_fees
+  before_save :set_full_name # this method is defined in the application_record
 
   def sequence_mark_per_subject(marks)
     mark = marks.find { |student| student["id"] == id.to_s }
