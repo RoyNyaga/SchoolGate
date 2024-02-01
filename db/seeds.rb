@@ -9,21 +9,21 @@
 #   end
 
 # teachers = [
-#   { phone_number: "000000001", name: "Ade George", password: "123456" },
-#   { phone_number: "000000002", name: "Tanga John", password: "123456" },
-#   { phone_number: "000000003", name: "Brilliant Ashu", password: "123456" },
-#   { phone_number: "000000004", name: "Nestor King", password: "123456" },
-#   { phone_number: "000000005", name: "Nanje Elundo", password: "123456" },
-#   { phone_number: "000000006", name: "Ivange Lary", password: "123456" },
-#   { phone_number: "000000007", name: "Fomeki Junior", password: "123456" },
-#   { phone_number: "000000008", name: "Orock Ojong", password: "123456" },
-#   { phone_number: "000000009", name: "Mbi Perkings", password: "123456" },
-#   { phone_number: "000000010", name: "Taboko kinge", password: "123456" },
-#   { phone_number: "000000011", name: "Peter Esoka", password: "123456" },
-#   { phone_number: "000000012", name: "max mpako", password: "123456" },
-#   { phone_number: "000000013", name: "Enow Teddy", password: "123456" },
-#   { phone_number: "000000014", name: "Christiano Ronaldo", password: "123456" },
-#   { phone_number: "000000015", name: "Mbog Florence", password: "123456" },
+#   { phone_number: "000000001", first_name: "Ade", last_name: "George", password: "123456" },
+#   { phone_number: "000000002", first_name: "Tanga", last_name: "John", password: "123456" },
+#   { phone_number: "000000003", first_name: "Brilliant", last_name: "Ashu", password: "123456" },
+#   { phone_number: "000000004", first_name: "Nestor", last_name: "King", password: "123456" },
+#   { phone_number: "000000005", first_name: "Nanje", last_name: "Elundo", password: "123456" },
+#   { phone_number: "000000006", first_name: "Ivange", last_name: "Lary", password: "123456" },
+#   { phone_number: "000000007", first_name: "Fomeki", last_name: "Junior", password: "123456" },
+#   { phone_number: "000000008", first_name: "Orock", last_name: "Ojong", password: "123456" },
+#   { phone_number: "000000009", first_name: "Mbi", last_name: "Perkings", password: "123456" },
+#   { phone_number: "000000010", first_name: "Taboko", last_name: "kinge", password: "123456" },
+#   { phone_number: "000000011", first_name: "Peter", last_name: "Esoka", password: "123456" },
+#   { phone_number: "000000012", first_name: "max", last_name: "mpako", password: "123456" },
+#   { phone_number: "000000013", first_name: "Enow", last_name: "Teddy", password: "123456" },
+#   { phone_number: "000000014", first_name: "Christiano", last_name: "Ronaldo", password: "123456" },
+#   { phone_number: "000000015", first_name: "Mbog", last_name: "Florence", password: "123456" },
 # ]
 
 @school = School.first

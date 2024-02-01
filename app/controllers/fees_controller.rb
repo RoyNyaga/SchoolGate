@@ -40,7 +40,7 @@ class FeesController < ApplicationController
   def update
     @fee.attributes = fee_params
     if @fee.valid?
-      @fee.update_records << { updator: current_teacher.name, changes: params[:fee][:installments], date: Date.today.to_s }.to_s
+      @fee.update_records << { updator: current_teacher.full_name, changes: params[:fee][:installments], date: Date.today.to_s }.to_s
       @fee.save
       respond_to do |format|
         # format.html { redirect_to fee_url(@fee), success: "Fee was successfully updated." }

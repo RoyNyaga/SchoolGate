@@ -17,7 +17,7 @@
   </div>
   <div>
     <%= form.label :teacher_id, style: "display: block" %>
-    <%= form.collection_select :teacher_id, Teacher.all, :id, :name, { prompt: "Select Teacher" }, { class: "general-input-styles" } %>
+    <%= form.collection_select :teacher_id, Teacher.all, :id, :full_name, { prompt: "Select Teacher" }, { class: "general-input-styles" } %>
   </div>
   <div>
     <%= form.label :permission, style: "display: block" %>

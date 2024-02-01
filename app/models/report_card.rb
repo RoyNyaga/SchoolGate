@@ -37,7 +37,7 @@ class ReportCard < ApplicationRecord
         subject_detail[:score] = score
         subject_detail[:grade] = "To Do"
         subject_detail[:rank] = student.sequence_rank(sequence_averages)
-        subject_detail[:teacher] = subject.teachers.first.name
+        subject_detail[:teacher] = subject.teachers.first.full_name
         subject_detail[:remark] = "Good"
         # binding.break
         details << subject_detail.to_s
