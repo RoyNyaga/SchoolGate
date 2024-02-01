@@ -14,6 +14,7 @@
     <% end %>
     <%= render partial: "teachings/form", 
         layout: "layouts/modal_layout", 
-        locals: { teaching: Teaching.new, action_name: "Assign Teacher", action_title: "Assign Teacher #{@subject.name}" }%>
+        locals: { teaching: Teaching.new, action_name: "Assign Teacher",
+         action_title: "Assign Teacher #{@subject.name}", modal_id: generate_modal_id("teachings_create_form") }%>
   </div>
 </div>

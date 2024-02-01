@@ -16,7 +16,8 @@
         <div>
           <%= render partial: "subjects/form", 
         layout: "layouts/modal_layout", 
-        locals: { subject: @subject, action_name: "Add Subject", action_title: "Create Subject" }%>
+        locals: { subject: @subject, action_name: "Add Subject", action_title: "Create Subject",
+        modal_id: generate_modal_id("subject_create_form") }%>
         </div>
         <% @subjects.each do |subject| %>
           <p><%= link_to subject.name, subject %></p>

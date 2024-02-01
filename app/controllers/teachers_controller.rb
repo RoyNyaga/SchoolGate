@@ -10,6 +10,7 @@ class TeachersController < ApplicationController
 
   def subjects
     @subjects = current_teacher.class_subjects
+    render layout: "school_layout"
   end
 
   def edit

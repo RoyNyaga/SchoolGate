@@ -6,7 +6,8 @@
       <div>
         <%= render partial: "invitations/form", 
         layout: "layouts/modal_layout", 
-        locals: { invitation: @invitation, action_name: "Invite Teacher", action_title: "Invite This Teacher" }%>
+        locals: { invitation: @invitation, action_name: "Invite Teacher", 
+        action_title: "Invite This Teacher", modal_id: generate_modal_id("invitations_create_form") }%>
       </div>
     </div>
     <div class="col-md-9"></div>

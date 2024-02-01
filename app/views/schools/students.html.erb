@@ -3,7 +3,8 @@
   <div>
     <%= render partial: "students/form", 
         layout: "layouts/modal_layout", 
-        locals: { student: @student, action_name: "Add Student", action_title: "Create A New Student" }%>
+        locals: { student: @student, action_name: "Add Student", action_title: "Create A New Student",
+         modal_id: generate_modal_id("students_create_form") }%>
   </div>
   <table class="table table-hover">
     <thead>
