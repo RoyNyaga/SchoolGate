@@ -1,76 +1,63 @@
-.nav-link{
+.nav-link {
   color: white;
   padding: 10px 20px;
   font-size: 1.2em;
 }
 
-.nav-link:hover{
+.nav-link:hover {
   border-radius: 20px;
   border: 1px solid white;
   background: rgb(158, 156, 156);
   color: white;
 }
 
-#school-top-navbar{
+#school-top-navbar {
   background: white;
   border-radius: 10px;
 }
 
-.sidebar {
-  margin: 0;
-  padding: 0;
-  width: 200px;
-  background-color: #000000;
-  position: fixed;
-  height: 100%;
-  overflow: auto;
-  top: 84px;
-  border-right: 4px solid white;
-}
-
-.sidebar a {
-  display: block;
-  color: rgb(247, 242, 242);
-  padding: 16px;
-  text-decoration: none;
-}
- 
-.sidebar a.active {
-  background-color: #04AA6D;
-  color: white;
-}
-
-.sidebar a:hover:not(.active) {
-  background-color: #555;
-  color: white;
-}
-
-.school-manager-nav-links{
+.school-manager-nav-links {
   color: #000000;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 1.1em;
 }
 
-#main-navbar{
+#main-navbar {
   border-bottom: 3px solid white;
   z-index: 10;
 }
 
-.navbar-toggler{
+.navbar-toggler {
   background: white;
 }
 
-.navbar-brand{
+.navbar-brand {
   border: 2px solid white;
-    padding: 5px 20px;
-    border-radius: 10px;
-    color: white;
-    font-weight: 900;
+  padding: 5px 20px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 900;
 }
 
+.sidebar {
+  background-color: var(--main-blue-color);
+  padding: 20px 10px;
+  min-height: 100vh;
+}
+
+.link-div-wrapper{
+  i{
+    color: white;
+    font-size: 1.3em;
+  }
+
+  .side-bar-links{
+    color: white;
+  }
+}
 
 @media screen and (max-width: 425px) {
-  .sidebar{
+  .sidebar {
     display: none;
   }
 }
