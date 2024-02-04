@@ -1,0 +1,31 @@
+<div>
+  <%= render partial: "shared/sidebar/sidebar_link_dropdown_component", locals: { main_icon_class: "camera-retro",
+  main_link_text: "Classes", main_link_path: classes_schools_path, drop_down_icon_class: "camera-retro",
+  dropdown_links: current_school_classes_link_data } %>
+</div>
+<ul>
+  <li class="side-bar-list-item">
+  </li>
+  <li class="side-bar-list-item">
+    <%= link_to "Students", students_schools_path, class: "side-bar-links" %>
+  </li>
+  <li class="side-bar-list-item">
+    <%= link_to "Statistics", school_path(current_school), class: "side-bar-links" %>
+  </li>
+  <li class="side-bar-list-item">
+    <%= link_to "Teachers", workings_path, class: "side-bar-links" %>
+  </li>
+  <li class="side-bar-list-item">
+    <%= link_to "Report Cards", report_cards_path, class: "side-bar-links" %>
+  </li>
+  <li class="side-bar-list-item">
+    <%= link_to "Schoo Fees", fees_path, class: "side-bar-links" %>
+  </li>
+  <li class="side-bar-list-item">
+    <%= link_to "Your Subjects", subjects_teachers_path, class: "side-bar-links" %>
+  </li>
+  <li class="side-bar-list-item">
+  </li>
+  <li class="side-bar-list-item">
+  </li>
+</ul>
