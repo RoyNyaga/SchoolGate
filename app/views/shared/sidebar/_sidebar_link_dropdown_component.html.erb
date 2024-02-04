@@ -5,18 +5,17 @@
     </div>
     <div class="col-md-10 d-flex justify-content-between">
       <%= link_to main_link_text, main_link_path, class: "side-bar-links" %>
-      <span class="sidebar-icon-span" data-expand-div-id="sidebar-classes-expand"><%= fa_icon(drop_down_icon_class) %></span>
+      <span class="sidebar-icon-arrow-down" data-expand-div-id="sidebar-classes-expand"><%= fa_icon("arrow-down") %></span>
+      <span class="sidebar-icon-arrow-up d-none" data-expand-div-id="sidebar-classes-expand"><%= fa_icon("arrow-up") %></span>
     </div>
   </div>
-  <% if dropdown_links.present? %>
-    <div class="expanded-section d-none" id="sidebar-classes-expand">
-      <ul class="list-unstyled text-white px-3">
-        <% dropdown_links.map do |dropdown_link| %>
-          <li>
-            <%= link_to dropdown_link[:class_name], dropdown_link[:class_path], class: "side-bar-dropdown-links" %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <div class="expanded-section d-none" id="sidebar-classes-expand">
+    <ul class="list-unstyled text-white px-3">
+      <% dropdown_links.map do |dropdown_link| %>
+        <li>
+          <%= link_to dropdown_link[:class_name], dropdown_link[:class_path], class: "side-bar-dropdown-links" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </div>
