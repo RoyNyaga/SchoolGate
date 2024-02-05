@@ -10,8 +10,11 @@ class ApplicationController < ActionController::Base
 
   def current_school_classes_link_data
     @current_school.school_classes.map do |school_class|
-      { class_name: school_class.name, class_path: school_class_path(school_class.id) }
+      { name: school_class.name, path: school_class_path(school_class.id) }
     end
+  end
+
+  def current_school_teachers_link_data
   end
 
   def check_for_current_school
