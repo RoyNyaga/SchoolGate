@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     collection do
       post :bulk_create
       get :pdf_download
+      get :auto_generate
+      get :manually_create
     end
   end
   resources :terms
@@ -53,6 +55,8 @@ Rails.application.routes.draw do
       get :students
       get :teachers
       get :invitations
+      get :contracts
+      get :permissions
     end
   end
 

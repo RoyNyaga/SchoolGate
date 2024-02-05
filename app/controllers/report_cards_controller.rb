@@ -5,9 +5,15 @@ class ReportCardsController < ApplicationController
   # GET /report_cards or /report_cards.json
   def index
     @term = Term.new
-    @report_cards = ReportCard.all
+    @report_cards = current_school.report_cards
     @terms = current_school.terms
     @report_card = ReportCard.new
+  end
+
+  def auto_generate
+  end
+
+  def manually_create
   end
 
   # GET /report_cards/1 or /report_cards/1.json
