@@ -23,7 +23,8 @@
 }
 
 #main-navbar {
-  border-bottom: 3px solid white;
+  background-color: var(--main-blue-color);
+  border-bottom: 5px solid var(--main-light-color);
   z-index: 10;
 }
 
@@ -43,9 +44,13 @@
   background-color: var(--main-blue-color);
   padding: 20px 10px;
   min-height: 100vh;
+  position: fixed;
+  min-width: 16%;
 }
 
-.link-div-wrapper{
+.sidebar-link-div-wrapper{
+  margin: 10px 0px;
+  
   i{
     color: white;
     font-size: 1.3em;
@@ -54,6 +59,42 @@
   .side-bar-links{
     color: white;
   }
+
+  .side-bar-dropdown-links{
+    text-decoration: none;
+    color: white;
+    background-color: transparent;
+    font-size: 0.9em;
+  }
+
+  .expanded-section{
+    padding-left: 40px;
+  }
+
+  .sidebar-icon-arrow-down{
+    cursor: pointer;
+  }
+
+  .sidebar-icon-arrow-up{
+    cursor: pointer;
+  }
+
+  .sidebar-link-div-main-section{
+    width: 99%;
+    margin: 0 auto;
+    padding: 10px 1px;
+    background: var(--heighlight-color);
+    border-radius: 10px;
+  }
+
+  .sidebar-link-div-main-section:hover{
+    background: var(--heighlight-color);
+  }
+
+  .heighlighted{
+    background-color: var(--heighlight-color);
+  }
+
 }
 
 @media screen and (max-width: 425px) {
