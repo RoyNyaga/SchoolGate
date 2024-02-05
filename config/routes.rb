@@ -52,6 +52,7 @@ Rails.application.routes.draw do
       get :classes
       get :students
       get :teachers
+      get :invitations
     end
   end
 
