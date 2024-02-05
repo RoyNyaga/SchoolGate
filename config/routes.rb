@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     collection do
       get :classes
       get :students
+      get :teachers
     end
   end
 

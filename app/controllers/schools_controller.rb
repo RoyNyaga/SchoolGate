@@ -72,6 +72,10 @@ class SchoolsController < ApplicationController
     @students = current_school.students
   end
 
+  def teachers
+    @teachers = current_school.workers
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
