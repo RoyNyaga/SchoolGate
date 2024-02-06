@@ -1,6 +1,5 @@
 class SchoolsController < ApplicationController
   layout "school_layout"
-  before_action :check_for_current_school
   before_action :set_school, only: %i[ show edit update destroy ]
   before_action :check_for_current_school, except: %i[show index]
 
@@ -70,6 +69,22 @@ class SchoolsController < ApplicationController
   def students
     @student = Student.new
     @students = current_school.students
+  end
+
+  def teachers
+    @teachers = current_school.workers
+  end
+
+  def invitations
+    @invitations = current_school.invitations
+  end
+
+  def contracts
+    @workings = current_school.workings
+  end
+
+  def permissions
+    @workings = current_school.workings
   end
 
   private

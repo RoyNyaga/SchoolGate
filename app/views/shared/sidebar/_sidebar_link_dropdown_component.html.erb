@@ -1,0 +1,25 @@
+<div class="sidebar-link-div-wrapper">
+  <div class="row sidebar-link-div-main-section">
+    <div class="col-md-2">
+      <span class="sidebar-icon-span"><%= fa_icon(main_icon_class) %></span>
+    </div>
+    <div class="col-md-10 d-flex justify-content-between">
+      <%= link_to main_link_text, main_link_path, class: "side-bar-links" %>
+      <span data-action="click->sidebars#openDropdown" class="sidebar-icon-arrow-down" 
+        data-expand-div-id=<%= generate_sidebar_expanded_div_id(main_link_text) %>
+        id="<%= generate_sidebar_expanded_div_id(main_link_text) %>_arrow_down"><%= fa_icon("arrow-down") %></span>
+      <span data-action="click->sidebars#closeDropdown" class="sidebar-icon-arrow-up d-none" 
+        data-expand-div-id=<%= generate_sidebar_expanded_div_id(main_link_text) %>
+        id="<%= generate_sidebar_expanded_div_id(main_link_text) %>_arrow_up"><%= fa_icon("arrow-up") %></span>
+    </div>
+  </div>
+  <div class="expanded-section d-none pt-2" id=<%= generate_sidebar_expanded_div_id(main_link_text) %>>
+    <ul class="list-unstyled">
+      <% dropdown_links.map do |dropdown_link| %>
+        <li class="sidebar-dropdown-list-items">
+          <%= link_to dropdown_link[:name], dropdown_link[:path], class: "side-bar-dropdown-links" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
