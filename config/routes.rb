@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :curriculums
   resources :fees do
     collection do
       get :statistics
