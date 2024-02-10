@@ -6,9 +6,9 @@ class CreateCurriculums < ActiveRecord::Migration[7.1]
       t.references :teacher, null: false, foreign_key: true
       t.references :subject, null: false, foreign_key: true
       t.string :title
-      t.string :is_complete
-      t.float :percent_complete
-
+      t.string :is_complete, default: false
+      t.float :percent_complete, default: 0.00
+      t.string :academic_year, null: false
       t.timestamps
     end
   end

@@ -48,8 +48,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_10_090256) do
     t.bigint "teacher_id", null: false
     t.bigint "subject_id", null: false
     t.string "title"
-    t.string "is_complete"
-    t.float "percent_complete"
+    t.string "is_complete", default: "f"
+    t.float "percent_complete", default: 0.0
+    t.string "academic_year", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["school_class_id"], name: "index_curriculums_on_school_class_id"
