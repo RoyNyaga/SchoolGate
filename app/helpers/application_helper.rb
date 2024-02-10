@@ -1,10 +1,17 @@
 module ApplicationHelper
   def generate_modal_id(type, record: nil)
-    action_name.strip.downcase.gsub(" ", "-")
     if record
       "#{record.class.name.downcase}_#{type}_modal_#{record.id}"
     else
       "#{type}_modal"
+    end
+  end
+
+  def generate_drawer_id(type, record: nil)
+    if record
+      "#{record.class.name.downcase}_#{type}_drawer_#{record.id}"
+    else
+      "#{type}_drawer"
     end
   end
 
