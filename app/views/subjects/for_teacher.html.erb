@@ -1,6 +1,9 @@
-<div id="school-main-div">
+<div class="container">
   <%= render @subject %>
   <%= link_to "Create Sequence", new_sequence_path(school_class_id: @subject.school_class_id, subject_id: @subject.id) %>
+  <%= render partial: "curriculums/preview", layout: "layouts/drawer_layout", 
+              locals: { fee: @curriculum, title: "Manage This Curriculum", 
+              item_id: generate_drawer_id("curriculum_show") , position: "end", btn_text: "Manage Curriculum", btn_visibility: true } %>
   <div class="row">
     <% @sequences.each do |sequence| %>
       <div class="col-md-3">

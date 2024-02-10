@@ -1,9 +1,5 @@
-<h1>New curriculum</h1>
-
-<%= render "form", curriculum: @curriculum %>
-
-<br>
-
 <div>
-  <%= link_to "Back to curriculums", curriculums_path %>
+  <%= turbo_frame_tag "curriculum_new_page" do %>
+    <%= render "form", curriculum: @curriculum %>
+  <% end %>
 </div>

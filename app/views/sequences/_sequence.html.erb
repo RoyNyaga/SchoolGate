@@ -1,7 +1,7 @@
 <div class="card"">
   <div class="card-body">
     <h6 class="card-title"><%= sequence.term.title %></h6>
-    <h6 class="card-subtitle mb-2 text-muted">Teacher: <%= sequence.teacher.name %></h6>
+    <h6 class="card-subtitle mb-2 text-muted">Teacher: <%= sequence.teacher.full_name %></h6>
     <div class="d-flex justify-content-between">
       <%= render partial: "sequences/sequence_card_one", 
         layout: "layouts/drawer_layout", 

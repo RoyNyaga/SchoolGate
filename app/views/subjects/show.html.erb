@@ -10,7 +10,7 @@
   <div>
     <h5>Teachers</h5>
     <% @subject.teachers.each do |teacher| %>
-      <p><%= teacher.name %></p>
+      <p><%= teacher.full_name %></p>
     <% end %>
     <%= render partial: "teachings/form", 
         layout: "layouts/modal_layout", 

@@ -10,7 +10,7 @@
     </div>
   </td>
   <td>
-    <a data-bs-toggle="offcanvas" href="#<%= fee.id %>_drawer" role="button" aria-controls="<%= fee.id %>_drawer">
+    <a data-bs-toggle="offcanvas" href="#<%= generate_drawer_id("fee_show", record: fee) %>" role="button" aria-controls="<%= fee.id %>_drawer">
       View
     </a>
   </td>
@@ -18,4 +18,4 @@
 <% # keeping the drawer out of the table to avoid issues when rerendering the card after updating a fee%>
 <%= render partial: "fees/fee", layout: "layouts/drawer_layout", 
               locals: { fee: fee, percentage_complete: percentage_complete, title: "Fee History of #{fee.student.full_name}", 
-              item_id: fee.id, position: "end", btn_text: "View", btn_visibility: false } %>
+              item_id: generate_drawer_id("fee_show", record: fee), position: "end", btn_text: "View", btn_visibility: false } %>

@@ -1,4 +1,4 @@
 <%= turbo_stream.replace @fee, partial: "fees/fee", locals: { fee: @fee, percentage_complete: @fee.percentage_complete, 
-title: "Fee History of #{@fee.student.full_name}",  item_id: @fee.id, position: "end", btn_text: "View" }  %>
+title: "Fee History of #{@fee.student.full_name}",  item_id: generate_drawer_id("fee_show", record: @fee), position: "end", btn_text: "View" }  %>
 <%= turbo_stream.replace "#{@fee.id}_fee_index_card", partial: "fee_index_card", locals: { fee: @fee } %>
 <%= turbo_stream.prepend "#{@fee.id}_drawer_flash_message", partial: "shared/flash_messages" %>
