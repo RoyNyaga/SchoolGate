@@ -10,8 +10,29 @@
     </div>
   <% end %>
   <div>
+    <%= form.label :school_id, class: "d-none" %>
+    <%= form.hidden_field :school_id, value: current_school.id %>
+  </div>
+  <div>
+    <%= form.label :school_class_id, class: "d-none" %>
+    <%= form.hidden_field :school_class_id, value: @subject.school_class_id %>
+  </div>
+  <div>
+    <%= form.label :teacher_id, class: "d-none" %>
+    <%= form.hidden_field :teacher_id, value: current_teacher.id %>
+  </div>
+  <div>
+    <%= form.label :subject_id, class: "d-none" %>
+    <%= form.hidden_field :subject_id, value: @subject.id %>
+  </div>
+  <div>
     <%= form.label :title, style: "display: block" %>
     <%= form.text_field :title, class: "general-input-styles" %>
+  </div>
+  <div>
+    <%= form.label :academic_year %>
+    <%= form.text_field :academic_year, value: Curriculum.generate_current_academic_year, 
+    class: "general-input-styles", disabled: true %>
   </div>
   <div>
     <%= form.submit %>

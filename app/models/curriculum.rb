@@ -5,4 +5,6 @@ class Curriculum < ApplicationRecord
   belongs_to :school_class
   belongs_to :teacher
   belongs_to :subject
+
+  validates :title, presence: true
 end

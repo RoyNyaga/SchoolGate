@@ -13,8 +13,7 @@ class CurriculumsController < ApplicationController
   # GET /curriculums/new
   def new
     @subject = Subject.find(params[:subject_id])
-    @curriculum = Curriculum.new(school_id: current_school.id, school_class_id: @subject.school_class_id,
-                                 teacher_id: current_teacher.id, subject_id: @subject.id)
+    @curriculum = Curriculum.new
   end
 
   # GET /curriculums/1/edit
@@ -28,10 +27,9 @@ class CurriculumsController < ApplicationController
     respond_to do |format|
       if @curriculum.save
         format.html { redirect_to curriculum_url(@curriculum), notice: "Curriculum was successfully created." }
-        format.json { render :show, status: :created, location: @curriculum }
+        format.turbo_stream { flash.now[:success] = "Curriculum Successfully Crerated" }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @curriculum.errors, status: :unprocessable_entity }
       end
     end
   end
