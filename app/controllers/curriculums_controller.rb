@@ -12,7 +12,9 @@ class CurriculumsController < ApplicationController
 
   # GET /curriculums/new
   def new
-    @curriculum = Curriculum.new
+    @subject = Subject.find(params[:subject_id])
+    @curriculum = Curriculum.new(school_id: current_school.id, school_class_id: @subject.school_class_id,
+                                 teacher_id: current_teacher.id, subject_id: @subject.id)
   end
 
   # GET /curriculums/1/edit
@@ -58,13 +60,14 @@ class CurriculumsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_curriculum
-      @curriculum = Curriculum.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def curriculum_params
-      params.require(:curriculum).permit(:school_id, :school_class_id, :teacher_id, :subject_id, :title, :is_complete, :percent_complete)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_curriculum
+    @curriculum = Curriculum.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def curriculum_params
+    params.require(:curriculum).permit(:school_id, :school_class_id, :teacher_id, :subject_id, :title, :is_complete, :percent_complete)
+  end
 end

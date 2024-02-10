@@ -1,5 +1,8 @@
 <div id="curriculum-preview-wrapper">
   <%= turbo_frame_tag "curriculum_new_page" do %>
-    <%= link_to "New Curriculum", new_curriculum_path %>
+    <% if @current_curriculum %>
+    <% else %>
+      <%= link_to "New Curriculum", new_curriculum_path(subject_id: @subject) %>
+    <% end %>
   <% end %>
 </div>
