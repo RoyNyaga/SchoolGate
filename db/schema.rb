@@ -95,11 +95,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_11_111327) do
   create_table "main_topics", force: :cascade do |t|
     t.bigint "teacher_id", null: false
     t.bigint "curriculum_id", null: false
+    t.bigint "subject_id", null: false
     t.string "title", null: false
     t.boolean "is_complete", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["curriculum_id"], name: "index_main_topics_on_curriculum_id"
+    t.index ["subject_id"], name: "index_main_topics_on_subject_id"
     t.index ["teacher_id"], name: "index_main_topics_on_teacher_id"
   end
 
@@ -261,6 +263,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_11_111327) do
   add_foreign_key "invitations", "schools"
   add_foreign_key "invitations", "teachers"
   add_foreign_key "main_topics", "curriculums"
+  add_foreign_key "main_topics", "subjects"
   add_foreign_key "main_topics", "teachers"
   add_foreign_key "report_cards", "school_classes"
   add_foreign_key "report_cards", "schools"

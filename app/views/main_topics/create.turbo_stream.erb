@@ -1,0 +1,2 @@
+<%= turbo_stream.replace "main_topic_new_frame", partial: "main_topics/add_btn", locals: { subject: @main_topic.subject, curriculum: @main_topic.curriculum } %>
+<%#= turbo_stream.prepend "#{generate_drawer_id("curriculum_show")}_drawer_flash_message", partial: "shared/flash_messages" %>

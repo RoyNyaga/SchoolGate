@@ -12,7 +12,7 @@ class MainTopicsController < ApplicationController
 
   # GET /main_topics/new
   def new
-    @subject = Subject.find(params[:subject_id])
+    # @subject = Subject.find(params[:subject_id])
     @curriculum = Curriculum.find(params[:curriculum_id])
     @main_topic = MainTopic.new
   end
