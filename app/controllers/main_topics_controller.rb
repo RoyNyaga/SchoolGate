@@ -12,6 +12,7 @@ class MainTopicsController < ApplicationController
 
   # GET /main_topics/new
   def new
+    @subject = Subject.find(params[:subject_id])
     @main_topic = MainTopic.new
   end
 
@@ -58,13 +59,14 @@ class MainTopicsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_main_topic
-      @main_topic = MainTopic.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def main_topic_params
-      params.require(:main_topic).permit(:teacher_id, :curriculum_id, :title, :is_complete)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_main_topic
+    @main_topic = MainTopic.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def main_topic_params
+    params.require(:main_topic).permit(:teacher_id, :curriculum_id, :title, :is_complete)
+  end
 end

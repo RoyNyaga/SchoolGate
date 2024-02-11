@@ -1,9 +1,7 @@
-<h1>New main topic</h1>
-
-<%= render "form", main_topic: @main_topic %>
-
+<%= turbo_frame_tag "first_turbo_frame" do %>
+  <%= link_to "Cancel", for_teacher_subject_path(@subject) %>
+  <%= render "form", main_topic: @main_topic %>
+<% end %>
 <br>
-
 <div>
-  <%= link_to "Back to main topics", main_topics_path %>
 </div>
