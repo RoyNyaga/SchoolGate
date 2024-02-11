@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @main_topic %>
+
+<div>
+  <%= link_to "Edit this main topic", edit_main_topic_path(@main_topic) %> |
+  <%= link_to "Back to main topics", main_topics_path %>
+
+  <%= button_to "Destroy this main topic", @main_topic, method: :delete %>
+</div>
