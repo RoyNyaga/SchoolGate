@@ -30,9 +30,9 @@
     <%= form.text_field :title, class: "general-input-styles" %>
   </div>
   <div>
-    <%= form.label :academic_year %>
-    <%= form.text_field :academic_year, value: Curriculum.generate_current_academic_year, 
-    class: "general-input-styles", disabled: true %>
+    <%= form.label :academic_year, style: "display: block" %>
+    <p><%= Curriculum.generate_current_academic_year  %></p>
+    <%= form.hidden_field :academic_year, value: Curriculum.generate_current_academic_year %>
   </div>
   <div>
     <%= form.submit %>

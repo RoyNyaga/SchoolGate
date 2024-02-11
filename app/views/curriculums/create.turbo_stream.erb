@@ -1,2 +1,2 @@
 <%= turbo_stream.replace "curriculum_new_page", partial: "curriculums/curriculum", locals: { curriculum: @curriculum } %>
-<%= turbo_stream.prepend "#{generate_drawer_id}_drawer_flash_message", partial: "shared/flash_messages" %>
+<%= turbo_stream.prepend "#{generate_drawer_id("curriculum_show")}_drawer_flash_message", partial: "shared/flash_messages" %>
