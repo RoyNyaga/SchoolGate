@@ -13,6 +13,7 @@ class MainTopicsController < ApplicationController
   # GET /main_topics/new
   def new
     @subject = Subject.find(params[:subject_id])
+    @curriculum = Curriculum.find(params[:curriculum_id])
     @main_topic = MainTopic.new
   end
 
@@ -27,7 +28,7 @@ class MainTopicsController < ApplicationController
     respond_to do |format|
       if @main_topic.save
         format.html { redirect_to main_topic_url(@main_topic), notice: "Main topic was successfully created." }
-        format.json { render :show, status: :created, location: @main_topic }
+        format.turbo_stream { flash.now[:success] = "Main Topic Successfully Created" }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @main_topic.errors, status: :unprocessable_entity }

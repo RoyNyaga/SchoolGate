@@ -1,6 +1,10 @@
-<%= turbo_frame_tag "first_turbo_frame" do %>
-  <%= link_to "Cancel", for_teacher_subject_path(@subject) %>
-  <%= render "form", main_topic: @main_topic %>
+<%= turbo_frame_tag "main_topic_new_frame" do %>
+  <div class="row">
+    <div class="col-md-8 col-10 mx-auto">
+      <%= link_to "Cancel", for_teacher_subject_path(@subject) %>
+      <%= render "form", main_topic: @main_topic %>
+    </div>
+  </div>
 <% end %>
 <br>
 <div>

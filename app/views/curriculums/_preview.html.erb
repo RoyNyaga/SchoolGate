@@ -6,7 +6,7 @@
       <%= link_to "New Curriculum", new_curriculum_path(subject_id: @subject.id) %>
     <% end %>
   <% end %>
-  <%= turbo_frame_tag "first_turbo_frame" do %>
-    <%= link_to "Add New Topic", new_main_topic_path(subject_id: @subject.id) %>
-  <% end %>
+  <div id="main-topic-add-btn">
+    <%= render partial: "main_topics/add_btn", locals: { subject: @subject, curriculum: @current_curriculum } %>
+  </div>
 </div>
