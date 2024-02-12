@@ -1,14 +1,30 @@
 <div class="container">
   <%= render @subject %>
-  <%= link_to "Create Sequence", new_sequence_path(school_class_id: @subject.school_class_id, subject_id: @subject.id) %>
-  <%= render partial: "curriculums/preview", layout: "layouts/drawer_layout", 
-              locals: { fee: @curriculum, title: "Manage This Curriculum", 
-              item_id: generate_drawer_id("curriculum_show") , position: "end", btn_text: "Manage Curriculum", btn_visibility: true } %>
   <div class="row">
-    <% @sequences.each do |sequence| %>
-      <div class="col-md-3">
-        <%= render partial: "sequences/sequence", locals: { sequence: sequence } %>
+    <div class="col-md-4">
+      <div class="section-div">
+        <div id="modal-form-section">
+          <%= render partial: "curriculums/form", 
+          layout: "layouts/modal_layout", 
+          locals: { curriculum: Curriculum.new, subject: @subject, action_name: "Save", action_title: "Create A New Curriculum",
+          modal_id: generate_modal_id("curriculum_create_form") }%>
+        </div>
+        <div id="curriculum-list">
+          <% @curriculums.each do |curriculum| %>
+            <%= render partial: "curriculums/curriculum", locals: { curriculum: curriculum, subject: @subject } %>
+          <% end %>
+        </div>
       </div>
-    <% end %>
+    </div>
+    <div class="col-md-8">
+      <%= link_to "Create Sequence", new_sequence_path(school_class_id: @subject.school_class_id, subject_id: @subject.id) %>
+      <div class="row">
+        <% @sequences.each do |sequence| %>
+          <div class="col-md-6">
+            <%= render partial: "sequences/sequence", locals: { sequence: sequence } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

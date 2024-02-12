@@ -12,7 +12,7 @@ class MainTopicsController < ApplicationController
 
   # GET /main_topics/new
   def new
-    # @subject = Subject.find(params[:subject_id])
+    @subject = Subject.find(params[:subject_id])
     @curriculum = Curriculum.find(params[:curriculum_id])
     @main_topic = MainTopic.new
   end
@@ -68,6 +68,6 @@ class MainTopicsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def main_topic_params
-    params.require(:main_topic).permit(:teacher_id, :curriculum_id, :title, :is_complete)
+    params.require(:main_topic).permit(:teacher_id, :curriculum_id, :title, :subject_id)
   end
 end

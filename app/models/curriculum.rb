@@ -5,6 +5,7 @@ class Curriculum < ApplicationRecord
   belongs_to :school_class
   belongs_to :teacher
   belongs_to :subject
+  has_many :main_topics
 
   validates :title, presence: true
 end

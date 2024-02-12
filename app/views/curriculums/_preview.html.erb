@@ -1,12 +1,11 @@
 <div id="curriculum-preview-wrapper">
-  <%= turbo_frame_tag "curriculum_new_page" do %>
-    <% if @current_curriculum %>
-      <%= render partial: "curriculums/curriculum", locals: { curriculum: @current_curriculum } %>
-    <% else %>
-      <%= link_to "New Curriculum", new_curriculum_path(subject_id: @subject.id) %>
+  <% main_topics = curriculum.main_topics %>
+  <div class="accordion" id=<%= generate_accordion_id("parent_#{curriculum.id}") %>>
+    <% main_topics.each do |main_topic| %>
+      <%= render partial: "main_topics/main_topic", locals: { curriculum: curriculum, main_topic: main_topic } %>
     <% end %>
-  <% end %>
+  </div>
   <div id="main-topic-add-btn">
-    <%= render partial: "main_topics/add_btn", locals: { subject: @subject, curriculum: @current_curriculum } %>
+    <%= render partial: "main_topics/add_btn", locals: { subject: subject, curriculum: curriculum } %>
   </div>
 </div>

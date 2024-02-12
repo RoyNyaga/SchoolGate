@@ -18,6 +18,10 @@
     <%= form.hidden_field :curriculum_id, value: @curriculum.id %>
   </div>
   <div>
+    <%= form.label :subject_id, class: "d-none" %>
+    <%= form.hidden_field :subject_id, value: @subject.id %>
+  </div>
+  <div>
     <%= form.label :title, style: "display: block" %>
     <%= form.text_field :title, class: "general-input-styles" %>
   </div>

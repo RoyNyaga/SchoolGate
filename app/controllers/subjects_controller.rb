@@ -62,8 +62,7 @@ class SubjectsController < ApplicationController
 
   def for_teacher
     @sequences = current_teacher.sequences.where(subject_id: @subject.id)
-    @current_curriculum = @current_teacher.curriculums.where(subject_id: @subject.id,
-                                                             academic_year: Curriculum.generate_current_academic_year).first
+    @curriculums = @current_teacher.curriculums.where(subject_id: @subject.id)
   end
 
   private

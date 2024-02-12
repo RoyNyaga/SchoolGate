@@ -15,6 +15,14 @@ module ApplicationHelper
     end
   end
 
+  def generate_accordion_id(type, record: nil)
+    if record
+      "#{record.class.name.downcase}_#{type}_accordion_#{record.id}"
+    else
+      "#{type}_accordion"
+    end
+  end
+
   def google_map_src
     "https://maps.googleapis.com/maps/api/js?key=#{ENV["GOOGLE_PLACES_API_KEY"]}&loading=async&libraries=places&callback=initAutocomplete"
   end

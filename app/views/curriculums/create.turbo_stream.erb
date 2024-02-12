@@ -1,2 +1,5 @@
-<%= turbo_stream.replace "curriculum_new_page", partial: "curriculums/curriculum", locals: { curriculum: @curriculum } %>
-<%= turbo_stream.prepend "#{generate_drawer_id("curriculum_show")}_drawer_flash_message", partial: "shared/flash_messages" %>
+<%#= turbo_stream.replace "modal-form-section", partial: "curriculums/form", 
+          layout: "layouts/modal_layout", 
+          locals: { curriculum: Curriculum.new, subject: @subject, action_name: "Save", action_title: "Create A New Curriculum",
+          modal_id: generate_modal_id("curriculum_create_form") } %>
+<%#= turbo_stream.prepend "curriculum-list", partial: "curriculums/curriculum", locals: { curriculum: @curriculum, subject: @subject } %>

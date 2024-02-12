@@ -23,15 +23,15 @@ class CurriculumsController < ApplicationController
   # POST /curriculums or /curriculums.json
   def create
     @curriculum = Curriculum.new(curriculum_params)
-
-    respond_to do |format|
-      if @curriculum.save
-        format.html { redirect_to curriculum_url(@curriculum), notice: "Curriculum was successfully created." }
-        format.turbo_stream { flash.now[:success] = "Curriculum Successfully Crerated" }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    @subject = @curriculum.subject
+    # respond_to do |format|
+    if @curriculum.save
+      flash[:success] = "Curriculum was successfully Created"
+      redirect_to for_teacher_subject_path(@subject)
+    else
+      render "subjects#for_teacher", status: :unprocessable_entity
     end
+    # end
   end
 
   # PATCH/PUT /curriculums/1 or /curriculums/1.json

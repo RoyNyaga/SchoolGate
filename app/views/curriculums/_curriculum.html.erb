@@ -1,5 +1,8 @@
 <div id="<%= dom_id curriculum %>">
-  <p>
+  <div class="d-flex justify-content-between">
     <%= curriculum.title %> - <%= curriculum.academic_year %>
-  </p>
+    <%= render partial: "curriculums/preview", layout: "layouts/drawer_layout", 
+              locals: { curriculum: curriculum, subject: subject, title: "Manage This Curriculum", 
+              item_id: generate_drawer_id("preview", record: curriculum) , position: "end", btn_text: "View", btn_visibility: true } %>
+  </div>
 </div>
