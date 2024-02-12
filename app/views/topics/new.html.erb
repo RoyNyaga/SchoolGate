@@ -1,9 +1,4 @@
-<h1>New topic</h1>
-
-<%= render "form", topic: @topic %>
-
-<br>
-
-<div>
-  <%= link_to "Back to topics", topics_path %>
-</div>
+<%= turbo_frame_tag "new_topic_page" do %>
+  <%= link_to "Back to topics", for_teacher_subject_path(@subject) %>
+  <%= render "form", topic: @topic %>
+<% end %>
