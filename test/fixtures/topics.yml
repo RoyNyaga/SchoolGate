@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  teacher: one
+  main_topic: one
+  title: MyString
+  progress: 1
+
+two:
+  teacher: two
+  main_topic: two
+  title: MyString
+  progress: 1

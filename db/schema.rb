@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_11_111327) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_12_164548) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -238,6 +238,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_11_111327) do
     t.index ["school_id"], name: "index_terms_on_school_id"
   end
 
+  create_table "topics", force: :cascade do |t|
+    t.bigint "teacher_id", null: false
+    t.bigint "main_topic_id", null: false
+    t.string "title", null: false
+    t.integer "progress", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["main_topic_id"], name: "index_topics_on_main_topic_id"
+    t.index ["teacher_id"], name: "index_topics_on_teacher_id"
+  end
+
   create_table "workings", force: :cascade do |t|
     t.bigint "school_id", null: false
     t.bigint "teacher_id", null: false
@@ -284,6 +295,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_11_111327) do
   add_foreign_key "teachings", "subjects"
   add_foreign_key "teachings", "teachers"
   add_foreign_key "terms", "schools"
+  add_foreign_key "topics", "main_topics"
+  add_foreign_key "topics", "teachers"
   add_foreign_key "workings", "schools"
   add_foreign_key "workings", "teachers"
 end

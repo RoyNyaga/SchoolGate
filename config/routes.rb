@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :topics
   resources :main_topics
   resources :curriculums
   resources :fees do
