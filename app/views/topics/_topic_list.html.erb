@@ -1,0 +1,7 @@
+<div>
+  <div class="text-center">
+    <%= turbo_frame_tag "new_topic_page" do %>
+      <%= link_to "Add Topic", new_topic_path(subject_id: subject.id) %>
+    <% end %>
+  </div>
+</div>
