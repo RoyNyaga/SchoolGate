@@ -2,7 +2,7 @@
   <% main_topics = curriculum.main_topics %>
   <div class="accordion" id=<%= generate_accordion_id("parent_#{curriculum.id}") %>>
     <% main_topics.each do |main_topic| %>
-      <%= render partial: "main_topics/main_topic", locals: { curriculum: curriculum, main_topic: main_topic } %>
+      <%= render partial: "main_topics/main_topic", locals: { curriculum: curriculum, main_topic: main_topic, subject: subject } %>
     <% end %>
   </div>
   <div id="main-topic-add-btn">
