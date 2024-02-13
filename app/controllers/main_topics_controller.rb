@@ -1,4 +1,5 @@
 class MainTopicsController < ApplicationController
+  include ApplicationHelper # This is to access certain helper methods from the controller
   before_action :set_main_topic, only: %i[ show edit update destroy ]
 
   # GET /main_topics or /main_topics.json
@@ -19,6 +20,8 @@ class MainTopicsController < ApplicationController
 
   # GET /main_topics/1/edit
   def edit
+    @curriculum = @main_topic.curriculum
+    @subject = @main_topic.subject
   end
 
   # POST /main_topics or /main_topics.json
@@ -40,8 +43,8 @@ class MainTopicsController < ApplicationController
   def update
     respond_to do |format|
       if @main_topic.update(main_topic_params)
-        format.html { redirect_to main_topic_url(@main_topic), notice: "Main topic was successfully updated." }
-        format.json { render :show, status: :ok, location: @main_topic }
+        format.html { redirect_to for_teacher_subject_path(@main_topic.subject), notice: "Main topic was successfully updated." }
+        # format.json { render :show, status: :ok, location: @main_topic }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @main_topic.errors, status: :unprocessable_entity }
@@ -51,11 +54,11 @@ class MainTopicsController < ApplicationController
 
   # DELETE /main_topics/1 or /main_topics/1.json
   def destroy
+    @main_topic_dom_id = custom_id_generator("item", record: @main_topic)
     @main_topic.destroy!
 
     respond_to do |format|
-      format.html { redirect_to main_topics_url, notice: "Main topic was successfully destroyed." }
-      format.json { head :no_content }
+      format.turbo_stream { flash.now[:success] = "Successfully deleted Tpic" }
     end
   end
 
