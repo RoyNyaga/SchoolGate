@@ -21,11 +21,9 @@
     <%= form.label :subject_id, class: "d-none" %>
     <%= form.hidden_field :subject_id, value: @subject.id %>
   </div>
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title, class: "general-input-styles" %>
-  </div>
-  <div>
-    <%= form.submit %>
+  <div class="d-flex">
+    <%= form.label :title, class: "d-none" %>
+    <%= form.text_field :title, placeholder: "Enter Title", class: "general-input-styles" %>
+    <%= form.submit :save %>
   </div>
 <% end %>
