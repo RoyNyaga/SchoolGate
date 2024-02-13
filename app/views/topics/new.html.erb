@@ -1,4 +1,8 @@
-<%= turbo_frame_tag "new_topic_page" do %>
-  <%= link_to "Back to topics", for_teacher_subject_path(@subject) %>
-  <%= render "form", topic: @topic %>
+<%= turbo_frame_tag custom_id_generator("new_topic_page", record: @main_topic) do %>
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <%= link_to "Cancel", for_teacher_subject_path(@subject) %>
+      <%= render partial: "topics/form", locals: { topic: @topic, subject: @subject, main_topic: @main_topic } %>
+    </div>
+  </div>
 <% end %>

@@ -1,8 +1,10 @@
 <div id="<%= dom_id curriculum %>">
   <div class="d-flex justify-content-between">
-    <%= curriculum.title %> - <%= curriculum.academic_year %>
+    <%= link_to "#{curriculum.title} - #{curriculum.academic_year}", "##{generate_drawer_id("preview", record: curriculum)}", data: { bs_toggle: "offcanvas" },
+     role: "button", aria: {controls: "#{generate_drawer_id("preview", record: curriculum)}_drawer"} %>
+    <%= link_to "Edit", edit_curriculum_path(curriculum) %>
     <%= render partial: "curriculums/preview", layout: "layouts/drawer_layout", 
               locals: { curriculum: curriculum, subject: subject, title: "Manage This Curriculum", 
-              item_id: generate_drawer_id("preview", record: curriculum) , position: "end", btn_text: "View", btn_visibility: true } %>
+              item_id: generate_drawer_id("preview", record: curriculum) , position: "end", btn_text: "View", btn_visibility: false } %>
   </div>
 </div>

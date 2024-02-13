@@ -1,4 +1,4 @@
 <%= turbo_stream.replace "main_topic_new_frame", partial: "main_topics/add_btn", locals: { subject: @main_topic.subject, curriculum: @main_topic.curriculum } %>
-<%= turbo_stream.prepend generate_accordion_id("parent_#{@main_topic.curriculum.id}"), partial: "main_topics/main_topic", 
- locals: { curriculum: @main_topic.curriculum, main_topic: @main_topic } %>
+<%= turbo_stream.append generate_accordion_id("parent_#{@main_topic.curriculum.id}"), partial: "main_topics/main_topic", 
+ locals: { curriculum: @main_topic.curriculum, main_topic: @main_topic, subject: @main_topic.subject } %>
 <%#= turbo_stream.prepend "#{generate_drawer_id("curriculum_show")}_drawer_flash_message", partial: "shared/flash_messages" %>

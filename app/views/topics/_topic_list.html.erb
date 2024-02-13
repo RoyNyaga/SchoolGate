@@ -1,7 +1,10 @@
 <div>
-  <div class="text-center">
-    <%= turbo_frame_tag "new_topic_page" do %>
-      <%= link_to "Add Topic", new_topic_path(subject_id: subject.id) %>
+  <div id="<%= custom_id_generator("preview_main_topic_subtopic_list", record: main_topic) %>">
+    <% main_topic.topics.each do |topic| %>
+      <%= render topic %>
     <% end %>
+  </div>
+  <div class="text-center">
+    <%= render partial: "topics/add_btn", locals: { subject: subject, main_topic: main_topic } %>
   </div>
 </div>

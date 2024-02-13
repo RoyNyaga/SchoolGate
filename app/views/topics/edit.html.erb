@@ -1,10 +1,9 @@
-<h1>Editing topic</h1>
-
-<%= render "form", topic: @topic %>
-
-<br>
-
-<div>
-  <%= link_to "Show this topic", @topic %> |
-  <%= link_to "Back to topics", topics_path %>
-</div>
+<%= turbo_frame_tag dom_id(@topic) do %>
+  <div>
+    <%= render partial: "topics/form", locals: { topic: @topic, subject: @topic.subject, main_topic: @topic.main_topic } %>
+  </div>
+  <div class="d-flex">
+    <%= link_to "Cancel", for_teacher_subject_path(@topic.subject) %>
+    <%=button_to "Delete Instead", topic_path(@topic), method: :delete %>
+  </div>
+<% end %>

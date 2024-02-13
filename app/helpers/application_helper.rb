@@ -23,6 +23,14 @@ module ApplicationHelper
     end
   end
 
+  def custom_id_generator(type, record: nil)
+    if record
+      "#{record.class.name.downcase}_#{type}_#{record.id}_custom_id"
+    else
+      "#{type}_custom_id"
+    end
+  end
+
   def google_map_src
     "https://maps.googleapis.com/maps/api/js?key=#{ENV["GOOGLE_PLACES_API_KEY"]}&loading=async&libraries=places&callback=initAutocomplete"
   end

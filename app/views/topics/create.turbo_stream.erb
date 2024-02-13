@@ -1,0 +1,2 @@
+<%= turbo_stream.replace custom_id_generator("new_topic_page", record: @topic.main_topic), partial: "topics/add_btn", locals: { subject: @topic.subject, main_topic: @topic.main_topic } %>
+<%= turbo_stream.append custom_id_generator("preview_main_topic_subtopic_list", record: @topic.main_topic), partial: "topics/topic", locals: { topic: @topic } %>

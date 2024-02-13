@@ -6,7 +6,7 @@
   </h2>
   <div id=<%= generate_accordion_id("child", record: main_topic) %> class="accordion-collapse collapse" data-bs-parent="#<%= generate_accordion_id("parent_#{curriculum.id}") %>">
     <div class="accordion-body">
-      <%= render partial: "topics/topic_list", locals: { subject: subject } %>
+      <%= render partial: "topics/topic_list", locals: { subject: subject, main_topic: main_topic } %>
     </div>
   </div>
 </div>
