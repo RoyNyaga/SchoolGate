@@ -1,10 +1,9 @@
-<h1>Editing curriculum</h1>
-
-<%= render "form", curriculum: @curriculum %>
-
-<br>
-
-<div>
-  <%= link_to "Show this curriculum", @curriculum %> |
-  <%= link_to "Back to curriculums", curriculums_path %>
-</div>
+<%= turbo_frame_tag custom_id_generator("edit_frame", record: @curriculum) do %>
+  <div> 
+    <%= render partial: "curriculums/form", locals: { curriculum: @curriculum, subject: @curriculum.subject } %>
+  </div>
+  <div class="d-flex">
+    <%= link_to "Cancel", for_teacher_subject_path(@curriculum.subject) %>
+    <%=button_to "Delete Instead", curriculum_path(@curriculum), method: :delete %>
+  </div>
+<% end %>
