@@ -41,10 +41,10 @@ class TopicsController < ApplicationController
     respond_to do |format|
       if @topic.update(topic_params)
         format.html { redirect_to topic_url(@topic), notice: "Topic was successfully updated." }
-        format.json { render :show, status: :ok, location: @topic }
+        # format.json { render :show, status: :ok, location: @topic }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @topic.errors, status: :unprocessable_entity }
+        # format.json { render json: @topic.errors, status: :unprocessable_entity }
       end
     end
   end
