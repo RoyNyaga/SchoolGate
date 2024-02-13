@@ -1,8 +1,11 @@
-<div class="accordion-item">
+<div class="accordion-item" id="<%= custom_id_generator("item", record: main_topic) %>">
   <h2 class="accordion-header">
-    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#<%= generate_accordion_id("child", record: main_topic) %>" aria-expanded="true" aria-controls="collapseOne">
-      <%= main_topic.title %>
-    </button>
+    <%= turbo_frame_tag custom_id_generator("update", record: main_topic) do %>
+      <%= link_to "Edit", edit_main_topic_path(main_topic) %>
+      <div class="accordion-button" data-bs-toggle="collapse" data-bs-target="#<%= generate_accordion_id("child", record: main_topic) %>">
+        <span> <%= main_topic.title %> </span>
+      </div>
+    <% end %>
   </h2>
   <div id=<%= generate_accordion_id("child", record: main_topic) %> class="accordion-collapse collapse" data-bs-parent="#<%= generate_accordion_id("parent_#{curriculum.id}") %>">
     <div class="accordion-body">
