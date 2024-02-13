@@ -38,8 +38,8 @@ class CurriculumsController < ApplicationController
   def update
     respond_to do |format|
       if @curriculum.update(curriculum_params)
-        format.html { redirect_to curriculum_url(@curriculum), notice: "Curriculum was successfully updated." }
-        format.json { render :show, status: :ok, location: @curriculum }
+        format.html { redirect_to for_teacher_subject_path(@curriculum.subject), notice: "Curriculum was successfully updated." }
+        # format.turbo_stream { flash[:success] = "Succfully Updated Curriculum" }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @curriculum.errors, status: :unprocessable_entity }
@@ -52,8 +52,7 @@ class CurriculumsController < ApplicationController
     @curriculum.destroy!
 
     respond_to do |format|
-      format.html { redirect_to curriculums_url, notice: "Curriculum was successfully destroyed." }
-      format.json { head :no_content }
+      format.turbo_stream { flash.now[:success] = "Successfully deleted Curriculum" }
     end
   end
 
