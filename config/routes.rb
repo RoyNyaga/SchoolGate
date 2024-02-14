@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :progresses
   resources :topics
   resources :main_topics
   resources :curriculums

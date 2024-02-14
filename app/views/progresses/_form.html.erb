@@ -1,0 +1,62 @@
+<%= form_with(model: progress) do |form| %>
+  <% if progress.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(progress.errors.count, "error") %> prohibited this progress from being saved:</h2>
+
+      <ul>
+        <% progress.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :school_id, style: "display: block" %>
+    <%= form.text_field :school_id %>
+  </div>
+
+  <div>
+    <%= form.label :subject_id, style: "display: block" %>
+    <%= form.text_field :subject_id %>
+  </div>
+
+  <div>
+    <%= form.label :teacher_id, style: "display: block" %>
+    <%= form.text_field :teacher_id %>
+  </div>
+
+  <div>
+    <%= form.label :topics, style: "display: block" %>
+    <%= form.text_field :topics %>
+  </div>
+
+  <div>
+    <%= form.label :duration, style: "display: block" %>
+    <%= form.time_field :duration %>
+  </div>
+
+  <div>
+    <%= form.label :term_id, style: "display: block" %>
+    <%= form.text_field :term_id %>
+  </div>
+
+  <div>
+    <%= form.label :absent_student_ids, style: "display: block" %>
+    <%= form.text_field :absent_student_ids %>
+  </div>
+
+  <div>
+    <%= form.label :academic_year, style: "display: block" %>
+    <%= form.text_field :academic_year %>
+  </div>
+
+  <div>
+    <%= form.label :seq_num, style: "display: block" %>
+    <%= form.number_field :seq_num %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
