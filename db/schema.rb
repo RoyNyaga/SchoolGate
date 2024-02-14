@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_12_164548) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_14_013314) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -103,6 +103,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_12_164548) do
     t.index ["curriculum_id"], name: "index_main_topics_on_curriculum_id"
     t.index ["subject_id"], name: "index_main_topics_on_subject_id"
     t.index ["teacher_id"], name: "index_main_topics_on_teacher_id"
+  end
+
+  create_table "progresses", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "subject_id", null: false
+    t.bigint "teacher_id", null: false
+    t.bigint "term_id", null: false
+    t.text "topics", default: [], array: true
+    t.time "duration"
+    t.text "absent_student_ids", default: [], array: true
+    t.string "academic_year", null: false
+    t.integer "seq_num", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_id"], name: "index_progresses_on_school_id"
+    t.index ["subject_id"], name: "index_progresses_on_subject_id"
+    t.index ["teacher_id"], name: "index_progresses_on_teacher_id"
+    t.index ["term_id"], name: "index_progresses_on_term_id"
   end
 
   create_table "report_cards", force: :cascade do |t|
@@ -278,6 +296,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_12_164548) do
   add_foreign_key "main_topics", "curriculums"
   add_foreign_key "main_topics", "subjects"
   add_foreign_key "main_topics", "teachers"
+  add_foreign_key "progresses", "schools"
+  add_foreign_key "progresses", "subjects"
+  add_foreign_key "progresses", "teachers"
+  add_foreign_key "progresses", "terms"
   add_foreign_key "report_cards", "school_classes"
   add_foreign_key "report_cards", "schools"
   add_foreign_key "report_cards", "students"
