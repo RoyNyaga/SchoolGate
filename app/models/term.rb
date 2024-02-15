@@ -6,7 +6,7 @@ class Term < ApplicationRecord
   enum term_type: { first_term: 1, second_term: 2, third_term: 3 }
 
   def title
-    "#{term_type.humanize} #{academic_year_start} / #{academic_year_end}"
+    "#{term_type.humanize} - #{academic_year}"
   end
 
   def sum_sequence_subject_marks(subject_id) # returns an array of marks hases with the sum of first sequence and second sequence marks
