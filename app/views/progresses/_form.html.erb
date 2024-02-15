@@ -2,7 +2,6 @@
   <% if progress.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(progress.errors.count, "error") %> prohibited this progress from being saved:</h2>
-
       <ul>
         <% progress.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,52 +9,43 @@
       </ul>
     </div>
   <% end %>
-
   <div>
-    <%= form.label :school_id, style: "display: block" %>
-    <%= form.text_field :school_id %>
+    <%= form.label :school_id, class: "d-none" %>
+    <%= form.hidden_field :school_id, value: current_school.id %>
   </div>
-
   <div>
-    <%= form.label :subject_id, style: "display: block" %>
-    <%= form.text_field :subject_id %>
+    <%= form.label :subject_id, class: "d-none" %>
+    <%= form.hidden_field :subject_id, value: @subject.id %>
   </div>
-
   <div>
-    <%= form.label :teacher_id, style: "display: block" %>
-    <%= form.text_field :teacher_id %>
+    <%= form.label :teacher_id, class: "d-none" %>
+    <%= form.hidden_field :teacher_id, value: current_teacher.id %>
   </div>
-
+  <div>
+    <%= form.label :duration, style: "display: block" %>
+    <%= form.time_field :duration, class: "general-input-styles" %>
+  </div>
   <div>
     <%= form.label :topics, style: "display: block" %>
     <%= form.text_field :topics %>
   </div>
-
   <div>
-    <%= form.label :duration, style: "display: block" %>
-    <%= form.time_field :duration %>
+    <%= form.label :academic_year, class: "d-none" %>
+    <%= form.hidden_field :academic_year, value: Curriculum.generate_current_academic_year %>
   </div>
-
+  <div>
+    <%= form.label :seq_num, style: "display: block" %>
+    <%= form.select :seq_num, Sequence.seq_nums.map { |k,v| [k.humanize, k] }, {include_blank: 'Select Sequence Number'}, { class: "general-input-styles" } %>
+    <%#= form.number_field :seq_num %>
+  </div>
   <div>
     <%= form.label :term_id, style: "display: block" %>
-    <%= form.text_field :term_id %>
+    <%= form.select :term_id, current_school.terms.map { |term| [term.title, term.id] }, {include_blank: 'Select Term'}, { class: "general-input-styles" } %>
   </div>
-
   <div>
     <%= form.label :absent_student_ids, style: "display: block" %>
     <%= form.text_field :absent_student_ids %>
   </div>
-
-  <div>
-    <%= form.label :academic_year, style: "display: block" %>
-    <%= form.text_field :academic_year %>
-  </div>
-
-  <div>
-    <%= form.label :seq_num, style: "display: block" %>
-    <%= form.number_field :seq_num %>
-  </div>
-
   <div>
     <%= form.submit %>
   </div>

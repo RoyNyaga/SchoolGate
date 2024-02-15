@@ -1,4 +1,6 @@
 class ProgressesController < ApplicationController
+  layout "school_layout"
+  before_action :check_for_current_school
   before_action :set_progress, only: %i[ show edit update destroy ]
 
   # GET /progresses or /progresses.json
@@ -13,6 +15,7 @@ class ProgressesController < ApplicationController
   # GET /progresses/new
   def new
     @progress = Progress.new
+    @subject = Subject.find(params[:subject_id])
   end
 
   # GET /progresses/1/edit
@@ -58,13 +61,14 @@ class ProgressesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_progress
-      @progress = Progress.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def progress_params
-      params.require(:progress).permit(:school_id, :subject_id, :teacher_id, :topics, :duration, :term_id, :absent_student_ids, :academic_year, :seq_num)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_progress
+    @progress = Progress.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def progress_params
+    params.require(:progress).permit(:school_id, :subject_id, :teacher_id, :topics, :duration, :term_id, :absent_student_ids, :academic_year, :seq_num)
+  end
 end
