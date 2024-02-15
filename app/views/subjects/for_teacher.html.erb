@@ -1,5 +1,12 @@
 <div class="container">
-  <%= render @subject %>
+  <div class="row">
+    <div class="col-md-4">
+      <%= render @subject %>
+    </div>
+    <div class="col-md-8">
+      <%= link_to "Add Progress", new_progress_path(subject_id: @subject.id) %>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-4">
       <div class="section-div">
