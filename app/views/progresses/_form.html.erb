@@ -35,36 +35,11 @@
       </div>
     </div>
     <div class="col-md-4">
-      <%= form.label :topics, class: "d-none" %>
+      <div>
+        <h5 class="text-center p-0 m-0">Which Topics did you teach today?</h5>
+        <p class="text-center p-0 m-0">You can select Topics from the curriculum(s) listed bellow</p>
+      </div>
       <div class="added-topics-wrapper">
-        <div class="added-topic">
-          <h6 class="added-topic-header">Title of the topic</h6>
-          <div class="added-topic-body">
-            <%= form.hidden_field :id, name: "progress[topics][][id]", value: "1" %>
-            <div class="d-flex justify-content-around">
-              <div>
-                <label>In Progress</label>
-                <%= radio_button_tag "progress[topics][][progress]", "in_progress" %>
-              </div>
-              <div>
-                <label>Completed</label>
-                <%= radio_button_tag "progress[topics][][progress]", "completed" %>
-              </div>
-              <span>Cancel</span>
-            </div>
-            <div class="d-flex justify-content-around">
-              <div>
-                <label>In Progress</label>
-                <%= radio_button_tag "progress[topics][][progress1]", "in_progress" %>
-              </div>
-              <div>
-                <label>Completed</label>
-                <%= radio_button_tag "progress[topics][][progress1]", "completed" %>
-              </div>
-              <span>Cancel</span>
-            </div>
-          </div>
-        </div>
       </div>
       <div class="curriculum-select">
         <% @curriculums.each do |curriculum| %>
