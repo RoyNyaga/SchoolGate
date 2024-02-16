@@ -27,25 +27,27 @@ export default class extends Controller {
     parentDiv.appendChild(generatedElement);
   }
 
+  removeTopic = (e) => {
+    const addedTopicId = e.target.getAttribute("data-topicelementid")
+    const addedTopicDiv = document.getElementById(addedTopicId)
+    addedTopicDiv.remove()
+  }
+
   generateTopicFormElement = (topicTitle, topicId) => {
     return `
-    <div class="added-topic">
-      <h6 class="added-topic-header">${topicTitle}</h6>
-      <div class="added-topic-body">
-        <input name="progress[topics][][id]" value=${topicId} autocomplete="off" type="hidden" id="progress_id">
-        <div class="d-flex justify-content-around">
-          <div>
-            <label>In Progress</label>
-            <input type="radio" name="progress[topics][][progress]" id="progress_topics__progress_in_progress" value="in_progress">
+    <div class="added-topic" id="added_topic_${topicId}">
+          <h6 class="added-topic-header">${topicTitle}</h6>
+          <div class="added-topic-body">
+            <input name="progress[topics][][id]" value=${topicId} autocomplete="off" type="hidden" id="progress_id">
+            <div class="d-flex justify-content-around">
+              <select class="progress-curriculum-select-input" name="progress[topics][][progress]" id="">
+                <option value="3">completed</option>
+                <option value="2">in_progress</option>
+              </select>
+              <span data-topicelementid="added_topic_${topicId}" data-action="click->progresses#removeTopic">Cancel</span>
+            </div>
           </div>
-          <div>
-            <label>Completed</label>
-            <input type="radio" name="progress[topics][][progress]" id="progress_topics__progress_completed" value="completed">
-          </div>
-          <span>Cancel</span>
         </div>
-      </div>
-    </div>
   `;
   }
 }
