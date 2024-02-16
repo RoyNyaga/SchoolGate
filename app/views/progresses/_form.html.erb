@@ -9,44 +9,67 @@
       </ul>
     </div>
   <% end %>
-  <div>
-    <%= form.label :school_id, class: "d-none" %>
-    <%= form.hidden_field :school_id, value: current_school.id %>
-  </div>
-  <div>
-    <%= form.label :subject_id, class: "d-none" %>
-    <%= form.hidden_field :subject_id, value: @subject.id %>
-  </div>
-  <div>
-    <%= form.label :teacher_id, class: "d-none" %>
-    <%= form.hidden_field :teacher_id, value: current_teacher.id %>
-  </div>
-  <div>
-    <%= form.label :duration, style: "display: block" %>
-    <%= form.time_field :duration, class: "general-input-styles" %>
-  </div>
-  <div>
-    <%= form.label :topics, style: "display: block" %>
-    <%= form.text_field :topics %>
-  </div>
-  <div>
-    <%= form.label :academic_year, class: "d-none" %>
-    <%= form.hidden_field :academic_year, value: Curriculum.generate_current_academic_year %>
-  </div>
-  <div>
-    <%= form.label :seq_num, style: "display: block" %>
-    <%= form.select :seq_num, Sequence.seq_nums.map { |k,v| [k.humanize, k] }, {include_blank: 'Select Sequence Number'}, { class: "general-input-styles" } %>
-    <%#= form.number_field :seq_num %>
-  </div>
-  <div>
-    <%= form.label :term_id, style: "display: block" %>
-    <%= form.select :term_id, current_school.terms.map { |term| [term.title, term.id] }, {include_blank: 'Select Term'}, { class: "general-input-styles" } %>
-  </div>
-  <div>
-    <%= form.label :absent_student_ids, style: "display: block" %>
-    <%= form.text_field :absent_student_ids %>
-  </div>
-  <div>
+  <%= form.label :school_id, class: "d-none" %>
+  <%= form.hidden_field :school_id, value: current_school.id %>
+  <%= form.label :subject_id, class: "d-none" %>
+  <%= form.hidden_field :subject_id, value: @subject.id %>
+  <%= form.label :teacher_id, class: "d-none" %>
+  <%= form.hidden_field :teacher_id, value: current_teacher.id %>
+  <div class="row">
+    <div class="col-md-4">
+      <div>
+        <%= form.label :academic_year, class: "d-none" %>
+        <%= form.hidden_field :academic_year, value: Curriculum.generate_current_academic_year %>
+      </div>
+      <div>
+        <%= form.label :term_id, style: "display: block" %>
+        <%= form.select :term_id, current_school.terms.map { |term| [term.title, term.id] }, {include_blank: 'Select Term'}, { class: "general-input-styles" } %>
+      </div>
+      <div>
+        <%= form.label :seq_num, style: "display: block" %>
+        <%= form.select :seq_num, Sequence.seq_nums.map { |k,v| [k.humanize, k] }, {include_blank: 'Select Sequence Number'}, { class: "general-input-styles" } %>
+      </div>
+      <div>
+        <%= form.label :duration, style: "display: block" %>
+        <%= form.time_field :duration, class: "general-input-styles" %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div>
+        <%= form.label :topics, style: "display: block" %>
+        <div class="added-topics">
+          <h6 class="added-topic-header">Title of the topic</h6>
+          <div class="added-topic-body">
+            <%= form.hidden_field :id, name: "progress[topics][][id]", value: "1" %>
+            <div class="d-flex justify-content-around">
+              <div>
+                <label>In Progress</label>
+                <%= radio_button_tag "progress[topics][][progress]", "in_progress" %>
+              </div>
+              <div>
+                <label>Completed</label>
+                <%= radio_button_tag "progress[topics][][progress]", "completed" %>
+              </div>
+              <span>Cancel</span>
+            </div>
+          </div>
+        </div>
+        <div class="curriculum-select">
+          <% @curriculums.each do |curriculum| %>
+            <%= render partial: "curriculums/progress_form_preview", 
+              layout: "layouts/modal_layout", 
+              locals: { curriculum: curriculum, action_name: curriculum.title, action_title: "Select Topic",
+              modal_id: generate_modal_id("progress_form_preview", record: curriculum) }%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div>
+        <%= form.label :absent_student_ids, style: "display: block" %>
+        <%= form.text_field :absent_student_ids %>
+      </div>
+    </div>
     <%= form.submit %>
   </div>
 <% end %>

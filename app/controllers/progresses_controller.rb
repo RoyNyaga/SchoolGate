@@ -16,6 +16,8 @@ class ProgressesController < ApplicationController
   def new
     @progress = Progress.new
     @subject = Subject.find(params[:subject_id])
+    @curriculums = Curriculum.where(subject_id: @subject.id, teacher_id: current_teacher.id,
+                                    academic_year: Curriculum.generate_current_academic_year)
   end
 
   # GET /progresses/1/edit
