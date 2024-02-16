@@ -1,4 +1,7 @@
 <div class="d-flex justify-content-between align-items-end">
   <p><%= topic.title %> - p -</p>
-  <p>Select</p>
+  <p data-action="click->progresses#addTopicToForm"
+    data-topic-id="<%= topic.id %>"
+    data-topic-title="<%= topic.title %>"
+    >Select</p>
 </div>

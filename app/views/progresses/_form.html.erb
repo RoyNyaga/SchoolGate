@@ -15,7 +15,7 @@
   <%= form.hidden_field :subject_id, value: @subject.id %>
   <%= form.label :teacher_id, class: "d-none" %>
   <%= form.hidden_field :teacher_id, value: current_teacher.id %>
-  <div class="row">
+  <div class="row" data-controller="progresses">
     <div class="col-md-4">
       <div>
         <%= form.label :academic_year, class: "d-none" %>
@@ -35,9 +35,9 @@
       </div>
     </div>
     <div class="col-md-4">
-      <div>
-        <%= form.label :topics, style: "display: block" %>
-        <div class="added-topics">
+      <%= form.label :topics, class: "d-none" %>
+      <div class="added-topics-wrapper">
+        <div class="added-topic">
           <h6 class="added-topic-header">Title of the topic</h6>
           <div class="added-topic-body">
             <%= form.hidden_field :id, name: "progress[topics][][id]", value: "1" %>
@@ -52,16 +52,27 @@
               </div>
               <span>Cancel</span>
             </div>
+            <div class="d-flex justify-content-around">
+              <div>
+                <label>In Progress</label>
+                <%= radio_button_tag "progress[topics][][progress1]", "in_progress" %>
+              </div>
+              <div>
+                <label>Completed</label>
+                <%= radio_button_tag "progress[topics][][progress1]", "completed" %>
+              </div>
+              <span>Cancel</span>
+            </div>
           </div>
         </div>
-        <div class="curriculum-select">
-          <% @curriculums.each do |curriculum| %>
-            <%= render partial: "curriculums/progress_form_preview", 
+      </div>
+      <div class="curriculum-select">
+        <% @curriculums.each do |curriculum| %>
+          <%= render partial: "curriculums/progress_form_preview", 
               layout: "layouts/modal_layout", 
               locals: { curriculum: curriculum, action_name: curriculum.title, action_title: "Select Topic",
               modal_id: generate_modal_id("progress_form_preview", record: curriculum) }%>
-          <% end %>
-        </div>
+        <% end %>
       </div>
     </div>
     <div class="col-md-4">
