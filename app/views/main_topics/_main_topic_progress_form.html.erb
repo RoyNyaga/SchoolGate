@@ -1,0 +1,12 @@
+<div class="accordion-item" id="<%= custom_id_generator("item", record: main_topic) %>">
+  <h2 class="accordion-header">
+    <div class="accordion-button" data-bs-toggle="collapse" data-bs-target="#<%= generate_accordion_id("child", record: main_topic) %>">
+      <span> <%= main_topic.title %> </span>
+    </div>
+  </h2>
+  <div id=<%= generate_accordion_id("child", record: main_topic) %> class="accordion-collapse collapse" data-bs-parent="#<%= generate_accordion_id("parent_#{curriculum.id}") %>">
+    <div class="accordion-body">
+      <%= render partial: "topics/progress_form_topic_list", locals: { main_topic: main_topic } %>
+    </div>
+  </div>
+</div>
