@@ -51,9 +51,17 @@
       </div>
     </div>
     <div class="col-md-4">
-      <div>
-        <%= form.label :absent_student_ids, style: "display: block" %>
-        <%= form.text_field :absent_student_ids %>
+      <%= form.label :absent_students, style: "display: block" %>
+      <div data-controller="students">
+        <div class="progress-absent-students" data-students-target="absentStudentDiv">
+        </div>
+        <div class="my-5">
+          <%= text_field :search, :search, class: "general-input-styles", placeholder: "Search Student Name",
+          data: { searchpath: json_search_students_path(subject_id: @subject.id),
+          action: "input->students#search" } %>
+        </div>
+        <div class="search-results" data-students-target="searchResults">
+        </div>
       </div>
     </div>
     <%= form.submit %>
