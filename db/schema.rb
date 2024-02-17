@@ -112,7 +112,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_15_133639) do
     t.bigint "term_id", null: false
     t.text "topics", default: [], array: true
     t.time "duration"
-    t.text "absent_student_ids", default: [], array: true
+    t.text "absent_students", default: [], array: true
     t.string "academic_year", null: false
     t.integer "seq_num", null: false
     t.datetime "created_at", null: false
