@@ -27,6 +27,10 @@ Rails.application.routes.draw do
     end
   end
   resources :students do
+    collection do
+      get :json_search
+    end
+
     member do
       put :update_photo
     end
