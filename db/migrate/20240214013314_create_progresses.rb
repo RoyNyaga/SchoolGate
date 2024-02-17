@@ -7,7 +7,7 @@ class CreateProgresses < ActiveRecord::Migration[7.1]
       t.references :term, null: false, foreign_key: true
       t.text :topics, array: true, default: []
       t.time :duration
-      t.text :absent_student_ids, array: true, default: []
+      t.text :absent_students, array: true, default: []
       t.string :academic_year, null: false
       t.integer :seq_num, null: false
 

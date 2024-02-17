@@ -3,14 +3,12 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="progresses"
 export default class extends Controller {
   connect() {
-    console.log("it has been connected")
   }
 
   addTopicToForm = (e) => {
     const title = e.target.getAttribute("data-topic-title")
     const id = e.target.getAttribute("data-topic-id")
     const topicToBeAdded = this.generateTopicFormElement(title, id)
-    console.log("topic to be added", topicToBeAdded)
     // Creating a temporary div to hold the generated HTML
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = topicToBeAdded;
@@ -23,7 +21,7 @@ export default class extends Controller {
       }
     }
     const parentDiv = document.querySelector(".added-topics-wrapper")
-    console.log("parent div", parentDiv)
+
     parentDiv.appendChild(generatedElement);
   }
 
