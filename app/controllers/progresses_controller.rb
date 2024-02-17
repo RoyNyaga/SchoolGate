@@ -72,6 +72,6 @@ class ProgressesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def progress_params
-    params.require(:progress).permit(:school_id, :subject_id, :teacher_id, :topics, :duration, :term_id, :absent_student_ids, :academic_year, :seq_num)
+    params.require(:progress).permit(:school_id, :subject_id, :teacher_id, :duration, :term_id, :academic_year, :seq_num, topics: [:id, :progress], absent_students: [:id, :full_name])
   end
 end
