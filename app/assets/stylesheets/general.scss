@@ -57,6 +57,15 @@ label{
   font-size: 1.3em;
 }
 
+.thump-up-alert{
+  font-size: 1.3em;
+}
+
+.progress-student-select{
+  padding: 5px;
+  background-color: orange;
+}
+
 @keyframes appear-then-fade {
   0%, 100% {
     opacity:0
@@ -64,6 +73,10 @@ label{
   5%, 60% {
     opacity:1
   }
+}
+
+.modal-notification-display {
+ 
 }
 
 .flash {
