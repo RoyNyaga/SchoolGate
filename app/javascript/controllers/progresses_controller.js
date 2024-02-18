@@ -10,6 +10,8 @@ export default class extends Controller {
     const topicIds = addedTopics.map(student => student.getAttribute('data-topicid'));
     const title = e.target.getAttribute("data-topic-title")
     const id = e.target.getAttribute("data-topic-id")
+    const thumpUpAlertId = e.target.getAttribute("data-topic-thumpalertid")
+    const thumpUpElement = document.getElementById(thumpUpAlertId)
     if (!topicIds.includes(id)) {
       const topicToBeAdded = this.generateTopicFormElement(title, id)
       // Creating a temporary div to hold the generated HTML
@@ -26,6 +28,11 @@ export default class extends Controller {
       const parentDiv = document.querySelector(".added-topics-wrapper")
 
       parentDiv.appendChild(generatedElement);
+      // trigger thump up alert
+      thumpUpElement.classList.toggle('d-none');
+      setTimeout(() => {
+        thumpUpElement.classList.toggle('d-none');
+      }, 1000);
     }
 
   }

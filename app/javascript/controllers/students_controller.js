@@ -69,6 +69,10 @@ export default class extends Controller {
       }
 
       this.absentStudentDivTarget.appendChild(generatedElement)
+      e.target.classList.add("progress-student-select")
+      setTimeout(() => {
+        e.target.classList.remove("progress-student-select")
+      }, 1000);
     }
   }
 

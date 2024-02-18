@@ -3,5 +3,6 @@
   <p data-action="click->progresses#addTopicToForm"
     data-topic-id="<%= topic.id %>"
     data-topic-title="<%= topic.title %>"
-    >Select</p>
+    data-topic-thumpalertid="thump_alert_topic_<%= topic.id %>"
+    >Select <span class="thump-up-alert d-none" id="thump_alert_topic_<%= topic.id %>">👍</span></p>
 </div>
