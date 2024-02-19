@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_18_214321) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_19_012850) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "absences", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "student_id", null: false
+    t.bigint "progress_id", null: false
+    t.bigint "term_id", null: false
+    t.string "academic_year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["progress_id"], name: "index_absences_on_progress_id"
+    t.index ["school_id"], name: "index_absences_on_school_id"
+    t.index ["student_id"], name: "index_absences_on_student_id"
+    t.index ["term_id"], name: "index_absences_on_term_id"
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -283,6 +297,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_18_214321) do
     t.index ["teacher_id"], name: "index_workings_on_teacher_id"
   end
 
+  add_foreign_key "absences", "progresses"
+  add_foreign_key "absences", "schools"
+  add_foreign_key "absences", "students"
+  add_foreign_key "absences", "terms"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "curriculums", "school_classes"
