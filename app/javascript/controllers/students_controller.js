@@ -43,7 +43,7 @@ export default class extends Controller {
       <input autocomplete="off" type="hidden" name="progress[absent_students][][id]" 
       value=${studentId}">
       <input autocomplete="off" type="hidden" name="progress[absent_students][][full_name]" 
-      value=${fullName}>
+      value="${fullName}">
     </div>
     `
   }
