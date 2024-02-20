@@ -5,6 +5,8 @@
     </div>
     <div class="col-md-8">
       <%= link_to "Add Progress", new_progress_path(subject_id: @subject.id) %>
+      <br>
+      <%= link_to "View Progress", progresses_teacher_path(current_teacher)%>
     </div>
   </div>
   <div class="row">
