@@ -26,14 +26,18 @@ class ProgressesController < ApplicationController
 
   # POST /progresses or /progresses.json
   def create
-    binding.break
     @progress = Progress.new(progress_params)
 
     respond_to do |format|
       if @progress.save
+        topic_ids = Progress.string_to_hash_arr(@progress.topics).map { |t| t["id"].to_i }
+        Progress.update_curriculum(topic_ids)
         format.html { redirect_to progress_url(@progress), notice: "Progress was successfully created." }
         format.json { render :show, status: :created, location: @progress }
       else
+        @subject = Subject.find(@progress.subject_id)
+        @curriculums = Curriculum.where(subject_id: @subject.id, teacher_id: current_teacher.id,
+                                        academic_year: Curriculum.generate_current_academic_year)
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @progress.errors, status: :unprocessable_entity }
       end
