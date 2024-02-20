@@ -45,6 +45,7 @@ Rails.application.routes.draw do
 
     member do
       put :update_photo
+      get :progresses
     end
   end
   get "pages/home"

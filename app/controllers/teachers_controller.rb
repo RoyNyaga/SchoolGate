@@ -26,6 +26,10 @@ class TeachersController < ApplicationController
     end
   end
 
+  def progresses
+    @progresses = current_teacher.progresses
+  end
+
   private
 
   def set_teacher
