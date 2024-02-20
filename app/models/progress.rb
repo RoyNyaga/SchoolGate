@@ -35,7 +35,7 @@ class Progress < ApplicationRecord
     topics = Progress.string_to_hash_arr(self.topics)
     topics.each do |t|
       topic = Topic.find(t["id"].to_i)
-      # using update_columns to avoid calling call methods so as to avoid issues.
+      # using update_columns to avoid calling callback methods so as to avoid issues.
       topic.update_columns(progress: t["progress"].to_i)
     end
   end
@@ -47,7 +47,6 @@ class Progress < ApplicationRecord
         { school_id: self.school_id, student_id: s["id"].to_i, progress_id: self.id, term_id: self.term_id,
           academic_year: self.academic_year }
       end
-      binding.break
       Absence.insert_all absences
     end
   end
