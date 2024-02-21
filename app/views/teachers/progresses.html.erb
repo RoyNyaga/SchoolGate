@@ -1,0 +1,26 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3 px-4">
+      <div class="row dark-blue-section-div">
+        <div class="col-2">
+          <span class="icon-small-size icon-white"><%= fa_icon("clock") %></span>
+        </div>
+        <div class="col-10">
+          <p class="dashboard-normal-font-size">Total Time</p>
+          <h5>
+            <%= @total_hours_mins_time[:hours] %> Hrs : 
+            <%= @total_hours_mins_time[:mins] %> Mins
+          </h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 px-4">
+      <div class="row dark-blue-section-div">
+        <div class="col-2"></div>
+        <div class="col-10">
+          <p class="dashboard-normal-font-size">Total Time</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

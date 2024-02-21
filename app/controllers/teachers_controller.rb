@@ -28,6 +28,8 @@ class TeachersController < ApplicationController
 
   def progresses
     @progresses = current_teacher.progresses
+    @total_hours_mins_time = Progress.calc_total_time(@progresses)
+    render layout: "school_layout"
   end
 
   private
