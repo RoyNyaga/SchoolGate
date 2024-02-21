@@ -20,6 +20,19 @@ class Progress < ApplicationRecord
     Curriculum.update_completion_state(main_topic_ids)
   end
 
+  def self.calc_total_time(progresses)
+    duration = { hours: 0, mins: 0 }
+    progresses.each do |progress|
+      duration[:hours] += progress.duration.hour if progress.duration.present?
+      duration[:mins] += progress.duration.min if progress.duration.present?
+    end
+    mins_to_hours = duration[:mins] / 60
+    remaining_mins = duration[:mins] % 60
+    duration[:hours] += mins_to_hours
+    duration[:mins] = remaining_mins
+    duration
+  end
+
   private
 
   def topics_presence
