@@ -1,9 +1,11 @@
 <%= turbo_frame_tag custom_id_generator("edit_frame", record: @curriculum) do %>
-  <div> 
-    <%= render partial: "curriculums/form", locals: { curriculum: @curriculum, subject: @curriculum.subject } %>
-  </div>
-  <div class="d-flex">
-    <%= link_to "Cancel", for_teacher_subject_path(@curriculum.subject) %>
-    <%=button_to "Delete Instead", curriculum_path(@curriculum), method: :delete %>
+  <div class="p-3 light-grey-card my-2">
+    <div>
+      <%= render partial: "curriculums/form", locals: { curriculum: @curriculum, subject: @curriculum.subject } %>
+    </div>
+    <div class="d-flex justify-content-between my-2 align-items-center">
+      <%= link_to "Cancel", for_teacher_subject_path(@curriculum.subject), class: "edit-link" %>
+      <%= button_to "Delete", curriculum_path(@curriculum), method: :delete, class: "delete-text-link" %>
+    </div>
   </div>
 <% end %>
