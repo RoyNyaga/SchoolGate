@@ -1,21 +1,23 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <%= render @subject %>
     </div>
-    <div class="col-md-8">
-      <%= link_to "Add Progress", new_progress_path(subject_id: @subject.id) %>
-      <br>
-      <%= link_to "View Progress", progresses_teacher_path(current_teacher)%>
+    <div class="col-md-9">
+      <div class="white-section-div">
+        <p class="text-center"><%= link_to "Add Progress", new_progress_path(subject_id: @subject.id), class: "general-link" %></p>
+        <%= render partial: "teachers/progress_table", locals: { progresses: @current_week_progresses, for_current_user: true } %>
+        <p class="text-center"><%= link_to "View Progresses", progresses_teacher_path(current_teacher), class: "general-link" %></p>
+      </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row my-5">
     <div class="col-md-4">
-      <div class="section-div">
+      <div class="white-section-div"">
         <div id="modal-form-section">
           <%= render partial: "curriculums/form", 
           layout: "layouts/modal_layout", 
-          locals: { curriculum: Curriculum.new, subject: @subject, action_name: "Save", action_title: "Create A New Curriculum",
+          locals: { curriculum: Curriculum.new, subject: @subject, action_name: "New Curriculum", action_title: "Create A New Curriculum",
           modal_id: generate_modal_id("curriculum_create_form") }%>
         </div>
         <div id="curriculum-list">
