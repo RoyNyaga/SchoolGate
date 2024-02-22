@@ -1,7 +1,7 @@
  <%= turbo_frame_tag custom_id_generator("update", record: @main_topic) do %>
   <%= render "form", main_topic: @main_topic %>
-  <div class="d-flex">
-    <%= link_to "Cancel", for_teacher_subject_path(@main_topic.subject) %>
-    <%=button_to "Delete Instead", main_topic_path(@main_topic), method: :delete %>
+  <div class="d-flex justify-content-between align-items-center my-2">
+    <%= link_to "Cancel", for_teacher_subject_path(@main_topic.subject), class: "edit-link" %>
+    <%=button_to "Delete", main_topic_path(@main_topic), method: :delete, class: "delete-text-link" %>
   </div>
 <% end %>
