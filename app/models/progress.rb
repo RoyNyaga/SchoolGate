@@ -1,5 +1,6 @@
 class Progress < ApplicationRecord
   include DataTrans
+  include TimeManipulation
 
   belongs_to :school
   belongs_to :subject
@@ -7,6 +8,7 @@ class Progress < ApplicationRecord
   belongs_to :term
   belongs_to :school_class
 
+  validates :duration, presence: true
   validate :topics_presence
 
   enum seq_num: { first_sequence: 1, second_sequence: 2, third_sequence: 3, forth_sequence: 4, fifth_sequence: 5, sith_sequence: 6 }
@@ -31,6 +33,10 @@ class Progress < ApplicationRecord
     duration[:hours] += mins_to_hours
     duration[:mins] = remaining_mins
     duration
+  end
+
+  def hours_mins_taught
+    "#{duration.hour} Hrs : #{duration.min} Mins" if duration
   end
 
   private
