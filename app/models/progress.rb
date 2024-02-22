@@ -8,7 +8,6 @@ class Progress < ApplicationRecord
   belongs_to :term
   belongs_to :school_class
 
-  validates :duration, presence: true
   validate :topics_presence
 
   enum seq_num: { first_sequence: 1, second_sequence: 2, third_sequence: 3, forth_sequence: 4, fifth_sequence: 5, sith_sequence: 6 }
@@ -27,8 +26,8 @@ class Progress < ApplicationRecord
   def self.calc_total_time(progresses)
     duration = { hours: 0, mins: 0 }
     progresses.each do |progress|
-      duration[:hours] += progress.duration.hour if progress.duration.present?
-      duration[:mins] += progress.duration.min if progress.duration.present?
+      duration[:hours] += progress.hours
+      duration[:mins] += progress.mins
     end
     mins_to_hours = duration[:mins] / 60
     remaining_mins = duration[:mins] % 60
@@ -38,7 +37,7 @@ class Progress < ApplicationRecord
   end
 
   def hours_mins_taught
-    "#{duration.hour} Hrs : #{duration.min} Mins" if duration
+    "#{hours} Hrs : #{mins} Mins"
   end
 
   private
