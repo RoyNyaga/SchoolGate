@@ -1,3 +1,3 @@
 <%= turbo_frame_tag "main_topic_new_frame" do %>
-  <%= link_to "Add New Topic", new_main_topic_path(subject_id: subject.id, curriculum_id: curriculum.id) %>
+  <%= link_to "Add New Chapter", new_main_topic_path(subject_id: subject.id, curriculum_id: curriculum.id), class: "general-link" %>
 <% end %>
