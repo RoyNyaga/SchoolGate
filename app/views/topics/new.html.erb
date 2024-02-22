@@ -1,7 +1,7 @@
 <%= turbo_frame_tag custom_id_generator("new_topic_page", record: @main_topic) do %>
   <div class="row">
     <div class="col-md-8 mx-auto">
-      <%= link_to "Cancel", for_teacher_subject_path(@subject) %>
+      <%= link_to "Cancel", for_teacher_subject_path(@subject), class: "edit-link" %>
       <%= render partial: "topics/form", locals: { topic: @topic, subject: @subject, main_topic: @main_topic } %>
     </div>
   </div>

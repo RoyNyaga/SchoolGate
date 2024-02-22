@@ -1,9 +1,11 @@
 <%= turbo_frame_tag dom_id(@topic) do %>
-  <div>
-    <%= render partial: "topics/form", locals: { topic: @topic, subject: @topic.subject, main_topic: @topic.main_topic } %>
-  </div>
-  <div class="d-flex">
-    <%= link_to "Cancel", for_teacher_subject_path(@topic.subject) %>
-    <%=button_to "Delete Instead", topic_path(@topic), method: :delete %>
+  <div class="light-grey-card my-3 py-3">
+    <div>
+      <%= render partial: "topics/form", locals: { topic: @topic, subject: @topic.subject, main_topic: @topic.main_topic } %>
+    </div>
+    <div class="d-flex justify-content-between align-items-center">
+      <%= link_to "Cancel", for_teacher_subject_path(@topic.subject), class: "edit-link" %>
+      <%=button_to "Delete Instead", topic_path(@topic), method: :delete, class: "delete-text-link" %>
+    </div>
   </div>
 <% end %>
