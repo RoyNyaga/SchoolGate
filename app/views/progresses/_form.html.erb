@@ -32,8 +32,18 @@
         <%= form.select :seq_num, Sequence.seq_nums.map { |k,v| [k.humanize, k] }, {include_blank: 'Select Sequence Number'}, { class: "general-input-styles" } %>
       </div>
       <div>
-        <%= form.label :duration, style: "display: block" %>
-        <%= form.time_field :duration, class: "general-input-styles" %>
+        <%= form.label :period_duration, style: "display: block" %>
+        <div class="row px-3">
+          <div class="col-5">
+            <%= form.label :hours %>
+            <%= form.number_field :hours, class: "general-input-styles" %>
+          </div>
+          <div class="col-1"></div>
+          <div class="col-5">
+            <%= form.label :minutes %>
+            <%= form.number_field :mins, class: "general-input-styles" %>
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-md-4">
