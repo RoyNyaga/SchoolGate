@@ -15,6 +15,8 @@ class Progress < ApplicationRecord
 
   after_save :update_related_records
 
+  store_accessor :period_duration, :hours, :mins
+
   def self.update_curriculum(topic_ids)
     main_topics = MainTopic.joins(:topics).where(topics: { id: topic_ids }).distinct
     MainTopic.update_completion_state(main_topics)
