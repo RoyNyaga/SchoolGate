@@ -1,8 +1,8 @@
 <%= turbo_frame_tag custom_id_generator("edit_frame", record: curriculum) do %>
-  <div class="d-flex justify-content-between"> 
-    <%= link_to "#{curriculum.title} - #{curriculum.academic_year}", "##{generate_drawer_id("preview", record: curriculum)}", data: { bs_toggle: "offcanvas" },
+  <div class="d-flex justify-content-between my-3">
+    <%= link_to "#{curriculum.title} - #{curriculum.academic_year}", "##{generate_drawer_id("preview", record: curriculum)}", class: "grey-link-text dashboard-normal-font-size", data: { bs_toggle: "offcanvas" },
      role: "button", aria: {controls: "#{generate_drawer_id("preview", record: curriculum)}_drawer"} %>
-    <%= link_to "Edit", edit_curriculum_path(curriculum) %>
+    <%= link_to "Edit", edit_curriculum_path(curriculum), class: "edit-link" %>
     <%= render partial: "curriculums/preview", layout: "layouts/drawer_layout", 
               locals: { curriculum: curriculum, subject: subject, title: "Manage This Curriculum", 
               item_id: generate_drawer_id("preview", record: curriculum) , position: "end", btn_text: "View", btn_visibility: false } %>
