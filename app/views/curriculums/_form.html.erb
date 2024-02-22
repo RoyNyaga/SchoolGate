@@ -29,14 +29,14 @@
     <% unless curriculum.persisted? %>
       <%= form.label :title, style: "display: block" %>
     <% end %>
-    <div class="d-flex">
+    <div class="d-flex align-items-center">
       <%= form.text_field :title, required: true, class: "general-input-styles" %>
-      <%= form.submit :save %>
+      <%= form.submit :save, class: "model-form-btn" %>
     </div>
   </div>
   <div>
     <%= form.label :academic_year %> -
-    <%= Curriculum.generate_current_academic_year  %>
+    <span class="text-color-grey-2"><%= Curriculum.generate_current_academic_year  %></span>
     <%= form.hidden_field :academic_year, value: Curriculum.generate_current_academic_year %>
   </div>
 <% end %>
