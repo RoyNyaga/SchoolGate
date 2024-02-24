@@ -10,9 +10,13 @@ class Student < ApplicationRecord
   after_create :create_fees
   before_save :set_full_name # this method is defined in the application_record
 
-  def sequence_mark_per_subject(marks)
-    mark = marks.find { |student| student["id"] == id.to_s }
+  def sequence_mark_per_subject(marks) # marks should be hashed
+    mark = get_mark_object(marks)
     mark["mark"] unless mark.nil?
+  end
+
+  def get_mark_object(marks)
+    marks.find { |student| student["id"] == id.to_s }
   end
 
   def rank_per_subject(marks)
