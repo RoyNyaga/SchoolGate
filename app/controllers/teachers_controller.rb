@@ -28,7 +28,7 @@ class TeachersController < ApplicationController
   end
 
   def progresses
-    @progresses = current_teacher.progresses
+    @progresses = current_teacher.progresses.where(school_id: current_school.id)
     @total_hours_mins_time = Progress.calc_total_time(@progresses)
     @topics_covered = @progresses.map { |p| p.topics.count }.sum
     @absentist_num = @progresses.map { |p| p.absent_students.count }.sum
