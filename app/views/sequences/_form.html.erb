@@ -47,6 +47,12 @@
           <td><%= num %></td>
           <td><%= student.full_name %></td>
           <td><%= generate_student_marks_input(form, sequence, student) %></td>
+          <td>
+            <span>Enrolled</span>
+            <div>
+              <%= generate_is_enrolled_input(form, sequence, student) %>
+            </div>
+          </td>
         </tr>
         <% num += 1 %>
       <% end %>
