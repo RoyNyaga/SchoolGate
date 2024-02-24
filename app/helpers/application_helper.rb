@@ -63,4 +63,10 @@ module ApplicationHelper
       { name: "Manually Create", path: manually_create_report_cards_path },
     ]
   end
+
+  def current_teacher_subject_link_data
+    current_teacher.class_subjects.where(school_id: current_school.id).map do |c_s|
+      { name: c_s.name, path: for_teacher_subject_path(c_s) }
+    end
+  end
 end
