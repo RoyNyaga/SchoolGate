@@ -13,6 +13,6 @@
   <%= render partial: "shared/sidebar/sidebar_link_component", locals: { main_icon_class: "camera-retro",
   main_link_text: "School Fees", main_link_path: fees_path } %>
   <hr>
-  <%= render partial: "shared/sidebar/sidebar_link_component", locals: { main_icon_class: "camera-retro",
-  main_link_text: "Your Subjects", main_link_path: subjects_teachers_path } %>
+  <%= render partial: "shared/sidebar/sidebar_link_dropdown_component", locals: { main_icon_class: "camera-retro",
+  main_link_text: "Your Subjects", main_link_path: subjects_teachers_path, dropdown_links: current_teacher_subject_link_data } %>
 </div>
