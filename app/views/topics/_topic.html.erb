@@ -1,6 +1,6 @@
 <%= turbo_frame_tag dom_id(topic) do %>
   <div class="d-flex justify-content-between align-items-center topic-items">
-    <p><%= topic.title %> - p -</p>
+    <p><span><%= topic.title %></span>  <span><%= topic_progress_icon(topic) %></span></p>
     <p><%= link_to "edit", edit_topic_path(topic), class: "general-link" %></p>
   </div>
 <% end %>
