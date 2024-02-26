@@ -69,4 +69,12 @@ module ApplicationHelper
       { name: c_s.name, path: for_teacher_subject_path(c_s) }
     end
   end
+
+  def topic_progress_icon(topic)
+    if topic.in_progress?
+      fas_icon("check", class: "text-warning")
+    elsif topic.completed?
+      fas_icon("check-double", class: "text-success")
+    end
+  end
 end
