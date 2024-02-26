@@ -3,7 +3,7 @@
     <%= turbo_frame_tag custom_id_generator("update", record: main_topic) do %>
       <%= link_to "Edit", edit_main_topic_path(main_topic), class: "general-link" %>
       <div class="accordion-button" data-bs-toggle="collapse" data-bs-target="#<%= generate_accordion_id("child", record: main_topic) %>">
-        <span> <%= main_topic.title %> </span>
+        <span> <%= main_topic.title %> </span> <span><%= main_topic.percent_complete %>% complete</span>
       </div>
     <% end %>
   </h2>
