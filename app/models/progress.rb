@@ -7,12 +7,14 @@ class Progress < ApplicationRecord
   belongs_to :teacher
   belongs_to :term
   belongs_to :school_class
+  has_many :absences, dependent: :destroy
 
   validate :topics_presence
 
   enum seq_num: { first_sequence: 1, second_sequence: 2, third_sequence: 3, forth_sequence: 4, fifth_sequence: 5, sith_sequence: 6 }
 
   after_save :update_related_records
+  before_save :duration_to_int
 
   store_accessor :period_duration, :hours, :mins
 
@@ -49,6 +51,11 @@ class Progress < ApplicationRecord
   def update_related_records
     update_topic_progresses
     create_absences
+  end
+
+  def duration_to_int
+    self.hours = hours.to_i if self.hours.present?
+    self.mins = mins.to_i if self.mins.present?
   end
 
   def update_topic_progresses
