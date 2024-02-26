@@ -1,4 +1,5 @@
 class SequencesController < ApplicationController
+  layout "school_layout"
   before_action :check_for_current_school
   before_action :set_sequence, only: %i[ show edit update destroy ]
 
