@@ -8,8 +8,5 @@
         layout: "layouts/drawer_layout", 
         locals: { sequence: sequence, title: sequence.seq_title, item_id: generate_drawer_id("preview_sequence", record: sequence), position: "end", btn_text: "View", btn_visibility: true }%>
     <%= link_to "Edit", edit_sequence_path(sequence), class: "general-link" %>
-    <%#= render partial: "curriculums/preview", layout: "layouts/drawer_layout", 
-              locals: { curriculum: curriculum, subject: subject, title: "Manage This Curriculum", 
-              item_id: generate_drawer_id("preview", record: curriculum) , position: "end", btn_text: "View", btn_visibility: false } %>
   </div>
 </div>
