@@ -7,7 +7,10 @@ class Student < ApplicationRecord
   has_many :report_cards
   has_many :fees, dependent: :destroy
 
-  after_create :create_fees
+  before_create do
+    generate_matricule
+    create_fees
+  end
   before_save :set_full_name # this method is defined in the application_record
 
   def sequence_mark_per_subject(marks) # marks should be hashed
@@ -35,8 +38,15 @@ class Student < ApplicationRecord
     fees.create(school_id: school_id, school_class_id: school_class_id, academic_year: Student.generate_current_academic_year)
   end
 
-  private
+  def student_number_code
+    "%04d" % school.students.count # returns number in a thousand format
+  end
+
+  def current_year_abbreviation
+    Time.now.strftime("%y")
+  end
 
   def generate_matricule
+    "#{current_year_abbreviation}#{school.school_identifier}#{student_number_code}".upcase
   end
 end
