@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :progresses
+  resources :progresses do
+    member do
+      get :more_details
+    end
+  end
   resources :topics
   resources :main_topics
   resources :curriculums
