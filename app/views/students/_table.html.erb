@@ -1,0 +1,23 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">ID num</th>
+      <th scope="col">class</th>
+      <th scope="col">Birth</th>
+      <th scope="col">Age</th>
+      <th scope="col">St Phone</th>
+      <th scope="col">Other Contacts</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @students.each do |student| %>
+      <tr>
+        <td><%= student.two_names %></td>
+        <td><%= student.school_class.name %></td>
+        <td><%= student.date_of_birth %></td>
+        <td>Here</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
