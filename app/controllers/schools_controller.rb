@@ -87,6 +87,14 @@ class SchoolsController < ApplicationController
     @workings = current_school.workings
   end
 
+  def progresses
+    week_start_and_end_dates = Progress.generate_start_and_end_week_dates(Time.now)
+    @progresses = current_school.progresses.where("created_at >= '#{week_start_and_end_dates[:start]}' AND created_at <= '#{week_start_and_end_dates[:end]}'")
+    @total_hours_mins_time = Progress.calc_total_time(@progresses)
+    @topics_covered = @progresses.map { |p| p.topics.count }.sum
+    @absentist_num = @progresses.map { |p| p.absent_students.count }.sum
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

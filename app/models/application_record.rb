@@ -1,6 +1,10 @@
 class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 
+  def two_names
+    full_name.split(" ")[0..1].join(" ")
+  end
+
   private
 
   def set_full_name

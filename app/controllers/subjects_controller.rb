@@ -64,7 +64,7 @@ class SubjectsController < ApplicationController
     @sequences = current_teacher.sequences.where(subject_id: @subject.id)
     @curriculums = @current_teacher.curriculums.where(subject_id: @subject.id)
     week_start_and_end_dates = Progress.generate_start_and_end_week_dates(Time.now)
-    @current_week_progresses = current_teacher.progresses.where("created_at >= '#{week_start_and_end_dates[:start]}' AND created_at <= '#{week_start_and_end_dates[:end]}'")
+    @current_week_progresses = current_teacher.progresses.where("created_at >= '#{week_start_and_end_dates[:start]}' AND created_at <= '#{week_start_and_end_dates[:end]}' AND school_id = #{current_school.id}")
     @current_week_hours_covered = Progress.calc_total_time(@current_week_progresses)
   end
 

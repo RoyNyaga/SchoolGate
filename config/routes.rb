@@ -70,6 +70,7 @@ Rails.application.routes.draw do
       get :invitations
       get :contracts
       get :permissions
+      get :progresses
     end
   end
 

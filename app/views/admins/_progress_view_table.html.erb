@@ -1,0 +1,36 @@
+<table class="table table-hover">
+  <thead class="table-head-styles">
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Teacher</th>
+      <th scope="col">Subject</th>
+      <th scope="col" class="d-none d-md-table-cell">Duration</th>
+      <th scope="col" class="d-none d-md-table-cell">Absences</th>
+      <th scope="col" class="d-none d-md-table-cell">Topics</th>
+      <th scope="col" class="d-none d-md-table-cell">Academic Y</th>
+      <th scope="col" class="d-none d-md-table-cell">Term</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% progresses.each do |progress| %>
+      <tr class="progress-table-rows">
+        <td class="table-row-data">
+          <%= link_to progress.readable_date(with_time: true), "##{generate_drawer_id("preview", record: progress)}", 
+            class: "grey-link-text dashboard-normal-font-size", data: { bs_toggle: "offcanvas" },
+            role: "button", aria: {controls: "#{generate_drawer_id("preview", record: progress)}_drawer"} %>
+        </td>
+        <td class="table-row-data"><%= progress.teacher.two_names %></td>
+        <td class="table-row-data"><%= progress.subject.name %></td>
+        <td class="table-row-data"><%= progress.hours_mins_taught %></td>
+        <td class="table-row-data"><%= progress.absent_students.size %></td>
+        <td class="table-row-data d-none d-md-table-cell"><%= progress.topics.size %></td>
+        <td class="table-row-data d-none d-md-table-cell"><%= progress.academic_year %></td>
+        <td class="table-row-data d-none d-md-table-cell"><%= progress.term.term_type %></td>
+      </tr>
+      <%= render partial: "progresses/preview", layout: "layouts/drawer_layout", 
+              locals: { progress: progress, title: progress.readable_date(with_time: true), 
+              item_id: generate_drawer_id("preview", record: progress) , position: "end", 
+              btn_text: "View", btn_visibility: false, hide_edit_action: true } %>
+    <% end %>
+  </tbody>
+</table>
