@@ -16,6 +16,7 @@ class Progress < ApplicationRecord
   after_save :update_related_records
   before_save :duration_to_int
 
+  delegate :name, to: :subject, prefix: true #subject_name
   store_accessor :period_duration, :hours, :mins
 
   def self.update_curriculum(topic_ids)
@@ -68,13 +69,14 @@ class Progress < ApplicationRecord
   end
 
   def create_absences
-    if created_at == updated_at # ensuring that we create absences only when a progress is beeing created
-      students = Progress.string_to_hash_arr(self.absent_students)
-      absences = students.map do |s|
+    absences.destroy_all # re-initializing absences
+    students = Progress.string_to_hash_arr(self.absent_students)
+    if students.present?
+      absences_to_create = students.map do |s|
         { school_id: self.school_id, student_id: s["id"].to_i, progress_id: self.id, term_id: self.term_id,
           academic_year: self.academic_year }
       end
-      Absence.insert_all absences
+      Absence.insert_all absences_to_create
     end
   end
 end
