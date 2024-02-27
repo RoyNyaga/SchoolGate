@@ -1,4 +1,6 @@
 <div id="curriculum-preview-wrapper">
+  <span class="text-white percent-complete-badge text-center dashboard-normal-font-size <%= generate_progress_background(curriculum.percent_complete) %>">
+    Curriculum progress <%= curriculum.percent_complete %> %</span>
   <% main_topics = curriculum.main_topics %>
   <div class="accordion" id=<%= generate_accordion_id("parent_#{curriculum.id}") %>>
     <% main_topics.each do |main_topic| %>
