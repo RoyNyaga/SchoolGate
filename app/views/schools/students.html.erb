@@ -1,29 +1,8 @@
 <div id="school-main-div">
-  <%= render "shared/school_manager_navbar" %>
   <div>
     <%= render partial: "students/form", 
         layout: "layouts/modal_layout", 
         locals: { student: @student, action_name: "Add Student", action_title: "Create A New Student",
          modal_id: generate_modal_id("students_create_form") }%>
   </div>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">full names</th>
-        <th scope="col">class</th>
-        <th scope="col">Date of birth</th>
-        <th scope="col">Desciplinary Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @students.each do |student| %>
-        <tr>
-          <td><%= student.full_name %></td>
-          <td><%= student.school_class.name %></td>
-          <td><%= student.date_of_birth %></td>
-          <td>Here</td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
 </div>
