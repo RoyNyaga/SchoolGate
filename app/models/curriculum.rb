@@ -10,15 +10,15 @@ class Curriculum < ApplicationRecord
   validates :title, presence: true
 
   def self.update_completion_state(main_topic_ids)
+    # binding.break
     curriculums = Curriculum.joins(:main_topics).where(main_topics: { id: main_topic_ids }).distinct
     curriculums.each do |curriculum|
-      curriculum_maintopic_group_data = curriculum.main_topics.group(:is_complete).count
-      total_main_topic = curriculum_maintopic_group_data.values.sum
-      if curriculum_maintopic_group_data[true].present? && curriculum_maintopic_group_data[true] > 0
-        curriculum_percent_complete = (curriculum_maintopic_group_data[true] / total_main_topic).to_f * 100
-
-        curriculum.update(is_complete: curriculum_percent_complete >= 100,
-                          percent_complete: curriculum_percent_complete)
+      main_topics = curriculum.main_topics
+      main_topics_percent_complete_sum = main_topics.map(&:percent_complete).sum
+      if main_topics_percent_complete_sum > 0
+        average_percent_completion = main_topics_percent_complete_sum / main_topics.count
+        curriculum.update(is_complete: average_percent_completion >= 100,
+                          percent_complete: average_percent_completion)
       end
     end
   end

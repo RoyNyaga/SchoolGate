@@ -30,8 +30,10 @@ export default class extends Controller {
       });
   }
 
-  remove = () => {
-    console.log("Remove was triggered")
+  remove = (e) => {
+    const removeStudentId = e.target.getAttribute("data-addedstudentid")
+    const addStudentDiv = document.getElementById(removeStudentId)
+    addStudentDiv.remove()
   }
 
   template = (studentId, fullName) => {
