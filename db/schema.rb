@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_27_222637) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_27_225050) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -179,7 +179,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_27_222637) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.json "school_fees_settings", default: {}
-    t.jsonb "student_id_settings"
+    t.jsonb "student_id_settings", default: {}
     t.index ["teacher_id"], name: "index_schools_on_teacher_id"
   end
 
@@ -216,7 +216,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_27_222637) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "town"
-    t.string "unique_identification"
+    t.string "matricule"
     t.string "portal_code"
     t.string "first_name"
     t.string "last_name"
