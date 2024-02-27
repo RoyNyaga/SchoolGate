@@ -52,6 +52,11 @@
         <p class="text-center p-0 m-0">You can select Topics from the curriculum(s) listed bellow</p>
       </div>
       <div class="added-topics-wrapper">
+        <% if progress.persisted? %>
+          <% topics.each do |topic| %>
+            <%= render partial: "topic_edit_input", locals: { topic: topic, form: form }%>
+          <% end %>
+        <% end %>
       </div>
       <div class="curriculum-select">
         <% @curriculums.each do |curriculum| %>
@@ -66,6 +71,11 @@
       <%= form.label :absent_students, style: "display: block" %>
       <div data-controller="students">
         <div class="progress-absent-students" data-students-target="absentStudentDiv">
+          <% if progress.persisted? %>
+            <% Progress.string_to_hash_arr(progress.absent_students).each do |student| %>
+              <%= render partial: "absent_student_input", locals: { student: student } %>
+            <% end %>
+          <% end %>
         </div>
         <div class="my-5">
           <%= text_field :search, :search, class: "general-input-styles", placeholder: "Search Student Name",
