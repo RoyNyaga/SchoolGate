@@ -1,0 +1,19 @@
+<div>
+  <div class="my-3">
+    <%= link_to "Edit", edit_progress_path(progress), class: "general-link" %>
+  </div>
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <p class="dashboard-normal-font-size d-flex justify-content-between"><span>Teacher:</span> <span class="text-color-grey-2"><%= progress.teacher.full_name %></span></p>
+      <p class="dashboard-normal-font-size d-flex justify-content-between"><span>Subject:</span>  <span class="text-color-grey-2"><%= progress.subject_name %></span></p>
+      <p class="dashboard-normal-font-size d-flex justify-content-between"><span>Class:</span>  <span class="text-color-grey-2"><%= progress.school_class.name %></span></p>
+      <p class="dashboard-normal-font-size d-flex justify-content-between"><span>Sequence:</span>  <span class="text-color-grey-2"><%= progress.seq_num %></span></p>
+      <p class="dashboard-normal-font-size d-flex justify-content-between"><span>Term:</span>  <span class="text-color-grey-2"><%= progress.term.term_type %></span></p>
+      <p class="dashboard-normal-font-size d-flex justify-content-between"><span>Academic Year:</span>  <span class="text-color-grey-2"><%= progress.academic_year %></span></p>
+      <h5 class="text-center my-2">Duration: <span class="text-color-grey-2"><%= progress.hours_mins_taught %></span></h5>
+    </div>
+  </div>
+  <%= turbo_frame_tag custom_id_generator("more_detail", record: progress) do %>
+    <%= link_to "more details", more_details_progress_path(progress) %>
+  <% end %>
+</div>

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Main topics</h1>
+
+<div id="main_topics">
+  <% @main_topics.each do |main_topic| %>
+    <%= render main_topic %>
+    <p>
+      <%= link_to "Show this main topic", main_topic %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New main topic", new_main_topic_path %>

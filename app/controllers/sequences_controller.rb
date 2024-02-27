@@ -1,4 +1,5 @@
 class SequencesController < ApplicationController
+  layout "school_layout"
   before_action :check_for_current_school
   before_action :set_sequence, only: %i[ show edit update destroy ]
 
@@ -42,6 +43,7 @@ class SequencesController < ApplicationController
   # PATCH/PUT /sequences/1 or /sequences/1.json
   def update
     respond_to do |format|
+      binding.break
       if @sequence.update(sequence_params)
         format.html { redirect_to sequence_url(@sequence), notice: "Sequence was successfully updated." }
         format.json { render :show, status: :ok, location: @sequence }
@@ -72,6 +74,6 @@ class SequencesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def sequence_params
     params.require(:sequence).permit(:school_id, :school_class_id, :term_id, :teacher_id, :seq_num, :subject_id,
-                                     :academic_year_start, :academic_year_end, marks: [:id, :name, :mark])
+                                     :academic_year_start, :academic_year_end, marks: [:id, :name, :mark, :is_enrolled])
   end
 end

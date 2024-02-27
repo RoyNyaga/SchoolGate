@@ -1,0 +1,7 @@
+<h1>Editing progress</h1>
+<%= render partial: "form", locals: { progress: @progress, topics: @topics } %>
+<br>
+<div>
+  <%= link_to "Show this progress", @progress %> |
+  <%= link_to "Back to progresses", progresses_path %>
+</div>

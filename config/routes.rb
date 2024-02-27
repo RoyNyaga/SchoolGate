@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  resources :progresses do
+    member do
+      get :more_details
+    end
+  end
+  resources :topics
+  resources :main_topics
+  resources :curriculums
   resources :fees do
     collection do
       get :statistics
@@ -23,6 +31,10 @@ Rails.application.routes.draw do
     end
   end
   resources :students do
+    collection do
+      get :json_search
+    end
+
     member do
       put :update_photo
     end
@@ -37,6 +49,7 @@ Rails.application.routes.draw do
 
     member do
       put :update_photo
+      get :progresses
     end
   end
   get "pages/home"

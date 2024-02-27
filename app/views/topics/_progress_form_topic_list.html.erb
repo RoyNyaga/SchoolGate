@@ -1,0 +1,7 @@
+<div>
+  <div id="<%= custom_id_generator("preview_main_topic_subtopic_list", record: main_topic) %>">
+    <% main_topic.topics.each do |topic| %>
+      <%= render partial: "topics/progress_form_topic", locals: { topic: topic } %>
+    <% end %>
+  </div>
+</div>

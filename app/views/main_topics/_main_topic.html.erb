@@ -1,0 +1,15 @@
+<div class="accordion-item" id="<%= custom_id_generator("item", record: main_topic) %>">
+  <h2 class="accordion-header">
+    <%= turbo_frame_tag custom_id_generator("update", record: main_topic) do %>
+      <%= link_to "Edit", edit_main_topic_path(main_topic), class: "general-link" %>
+      <div class="accordion-button" data-bs-toggle="collapse" data-bs-target="#<%= generate_accordion_id("child", record: main_topic) %>">
+        <span> <%= main_topic.title %> </span> <span class="percent-complete-badge <%= generate_progress_background(main_topic.percent_complete) %>"><%= main_topic.percent_complete.round(2) %> %</span>
+      </div>
+    <% end %>
+  </h2>
+  <div id=<%= generate_accordion_id("child", record: main_topic) %> class="accordion-collapse collapse" data-bs-parent="#<%= generate_accordion_id("parent_#{curriculum.id}") %>">
+    <div class="accordion-body">
+      <%= render partial: "topics/topic_list", locals: { subject: subject, main_topic: main_topic } %>
+    </div>
+  </div>
+</div>

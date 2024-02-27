@@ -2,19 +2,15 @@ body {
   font-family: 'Josefin Sans', sans-serif;
 }
 
-#school-layout-main-wrapper{
-  background: var(--main-light-color);
+.margin-zero {
+  margin: 0;
 }
 
-h1{
+h1 {
   color: white;
 }
 
-#school-main-div{
- 
-}
-
-.general-input-styles{
+.general-input-styles {
   font-family: 'Josefin Sans', sans-serif;
   width: 100%;
   height: 35px;
@@ -22,52 +18,194 @@ h1{
   background: #ffffff2a;
   border: 2px solid #022130;
   color: #022130;
-  font-size: 1.1em;
+  font-size: 16px;
   border-radius: 5px;
   margin-top: 7px;
 }
 
-label{
+label {
   color: #022130;
   font-family: 'Josefin Sans', sans-serif;
 }
 
-.general-btn{
-  background-color: #6d757d;
+.general-btn {
+  background-color: var(--button-grey-color);
   color: white;
   font-family: 'Josefin Sans', sans-serif;
+  font-size: var(--general-btn-font-size);
+  border: 2px solid var(--main-blue-color);
+  border-radius: 5px;
 }
 
-.general-btn:hover{
-  background-color: #222527;
+.general-btn:hover {
+  background-color: var(--main-blue-color);
 }
 
-.canvas-custom-class{
+.general-link {
+  background-color: var(--button-grey-color);
+  color: white;
+  font-family: 'Josefin Sans', sans-serif;
+  padding: var(--button-padding);
+  font-size: var(--general-btn-font-size);
+  text-decoration: none;
+  border: 2px solid var(--main-blue-color);
+  border-radius: 5px;
+}
+
+.general-link:hover {
+  background-color: var(--main-blue-color);
+}
+
+.grey-link-text {
+  color: var(--button-grey-color);
+}
+
+.grey-link-text:hover {
+  color: #40464d;
+  text-decoration: none;
+}
+
+.edit-link {
+  color: #000000;
+  font-weight: 900;
+  text-decoration: none;
+  font-size: var(--general-text-btn-font-size);
+}
+
+.edit-link:hover {
+  color: #524f4f;
+  text-decoration: underline;
+}
+
+.model-form-btn {
+  height: 35px;
+  position: relative;
+  top: 3px;
+  border: 2px solid var(--main-blue-color);
+  border-radius: 5px;
+  background-color: var(--button-grey-color);
+  color: white;
+  font-size: 16px;
+}
+
+.canvas-custom-class {
   width: 50% !important;
 }
 
-.section-div{
-  background: #fefefe;
-  padding: 10px;
-  border: 2px solid white;
-  border-radius: 20px;
+.dark-blue-section-div {
+  background-color: var(--main-blue-color);
+  color: white;
+  border-radius: 10px;
+  padding: 10px 4px;
 }
 
-.fee-progress-fonts{
+.white-section-div {
+  background-color: var(--main-white);
+  border-radius: 10px;
+  padding: 10px 4px;
+}
+
+.table-head-styles {
+  font-size: 1.2em;
+}
+
+.table-row-data {
+  background-color: transparent !important;
+  color: var(--grey-color-1) !important;
+  padding: 10px 8px !important;
+  font-size: 1em;
+}
+
+.fee-progress-fonts {
   font-size: 1.3em;
 }
 
+.thump-up-alert {
+  font-size: 1.3em;
+}
+
+.progress-student-select {
+  padding: 5px;
+  background-color: orange;
+}
+
+.modal-header {
+  background-color: var(--button-grey-color);
+}
+
+.modal-content {
+  border: 2px solid var(--button-grey-color);
+}
+
+.offcanvas-header {
+  background-color: var(--button-grey-color);
+  color: white;
+}
+
+.btn-close {
+  font-size: 1.3em;
+  font-weight: 900;
+}
+
+.accordion-item {
+  margin: 10px 0px;
+  background-color: var(--light-grey-color);
+}
+
+.accordion-button {
+  background: var(--button-grey-color);
+  color: white;
+  font-weight: 900;
+}
+
+.accordion-button:not(.collapsed) {
+  background: var(--button-grey-color);
+  color: white;
+  font-weight: 900;
+}
+
+.topic-items {
+  border-bottom: 2px solid var(--background-grey-color);
+}
+
+.light-grey-card {
+  background-color: var(--light-grey-color);
+  border: 1px solid #6e757d;
+  border-radius: 10px;
+}
+
+.delete-text-link{
+  text-decoration: underline;
+  color: black;
+  border: none;
+  font-size: var(--general-text-btn-font-size);
+}
+
+.sequence-mark-input{
+  width: 60%;
+}
+
+.percent-complete-badge{
+  padding: 5px;
+  font-weight: 900;
+  border-radius: 30px;
+}
+
 @keyframes appear-then-fade {
-  0%, 100% {
-    opacity:0
+
+  0%,
+  100% {
+    opacity: 0
   }
-  5%, 60% {
-    opacity:1
+
+  5%,
+  60% {
+    opacity: 1
   }
 }
 
 .flash {
-  position:fixed;
+  position: fixed;
   top: 93%;
   left: 50%;
   transform: translateX(-50%);
@@ -85,6 +223,7 @@ label{
     background: rgb(2, 102, 2);
     color: white;
     padding: 10px;
+
     @media screen and (max-width: 425px) {
       padding: 2;
     }
@@ -96,25 +235,67 @@ label{
     background: rgb(119, 2, 2);
     color: white;
     padding: 10px;
+
     @media screen and (max-width: 425px) {
       padding: 2;
     }
   }
-  
+
   &__message_notice {
     animation: appear-then-fade 4s both;
     border-radius: 999px;
     background: rgb(2, 102, 2);
     color: white;
     padding: 10px;
+
     @media screen and (max-width: 425px) {
       padding: 2;
     }
   }
 }
 
+#school-layout-body {
+  background-color: var(--background-grey-color);
+}
+
+.icon-small-size {
+  font-size: 1.6em;
+}
+
+.icon-white {
+  color: white;
+}
+
+.dashboard-normal-font-size {
+  font-size: 1.1em;
+}
+
+.dashboard-small-font-size {
+  font-size: 0.8em;
+}
+
+.text-color-info {
+  color: var(--text-color-info);
+}
+
+.text-color-grey {
+  color: var(--text-color-grey);
+}
+
+.text-color-grey-2{
+  color: var(--text-color-grey-2);
+}
+
 @media screen and (max-width: 425px) {
-  .canvas-custom-class{
+  .canvas-custom-class {
     width: 90% !important;
+  }
+
+  .table-row-data {
+    font-size: 0.9em;
+  }
+
+  .table-head-styles {
+    font-size: 1.1em;
   }
 }

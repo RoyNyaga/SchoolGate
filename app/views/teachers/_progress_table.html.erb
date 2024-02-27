@@ -1,0 +1,38 @@
+<% if for_current_user %>
+  <table class="table table-hover">
+    <thead class="table-head-styles">
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">duration</th>
+        <th scope="col">Abs</th>
+        <th scope="col">Topics</th>
+        <th scope="col" class="d-none d-md-table-cell">academic year</th>
+        <th scope="col" class="d-none d-md-table-cell">Term</th>
+        <th scope="col" class="d-none d-md-table-cell">Sequence</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% progresses.each do |progress| %>
+        <%= render partial: "teachers/progress_table_row", locals: { progress: progress, for_current_user: true } %>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <table class="table table-hover">
+    <thead class="table-head-styles">
+      <tr>
+        <th scope="col">Subject</th>
+        <th scope="col">Class</th>
+        <th scope="col">teacher</th>
+        <th scope="col" class="d-none d-md-table-cell">academic year</th>
+        <th scope="col" class="d-none d-md-table-cell">Term</th>
+        <th scope="col" class="d-none d-md-table-cell">Sequence</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% progresses.each do |progress| %>
+        <%= render partial: "teachers/progress_table_row", locals: { progress: progress } %>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

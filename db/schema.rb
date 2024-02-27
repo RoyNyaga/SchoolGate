@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_01_020046) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_22_213745) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "absences", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "student_id", null: false
+    t.bigint "progress_id", null: false
+    t.bigint "term_id", null: false
+    t.string "academic_year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["progress_id"], name: "index_absences_on_progress_id"
+    t.index ["school_id"], name: "index_absences_on_school_id"
+    t.index ["student_id"], name: "index_absences_on_student_id"
+    t.index ["term_id"], name: "index_absences_on_term_id"
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +54,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_01_020046) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "curriculums", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "school_class_id", null: false
+    t.bigint "teacher_id", null: false
+    t.bigint "subject_id", null: false
+    t.string "title"
+    t.float "percent_complete", default: 0.0
+    t.string "academic_year", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "is_complete", default: false
+    t.index ["school_class_id"], name: "index_curriculums_on_school_class_id"
+    t.index ["school_id"], name: "index_curriculums_on_school_id"
+    t.index ["subject_id"], name: "index_curriculums_on_subject_id"
+    t.index ["teacher_id"], name: "index_curriculums_on_teacher_id"
   end
 
   create_table "fees", force: :cascade do |t|
@@ -73,6 +104,40 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_01_020046) do
     t.index ["school_id"], name: "index_invitations_on_school_id"
     t.index ["sender_id"], name: "index_invitations_on_sender_id"
     t.index ["teacher_id"], name: "index_invitations_on_teacher_id"
+  end
+
+  create_table "main_topics", force: :cascade do |t|
+    t.bigint "teacher_id", null: false
+    t.bigint "curriculum_id", null: false
+    t.bigint "subject_id", null: false
+    t.string "title", null: false
+    t.boolean "is_complete", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float "percent_complete", default: 0.0
+    t.index ["curriculum_id"], name: "index_main_topics_on_curriculum_id"
+    t.index ["subject_id"], name: "index_main_topics_on_subject_id"
+    t.index ["teacher_id"], name: "index_main_topics_on_teacher_id"
+  end
+
+  create_table "progresses", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "subject_id", null: false
+    t.bigint "teacher_id", null: false
+    t.bigint "term_id", null: false
+    t.text "topics", default: [], array: true
+    t.text "absent_students", default: [], array: true
+    t.string "academic_year", null: false
+    t.integer "seq_num", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "school_class_id", null: false
+    t.jsonb "period_duration", default: {"mins"=>0, "hours"=>0}
+    t.index ["school_class_id"], name: "index_progresses_on_school_class_id"
+    t.index ["school_id"], name: "index_progresses_on_school_id"
+    t.index ["subject_id"], name: "index_progresses_on_subject_id"
+    t.index ["teacher_id"], name: "index_progresses_on_teacher_id"
+    t.index ["term_id"], name: "index_progresses_on_term_id"
   end
 
   create_table "report_cards", force: :cascade do |t|
@@ -201,11 +266,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_01_020046) do
   create_table "terms", force: :cascade do |t|
     t.bigint "school_id", null: false
     t.integer "term_type", null: false
-    t.string "academic_year_start"
-    t.string "academic_year_end"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "academic_year", default: "2023/2024"
     t.index ["school_id"], name: "index_terms_on_school_id"
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.bigint "teacher_id", null: false
+    t.bigint "main_topic_id", null: false
+    t.bigint "subject_id", null: false
+    t.string "title", null: false
+    t.integer "progress", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["main_topic_id"], name: "index_topics_on_main_topic_id"
+    t.index ["subject_id"], name: "index_topics_on_subject_id"
+    t.index ["teacher_id"], name: "index_topics_on_teacher_id"
   end
 
   create_table "workings", force: :cascade do |t|
@@ -221,13 +298,29 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_01_020046) do
     t.index ["teacher_id"], name: "index_workings_on_teacher_id"
   end
 
+  add_foreign_key "absences", "progresses"
+  add_foreign_key "absences", "schools"
+  add_foreign_key "absences", "students"
+  add_foreign_key "absences", "terms"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "curriculums", "school_classes"
+  add_foreign_key "curriculums", "schools"
+  add_foreign_key "curriculums", "subjects"
+  add_foreign_key "curriculums", "teachers"
   add_foreign_key "fees", "school_classes"
   add_foreign_key "fees", "schools"
   add_foreign_key "fees", "students"
   add_foreign_key "invitations", "schools"
   add_foreign_key "invitations", "teachers"
+  add_foreign_key "main_topics", "curriculums"
+  add_foreign_key "main_topics", "subjects"
+  add_foreign_key "main_topics", "teachers"
+  add_foreign_key "progresses", "school_classes"
+  add_foreign_key "progresses", "schools"
+  add_foreign_key "progresses", "subjects"
+  add_foreign_key "progresses", "teachers"
+  add_foreign_key "progresses", "terms"
   add_foreign_key "report_cards", "school_classes"
   add_foreign_key "report_cards", "schools"
   add_foreign_key "report_cards", "students"
@@ -247,6 +340,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_01_020046) do
   add_foreign_key "teachings", "subjects"
   add_foreign_key "teachings", "teachers"
   add_foreign_key "terms", "schools"
+  add_foreign_key "topics", "main_topics"
+  add_foreign_key "topics", "subjects"
+  add_foreign_key "topics", "teachers"
   add_foreign_key "workings", "schools"
   add_foreign_key "workings", "teachers"
 end

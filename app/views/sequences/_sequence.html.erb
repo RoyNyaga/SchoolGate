@@ -1,12 +1,12 @@
-<div class="card"">
-  <div class="card-body">
-    <h6 class="card-title"><%= sequence.term.title %></h6>
-    <h6 class="card-subtitle mb-2 text-muted">Teacher: <%= sequence.teacher.name %></h6>
-    <div class="d-flex justify-content-between">
-      <%= render partial: "sequences/sequence_card_one", 
+<div class="light-grey-card p-2 dashboard-normal-font-size">
+  <h6><%= sequence.seq_title %></h6>
+  <p class="margin-zero">Student enrolled: <span class="text-color-grey-2 px-3"><%= sequence.enrolled_num %></span></p>
+  <p class="margin-zero">Percent success: <span class="text-color-grey-2 px-3"><%= sequence.percent_success %> %</span></p>
+  <p class="margin-zero">Teacher: <span class="text-color-grey-2 px-3"><%= sequence.teacher.full_name %></span></p>
+  <div class="d-flex justify-content-between">
+    <%= render partial: "sequences/sequence_card_one", 
         layout: "layouts/drawer_layout", 
-        locals: { sequence: sequence, title: sequence.term.title, item_id: sequence.id, position: "end", btn_text: "View" }%>
-      <%= link_to "Edit", edit_sequence_path(sequence), class: "card-link" %>
-    </div>
+        locals: { sequence: sequence, title: sequence.seq_title, item_id: generate_drawer_id("preview_sequence", record: sequence), position: "end", btn_text: "View", btn_visibility: true }%>
+    <%= link_to "Edit", edit_sequence_path(sequence), class: "general-link" %>
   </div>
 </div>

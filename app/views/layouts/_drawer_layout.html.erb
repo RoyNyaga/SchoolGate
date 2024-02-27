@@ -1,16 +1,16 @@
 <% btn_visibility ||= false # setting default visibility values%>
 <% if btn_visibility %>
-  <a data-bs-toggle="offcanvas" href="#<%= item_id %>_drawer" role="button" aria-controls="<%= item_id %>_drawer">
+  <a class="general-link" data-bs-toggle="offcanvas" href="#<%= item_id %>" role="button" aria-controls="<%= item_id %>_drawer">
     <%= btn_text %>
   </a>
 <% end %>
-<div class="offcanvas offcanvas-<%= position %> canvas-custom-class" tabindex="-1" id="<%= item_id %>_drawer" aria-labelledby="<%= item_id %>_drawerLabel">
+<div class="offcanvas offcanvas-<%= position %> canvas-custom-class" tabindex="-1" id="<%= item_id %>" aria-labelledby="<%= item_id %>_drawerLabel">
   <div id="<%= item_id %>_drawer_flash_message" class="flash">
     <%= render "shared/flash_messages" %>
   </div>
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="<%= item_id %>_drawerLabel"><%= title %></h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">X</button>
   </div>
   <div class="offcanvas-body">
     <%= yield %>

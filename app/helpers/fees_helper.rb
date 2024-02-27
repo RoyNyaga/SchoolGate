@@ -25,12 +25,4 @@ module FeesHelper
   def generate_installment_input_field(form, value)
     form.number_field :installments, name: "fee[installments][]", value: value, class: "general-input-styles", data: { action: "fees#calculateSum" }
   end
-
-  def generate_student_marks_input(form, sequence, student)
-    if sequence.persisted?
-      form.number_field :mark, name: "sequence[marks][][mark]", step: "any", value: student.sequence_mark_per_subject(sequence.hashed_marks)
-    else
-      form.number_field :mark, name: "sequence[marks][][mark]", step: "any"
-    end
-  end
 end

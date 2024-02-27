@@ -1,0 +1,10 @@
+<div class="added-topic" id="added_topic_<%= topic.id %>" data-topicid="<%= topic.id %>">
+  <h6 class="added-topic-header"><%= topic.title %></h6>
+  <div class="added-topic-body">
+    <input name="progress[topics][][id]" value="<%= topic.id %>" autocomplete="off" type="hidden" id="progress_id">
+    <div class="d-flex justify-content-around">
+      <%= topic_progress_select(form, topic) %>
+      <span data-topicelementid="added_topic_<%= topic.id %>" data-action="click->progresses#removeTopic">Cancel</span>
+    </div>
+  </div>
+</div>

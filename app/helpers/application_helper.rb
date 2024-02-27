@@ -1,10 +1,33 @@
 module ApplicationHelper
   def generate_modal_id(type, record: nil)
-    action_name.strip.downcase.gsub(" ", "-")
     if record
       "#{record.class.name.downcase}_#{type}_modal_#{record.id}"
     else
       "#{type}_modal"
+    end
+  end
+
+  def generate_drawer_id(type, record: nil)
+    if record
+      "#{record.class.name.downcase}_#{type}_drawer_#{record.id}"
+    else
+      "#{type}_drawer"
+    end
+  end
+
+  def generate_accordion_id(type, record: nil)
+    if record
+      "#{record.class.name.downcase}_#{type}_accordion_#{record.id}"
+    else
+      "#{type}_accordion"
+    end
+  end
+
+  def custom_id_generator(type, record: nil)
+    if record
+      "#{record.class.name.downcase}_#{type}_#{record.id}_custom_id"
+    else
+      "#{type}_custom_id"
     end
   end
 
@@ -39,5 +62,19 @@ module ApplicationHelper
       { name: "Auto Generate (bulk)", path: auto_generate_report_cards_path },
       { name: "Manually Create", path: manually_create_report_cards_path },
     ]
+  end
+
+  def current_teacher_subject_link_data
+    current_teacher.class_subjects.where(school_id: current_school.id).map do |c_s|
+      { name: c_s.name, path: for_teacher_subject_path(c_s) }
+    end
+  end
+
+  def topic_progress_icon(topic)
+    if topic.in_progress?
+      fas_icon("check", class: "text-warning")
+    elsif topic.completed?
+      fas_icon("check-double", class: "text-success")
+    end
   end
 end

@@ -1,0 +1,91 @@
+<%= form_with(model: progress) do |form| %>
+  <% if progress.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(progress.errors.count, "error") %> prohibited this progress from being saved:</h2>
+      <ul>
+        <% progress.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= form.label :school_id, class: "d-none" %>
+  <%= form.hidden_field :school_id, value: current_school.id %>
+  <%= form.label :subject_id, class: "d-none" %>
+  <%= form.hidden_field :subject_id, value: @subject.id %>
+  <%= form.label :teacher_id, class: "d-none" %>
+  <%= form.hidden_field :teacher_id, value: current_teacher.id %>
+  <%= form.label :school_class_id, class: "d-none" %>
+  <%= form.hidden_field :school_class_id, value: @subject.school_class_id %>
+  <div class="row" data-controller="progresses">
+    <div class="col-md-4">
+      <div>
+        <%= form.label :academic_year, class: "d-none" %>
+        <%= form.hidden_field :academic_year, value: Curriculum.generate_current_academic_year %>
+      </div>
+      <div>
+        <%= form.label :term_id, style: "display: block" %>
+        <%= form.select :term_id, current_school.terms.map { |term| [term.title, term.id] }, {include_blank: 'Select Term'}, { class: "general-input-styles" } %>
+      </div>
+      <div>
+        <%= form.label :seq_num, style: "display: block" %>
+        <%= form.select :seq_num, Sequence.seq_nums.map { |k,v| [k.humanize, k] }, {include_blank: 'Select Sequence Number'}, { class: "general-input-styles" } %>
+      </div>
+      <div>
+        <%= form.label :period_duration, style: "display: block" %>
+        <div class="row px-3">
+          <div class="col-5">
+            <%= form.label :hours %>
+            <%= form.number_field :hours, class: "general-input-styles" %>
+          </div>
+          <div class="col-1"></div>
+          <div class="col-5">
+            <%= form.label :minutes %>
+            <%= form.number_field :mins, class: "general-input-styles" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div>
+        <h5 class="text-center p-0 m-0">Which Topics did you teach today?</h5>
+        <p class="text-center p-0 m-0">You can select Topics from the curriculum(s) listed bellow</p>
+      </div>
+      <div class="added-topics-wrapper">
+        <% if progress.persisted? %>
+          <% topics.each do |topic| %>
+            <%= render partial: "topic_edit_input", locals: { topic: topic, form: form }%>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="curriculum-select">
+        <% @curriculums.each do |curriculum| %>
+          <%= render partial: "curriculums/progress_form_preview", 
+              layout: "layouts/modal_layout", 
+              locals: { curriculum: curriculum, action_name: curriculum.title, action_title: "Select Topic",
+              modal_id: generate_modal_id("progress_form_preview", record: curriculum) }%>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <%= form.label :absent_students, style: "display: block" %>
+      <div data-controller="students">
+        <div class="progress-absent-students" data-students-target="absentStudentDiv">
+          <% if progress.persisted? %>
+            <% Progress.string_to_hash_arr(progress.absent_students).each do |student| %>
+              <%= render partial: "absent_student_input", locals: { student: student } %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="my-5">
+          <%= text_field :search, :search, class: "general-input-styles", placeholder: "Search Student Name",
+          data: { searchpath: json_search_students_path(subject_id: @subject.id),
+          action: "input->students#search" } %>
+        </div>
+        <div class="search-results" data-students-target="searchResults">
+        </div>
+      </div>
+    </div>
+    <%= form.submit %>
+  </div>
+<% end %>

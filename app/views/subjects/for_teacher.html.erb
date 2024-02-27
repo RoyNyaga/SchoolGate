@@ -1,11 +1,45 @@
-<div id="school-main-div">
-  <%= render @subject %>
-  <%= link_to "Create Sequence", new_sequence_path(school_class_id: @subject.school_class_id, subject_id: @subject.id) %>
+<div class="container-fluid">
   <div class="row">
-    <% @sequences.each do |sequence| %>
-      <div class="col-md-3">
-        <%= render partial: "sequences/sequence", locals: { sequence: sequence } %>
+    <div class="col-md-3 my-3">
+      <%= render @subject %>
+    </div>
+    <div class="col-md-9 my-3">
+      <div class="white-section-div">
+        <p class="text-center"><%= link_to "Add Progress", new_progress_path(subject_id: @subject.id), class: "general-link" %></p>
+        <%= render partial: "teachers/progress_table", locals: { progresses: @current_week_progresses, for_current_user: true } %>
+        <p class="text-center"><%= link_to "View Progresses", progresses_teacher_path(current_teacher), class: "general-link" %></p>
       </div>
-    <% end %>
+    </div>
+  </div>
+  <div class="row my-5">
+    <div class="col-md-4 my-2">
+      <div class="white-section-div">
+        <div id="modal-form-section">
+          <%= render partial: "curriculums/form", 
+          layout: "layouts/modal_layout", 
+          locals: { curriculum: Curriculum.new, subject: @subject, action_name: "New Curriculum", action_title: "Create A New Curriculum",
+          modal_id: generate_modal_id("curriculum_create_form") }%>
+        </div>
+        <div id="curriculum-list">
+          <% @curriculums.each do |curriculum| %>
+            <%= render partial: "curriculums/curriculum", locals: { curriculum: curriculum, subject: @subject } %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 my-2">
+      <div class="white-section-div p-3">
+        <p class="text-center">
+          <%= link_to "New Sequence Marks", new_sequence_path(school_class_id: @subject.school_class_id, subject_id: @subject.id), class: "general-link" %>
+        </p>
+        <div class="row">
+          <% @sequences.each do |sequence| %>
+            <div class="col-md-6 my-2">
+              <%= render partial: "sequences/sequence", locals: { sequence: sequence } %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

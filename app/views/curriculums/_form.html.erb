@@ -1,0 +1,42 @@
+<%= form_with(model: curriculum) do |form| %>
+  <% if curriculum.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(curriculum.errors.count, "error") %> prohibited this curriculum from being saved:</h2>
+      <ul>
+        <% curriculum.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= form.label :school_id, class: "d-none" %>
+    <%= form.hidden_field :school_id, value: current_school.id %>
+  </div>
+  <div>
+    <%= form.label :school_class_id, class: "d-none" %>
+    <%= form.hidden_field :school_class_id, value: subject.school_class_id %>
+  </div>
+  <div>
+    <%= form.label :teacher_id, class: "d-none" %>
+    <%= form.hidden_field :teacher_id, value: current_teacher.id %>
+  </div>
+  <div>
+    <%= form.label :subject_id, class: "d-none" %>
+    <%= form.hidden_field :subject_id, value: subject.id %>
+  </div>
+  <div>
+    <% unless curriculum.persisted? %>
+      <%= form.label :title, style: "display: block" %>
+    <% end %>
+    <div class="d-flex align-items-center">
+      <%= form.text_field :title, required: true, class: "general-input-styles" %>
+      <%= form.submit :save, class: "model-form-btn" %>
+    </div>
+  </div>
+  <div>
+    <%= form.label :academic_year %> -
+    <span class="text-color-grey-2"><%= Curriculum.generate_current_academic_year  %></span>
+    <%= form.hidden_field :academic_year, value: Curriculum.generate_current_academic_year %>
+  </div>
+<% end %>

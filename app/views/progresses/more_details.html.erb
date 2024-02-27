@@ -1,0 +1,21 @@
+<%= turbo_frame_tag custom_id_generator("more_detail", record: @progress) do %>
+  <div class="row my-3">
+    <div class="col-md-7 light-grey-card py-2">
+      <div>
+        <h5>Topics Covered</h5>
+        <% @topics.each do |topic| %>
+          <p class="dashboard-normal-font-size d-flex justify-content-between">
+            <span>- <%= topic.title %></span>
+            <span><%= topic_progress_icon(topic) %></span>
+          </p>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <h5>Absent Students</h5>
+      <% @absent_students.each do |student| %>
+        <p class="dashboard-normal-font-size"> - <%= student.full_name %></p>
+      <% end %>
+    </div>
+  </div>
+<% end %>

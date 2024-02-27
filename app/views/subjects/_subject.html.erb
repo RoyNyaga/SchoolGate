@@ -1,18 +1,7 @@
-<div class="section-div" id="<%= dom_id subject %>">
-  <p>
-    <strong>School:</strong>
-    <%= subject.school_id %>
-  </p>
-  <p>
-    <strong>School class:</strong>
-    <%= subject.school_class_id %>
-  </p>
-  <p>
-    <strong>Name:</strong>
-    <%= subject.name %>
-  </p>
-  <p>
-    <strong>Coefficient:</strong>
-    <%= subject.coefficient %>
-  </p>
+<div class="dark-blue-section-div dashboard-normal-font-size">
+  <h5 class="text-center"><%= subject.name %></h5>
+  <p class="margin-zero">Class: <span class="text-color-grey"><%= subject.school_class.name %></span></p>
+  <p class="margin-zero">Students: <span class="text-color-grey"><%= subject.school_class.students.count %></span></p>
+  <p class="margin-zero">Coefficient: <span class="text-color-grey"><%= subject.coefficient %></span></p>
+  <h5 class="text-center"><span class="text-color-info"><%= @current_week_hours_covered[:hours] %> Hrs : <%=  @current_week_hours_covered[:mins] %> Mins</span>  Covered</h5>
 </div>

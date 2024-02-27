@@ -1,9 +1,12 @@
-<h1>New sequence</h1>
-
-<%= render "form", sequence: @sequence %>
-
-<br>
-
-<div>
-  <%= link_to "Back to sequences", sequences_path %>
+<div class="container">
+  <div class="my-2">
+    <%= link_to "Back", for_teacher_subject_path(@subject), class: "general-link" %>
+  </div>
+  <div class="row">
+    <div class="mx-auto col-md-8 light-grey-card">
+      <h4 class="my-3 text-center">Edit sequence</h4>
+      <%= render "form", sequence: @sequence %>
+    </div>
+  </div>
 </div>
+<br>

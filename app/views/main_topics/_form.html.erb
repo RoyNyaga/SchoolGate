@@ -1,0 +1,29 @@
+<%= form_with(model: main_topic) do |form| %>
+  <% if main_topic.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(main_topic.errors.count, "error") %> prohibited this main_topic from being saved:</h2>
+      <ul>
+        <% main_topic.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= form.label :teacher_id, class: "d-none" %>
+    <%= form.hidden_field :teacher_id, value: current_teacher.id %>
+  </div>
+  <div>
+    <%= form.label :curriculum_id, class: "d-none" %>
+    <%= form.hidden_field :curriculum_id, value: @curriculum.id %>
+  </div>
+  <div>
+    <%= form.label :subject_id, class: "d-none" %>
+    <%= form.hidden_field :subject_id, value: @subject.id %>
+  </div>
+  <div class="d-flex align-items-center">
+    <%= form.label :title, class: "d-none" %>
+    <%= form.text_field :title, placeholder: "Enter Title", class: "general-input-styles" %>
+    <%= form.submit :save, class: "model-form-btn" %>
+  </div>
+<% end %>

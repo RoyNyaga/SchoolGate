@@ -21,7 +21,8 @@
   <div>
     <%= form.hidden_field :subject_id, value: @subject.id %>
   </div>
-  <div>
+  <div class="my-2">
+    <%= form.label :term, style: "display: block" %>
     <%= form.collection_select :term_id, 
     current_school.terms, :id, :term_type, { prompt: "Select Term" },
      { class: "general-input-styles", required: true } %>
@@ -30,12 +31,13 @@
     <%= form.label :seq_num, style: "display: block" %>
     <%= form.select :seq_num, Sequence.seq_nums.map { |k,v| [k.humanize, k] }, {include_blank: 'Select Sequence Number'}, { class: "general-input-styles" } %>
   </div>
-  <table class="table table-hover">
+  <table class="table table-hover my-3">
     <thead>
       <tr>
         <th scope="col">No</th>
         <th scope="col">Name</th>
         <th scope="col">mark</th>
+        <th scope="col">Enrolled</th>
       </tr>
     </thead>
     <tbody>
@@ -47,12 +49,18 @@
           <td><%= num %></td>
           <td><%= student.full_name %></td>
           <td><%= generate_student_marks_input(form, sequence, student) %></td>
+          <td>
+            <span>Enrolled</span>
+            <div>
+              <%= generate_is_enrolled_input(form, sequence, student) %>
+            </div>
+          </td>
         </tr>
         <% num += 1 %>
       <% end %>
     </tbody>
   </table>
   <div>
-    <%= form.submit %>
+    <%= form.submit class: "model-form-btn" %>
   </div>
 <% end %>
