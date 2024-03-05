@@ -13,6 +13,8 @@ class Student < ApplicationRecord
   end
   before_save :set_full_name # this method is defined in the application_record
 
+  delegate :name, to: :school_class, prefix: true
+
   def sequence_mark_per_subject(marks) # marks should be hashed
     mark = get_mark_object(marks)
     mark["mark"] unless mark.nil?
