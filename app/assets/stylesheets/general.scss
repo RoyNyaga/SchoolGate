@@ -174,18 +174,18 @@ label {
   border-radius: 10px;
 }
 
-.delete-text-link{
+.delete-text-link {
   text-decoration: underline;
   color: black;
   border: none;
   font-size: var(--general-text-btn-font-size);
 }
 
-.sequence-mark-input{
+.sequence-mark-input {
   width: 60%;
 }
 
-.percent-complete-badge{
+.percent-complete-badge {
   padding: 5px;
   font-weight: 900;
   border-radius: 30px;
@@ -270,6 +270,10 @@ label {
   font-size: 1.1em;
 }
 
+.dashboard-medium-font-size {
+  font-size: 1.4em;
+}
+
 .dashboard-small-font-size {
   font-size: 0.8em;
 }
@@ -282,8 +286,16 @@ label {
   color: var(--text-color-grey);
 }
 
-.text-color-grey-2{
+.text-color-grey-2 {
   color: var(--text-color-grey-2);
+}
+
+.custom-border-medium {
+  border: 3px solid #6e757d;
+}
+
+.custom-border-small {
+  border: 2px solid #6e757d;
 }
 
 @media screen and (max-width: 425px) {
