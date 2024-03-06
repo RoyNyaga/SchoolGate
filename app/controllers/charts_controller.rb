@@ -1,4 +1,5 @@
 class ChartsController < ApplicationController
+  before_action :check_for_current_school
   before_action :set_fees, only: [:complete_incomplete_pie, :incomplete_fee_per_installment_bar, :complete_fee_per_installment_bar]
 
   def complete_incomplete_pie
@@ -29,6 +30,12 @@ class ChartsController < ApplicationController
     main_data = {}
     school_classes = current_school.school_classes.includes(:fees)
     data = Charts::DataParsing.revenue_per_class_over_time(school_classes, params[:academic_year])
+    render json: data
+  end
+
+  def report_card_performance_line
+    report_card = ReportCard.find(params[:report_card_id])
+    data = report_card.generate_chart_data
     render json: data
   end
 
