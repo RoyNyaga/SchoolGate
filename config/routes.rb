@@ -90,6 +90,7 @@ Rails.application.routes.draw do
       get :incomplete_fee_per_class
       get :complete_fee_per_class
       get :revenue_per_class_over_time_line_chart
+      get :report_card_performance_line
     end
   end
 end
