@@ -1,4 +1,5 @@
 class AcademicYearsController < ApplicationController
+  layout "school_layout"
   before_action :set_academic_year, only: %i[ show edit update destroy ]
 
   # GET /academic_years or /academic_years.json
@@ -58,13 +59,14 @@ class AcademicYearsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_academic_year
-      @academic_year = AcademicYear.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def academic_year_params
-      params.require(:academic_year).permit(:year, :is_active)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_academic_year
+    @academic_year = AcademicYear.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def academic_year_params
+    params.require(:academic_year).permit(:year, :is_active)
+  end
 end

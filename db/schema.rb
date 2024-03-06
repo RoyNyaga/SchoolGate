@@ -30,7 +30,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_06_055555) do
 
   create_table "academic_years", force: :cascade do |t|
     t.string "year"
-    t.string "is_active"
+    t.boolean "is_active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
