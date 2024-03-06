@@ -298,6 +298,15 @@ label {
   border: 2px solid #6e757d;
 }
 
+.report-card-table-font-size{
+  font-size: 0.9em;
+}
+
+.horizontal-scroll{
+  // white-space: nowrap;
+  overflow-x: auto; /* Enable horizontal scrolling */
+}
+
 @media screen and (max-width: 425px) {
   .canvas-custom-class {
     width: 90% !important;
