@@ -1,5 +1,6 @@
 class AcademicYearsController < ApplicationController
   layout "school_layout"
+  before_action :check_for_current_school
   before_action :set_academic_year, only: %i[ show edit update destroy ]
 
   # GET /academic_years or /academic_years.json
