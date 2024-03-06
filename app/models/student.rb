@@ -52,8 +52,12 @@ class Student < ApplicationRecord
     "#{current_year_abbreviation}#{school.school_identifier}#{student_number_code}".upcase
   end
 
-  def all_classes_addented_ids
+  def all_classes_attended_ids
     previous_classes + [school_class_id]
+  end
+
+  def attended_academic_years
+    fees.where("percentage_complete > 1").map(&:academic_year)
   end
 
   # def save_matricule
