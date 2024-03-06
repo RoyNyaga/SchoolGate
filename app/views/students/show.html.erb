@@ -18,4 +18,15 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="white-section-div">
+        <h5 class="text-center">Performance Record</h5>
+        <% @report_cards.each do |report_card| %>
+          <%= render partial: "students/fees_card", locals: { report_card: report_card }%>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-8"></div>
+  </div>
 </div>
