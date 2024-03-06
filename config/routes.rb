@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :academic_years
   resources :progresses do
     member do
       get :more_details
