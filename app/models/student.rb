@@ -52,6 +52,10 @@ class Student < ApplicationRecord
     "#{current_year_abbreviation}#{school.school_identifier}#{student_number_code}".upcase
   end
 
+  def all_classes_addented_ids
+    previous_classes + [school_class_id]
+  end
+
   # def save_matricule
   #   update(matricule: generate_matricule)
   # end
