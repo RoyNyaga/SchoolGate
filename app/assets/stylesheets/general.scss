@@ -307,6 +307,9 @@ label {
   overflow-x: auto; /* Enable horizontal scrolling */
 }
 
+.report-card-detail-input-size{
+  width: 50px;
+}
 @media screen and (max-width: 425px) {
   .canvas-custom-class {
     width: 90% !important;
@@ -319,4 +322,8 @@ label {
   .table-head-styles {
     font-size: 1.1em;
   }
+
+  // .report-card-detail-input-size{
+  //   width: 80%;
+  // }
 }
