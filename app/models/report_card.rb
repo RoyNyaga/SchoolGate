@@ -93,4 +93,8 @@ class ReportCard < ApplicationRecord
   def long_title
     "#{term.term_type} #{term.academic_year} #{school_class.name}"
   end
+
+  def details_for(subject)
+    ReportCard.string_to_hash_arr(details).find { |d| d[:name] == subject.name }
+  end
 end
