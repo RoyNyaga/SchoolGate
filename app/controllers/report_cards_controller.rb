@@ -27,6 +27,7 @@ class ReportCardsController < ApplicationController
 
   # GET /report_cards/1/edit
   def edit
+    @school_class = @report_card.school_class
   end
 
   # POST /report_cards or /report_cards.json
