@@ -14,4 +14,7 @@
   <div class="my-5 light-grey-card horizontal-scroll">
     <%= render partial: "report_cards/report_card", locals: { report_card: report_card } %>
   </div>
+  <div>
+    <%= link_to "Edit Report Card", edit_report_card_path(report_card), class: "general-link" %>
+  </div>
 </div>
