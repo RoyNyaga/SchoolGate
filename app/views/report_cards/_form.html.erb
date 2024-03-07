@@ -17,23 +17,63 @@
     <%= form.collection_select :school_class_id, current_school.school_classes, :id, :name, { prompt: "Select Class" }, { class: "general-input-styles" } %>
   </div>
   <div>
-    <%= form.hidden_field :term_id, value: term.id %>
+    <%= form.label :term_id %>
+    <%= form.collection_select :term_id, current_school.terms, :id, :term_type, { prompt: "Select Term" }, { class: "general-input-styles" } %>
   </div>
-  <div>
-    <%= form.label :average, style: "display: block" %>
-    <%= form.text_field :average %>
-  </div>
-  <div>
-    <%= form.label :rank, style: "display: block" %>
-    <%= form.number_field :rank %>
-  </div>
-  <div>
-    <%= form.label :class_average, style: "display: block" %>
-    <%= form.number_field :class_average %>
-  </div>
-  <div>
-    <%= form.label :passed_subjects, style: "display: block" %>
-    <%= form.number_field :passed_subjects %>
+  <div class="horizontal-scroll">
+    <table class="table table-hover">
+      <thead class="report-card-table-font-size">
+        <tr>
+          <th scope="col">subject</th>
+          <th scope="col">seq1</th>
+          <th scope="col">seq2</th>
+          <th scope="col">Avg/20</th>
+          <th scope="col">Coef</th>
+          <th scope="col">score</th>
+          <th scope="col">grade</th>
+          <th scope="col">rank</th>
+          <th scope="col">teacher</th>
+          <th scope="col">remark</th>
+        </tr>
+      </thead>
+      <tbody class="report-card-table-font-size">
+        <% @school_class.subjects.each do |subject| %>
+          <% detail = report_card.details_for(subject) %>
+          <tr class="progress-table-rows">
+            <td class="table-row-data">
+              <%= detail[:name] %>
+            </td>
+            <td class="table-row-data">
+              <%= detail_dynamic_inputs(form, "number_field", "report_card[details][][first_seq_mark]", detail[:first_seq_mark], class_names: "report-card-detail-input-size") %>
+            </td>
+            <td class="table-row-data">
+              <%= detail_dynamic_inputs(form, "number_field", "report_card[details][][second_seq_mark]", detail[:second_seq_mark], class_names: "report-card-detail-input-size") %>
+            </td>
+            <td class="table-row-data">
+              <%= detail_dynamic_inputs(form, "number_field", "report_card[details][][average_mark]", detail[:average_mark], class_names: "report-card-detail-input-size") %>
+            </td>
+            <td class="table-row-data">
+              <%= detail_dynamic_inputs(form, "number_field", "report_card[details][][coefficient]", detail[:coefficient], class_names: "report-card-detail-input-size") %>
+            </td>
+            <td class="table-row-data">
+              <%= detail_dynamic_inputs(form, "number_field", "report_card[details][][score]", detail[:score], class_names: "report-card-detail-input-size") %>
+            </td>
+            <td class="table-row-data">
+              <%= detail_dynamic_inputs(form, "text_field", "report_card[details][][grade]", detail[:grade], class_names: "report-card-detail-input-size") %>
+            </td>
+            <td class="table-row-data">
+              <%= detail_dynamic_inputs(form, "number_field", "report_card[details][][rank]", detail[:rank], class_names: "report-card-detail-input-size") %>
+            </td>
+            <td class="table-row-data">
+              <%= detail_dynamic_inputs(form, "text_field", "report_card[details][][teacher]", detail[:teacher]) %>
+            </td>
+            <td class="table-row-data">
+              <%= detail_dynamic_inputs(form, "text_field", "report_card[details][][remark]", detail[:remark]) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
   <div>
     <%= form.submit %>
