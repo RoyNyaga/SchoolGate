@@ -95,6 +95,6 @@ class ReportCard < ApplicationRecord
   end
 
   def details_for(subject)
-    ReportCard.string_to_hash_arr(details).find { |d| d[:name] == subject.name }
+    ReportCard.string_to_hash_arr(details).find { |d| d["name"] == subject.name }
   end
 end
