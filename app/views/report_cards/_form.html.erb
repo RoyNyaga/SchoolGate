@@ -39,39 +39,67 @@
       <tbody class="report-card-table-font-size">
         <% @school_class.subjects.each do |subject| %>
           <% detail = report_card.details_for(subject) %>
-          <tr class="progress-table-rows">
+          <tr class="progress-table-rows" id="<%= custom_id_generator('details', record: subject)%>">
             <td class="table-row-data">
-              <%= detail[:name] %>
+              <%= detail_dynamic_inputs(form, "text_field", "report_card[details][][disabled_name]", subject.name, disabled: true ) %>
+              <%= detail_dynamic_inputs(form, "hidden_field", "report_card[details][][name]", subject.name ) %>
             </td>
             <td class="table-row-data">
-              <%= detail_dynamic_inputs(form, "number_field", "report_card[details][][first_seq_mark]", detail[:first_seq_mark], class_names: "report-card-detail-input-size") %>
+              <%= detail_dynamic_inputs(form, "number_field", "report_card[details][][first_seq_mark]", detail["first_seq_mark"], class_names: "report-card-detail-input-size") %>
             </td>
             <td class="table-row-data">
-              <%= detail_dynamic_inputs(form, "number_field", "report_card[details][][second_seq_mark]", detail[:second_seq_mark], class_names: "report-card-detail-input-size") %>
+              <%= detail_dynamic_inputs(form, "number_field", "report_card[details][][second_seq_mark]", detail["second_seq_mark"], class_names: "report-card-detail-input-size") %>
             </td>
             <td class="table-row-data">
-              <%= detail_dynamic_inputs(form, "number_field", "report_card[details][][average_mark]", detail[:average_mark], class_names: "report-card-detail-input-size") %>
+              <%= detail_dynamic_inputs(form, "number_field", "report_card[details][][average_mark]", detail["average_mark"], class_names: "report-card-detail-input-size") %>
             </td>
             <td class="table-row-data">
-              <%= detail_dynamic_inputs(form, "number_field", "report_card[details][][coefficient]", detail[:coefficient], class_names: "report-card-detail-input-size") %>
+              <%= detail_dynamic_inputs(form, "number_field", "report_card[details][][coefficient]", detail["coefficient"], class_names: "report-card-detail-input-size") %>
             </td>
             <td class="table-row-data">
-              <%= detail_dynamic_inputs(form, "number_field", "report_card[details][][score]", detail[:score], class_names: "report-card-detail-input-size") %>
+              <%= detail_dynamic_inputs(form, "number_field", "report_card[details][][score]", detail["score"], class_names: "report-card-detail-input-size") %>
             </td>
             <td class="table-row-data">
-              <%= detail_dynamic_inputs(form, "text_field", "report_card[details][][grade]", detail[:grade], class_names: "report-card-detail-input-size") %>
+              <%= detail_dynamic_inputs(form, "text_field", "report_card[details][][grade]", detail["grade"], class_names: "report-card-detail-input-size") %>
             </td>
             <td class="table-row-data">
-              <%= detail_dynamic_inputs(form, "number_field", "report_card[details][][rank]", detail[:rank], class_names: "report-card-detail-input-size") %>
+              <%= detail_dynamic_inputs(form, "number_field", "report_card[details][][rank]", detail["rank"], class_names: "report-card-detail-input-size") %>
             </td>
             <td class="table-row-data">
-              <%= detail_dynamic_inputs(form, "text_field", "report_card[details][][teacher]", detail[:teacher]) %>
+              <%= detail_dynamic_inputs(form, "text_field", "report_card[details][][teacher]", detail["teacher"]) %>
             </td>
             <td class="table-row-data">
-              <%= detail_dynamic_inputs(form, "text_field", "report_card[details][][remark]", detail[:remark]) %>
+              <%= detail_dynamic_inputs(form, "text_field", "report_card[details][][remark]", detail["remark"]) %>
+            </td>
+            <td class="table-row-data">
+              <span class="general-link" data-rowid="<%= custom_id_generator('details', record: subject)%>">Remove</span>
             </td>
           </tr>
         <% end %>
+        <tr class="progress-table-rows">
+          <td class="table-row-data">
+          </td>
+          <td class="table-row-data">
+          </td>
+          <td class="table-row-data">
+          </td>
+          <td class="table-row-data">
+          </td>
+          <td class="table-row-data">
+            <%= detail_dynamic_inputs(form, "number_field", "report_card[total_coefficient]", report_card.total_coefficient, class_names: "report-card-detail-input-size") %>
+          </td>
+          <td class="table-row-data">
+            <%= detail_dynamic_inputs(form, "number_field", "report_card[total_score]", report_card.total_score, class_names: "report-card-detail-input-size") %>
+          </td>
+          <td class="table-row-data">
+          </td>
+          <td class="table-row-data">
+          </td>
+          <td class="table-row-data">
+          </td>
+          <td class="table-row-data">
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
