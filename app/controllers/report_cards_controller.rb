@@ -81,15 +81,6 @@ class ReportCardsController < ApplicationController
   end
 
   def pdf_download
-    # report_pdf = Prawn::Document.new
-    # # subject_table = Prawn::Table
-    # report_pdf.bounding_box([20, 730], width: 500, height: 650) do
-    #   report_pdf.text "here is my text"
-    #   report_pdf.table([["short", "short", "loooooooooooooooooooong"],
-    #                     ["short", "loooooooooooooooooooong", "short"],
-    #                     ["loooooooooooooooooooong", "short", "short"]])
-    #   report_pdf.transparent(1) { report_pdf.stroke_bounds }
-    # end
     @report_cards = ReportCard.where(term_id: params[:term_id], school_class: params[:school_class_id])
     pdf_file = PdfGeneratorService.new(@report_cards)
     # binding.break
@@ -105,6 +96,8 @@ class ReportCardsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def report_card_params
-    params.require(:report_card).permit(:school_id, :school_class_id, :term_id, :average, :rank, :class_average, :passed_subjects)
+    params.require(:report_card).permit(:school_id, :school_class_id, :term_id, :average, :rank, :class_average, :passed_subjects, :total_score, :total_coefficient,
+                                        details: [:name, :first_seq_mark, :second_seq_mark, :average_mark, :coefficient, :score,
+                                                  :grade, :rank, :teacher, :remark])
   end
 end
