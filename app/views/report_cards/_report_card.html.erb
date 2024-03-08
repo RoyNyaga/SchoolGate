@@ -18,16 +18,16 @@
     <% ReportCard.string_to_hash_arr(report_card.details).each_with_index do |subject, index| %>
       <tr class="progress-table-rows">
         <td class="table-row-data"><%= index += 1 %></td>
-        <td class="table-row-data"><%= subject[:name] %></td>
-        <td class="table-row-data"><%= subject[:first_seq_mark] %></td>
-        <td class="table-row-data"><%= subject[:second_seq_mark] %></td>
-        <td class="table-row-data"><%= subject[:average_mark] %></td>
-        <td class="table-row-data"><%= subject[:coefficient] %></td>
-        <td class="table-row-data"><%= subject[:score] %></td>
-        <td class="table-row-data"><%= subject[:grade] %></td>
-        <td class="table-row-data"><%= subject[:rank] %></td>
-        <td class="table-row-data"><%= subject[:teacher] %></td>
-        <td class="table-row-data"><%= subject[:remark] %></td>
+        <td class="table-row-data"><%= subject["name"] %></td>
+        <td class="table-row-data"><%= subject["first_seq_mark"] %></td>
+        <td class="table-row-data"><%= subject["second_seq_mark"] %></td>
+        <td class="table-row-data"><%= subject["average_mark"] %></td>
+        <td class="table-row-data"><%= subject["coefficient"] %></td>
+        <td class="table-row-data"><%= subject["score"] %></td>
+        <td class="table-row-data"><%= subject["grade"] %></td>
+        <td class="table-row-data"><%= subject["rank"] %></td>
+        <td class="table-row-data"><%= subject["teacher"] %></td>
+        <td class="table-row-data"><%= subject["remark"] %></td>
       </tr>
     <% end %>
   </tbody>
