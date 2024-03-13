@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  academic_year: one
+  school_class: one
+  term: one
+  student_passed_num: 1
+  class_average: 1.5
+  school: one
+  status: 1
+  failed_errors: MyString
+  most_performed_students: MyString
+
+two:
+  academic_year: two
+  school_class: two
+  term: two
+  student_passed_num: 1
+  class_average: 1.5
+  school: two
+  status: 1
+  failed_errors: MyString
+  most_performed_students: MyString
