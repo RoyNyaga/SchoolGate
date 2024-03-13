@@ -1,0 +1,2 @@
+module ReportCardGeneratorsHelper
+end
