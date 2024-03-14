@@ -5,7 +5,8 @@ class SchoolClass < ApplicationRecord
   has_many :sequences, dependent: :destroy
   has_many :report_cards, dependent: :destroy
   has_many :fees, dependent: :destroy
-  has_many :school_classes, dependent: :destroy
+  has_many :teachings, dependent: :destroy
+  has_many :teachers, through: :teachings
 
   validates :name, presence: true, uniqueness: { scope: :school_id,
                                                  message: ": Every Class Should be Unique" }
