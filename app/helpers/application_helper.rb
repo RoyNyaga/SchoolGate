@@ -77,4 +77,9 @@ module ApplicationHelper
       fas_icon("check-double", class: "text-success")
     end
   end
+
+  def generate_years
+    current_year = Date.today.year
+    ["#{current_year - 1}/#{current_year}", "#{current_year}/#{current_year + 1}"]
+  end
 end

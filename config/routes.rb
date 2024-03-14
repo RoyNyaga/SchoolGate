@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :academic_years
+  resources :report_card_generators
+  resources :academic_years do
+    member do
+      put :toggle_activeness
+    end
+  end
   resources :progresses do
     member do
       get :more_details

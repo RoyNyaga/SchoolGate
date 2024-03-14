@@ -1,15 +1,17 @@
 class AcademicYearsController < ApplicationController
   layout "school_layout"
   before_action :check_for_current_school
-  before_action :set_academic_year, only: %i[ show edit update destroy ]
+  before_action :set_academic_year, only: %i[ show edit update destroy toggle_activeness ]
 
   # GET /academic_years or /academic_years.json
   def index
-    @academic_years = AcademicYear.all
+    @academic_year = AcademicYear.new
+    @academic_years = current_school.academic_years
   end
 
   # GET /academic_years/1 or /academic_years/1.json
   def show
+    @term = Term.new
   end
 
   # GET /academic_years/new
@@ -27,11 +29,9 @@ class AcademicYearsController < ApplicationController
 
     respond_to do |format|
       if @academic_year.save
-        format.html { redirect_to academic_year_url(@academic_year), notice: "Academic year was successfully created." }
-        format.json { render :show, status: :created, location: @academic_year }
+        format.html { redirect_to academic_years_path, success: "Academic year was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @academic_year.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -59,6 +59,16 @@ class AcademicYearsController < ApplicationController
     end
   end
 
+  def toggle_activeness
+    is_active = ActiveRecord::Type::Boolean.new.cast(params[:is_active])
+    if @academic_year.update(is_active: is_active)
+      respond_to do |format|
+        flash[:success] = "Successfully updated Academic Year"
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("academic_year_#{@academic_year.id}", partial: "academic_years/academic_year", locals: { academic_year: @academic_year }) }
+      end
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -68,6 +78,6 @@ class AcademicYearsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def academic_year_params
-    params.require(:academic_year).permit(:year, :is_active)
+    params.require(:academic_year).permit(:school_id, :year, :is_active)
   end
 end

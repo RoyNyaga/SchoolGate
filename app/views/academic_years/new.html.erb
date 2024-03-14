@@ -1,9 +1,3 @@
-<h1>New academic year</h1>
-
-<%= render "form", academic_year: @academic_year %>
-
-<br>
-
-<div>
-  <%= link_to "Back to academic years", academic_years_path %>
-</div>
+<%= turbo_frame_tag custom_id_generator("new", record: @academic_year) do %>
+  <%= render "form", academic_year: @academic_year %>
+<% end %>

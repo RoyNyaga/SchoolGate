@@ -21,8 +21,4 @@ module SequencesHelper
       form.select :marks, [["Yes", true, { selected: true }], ["No", false]], {}, { name: "sequence[marks][][is_enrolled]" }
     end
   end
-
-  def generate_years
-    [Date.today.year + 1, Date.today.year, Date.today.year - 1]
-  end
 end

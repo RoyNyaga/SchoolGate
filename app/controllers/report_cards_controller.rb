@@ -76,7 +76,6 @@ class ReportCardsController < ApplicationController
       @school_class = SchoolClass.find(params[:report_card][:school_class_id])
       flash[:success] = "Successfully generated Report Cards for #{@school_class.name}"
       redirect_to request.referer
-      ReportCard.generate_school_class_report_cards(params[:report_card][:school_class_id], params[:report_card][:term_id])
     end
   end
 

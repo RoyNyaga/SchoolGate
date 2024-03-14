@@ -20,6 +20,11 @@ class Student < ApplicationRecord
     mark["mark"] unless mark.nil?
   end
 
+  def was_enrolled?(marks)
+    mark = get_mark_object(marks)
+    mark.nil? ? false : mark["is_enrolled"]
+  end
+
   def get_mark_object(marks)
     marks.find { |student| student["id"] == id.to_s }
   end

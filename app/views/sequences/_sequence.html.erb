@@ -7,6 +7,7 @@
     <%= render partial: "sequences/sequence_card_one", 
         layout: "layouts/drawer_layout", 
         locals: { sequence: sequence, title: sequence.seq_title, item_id: generate_drawer_id("preview_sequence", record: sequence), position: "end", btn_text: "View", btn_visibility: true }%>
+    <%= sequence.status %>
     <%= link_to "Edit", edit_sequence_path(sequence), class: "general-link" %>
   </div>
 </div>
