@@ -4,7 +4,12 @@ class ReportCardGenerator < ApplicationRecord
   belongs_to :term
   belongs_to :school
 
+  enum progress_state: { initializing: 0, report_card_creation: 1, generating_pdf: 2 }
+
   def self.generate_school_class_report_cards(report_card_generator)
+    report_card_generator.update(progress_state: 1)
+    start_time = Time.now
+
     @generator = report_card_generator
     @school_class = @generator.school_class
     @school = @school_class.school
@@ -46,7 +51,7 @@ class ReportCardGenerator < ApplicationRecord
             subject_detail["grade"] = "To Do"
             subject_detail["rank"] = student.sequence_rank(sequence_averages)
             subject_detail["teacher"] = subject.teachers.first.full_name
-            subject_detail["remark"] = "Good"
+            subject_detail["remark"] = subject.add_remarks(average_mark)
             # binding.break
             details << subject_detail.to_s
           else
@@ -71,11 +76,19 @@ class ReportCardGenerator < ApplicationRecord
     add_class_average
 
     if @failed_errors.present?
-      @generator.update(failed_errors: @failed_errors.uniq, warning_messages: @warning_messages.uniq)
+      process_duration = start_time - Time.now
+      @generator.update(failed_errors: @failed_errors.uniq,
+                        warning_messages: @warning_messages.uniq, process_duration: process_duration,
+                        is_successful: false)
     else
+      process_duration = start_time - Time.now
       reports_to_be_deleted = ReportCard.where(school_class_id: @school_class.id, term_id: @term.id, academic_year_id: @academic_year.id)
       reports_to_be_deleted.destroy_all if reports_to_be_deleted.present?
       ReportCard.insert_all @bulk_report
+      @generator.update(is_successful: true, warning_messages: @warning_messages,
+                        process_duration: process_duration, student_passed_num: calc_student_passed_num,
+                        class_average: calc_class_average, most_performed_students: get_most_performed_students,
+                        least_performed_students: get_least_performed_students)
     end
   end
 
@@ -99,9 +112,32 @@ class ReportCardGenerator < ApplicationRecord
     @bulk_report.each { |r| r[:rank] = averages.index(r[:average]) + 1 }
   end
 
+  def self.calc_student_passed_num
+    @bulk_report.select { |r| r[:average] >= 10 }.count
+  end
+
+  def self.sort_reports_increasing_order #1,2,3,4,5
+    @bulk_report.sort_by { |r| r[:average] }
+  end
+
+  def self.sort_reports_decreasing_order # 5,4,3,2,1
+    @bulk_report.sort_by { |r| -r[:average] }
+  end
+
+  def self.get_most_performed_students
+    sort_reports_decreasing_order[0..4]
+  end
+
+  def self.get_least_performed_students
+    sort_reports_increasing_order[0..4]
+  end
+
+  def self.calc_class_average
+    @bulk_report.map { |r| r[:average] }.sum / @bulk_report.size
+  end
+
   def self.add_class_average
-    average = @bulk_report.map { |r| r[:average] }.sum / @bulk_report.size
-    @bulk_report.each { |r| r[:class_average] = average }
+    @bulk_report.each { |r| r[:class_average] = calc_class_average }
   end
 
   def self.error_name_list(error_code)

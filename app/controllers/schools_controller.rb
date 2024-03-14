@@ -63,7 +63,7 @@ class SchoolsController < ApplicationController
 
   def classes
     @school_class = SchoolClass.new
-    @school_classes = current_school.school_classes
+    @school_classes = current_school.school_classes.includes(:teachers, :students)
   end
 
   def students
