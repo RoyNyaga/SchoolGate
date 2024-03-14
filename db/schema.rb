@@ -156,7 +156,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_13_200810) do
     t.integer "student_passed_num"
     t.float "class_average"
     t.bigint "school_id", null: false
-    t.integer "status"
+    t.integer "progress_state", default: 0
+    t.boolean "is_successful", default: false
     t.text "failed_errors", default: [], array: true
     t.text "most_performed_students", default: [], array: true
     t.datetime "created_at", null: false

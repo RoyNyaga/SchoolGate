@@ -7,7 +7,8 @@ class CreateReportCardGenerators < ActiveRecord::Migration[7.1]
       t.integer :student_passed_num
       t.float :class_average
       t.references :school, null: false, foreign_key: true
-      t.integer :status
+      t.integer :progress_state, default: 0
+      t.boolean :is_successful, default: false
       t.text :failed_errors, array: true, default: []
       t.text :most_performed_students, array: true, default: []
 
