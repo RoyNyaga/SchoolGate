@@ -1,0 +1,14 @@
+<%= turbo_frame_tag custom_id_generator("edit", record: school_class) do %>
+  <div class="dark-blue-section-div dashboard-normal-font-size p-2">
+    <h5 class="text-center">Class Info</h5>
+    <p class="margin-zero">Name: <span class="text-color-grey"><%= school_class.name %></span></p>
+    <p class="margin-zero">Level: <span class="text-color-grey"><%= school_class.level %></span></p>
+    <div class="d-flex justify-content-between">
+      <p>Students: <span class="text-color-grey"><%= school_class.students.size%></span></p>
+      <p>Teachers <span class="text-color-grey"><%= school_class.teachers.size%></span></p>
+    </div>
+    <div class="">
+      <%= link_to "Edit", edit_school_class_path(school_class), class: "general-link" %>
+    </div>
+  </div>
+<% end %>

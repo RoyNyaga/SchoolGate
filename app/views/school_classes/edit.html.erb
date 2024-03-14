@@ -1,10 +1,6 @@
-<h1>Editing school class</h1>
-
-<%= render "form", school_class: @school_class %>
-
-<br>
-
-<div>
-  <%= link_to "Show this school class", @school_class %> |
-  <%= link_to "Back to school classes", school_classes_path %>
-</div>
+<%= turbo_frame_tag custom_id_generator("edit", record: school_class) do %>
+  <div class="white-section-div">
+    <%= link_to "Cancel", @school_class, class: "grey-link-text" %>
+    <%= render "form", school_class: @school_class %>
+  </div>
+<% end %>

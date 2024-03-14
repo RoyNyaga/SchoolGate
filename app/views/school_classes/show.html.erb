@@ -1,11 +1,12 @@
 <div class="container">
-  <div class="">
-    <h1>Class general Info</h1>
-    <%= render @school_class %>
-    <div>
-      <%= link_to "Edit this school class", edit_school_class_path(@school_class) %> |
-      <%= link_to "Back to school classes", school_classes_path %>
-      <%= button_to "Destroy this school class", @school_class, method: :delete %>
+  <div class="row">
+    <div class="col-md-3">
+      <%= render partial: "school_classes/school_class_show_card", locals: { school_class: @school_class }%>
+    </div>
+    <div class="col-md-9">
+      <div class="section-div">
+        <h5>Students</h5>
+      </div>
     </div>
   </div>
   <div class="row">
@@ -21,11 +22,6 @@
         <% @subjects.each do |subject| %>
           <p><%= link_to subject.name, subject %></p>
         <% end %>
-      </div>
-    </div>
-    <div class="col-md-4 py-5">
-      <div class="section-div">
-        <h5>Students</h5>
       </div>
     </div>
     <div class="col-md-4 py-5">
