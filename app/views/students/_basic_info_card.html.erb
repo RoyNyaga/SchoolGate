@@ -1,0 +1,35 @@
+<div class="dashboard-normal-font-size" id="<%= dom_id student %>">
+  <p>
+    Current Class: <span class="text-color-grey-2"><%= student.school_class_name %></span>
+  </p>
+  <p>
+    Date Of Birth: <span class="text-color-grey-2"><%= student.readable_date(date: student.date_of_birth, with_year: true) %></span>
+  </p>
+  <p>
+    Town: <span class="text-color-grey-2"><%= student.town %></span>
+  </p>
+  <p>
+    Address: <span class="text-color-grey-2"><%= student.address %></span>
+  </p>
+  <p>
+    Contact: <span class="text-color-grey-2"><%= student.contact %></span>
+  </p>
+  <p>
+    Fathers Name: <span class="text-color-grey-2"><%= student.fathers_name %></span>
+  </p>
+  <p>
+    Fathers Contact: <span class="text-color-grey-2"><%= student.fathers_contact %></span>
+  </p>
+  <p>
+    Mothers Name: <span class="text-color-grey-2"><%= student.mothers_name %></span>
+  </p>
+  <p>
+    Mothers Contact: <span class="text-color-grey-2"><%= student.mothers_contact %></span>
+  </p>
+  <p>
+    Guidance Name: <span class="text-color-grey-2"><%= student.guidance_name %></span>
+  </p>
+  <p>
+    Guidance Contact: <span class="text-color-grey-2"><%= student.guidance_contact %></span>
+  </p>
+</div>

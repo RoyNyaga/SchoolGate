@@ -1,0 +1,31 @@
+<%= form_with(model: report_card_generator) do |form| %>
+  <% if report_card_generator.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(report_card_generator.errors.count, "error") %> prohibited this report_card_generator from being saved:</h2>
+      <ul>
+        <% report_card_generator.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= form.label :academic_year_id, style: "display: block" %>
+    <%= form.collection_select :academic_year_id, current_school.academic_years.active, :id, :year, { prompt: "Select Academic Year", required: true }, { class: "general-input-styles" } %>
+  </div>
+  <div>
+    <%= form.label :school_class_id, style: "display: block" %>
+    <%= form.collection_select :school_class_id, current_school.school_classes, :id, :name, { prompt: "Select School Class", required: true }, { class: "general-input-styles" } %>
+  </div>
+  <div>
+    <%= form.label :term_id, style: "display: block" %>
+    <%= form.collection_select :term_id, current_school.terms, :id, :term_type, { prompt: "Select Term", required: true }, { class: "general-input-styles" } %>
+  </div>
+  <div>
+    <%= form.label :school_id, class: "d-none" %>
+    <%= form.hidden_field :school_id, value: current_school.id %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

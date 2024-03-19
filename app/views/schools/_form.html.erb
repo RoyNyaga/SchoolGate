@@ -30,42 +30,47 @@
       <%= form.label :moto, style: "display: block" %>
       <%= form.text_field :moto, class: "general-input-styles" %>
     </div>
-    <% if edit %>
-      <div class="col-md-12">
-        <h6 class="text-center my-3">School Fees Setting</h6>
-        <div class="row">
-          <div class="col-md-3">
-            <%= form.label :level_1_fees, style: "display: block" %>
-            <%= form.number_field :level_1_fees, class: "general-input-styles" %>
-          </div>
-          <div class="col-md-3">
-            <%= form.label :level_2_fees, style: "display: block" %>
-            <%= form.number_field :level_2_fees, class: "general-input-styles" %>
-          </div>
-          <div class="col-md-3">
-            <%= form.label :level_3_fees, style: "display: block" %>
-            <%= form.number_field :level_3_fees, class: "general-input-styles" %>
-          </div>
-          <div class="col-md-3">
-            <%= form.label :level_4_fees, style: "display: block" %>
-            <%= form.number_field :level_4_fees, class: "general-input-styles" %>
-          </div>
-          <div class="col-md-3">
-            <%= form.label :level_5_fees, style: "display: block" %>
-            <%= form.number_field :level_5_fees, class: "general-input-styles" %>
-          </div>
-          <div class="col-md-3">
-            <%= form.label :level_6_fees, style: "display: block" %>
-            <%= form.number_field :level_6_fees, class: "general-input-styles" %>
-          </div>
-          <div class="col-md-3">
-            <%= form.label :level_7_fees, style: "display: block" %>
-            <%= form.number_field :level_7_fees, class: "general-input-styles" %>
-          </div>
-        </div>
-      </div>
-    <% end %>
   </div>
+  <% if edit %>
+    <h5 class="text-center my-3">School Fees Setting</h5>
+    <div class="row">
+      <div class="col-md-3">
+        <%= form.label :level_1_fees, style: "display: block" %>
+        <%= form.number_field :level_1_fees, class: "general-input-styles" %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :level_2_fees, style: "display: block" %>
+        <%= form.number_field :level_2_fees, class: "general-input-styles" %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :level_3_fees, style: "display: block" %>
+        <%= form.number_field :level_3_fees, class: "general-input-styles" %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :level_4_fees, style: "display: block" %>
+        <%= form.number_field :level_4_fees, class: "general-input-styles" %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :level_5_fees, style: "display: block" %>
+        <%= form.number_field :level_5_fees, class: "general-input-styles" %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :level_6_fees, style: "display: block" %>
+        <%= form.number_field :level_6_fees, class: "general-input-styles" %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :level_7_fees, style: "display: block" %>
+        <%= form.number_field :level_7_fees, class: "general-input-styles" %>
+      </div>
+    </div>
+    <h5 class="text-center my-3">Student ID Settings</h6>
+    <div class="row">
+      <div class="col-md-3">
+        <%= form.label :school_identifier, style: "display: block" %>
+        <%= form.text_field :school_identifier, class: "general-input-styles" %>
+      </div>
+    </div>
+  <% end %>
   <div>
     <%= form.submit %>
   </div>

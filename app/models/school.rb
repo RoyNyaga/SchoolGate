@@ -10,9 +10,14 @@ class School < ApplicationRecord
   has_many :terms, dependent: :destroy
   has_many :report_cards, dependent: :destroy
   has_many :fees, dependent: :destroy
+  has_many :progresses, dependent: :destroy
+  has_many :academic_years
+  has_many :report_card_generators
 
   store_accessor :school_fees_settings, :level_1_fees, :level_2_fees, :level_3_fees, :level_4_fees,
                  :level_5_fees, :level_6_fees, :level_7_fees
+
+  store_accessor :student_id_settings, :school_identifier
 
   scope :without_settings_attr, -> {
       select(:full_name, :id, :teacher_id, :abbreviation, :town,

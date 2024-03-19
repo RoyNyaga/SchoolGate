@@ -1,5 +1,6 @@
 class MainTopicsController < ApplicationController
   include ApplicationHelper # This is to access certain helper methods from the controller
+  before_action :check_for_current_school
   before_action :set_main_topic, only: %i[ show edit update destroy ]
 
   # GET /main_topics or /main_topics.json

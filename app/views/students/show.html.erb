@@ -1,8 +1,32 @@
-<div id="school-main-div">
-  <%= render @student %>
-  <div>
-    <%= link_to "Edit this student", edit_student_path(@student) %> |
-    <%= link_to "Back to students", students_path %>
-    <%= button_to "Destroy this student", @student, method: :delete %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 mx-auto">
+      <div class="my-3 d-flex justify-content-between">
+        <%= link_to "<-- Back", students_schools_path, class: "general-link" %>
+        <%= link_to "Edit", edit_student_path(@student), class: "general-link" %>
+        <%= button_to "Destroy", @student, method: :delete, class: "general-link" %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 dark-blue-section-div p-2 custom-border-medium my-3">
+      <%= render partial: "students/photo_and_other_details", locals: { student: @student } %>
+    </div>
+    <div class="col-md-8 my-3">
+      <div class="light-grey-card custom-border-medium p-3">
+        <%= render partial: "students/basic_info_card", locals: { student: @student }%>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="white-section-div">
+        <h5 class="text-center">Performance Record</h5>
+        <% @report_cards.each do |report_card| %>
+          <%= render partial: "students/performance_record", locals: { report_card: report_card }%>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-8"></div>
   </div>
 </div>

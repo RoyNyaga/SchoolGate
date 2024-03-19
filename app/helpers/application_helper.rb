@@ -77,4 +77,27 @@ module ApplicationHelper
       fas_icon("check-double", class: "text-success")
     end
   end
+
+  def generate_years
+    current_year = Date.today.year
+    ["#{current_year - 1}/#{current_year}", "#{current_year}/#{current_year + 1}"]
+  end
+
+  def percentage_badge_color(percentage_complete)
+    if percentage_complete <= 25
+      "bg-secondary"
+    elsif percentage_complete <= 50
+      "bg-warning"
+    elsif percentage_complete <= 75
+      "bg-info"
+    elsif percentage_complete <= 99
+      "bg-success"
+    elsif percentage_complete >= 100
+      "bg-primary"
+    end
+  end
+
+  def success_state_badge_color(boolean)
+    boolean ? "bg-success" : "bg-danger"
+  end
 end

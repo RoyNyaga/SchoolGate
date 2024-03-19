@@ -1,0 +1,8 @@
+<div class="container-fluid">
+  <%= render partial: "teachers/progress_stats_section", locals: { progresses: @progresses, 
+  topics_covered: @topics_covered, absentist_num: @absentist_num, 
+  total_hours_mins_time: @total_hours_mins_time } %>
+  <div class="white-section-div my-5">
+    <%= render partial: "teachers/progress_table", locals: { progresses: @progresses, for_current_user: false } %>
+  </div>
+</div>

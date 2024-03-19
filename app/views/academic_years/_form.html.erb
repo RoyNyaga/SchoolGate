@@ -1,0 +1,27 @@
+<%= form_with(model: academic_year) do |form| %>
+  <% if academic_year.errors.any? %>
+    <div class="form-error-div">
+      <p><%= pluralize(academic_year.errors.count, "error") %> prohibited this academic_year from being saved:</p>
+      <ul>
+        <% academic_year.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= form.label :year, class: "d-none" %>
+    <%= form.hidden_field :school_id, value: current_school.id %>
+  </div>
+  <div>
+    <%= form.label :year, style: "display: block" %>
+    <%= form.select :year, generate_years.map { |v| [v,v] }, {include_blank: 'Select start Year'}, { class: "general-input-styles" } %>
+  </div>
+  <div>
+    <%= form.label :is_active, style: "display: block" %>
+    <%= form.check_box :is_active %>
+  </div>
+  <div>
+    <%= form.submit class: "model-form-btn" %>
+  </div>
+<% end %>

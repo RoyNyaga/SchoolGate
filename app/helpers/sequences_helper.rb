@@ -22,7 +22,15 @@ module SequencesHelper
     end
   end
 
-  def generate_years
-    [Date.today.year + 1, Date.today.year, Date.today.year - 1]
+  def sequence_status_badge_color(sequence)
+    if sequence.status == "in_progress"
+      "bg-secondary"
+    elsif sequence.status == "submitted"
+      "bg-warning"
+    elsif sequence.status == "rejected"
+      "bg-danger"
+    elsif sequence.status == "approved"
+      "bg-success"
+    end
   end
 end

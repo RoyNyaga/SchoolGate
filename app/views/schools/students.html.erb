@@ -1,29 +1,21 @@
-<div id="school-main-div">
-  <%= render "shared/school_manager_navbar" %>
+<div class="container">
+  <div class="students-class-info row">
+    <% @school_classes.each do |school_class| %>
+      <div class="col-6 col-md-2 my-2">
+        <div class="dark-blue-section-div text-center">
+          <p class="dashboard-normal-font-size"><%= school_class.name %></p>
+          <h5><%= school_class.students.count %></h5>
+        </div>
+      </div>
+    <% end %>
+  </div>
   <div>
     <%= render partial: "students/form", 
         layout: "layouts/modal_layout", 
         locals: { student: @student, action_name: "Add Student", action_title: "Create A New Student",
          modal_id: generate_modal_id("students_create_form") }%>
   </div>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">full names</th>
-        <th scope="col">class</th>
-        <th scope="col">Date of birth</th>
-        <th scope="col">Desciplinary Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @students.each do |student| %>
-        <tr>
-          <td><%= student.full_name %></td>
-          <td><%= student.school_class.name %></td>
-          <td><%= student.date_of_birth %></td>
-          <td>Here</td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="students-list-div white-section-div my-5">
+    <%= render partial: "students/table", locals: { students: @students } %>
+  </div>
 </div>

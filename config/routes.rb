@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :report_card_generators
+  resources :academic_years do
+    member do
+      put :toggle_activeness
+    end
+  end
   resources :progresses do
     member do
       get :more_details
@@ -22,7 +28,11 @@ Rails.application.routes.draw do
     end
   end
   resources :terms
-  resources :sequences
+  resources :sequences do
+    member do
+      put :toggle_approval
+    end
+  end
   resources :workings
   resources :teachings
   resources :subjects do
@@ -70,6 +80,7 @@ Rails.application.routes.draw do
       get :invitations
       get :contracts
       get :permissions
+      get :progresses
     end
   end
 
@@ -88,6 +99,7 @@ Rails.application.routes.draw do
       get :incomplete_fee_per_class
       get :complete_fee_per_class
       get :revenue_per_class_over_time_line_chart
+      get :report_card_performance_line
     end
   end
 end

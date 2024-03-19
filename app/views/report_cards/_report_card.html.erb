@@ -1,37 +1,50 @@
-<div id="<%= dom_id report_card %>">
-  <p>
-    <strong>School:</strong>
-    <%= report_card.school_id %>
-  </p>
-
-  <p>
-    <strong>School class:</strong>
-    <%= report_card.school_class_id %>
-  </p>
-
-  <p>
-    <strong>Term:</strong>
-    <%= report_card.term_id %>
-  </p>
-
-  <p>
-    <strong>Average:</strong>
-    <%= report_card.average %>
-  </p>
-
-  <p>
-    <strong>Rank:</strong>
-    <%= report_card.rank %>
-  </p>
-
-  <p>
-    <strong>Class average:</strong>
-    <%= report_card.class_average %>
-  </p>
-
-  <p>
-    <strong>Passed subjects:</strong>
-    <%= report_card.passed_subjects %>
-  </p>
-
-</div>
+<table class="table table-hover">
+  <thead class="report-card-table-font-size">
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Subject</th>
+      <th scope="col">Seq1</th>
+      <th scope="col">Seq2</th>
+      <th scope="col">Avg/20</th>
+      <th scope="col">Coef</th>
+      <th scope="col">Score</th>
+      <th scope="col">Grade</th>
+      <th scope="col">Rank</th>
+      <th scope="col">Teacher</th>
+      <th scope="col">Remark</th>
+    </tr>
+  </thead>
+  <tbody class="report-card-table-font-size">
+    <% ReportCard.string_to_hash_arr(report_card.details).each_with_index do |subject, index| %>
+      <tr class="progress-table-rows">
+        <td class="table-row-data"><%= index += 1 %></td>
+        <td class="table-row-data"><%= subject["name"] %></td>
+        <td class="table-row-data"><%= subject["first_seq_mark"] %></td>
+        <td class="table-row-data"><%= subject["second_seq_mark"] %></td>
+        <td class="table-row-data"><%= subject["average_mark"] %></td>
+        <td class="table-row-data"><%= subject["coefficient"] %></td>
+        <td class="table-row-data"><%= subject["score"] %></td>
+        <td class="table-row-data"><%= subject["grade"] %></td>
+        <td class="table-row-data"><%= subject["rank"] %></td>
+        <td class="table-row-data"><%= subject["teacher"] %></td>
+        <td class="table-row-data"><%= subject["remark"] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<table class="table table-hover">
+  <tbody class="report-card-table-font-size">
+    <tr class="progress-table-rows">
+      <td class="table-row-data">Terminal Average</td>
+      <td class="table-row-data"><strong><%= report_card.average.round(2) %></strong></td>
+    </tr>
+    <tr class="progress-table-rows">
+      <td class="table-row-data">Rank</td>
+      <td class="table-row-data"><strong><%= report_card.rank %></strong></td>
+    </tr>
+    <tr class="progress-table-rows">
+      <td class="table-row-data">Class Average</td>
+      <td class="table-row-data"><strong><%= report_card.class_average.round(2) %></strong></td>
+    </tr>
+  </tbody>
+</table>

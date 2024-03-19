@@ -10,19 +10,6 @@ h1 {
   color: white;
 }
 
-.general-input-styles {
-  font-family: 'Josefin Sans', sans-serif;
-  width: 100%;
-  height: 35px;
-  padding: 5px;
-  background: #ffffff2a;
-  border: 2px solid #022130;
-  color: #022130;
-  font-size: 16px;
-  border-radius: 5px;
-  margin-top: 7px;
-}
-
 label {
   color: #022130;
   font-family: 'Josefin Sans', sans-serif;
@@ -106,14 +93,14 @@ label {
 }
 
 .table-head-styles {
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 .table-row-data {
   background-color: transparent !important;
   color: var(--grey-color-1) !important;
   padding: 10px 8px !important;
-  font-size: 1em;
+  font-size: 0.8em;
 }
 
 .fee-progress-fonts {
@@ -174,21 +161,33 @@ label {
   border-radius: 10px;
 }
 
-.delete-text-link{
+.delete-text-link {
   text-decoration: underline;
   color: black;
   border: none;
   font-size: var(--general-text-btn-font-size);
 }
 
-.sequence-mark-input{
+.sequence-mark-input {
   width: 60%;
 }
 
-.percent-complete-badge{
+.percent-complete-badge {
   padding: 5px;
   font-weight: 900;
   border-radius: 30px;
+}
+
+.toggle-icons{
+  font-size: 1.5em;
+}
+
+.toggle-icon-active{
+  color: #10c310;
+}
+
+.toggle-icon-deactivated{
+  color: grey;
 }
 
 @keyframes appear-then-fade {
@@ -220,7 +219,7 @@ label {
   &__message_success {
     animation: appear-then-fade 4s both;
     border-radius: 999px;
-    background: rgb(2, 102, 2);
+    background: var(--success-color);
     color: white;
     padding: 10px;
 
@@ -232,8 +231,8 @@ label {
   &__message_error {
     animation: appear-then-fade 4s both;
     border-radius: 999px;
-    background: rgb(119, 2, 2);
-    color: white;
+    background: var(--error-background-color);
+    color: var(--error-text-color);
     padding: 10px;
 
     @media screen and (max-width: 425px) {
@@ -254,6 +253,11 @@ label {
   }
 }
 
+.form-error-div{
+  background: var(--error-background-color);
+  color: var(--error-text-color);
+}
+
 #school-layout-body {
   background-color: var(--background-grey-color);
 }
@@ -270,8 +274,16 @@ label {
   font-size: 1.1em;
 }
 
+.dashboard-medium-font-size {
+  font-size: 1.4em;
+}
+
 .dashboard-small-font-size {
   font-size: 0.8em;
+}
+
+.dashboard-extra-small{
+  font-size: 0.6em;
 }
 
 .text-color-info {
@@ -282,8 +294,40 @@ label {
   color: var(--text-color-grey);
 }
 
-.text-color-grey-2{
+.text-color-grey-2 {
   color: var(--text-color-grey-2);
+}
+
+.custom-border-medium {
+  border: 3px solid #6e757d;
+}
+
+.custom-border-small {
+  border: 2px solid #6e757d;
+}
+
+.report-card-table-font-size{
+  font-size: 0.9em;
+}
+
+.horizontal-scroll{
+  // white-space: nowrap;
+  overflow-x: auto; /* Enable horizontal scrolling */
+}
+
+.report-card-detail-input-size{
+  width: 60px;
+}
+
+.scrollable-tbody {
+  height: 400px; /* Set the desired height */
+  overflow-y: auto; /* Add vertical scrollbar when content exceeds the height */
+  border: 1px solid #ccc; /* Optional: Add border for visual clarity */
+  thead {
+    /* Make sure the header cells align with the body cells */
+    position: sticky;
+    top: 0;
+  }
 }
 
 @media screen and (max-width: 425px) {
@@ -292,10 +336,14 @@ label {
   }
 
   .table-row-data {
-    font-size: 0.9em;
+    font-size: 0.7em;
   }
 
   .table-head-styles {
-    font-size: 1.1em;
+    font-size: 0.9em;
   }
+
+  // .report-card-detail-input-size{
+  //   width: 80%;
+  // }
 }

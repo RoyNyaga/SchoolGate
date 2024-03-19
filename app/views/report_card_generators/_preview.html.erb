@@ -1,0 +1,26 @@
+<div>
+  <div class="d-flex justify-content-between light-grey-card p-2">
+    <p class="margin-zero">Generate Status: <span class="text-white badge <%= success_state_badge_color(report_card_generator.is_successful) %>"><%= report_card_generator.is_successful %></span></p>
+    <%= button_to "Regenerate", report_card_generator_path(report_card_generator), method: :put, class: "general-btn"%>
+  </div>
+  <div class="my-3 row white-section-div">
+    <div class="col-md-6">
+      <p class="margin-zero">Number of Students: <span class="text-color-grey-2"><%= report_card_generator.student_num %></span></p>
+      <p class="margin-zero">Number of successful Students: <span class="text-color-grey-2"><%= report_card_generator.student_passed_num %></span></p>
+      <p class="margin-zero">Class Average: <span class="text-color-grey-2"><%= report_card_generator.class_average %></span></p>
+      <p class="margin-zero">Success Rate: 
+        <span class="text-color-grey-2"><%= report_card_generator.student_passed_num %> / <%= report_card_generator.student_num %></span>
+        <span class="text-white percent-complete-badge text-center <%= percentage_badge_color(report_card_generator.success_rate) %>">
+          <%= report_card_generator.success_rate %> %</span>
+      </p>
+    </div>
+    <div class="col-md-6">
+      <p class="margin-zero">Process duration: <span class="text-color-grey-2"><%= report_card_generator.format_process_duration %></span></p>
+      <p class="margin-zero">Process state: <span class="text-color-grey-2"><%= report_card_generator.progress_state %></span></p>
+      <p class="margin-zero">Error Count: <span class="text-color-grey-2"><%= report_card_generator.failed_errors.size %></span></p>
+      <p class="margin-zero">Warning count: <span class="text-color-grey-2"><%= report_card_generator.warning_messages.size %></span></p>
+      <%= render partial: "failed_errors", locals: { failed_errors: ReportCardGenerator.string_to_hash_arr(report_card_generator.failed_errors) }%>
+      <%= render partial: "warning_messages", locals: { warning_messages: ReportCardGenerator.string_to_hash_arr(report_card_generator.warning_messages) }%>
+    </div>
+  </div>
+</div>

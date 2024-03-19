@@ -1,7 +1,9 @@
 <div>
-  <div class="my-3">
-    <%= link_to "Edit", edit_progress_path(progress), class: "general-link" %>
-  </div>
+  <% unless hide_edit_action %>
+    <div class="my-3">
+      <%= link_to "Edit", edit_progress_path(progress), class: "general-link" %>
+    </div>
+  <% end %>
   <div class="row">
     <div class="col-md-8 mx-auto">
       <p class="dashboard-normal-font-size d-flex justify-content-between"><span>Teacher:</span> <span class="text-color-grey-2"><%= progress.teacher.full_name %></span></p>

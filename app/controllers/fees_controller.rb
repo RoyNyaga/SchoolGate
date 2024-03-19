@@ -1,5 +1,6 @@
 class FeesController < ApplicationController
   layout "school_layout"
+  before_action :check_for_current_school
   before_action :set_fee, only: %i[ show edit update destroy ]
 
   # GET /fees or /fees.json

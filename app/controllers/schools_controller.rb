@@ -63,12 +63,13 @@ class SchoolsController < ApplicationController
 
   def classes
     @school_class = SchoolClass.new
-    @school_classes = current_school.school_classes
+    @school_classes = current_school.school_classes.includes(:teachers, :students)
   end
 
   def students
     @student = Student.new
     @students = current_school.students
+    @school_classes = current_school.school_classes.includes(:students)
   end
 
   def teachers
@@ -87,6 +88,14 @@ class SchoolsController < ApplicationController
     @workings = current_school.workings
   end
 
+  def progresses
+    week_start_and_end_dates = Progress.generate_start_and_end_week_dates(Time.now)
+    @progresses = current_school.progresses.where("created_at >= '#{week_start_and_end_dates[:start]}' AND created_at <= '#{week_start_and_end_dates[:end]}'")
+    @total_hours_mins_time = Progress.calc_total_time(@progresses)
+    @topics_covered = @progresses.map { |p| p.topics.count }.sum
+    @absentist_num = @progresses.map { |p| p.absent_students.count }.sum
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -97,6 +106,6 @@ class SchoolsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def school_params
     params.require(:school).permit(:full_name, :abbreviation, :town, :address, :moto, :level_1_fees, :level_2_fees,
-                                   :level_3_fees, :level_4_fees, :level_5_fees, :level_6_fees, :level_7_fees)
+                                   :level_3_fees, :level_4_fees, :level_5_fees, :level_6_fees, :level_7_fees, :school_identifier)
   end
 end

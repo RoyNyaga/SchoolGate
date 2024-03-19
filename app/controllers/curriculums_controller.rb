@@ -1,4 +1,5 @@
 class CurriculumsController < ApplicationController
+  before_action :check_for_current_school
   before_action :set_curriculum, only: %i[ show edit update destroy ]
 
   # GET /curriculums or /curriculums.json

@@ -2,11 +2,14 @@ class Term < ApplicationRecord
   belongs_to :school
   has_many :sequences
   has_many :report_cards
+  belongs_to :academic_year
 
+  validates :term_type, uniqueness: { scope: :academic_year_id,
+                                      message: "Term already exist for this academic year" }
   enum term_type: { first_term: 1, second_term: 2, third_term: 3 }
 
   def title
-    "#{term_type.humanize} - #{academic_year}"
+    "#{term_type.humanize} - #{academic_year.year}"
   end
 
   def sum_sequence_subject_marks(subject_id) # returns an array of marks hases with the sum of first sequence and second sequence marks

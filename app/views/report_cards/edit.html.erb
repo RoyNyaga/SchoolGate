@@ -1,10 +1,5 @@
-<h1>Editing report card</h1>
-
-<%= render "form", report_card: @report_card %>
-
-<br>
-
-<div>
+<div class="container">
+  <%= render "form", report_card: @report_card %>
   <%= link_to "Show this report card", @report_card %> |
   <%= link_to "Back to report cards", report_cards_path %>
 </div>

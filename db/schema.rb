@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_22_213745) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_17_125707) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,6 +26,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_213745) do
     t.index ["school_id"], name: "index_absences_on_school_id"
     t.index ["student_id"], name: "index_absences_on_student_id"
     t.index ["term_id"], name: "index_absences_on_term_id"
+  end
+
+  create_table "academic_years", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.string "year"
+    t.boolean "is_active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_id"], name: "index_academic_years_on_school_id"
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -140,6 +149,29 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_213745) do
     t.index ["term_id"], name: "index_progresses_on_term_id"
   end
 
+  create_table "report_card_generators", force: :cascade do |t|
+    t.bigint "academic_year_id", null: false
+    t.bigint "school_class_id", null: false
+    t.bigint "term_id", null: false
+    t.integer "student_passed_num"
+    t.float "class_average"
+    t.bigint "school_id", null: false
+    t.integer "progress_state", default: 0
+    t.boolean "is_successful", default: false
+    t.text "failed_errors", default: [], array: true
+    t.text "most_performed_students", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "warning_messages", default: [], array: true
+    t.float "process_duration", default: 0.0
+    t.text "least_performed_students", default: [], array: true
+    t.integer "student_num"
+    t.index ["academic_year_id"], name: "index_report_card_generators_on_academic_year_id"
+    t.index ["school_class_id"], name: "index_report_card_generators_on_school_class_id"
+    t.index ["school_id"], name: "index_report_card_generators_on_school_id"
+    t.index ["term_id"], name: "index_report_card_generators_on_term_id"
+  end
+
   create_table "report_cards", force: :cascade do |t|
     t.bigint "school_id", null: false
     t.bigint "school_class_id", null: false
@@ -154,6 +186,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_213745) do
     t.bigint "student_id", null: false
     t.float "total_score", default: 0.0
     t.float "total_coefficient", default: 0.0
+    t.bigint "academic_year_id", null: false
+    t.index ["academic_year_id"], name: "index_report_cards_on_academic_year_id"
     t.index ["school_class_id"], name: "index_report_cards_on_school_class_id"
     t.index ["school_id"], name: "index_report_cards_on_school_id"
     t.index ["student_id"], name: "index_report_cards_on_student_id"
@@ -179,6 +213,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_213745) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.json "school_fees_settings", default: {}
+    t.jsonb "student_id_settings", default: {}
     t.index ["teacher_id"], name: "index_schools_on_teacher_id"
   end
 
@@ -192,6 +227,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_213745) do
     t.text "marks", default: [], array: true
     t.bigint "subject_id", null: false
     t.bigint "term_id"
+    t.bigint "academic_year_id", default: 1, null: false
+    t.integer "status", default: 0
+    t.index ["academic_year_id"], name: "index_sequences_on_academic_year_id"
     t.index ["school_class_id"], name: "index_sequences_on_school_class_id"
     t.index ["school_id"], name: "index_sequences_on_school_id"
     t.index ["subject_id"], name: "index_sequences_on_subject_id"
@@ -215,11 +253,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_213745) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "town"
-    t.string "unique_identification"
+    t.string "matricule"
     t.string "portal_code"
     t.string "first_name"
     t.string "last_name"
     t.text "previous_classes", default: [], array: true
+    t.string "contact"
+    t.integer "status", default: 0
     t.index ["school_class_id"], name: "index_students_on_school_class_id"
     t.index ["school_id"], name: "index_students_on_school_id"
   end
@@ -231,6 +271,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_213745) do
     t.float "coefficient", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "remarks", default: {"less_than_equal_to_5"=>"Very poor", "less_than_equal_to_9"=>"Poor", "less_than_equal_to_12"=>"Average", "less_than_equal_to_15"=>"Good", "less_than_equal_to_18"=>"V good", "less_than_equal_to_20"=>"Excellent"}
     t.index ["school_class_id"], name: "index_subjects_on_school_class_id"
     t.index ["school_id"], name: "index_subjects_on_school_id"
   end
@@ -268,7 +309,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_213745) do
     t.integer "term_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "academic_year", default: "2023/2024"
+    t.bigint "academic_year_id", default: 1
+    t.index ["academic_year_id"], name: "index_terms_on_academic_year_id"
     t.index ["school_id"], name: "index_terms_on_school_id"
   end
 
@@ -302,6 +344,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_213745) do
   add_foreign_key "absences", "schools"
   add_foreign_key "absences", "students"
   add_foreign_key "absences", "terms"
+  add_foreign_key "academic_years", "schools"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "curriculums", "school_classes"
@@ -321,12 +364,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_213745) do
   add_foreign_key "progresses", "subjects"
   add_foreign_key "progresses", "teachers"
   add_foreign_key "progresses", "terms"
+  add_foreign_key "report_card_generators", "academic_years"
+  add_foreign_key "report_card_generators", "school_classes"
+  add_foreign_key "report_card_generators", "schools"
+  add_foreign_key "report_card_generators", "terms"
+  add_foreign_key "report_cards", "academic_years"
   add_foreign_key "report_cards", "school_classes"
   add_foreign_key "report_cards", "schools"
   add_foreign_key "report_cards", "students"
   add_foreign_key "report_cards", "terms"
   add_foreign_key "school_classes", "schools"
   add_foreign_key "schools", "teachers"
+  add_foreign_key "sequences", "academic_years"
   add_foreign_key "sequences", "school_classes"
   add_foreign_key "sequences", "schools"
   add_foreign_key "sequences", "subjects"
@@ -339,6 +388,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_213745) do
   add_foreign_key "teachings", "school_classes"
   add_foreign_key "teachings", "subjects"
   add_foreign_key "teachings", "teachers"
+  add_foreign_key "terms", "academic_years"
   add_foreign_key "terms", "schools"
   add_foreign_key "topics", "main_topics"
   add_foreign_key "topics", "subjects"

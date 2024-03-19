@@ -11,6 +11,7 @@ class StudentsController < ApplicationController
 
   # GET /students/1 or /students/1.json
   def show
+    @report_cards = @student.report_cards.includes(:term, :school_class)
   end
 
   # GET /students/new
