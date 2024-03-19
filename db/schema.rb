@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_14_120521) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_17_125707) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -165,6 +165,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_120521) do
     t.text "warning_messages", default: [], array: true
     t.float "process_duration", default: 0.0
     t.text "least_performed_students", default: [], array: true
+    t.integer "student_num"
     t.index ["academic_year_id"], name: "index_report_card_generators_on_academic_year_id"
     t.index ["school_class_id"], name: "index_report_card_generators_on_school_class_id"
     t.index ["school_id"], name: "index_report_card_generators_on_school_id"
@@ -258,6 +259,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_120521) do
     t.string "last_name"
     t.text "previous_classes", default: [], array: true
     t.string "contact"
+    t.integer "status", default: 0
     t.index ["school_class_id"], name: "index_students_on_school_class_id"
     t.index ["school_id"], name: "index_students_on_school_id"
   end
