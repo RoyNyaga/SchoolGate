@@ -28,7 +28,11 @@ Rails.application.routes.draw do
     end
   end
   resources :terms
-  resources :sequences
+  resources :sequences do
+    member do
+      put :toggle_approval
+    end
+  end
   resources :workings
   resources :teachings
   resources :subjects do
