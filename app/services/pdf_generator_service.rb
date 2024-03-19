@@ -1,11 +1,17 @@
 class PdfGeneratorService
   attr_accessor :report_cards
 
-  def initialize(report_cards)
+  def initialize(report_card_generator)
     @pdf = Prawn::Document.new
+
     # @document_width = @pdf.bounds.width
-    @report_cards = report_cards
-    @school = School.find(report_cards.first.school_id)
+    @report_card_generator = report_card_generator
+    @report_cards = report_card_generator.report_cards
+    @school = @report_card_generator.school
+  end
+
+  def file_name
+    "#{@report_card_generator.title(with_school: true).gsub(" ", "_").gsub("-", "_").gsub("/", "_")}_#{@report_card_generator.id}.pdf"
   end
 
   def table_head
