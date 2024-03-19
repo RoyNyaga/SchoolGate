@@ -63,3 +63,5 @@ Things you may want to cover:
 
 ## performance inspection tools
 - honeybadger
+
+- https://www.reddit.com/r/rails/comments/blqc5i/generating_a_pdf_on_disk_using_prawn_and/
