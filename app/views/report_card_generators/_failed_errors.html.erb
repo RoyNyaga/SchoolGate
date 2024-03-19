@@ -1,0 +1,18 @@
+<div class="accordion accordion-flush" id="report-error-div-parent">
+  <div class="accordion-item">
+    <div class="accordion-header" id="error-heading">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#report-error-div" aria-expanded="false" aria-controls="report-error-div">
+        Errors <%= failed_errors.count %>
+      </button>
+    </div>
+    <div id="report-error-div" class="accordion-collapse collapse" aria-labelledby="error-heading" data-bs-parent="#report-error-div-parent">
+      <div class="accordion-body">
+        <ol>
+          <% failed_errors.each do |failed_error| %>
+            <li><%= generate_error_and_warning_links(failed_error) %></li>
+          <% end %>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
