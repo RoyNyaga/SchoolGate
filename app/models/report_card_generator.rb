@@ -1,18 +1,19 @@
 class ReportCardGenerator < ApplicationRecord
   include DataTrans
-
+  has_one_attached :report_card_file
   belongs_to :academic_year
   belongs_to :school_class
   belongs_to :term
   belongs_to :school
+  has_many :report_cards
 
-  enum progress_state: { initializing: 0, report_card_creation: 1, generating_pdf: 2 }
+  enum progress_state: { initializing: 0, report_card_creation: 1, generating_pdf: 2, attach_pdf_to_generator: 3, completed: 4 }
   delegate :year, to: :academic_year
   delegate :name, to: :school_class
   delegate :term_type, to: :term
 
-  def title
-    "#{name} - #{term_type} - #{year}"
+  def title(with_school: false)
+    with_school ? "#{name} - #{term_type} - #{year} - #{school.full_name}" : "#{name} - #{term_type} - #{year}"
   end
 
   def success_rate
@@ -111,6 +112,18 @@ class ReportCardGenerator < ApplicationRecord
                         student_passed_num: calc_student_passed_num, class_average: calc_class_average,
                         most_performed_students: get_most_performed_students, failed_errors: @failed_errors,
                         least_performed_students: get_least_performed_students)
+
+      @generator.update(progress_state: 2)
+
+      pdf_generator = PdfGeneratorService.new(@generator)
+      pdf_data = pdf_generator.generate_pdf
+      file_name = pdf_generator.file_name
+      @generator.update(progress_state: 3)
+
+      pdf_data.render_file Rails.root.join("public/report_cards", file_name)
+      pdf_path = File.open Rails.root.join("public/report_cards/#{file_name}")
+      @generator.report_card_file.attach(io: pdf_path, filename: file_name)
+      @generator.update(progress_state: 4)
     end
   end
 
