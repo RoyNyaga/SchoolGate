@@ -1,14 +1,11 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Report card generators</h1>
-
-<div id="report_card_generators">
-  <% @report_card_generators.each do |report_card_generator| %>
-    <%= render report_card_generator %>
-    <p>
-      <%= link_to "Show this report card generator", report_card_generator %>
-    </p>
-  <% end %>
+<div class="container">
+  <h4 class="text-center my-3">Report card generators</h4>
+  <div id="report_card_generators" class="row">
+    <% @report_card_generators.each do |report_card_generator| %>
+      <div class="col-md-4">
+        <%= render report_card_generator %>
+      </div>
+    <% end %>
+  </div>
 </div>
-
 <%= link_to "New report card generator", new_report_card_generator_path %>

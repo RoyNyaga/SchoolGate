@@ -16,8 +16,8 @@ class ReportCard < ApplicationRecord
     ]
     arr.each do |subject, index|
       seq_obj = {
-        "first_seq_mark_data" => { "#{subject[:name][0..3]}" => subject[:first_seq_mark] },
-        "second_seq_mark_data" => { "#{subject[:name][0..3]}" => subject[:second_seq_mark] },
+        "first_seq_mark_data" => { "#{subject["name"][0..3]}" => subject["first_seq_mark"] },
+        "second_seq_mark_data" => { "#{subject["name"][0..3]}" => subject["second_seq_mark"] },
       }
 
       main_data.each_with_index do |obj, index|
@@ -29,7 +29,7 @@ class ReportCard < ApplicationRecord
   end
 
   def long_title
-    "#{term.term_type} #{term.academic_year} #{school_class.name}"
+    "#{term.term_type} #{term.academic_year.year} #{school_class.name}"
   end
 
   def details_for(subject)

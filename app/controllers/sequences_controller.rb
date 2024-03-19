@@ -1,11 +1,11 @@
 class SequencesController < ApplicationController
   layout "school_layout"
   before_action :check_for_current_school
-  before_action :set_sequence, only: %i[ show edit update destroy ]
+  before_action :set_sequence, only: %i[ show edit update destroy toggle_approval ]
 
   # GET /sequences or /sequences.json
   def index
-    @sequences = Sequence.all
+    @sequences = current_school.sequences.order(created_at: :desc)
   end
 
   # GET /sequences/1 or /sequences/1.json
@@ -28,7 +28,8 @@ class SequencesController < ApplicationController
   # POST /sequences or /sequences.json
   def create
     @sequence = Sequence.new(sequence_params)
-
+    @school_class = @sequence.school_class
+    @subject = @sequence.subject
     respond_to do |format|
       if @sequence.save
         format.html { redirect_to sequence_url(@sequence), notice: "Sequence was successfully created." }
@@ -42,8 +43,9 @@ class SequencesController < ApplicationController
 
   # PATCH/PUT /sequences/1 or /sequences/1.json
   def update
+    @school_class = @sequence.school_class
+    @subject = @sequence.subject
     respond_to do |format|
-      binding.break
       if @sequence.update(sequence_params)
         format.html { redirect_to sequence_url(@sequence), notice: "Sequence was successfully updated." }
         format.json { render :show, status: :ok, location: @sequence }
@@ -62,6 +64,15 @@ class SequencesController < ApplicationController
       format.html { redirect_to sequences_url, notice: "Sequence was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def toggle_approval
+    if @sequence.update(status: params[:status].to_i)
+      flash[:success] = "Successfully approved Sequence"
+    else
+      flash[:error] = "Error: #{@sequence.errors.full_messages.join(", ")}"
+    end
+    redirect_to request.referer
   end
 
   private

@@ -93,14 +93,14 @@ label {
 }
 
 .table-head-styles {
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 .table-row-data {
   background-color: transparent !important;
   color: var(--grey-color-1) !important;
   padding: 10px 8px !important;
-  font-size: 1em;
+  font-size: 0.8em;
 }
 
 .fee-progress-fonts {
@@ -231,8 +231,8 @@ label {
   &__message_error {
     animation: appear-then-fade 4s both;
     border-radius: 999px;
-    background: rgb(119, 2, 2);
-    color: white;
+    background: var(--error-background-color);
+    color: var(--error-text-color);
     padding: 10px;
 
     @media screen and (max-width: 425px) {
@@ -251,6 +251,11 @@ label {
       padding: 2;
     }
   }
+}
+
+.form-error-div{
+  background: var(--error-background-color);
+  color: var(--error-text-color);
 }
 
 #school-layout-body {
@@ -314,17 +319,28 @@ label {
   width: 60px;
 }
 
+.scrollable-tbody {
+  height: 400px; /* Set the desired height */
+  overflow-y: auto; /* Add vertical scrollbar when content exceeds the height */
+  border: 1px solid #ccc; /* Optional: Add border for visual clarity */
+  thead {
+    /* Make sure the header cells align with the body cells */
+    position: sticky;
+    top: 0;
+  }
+}
+
 @media screen and (max-width: 425px) {
   .canvas-custom-class {
     width: 90% !important;
   }
 
   .table-row-data {
-    font-size: 0.9em;
+    font-size: 0.7em;
   }
 
   .table-head-styles {
-    font-size: 1.1em;
+    font-size: 0.9em;
   }
 
   // .report-card-detail-input-size{

@@ -1,14 +1,11 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Sequences</h1>
-
-<div id="sequences">
-  <% @sequences.each do |sequence| %>
-    <%= render sequence %>
-    <p>
-      <%= link_to "Show this sequence", sequence %>
-    </p>
-  <% end %>
+<div class="container">
+  <h4 class="text-center my-3">Sequences</h4>
+  <div id="sequences">
+    <% @sequences.each do |sequence| %>
+      <%= render sequence %>
+      <p>
+        <%= link_to "Show this sequence", sequence %>
+      </p>
+    <% end %>
+  </div>
 </div>
-
-<%= link_to "New sequence", new_sequence_path %>

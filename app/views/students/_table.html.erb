@@ -11,15 +11,15 @@
     </tr>
   </thead>
   <tbody>
-    <% @students.each do |student| %>
+    <% students.each do |student| %>
       <tr>
         <td>
           <%= link_to student.two_names, "##{generate_drawer_id("preview", record: student)}", 
-          class: "grey-link-text dashboard-normal-font-size", data: { bs_toggle: "offcanvas" },
+          class: "grey-link-text", data: { bs_toggle: "offcanvas" },
           role: "button", aria: {controls: "#{generate_drawer_id("preview", record: student)}_drawer"} %>
         </td>
-        <td><%= student.school_class.name %></td>
-        <td><%= student.matricule %></td>
+        <td class="table-row-data"><%= student.school_class.name %></td>
+        <td class="table-row-data"><%= student.matricule %></td>
         <td class="table-row-data d-none d-md-table-cell"><%= student.date_of_birth %></td>
         <td class="table-row-data d-none d-md-table-cell"><%= student.fathers_name %></td>
         <td class="table-row-data d-none d-md-table-cell"><%= student.mothers_name %></td>

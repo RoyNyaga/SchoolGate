@@ -1,6 +1,8 @@
-<%= turbo_frame_tag custom_id_generator("edit", record: school_class) do %>
+<%= turbo_frame_tag custom_id_generator("edit", record: @school_class) do %>
   <div class="white-section-div">
-    <%= link_to "Cancel", @school_class, class: "grey-link-text" %>
+    <div class="text-center">
+      <%= link_to "Cancel", @school_class, class: "grey-link-text" %>
+    </div>
     <%= render "form", school_class: @school_class %>
   </div>
 <% end %>

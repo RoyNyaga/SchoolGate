@@ -12,6 +12,7 @@ class Student < ApplicationRecord
     create_fees
   end
   before_save :set_full_name # this method is defined in the application_record
+  enum status: { active: 0, dropout: 1, dismissed: 2 }
 
   delegate :name, to: :school_class, prefix: true
 

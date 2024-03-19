@@ -21,4 +21,16 @@ module SequencesHelper
       form.select :marks, [["Yes", true, { selected: true }], ["No", false]], {}, { name: "sequence[marks][][is_enrolled]" }
     end
   end
+
+  def sequence_status_badge_color(sequence)
+    if sequence.status == "in_progress"
+      "bg-secondary"
+    elsif sequence.status == "submitted"
+      "bg-warning"
+    elsif sequence.status == "rejected"
+      "bg-danger"
+    elsif sequence.status == "approved"
+      "bg-success"
+    end
+  end
 end

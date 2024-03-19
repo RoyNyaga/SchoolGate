@@ -39,6 +39,7 @@
       <tbody class="report-card-table-font-size">
         <% @school_class.subjects.each do |subject| %>
           <% detail = report_card.details_for(subject) %>
+          <% next if detail.nil? %>
           <tr class="progress-table-rows" id="<%= custom_id_generator('details', record: subject)%>">
             <td class="table-row-data">
               <%= detail_dynamic_inputs(form, "text_field", "report_card[details][][disabled_name]", subject.name, disabled: true ) %>

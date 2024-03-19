@@ -12,6 +12,7 @@ class School < ApplicationRecord
   has_many :fees, dependent: :destroy
   has_many :progresses, dependent: :destroy
   has_many :academic_years
+  has_many :report_card_generators
 
   store_accessor :school_fees_settings, :level_1_fees, :level_2_fees, :level_3_fees, :level_4_fees,
                  :level_5_fees, :level_6_fees, :level_7_fees

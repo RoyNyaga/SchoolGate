@@ -7,10 +7,13 @@ class Sequence < ApplicationRecord
   belongs_to :academic_year
 
   delegate :term_type, to: :term
+  delegate :name, to: :school_class
+
   enum seq_num: { first_sequence: 1, second_sequence: 2, third_sequence: 3, forth_sequence: 4, fifth_sequence: 5, sith_sequence: 6 }
   enum status: { in_progress: 0, submitted: 1, rejected: 2, approved: 3 }
 
   validate :sequences_per_term
+  validate :enrollment_num_not_zero
 
   def hashed_marks
     # parsing marks to ruby hash and converting the mark value to float
@@ -25,11 +28,12 @@ class Sequence < ApplicationRecord
   end
 
   def sort_by_mark_desc
-    hashed_marks.sort_by { |item| -item["mark"] }
+    enrolled_students.sort_by { |item| -item["mark"] }
   end
 
-  def seq_title
-    "#{seq_num} - #{term_type} - #{academic_year.year}"
+  def seq_title(with_class_name: false)
+    with_class_name ? "#{name} - #{seq_num} - #{term_type} - #{academic_year.year}" :
+      "#{seq_num} - #{term_type} - #{academic_year.year}"
   end
 
   def enrolled_students
@@ -59,6 +63,12 @@ class Sequence < ApplicationRecord
   private
 
   def sequences_per_term
-    errors.add(:term, "Can't not have more than 2 sequences") if term.sequences.count = 2
+    unless self.persisted?
+      errors.add(:term, "Can not have more than 2 sequences per term") if term.sequences.count == 2
+    end
+  end
+
+  def enrollment_num_not_zero
+    errors.add(:enrollment, "should exist atleast for one student") if enrolled_students.size == 0
   end
 end

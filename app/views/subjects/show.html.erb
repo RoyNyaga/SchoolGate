@@ -1,20 +1,48 @@
-<div id="school-main-div">
-  <%= render "shared/school_manager_navbar" %>
-  <%= link_to @school_class.name, @school_class %> / <%= link_to @subject.name, @subject %>
-  <%= render @subject %>
-  <div>
-    <%= link_to "Edit this subject", edit_subject_path(@subject) %> |
-    <%= link_to "Back to subjects", subjects_path %>
-    <%= button_to "Destroy this subject", @subject, method: :delete %>
+<div class="container">
+  <div class="my-2">
+    <%= link_to @school_class.name, @school_class, class: "edit-link" %> / <%= link_to @subject.name, @subject, class: "edit-link" %>
   </div>
-  <div>
-    <h5>Teachers</h5>
-    <% @subject.teachers.each do |teacher| %>
-      <p><%= teacher.full_name %></p>
-    <% end %>
-    <%= render partial: "teachings/form", 
+  <div class="row my-2">
+    <div class="col-md-3 white-section-div p-2 my-2">
+      <%= render partial: "subjects/subject", locals: { subject: @subject, is_admin_dashboard: true }%>
+      <div class="light-grey-card dashboard-normal-font-size p-2 my-3">
+        <h5>Teachers</h5>
+        <% @subject.teachers.each do |teacher| %>
+          <p><%= teacher.full_name %></p>
+        <% end %>
+        <%= render partial: "teachings/form", 
         layout: "layouts/modal_layout", 
         locals: { teaching: Teaching.new, action_name: "Assign Teacher",
          action_title: "Assign Teacher #{@subject.name}", modal_id: generate_modal_id("teachings_create_form") }%>
+      </div>
+    </div>
+    <div class="col-md-9 my-2">
+      <div class="white-section-div">
+        <%= render partial: "teachers/progress_table", locals: { progresses: @subject.progresses, for_current_user: false } %>
+      </div>
+    </div>
+  </div>
+  <div class="row my-2">
+    <div class="col-md-4 white-section-div my-2">
+      <div id="curriculum-list">
+        <% @subject.curriculums.each do |curriculum| %>
+          <%= render partial: "curriculums/curriculum", locals: { curriculum: curriculum, subject: @subject } %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-8 my-2">
+      <div class="white-section-div p-3">
+        <p class="text-center">
+          <%= link_to "New Sequence Marks", new_sequence_path(school_class_id: @subject.school_class_id, subject_id: @subject.id), class: "general-link" %>
+        </p>
+        <div class="row">
+          <% @subject.sequences.each do |sequence| %>
+            <div class="col-md-6 my-2">
+              <%= render partial: "sequences/sequence", locals: { sequence: sequence } %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

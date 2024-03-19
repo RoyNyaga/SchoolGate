@@ -10,7 +10,7 @@ class Fee < ApplicationRecord
                                        message: "Two Fees can't exist for the same student in the same class" }
   validate :fee_not_above_required_fee
 
-  enum installment_num: { no_installment: 0, first_installment: 1, second_installment: 2, third_installment: 3, forth_installment: 4,
+  enum installment_num: { no_payment: 0, first_installment: 1, second_installment: 2, third_installment: 3, forth_installment: 4,
                           fifth_installment: 5, sith_installment: 6 }
 
   before_save :set_other_field_values

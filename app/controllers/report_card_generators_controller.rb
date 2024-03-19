@@ -5,7 +5,7 @@ class ReportCardGeneratorsController < ApplicationController
 
   # GET /report_card_generators or /report_card_generators.json
   def index
-    @report_card_generators = ReportCardGenerator.all
+    @report_card_generators = current_school.report_card_generators.order(created_at: :desc)
   end
 
   # GET /report_card_generators/1 or /report_card_generators/1.json
@@ -40,14 +40,10 @@ class ReportCardGeneratorsController < ApplicationController
 
   # PATCH/PUT /report_card_generators/1 or /report_card_generators/1.json
   def update
+    ReportCardGenerator.generate_school_class_report_cards(@report_card_generator)
+
     respond_to do |format|
-      if @report_card_generator.update(report_card_generator_params)
-        format.html { redirect_to report_card_generator_url(@report_card_generator), notice: "Report card generator was successfully updated." }
-        format.json { render :show, status: :ok, location: @report_card_generator }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @report_card_generator.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to report_card_generator_url(@report_card_generator), notice: "Report card generator was successfully Regenerated." }
     end
   end
 

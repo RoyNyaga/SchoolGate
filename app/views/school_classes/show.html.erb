@@ -4,15 +4,16 @@
       <%= render partial: "school_classes/school_class_show_card", locals: { school_class: @school_class }%>
     </div>
     <div class="col-md-9">
-      <div class="section-div">
-        <h5>Students</h5>
+      <h5 class="text-center light-grey-card py-2">Students</h5>
+      <div class="students-list-div white-section-div my-2 scrollable-tbody">
+        <%= render partial: "students/table", locals: { students: @school_class.students } %>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-md-4 py-5">
-      <div class="section-div">
-        <h5>Subjects</h5>
+      <h5 class="text-center light-grey-card py-2 my-2">Subjects</h5>
+      <div class="white-section-div scrollable-tbody">
         <div>
           <%= render partial: "subjects/form", 
         layout: "layouts/modal_layout", 
@@ -20,7 +21,7 @@
         modal_id: generate_modal_id("subject_create_form") }%>
         </div>
         <% @subjects.each do |subject| %>
-          <p><%= link_to subject.name, subject %></p>
+          <p><%= link_to subject.name, subject_path(subject), class: "grey-link-text dashboard-normal-font-size" %></p>
         <% end %>
       </div>
     </div>

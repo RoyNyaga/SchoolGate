@@ -1,38 +1,16 @@
-<div id="<%= dom_id report_card_generator %>">
-  <p>
-    <strong>Academic year:</strong>
-    <%= report_card_generator.academic_year_id %>
+<div class="dashboard-normal-font-size light-grey-card p-2">
+  <p class="margin-zero"><%= report_card_generator.title %></p>
+  <p class="margin-zero">Generate Status: <span class="text-white badge <%= success_state_badge_color(report_card_generator.is_successful) %>"><%= report_card_generator.is_successful %></span></p>
+  <p class="margin-zero">Error Count: <span class="text-color-grey-2"><%= report_card_generator.failed_errors.size %></span></p>
+  <p class="margin-zero">Warning count: <span class="text-color-grey-2"><%= report_card_generator.warning_messages.size %></span></p>
+  <p class="margin-zero">Success Rate: 
+    <span class="text-color-grey-2"><%= report_card_generator.student_passed_num %> / <%= report_card_generator.student_num %></span>
+    <span class="text-white percent-complete-badge text-center <%= percentage_badge_color(report_card_generator.success_rate) %>">
+      <%= report_card_generator.success_rate %> %</span>
   </p>
-  <p>
-    <strong>School class:</strong>
-    <%= report_card_generator.school_class_id %>
-  </p>
-  <p>
-    <strong>Term:</strong>
-    <%= report_card_generator.term_id %>
-  </p>
-  <p>
-    <strong>Student passed num:</strong>
-    <%= report_card_generator.student_passed_num %>
-  </p>
-  <p>
-    <strong>Class average:</strong>
-    <%= report_card_generator.class_average %>
-  </p>
-  <p>
-    <strong>School:</strong>
-    <%= report_card_generator.school_id %>
-  </p>
-  <p>
-    <strong>progress_state:</strong>
-    <%= report_card_generator.progress_state %>
-  </p>
-  <p>
-    <strong>Failed errors:</strong>
-    <%= report_card_generator.failed_errors %>
-  </p>
-  <p>
-    <strong>Most performed students:</strong>
-    <%= report_card_generator.most_performed_students %>
-  </p>
+  <div class="d-flex justify-content-between align-items-start my-2">
+    <%= render partial: "report_card_generators/preview", layout: "layouts/drawer_layout", 
+              locals: { report_card_generator: report_card_generator, title: report_card_generator.title, 
+              item_id: generate_drawer_id("preview", record: report_card_generator) , position: "end", btn_text: "View", btn_visibility: true } %>
+  </div>
 </div>

@@ -1,7 +1,7 @@
 <%= form_with(model: sequence) do |form| %>
   <% if sequence.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(sequence.errors.count, "error") %> prohibited this sequence from being saved:</h2>
+    <div class="form-error-div">
+      <p><%= pluralize(sequence.errors.count, "error") %> prohibited this sequence from being saved:</p>
       <ul>
         <% sequence.errors.each do |error| %>
           <li><%= error.full_message %></li>

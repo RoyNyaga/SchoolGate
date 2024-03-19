@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-3 my-3">
-      <%= render @subject %>
+      <%= render partial: "subjects/subject", locals: {subject: @subject, is_admin_dashboard: false } %>
     </div>
     <div class="col-md-9 my-3">
       <div class="white-section-div">

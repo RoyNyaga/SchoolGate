@@ -23,7 +23,7 @@
       <div class="white-section-div">
         <h5 class="text-center">Performance Record</h5>
         <% @report_cards.each do |report_card| %>
-          <%= render partial: "students/report_list_card", locals: { report_card: report_card }%>
+          <%= render partial: "students/performance_record", locals: { report_card: report_card }%>
         <% end %>
       </div>
     </div>
