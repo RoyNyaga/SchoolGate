@@ -1,0 +1,18 @@
+<div class="accordion accordion-flush" id="report-warning-div-parent">
+  <div class="accordion-item">
+    <div class="accordion-header" id="warning-heading">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#report-warning-div" aria-expanded="false" aria-controls="report-warning-div">
+        Warnings <%= warning_messages.size %>
+      </button>
+    </div>
+    <div id="report-warning-div" class="accordion-collapse collapse" aria-labelledby="warning-heading" data-bs-parent="#report-warning-div-parent">
+      <div class="accordion-body">
+        <ol>
+          <% warning_messages.each do |warning_message| %>
+            <li><%= generate_error_and_warning_links(warning_message) %></li>
+          <% end %>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
