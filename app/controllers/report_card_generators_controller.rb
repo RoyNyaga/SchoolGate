@@ -1,7 +1,7 @@
 class ReportCardGeneratorsController < ApplicationController
   layout "school_layout"
   before_action :check_for_current_school
-  before_action :set_report_card_generator, only: %i[ show edit update destroy loading ]
+  before_action :set_report_card_generator, only: %i[ show edit update destroy loading progress_state_api ]
 
   # GET /report_card_generators or /report_card_generators.json
   def index
@@ -59,6 +59,14 @@ class ReportCardGeneratorsController < ApplicationController
   end
 
   def loading
+  end
+
+  def progress_state_api
+    render json: {
+      progress_state: @report_card_generator.progress_state,
+      is_processing: @report_card_generator.is_processing,
+      redirect_url: report_card_generator_path(@report_card_generator),
+    }
   end
 
   private

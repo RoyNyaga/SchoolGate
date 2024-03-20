@@ -27,7 +27,7 @@ class ReportCardGenerator < ApplicationRecord
 
   def self.generate_school_class_report_cards(report_card_generator)
     @report_card_generator = report_card_generator
-    @report_card_generator.update(progress_state: 1)
+    @report_card_generator.update(progress_state: 1, is_processing: true)
     start_time = Time.now
     @school_class = @report_card_generator.school_class
     @school = @school_class.school
@@ -127,6 +127,8 @@ class ReportCardGenerator < ApplicationRecord
       process_duration = Time.now - start_time
       @report_card_generator.update(progress_state: 4, process_duration: process_duration)
     end
+
+    @report_card_generator.update(is_processing: false)
   end
 
   def self.generate_warning_message(title, object, object_name)

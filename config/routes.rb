@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :report_card_generators do
     member do
       get :loading
+      get :progress_state_api
     end
   end
   resources :academic_years do
