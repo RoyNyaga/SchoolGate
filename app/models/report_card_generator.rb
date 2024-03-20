@@ -124,7 +124,8 @@ class ReportCardGenerator < ApplicationRecord
       pdf_path = File.open Rails.root.join("public/report_cards/#{file_name}")
       @report_card_generator.report_card_file.attach(io: pdf_path, filename: file_name)
       pdf_generator.delete_pdf_file
-      @report_card_generator.update(progress_state: 4)
+      process_duration = Time.now - start_time
+      @report_card_generator.update(progress_state: 4, process_duration: process_duration)
     end
   end
 
