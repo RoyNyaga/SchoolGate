@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   mount MissionControl::Jobs::Engine, at: "/jobs"
-  resources :report_card_generators
+  resources :report_card_generators do
+    member do
+      get :loading
+    end
+  end
   resources :academic_years do
     member do
       put :toggle_activeness

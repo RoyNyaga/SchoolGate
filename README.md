@@ -65,3 +65,6 @@ Things you may want to cover:
 - honeybadger
 
 - https://www.reddit.com/r/rails/comments/blqc5i/generating_a_pdf_on_disk_using_prawn_and/
+
+## loader feature
+- https://www.youtube.com/watch?v=ZcXJCBe1UZU
