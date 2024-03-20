@@ -26,13 +26,13 @@ class ReportCardGenerator < ApplicationRecord
   end
 
   def self.generate_school_class_report_cards(report_card_generator)
-    report_card_generator.update(progress_state: 1)
+    @report_card_generator = report_card_generator
+    @report_card_generator.update(progress_state: 1)
     start_time = Time.now
-    @generator = report_card_generator
-    @school_class = @generator.school_class
+    @school_class = @report_card_generator.school_class
     @school = @school_class.school
-    @term = @generator.term
-    @academic_year = @generator.academic_year
+    @term = @report_card_generator.term
+    @academic_year = @report_card_generator.academic_year
     @students = @school_class.students
     @subjects = @school_class.subjects
     @bulk_report = []
@@ -99,31 +99,32 @@ class ReportCardGenerator < ApplicationRecord
 
     if @failed_errors.present?
       process_duration = Time.now - start_time
-      @generator.update(failed_errors: @failed_errors.uniq,
-                        warning_messages: @warning_messages.uniq, process_duration: process_duration,
-                        is_successful: false)
+      @report_card_generator.update(failed_errors: @failed_errors.uniq,
+                                    warning_messages: @warning_messages.uniq, process_duration: process_duration,
+                                    is_successful: false)
     else
       process_duration = Time.now - start_time
       reports_to_be_deleted = ReportCard.where(school_class_id: @school_class.id, term_id: @term.id, academic_year_id: @academic_year.id)
       reports_to_be_deleted.destroy_all if reports_to_be_deleted.present?
       ReportCard.insert_all @bulk_report
-      @generator.update(is_successful: true, warning_messages: @warning_messages,
-                        process_duration: process_duration, student_num: @school_class.students.active.size,
-                        student_passed_num: calc_student_passed_num, class_average: calc_class_average,
-                        most_performed_students: get_most_performed_students, failed_errors: @failed_errors,
-                        least_performed_students: get_least_performed_students)
+      @report_card_generator.update(is_successful: true, warning_messages: @warning_messages,
+                                    process_duration: process_duration, student_num: @school_class.students.active.size,
+                                    student_passed_num: calc_student_passed_num, class_average: calc_class_average,
+                                    most_performed_students: get_most_performed_students, failed_errors: @failed_errors,
+                                    least_performed_students: get_least_performed_students)
 
-      @generator.update(progress_state: 2)
+      @report_card_generator.update(progress_state: 2)
 
-      pdf_generator = PdfGeneratorService.new(@generator)
+      pdf_generator = PdfGeneratorService.new(@report_card_generator)
       pdf_data = pdf_generator.generate_pdf
       file_name = pdf_generator.file_name
-      @generator.update(progress_state: 3)
+      @report_card_generator.update(progress_state: 3)
 
       pdf_data.render_file Rails.root.join("public/report_cards", file_name)
       pdf_path = File.open Rails.root.join("public/report_cards/#{file_name}")
-      @generator.report_card_file.attach(io: pdf_path, filename: file_name)
-      @generator.update(progress_state: 4)
+      @report_card_generator.report_card_file.attach(io: pdf_path, filename: file_name)
+      pdf_generator.delete_pdf_file
+      @report_card_generator.update(progress_state: 4)
     end
   end
 

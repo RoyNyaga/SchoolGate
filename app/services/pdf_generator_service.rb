@@ -1,17 +1,14 @@
 class PdfGeneratorService
-  attr_accessor :report_cards
+  attr_accessor :report_cards, :file_name
 
   def initialize(report_card_generator)
     @pdf = Prawn::Document.new
 
     # @document_width = @pdf.bounds.width
     @report_card_generator = report_card_generator
+    @file_name = "#{@report_card_generator.title(with_school: true).gsub(" ", "_").gsub("-", "_").gsub("/", "_")}_#{@report_card_generator.id}.pdf"
     @report_cards = report_card_generator.report_cards
     @school = @report_card_generator.school
-  end
-
-  def file_name
-    "#{@report_card_generator.title(with_school: true).gsub(" ", "_").gsub("-", "_").gsub("/", "_")}_#{@report_card_generator.id}.pdf"
   end
 
   def table_head
@@ -100,5 +97,17 @@ class PdfGeneratorService
     end
 
     @pdf
+  end
+
+  def delete_pdf_file
+    file_path = Rails.root.join("public/report_cards", @file_name)
+
+    # Check if the file exists before attempting to delete it
+    if File.exist?(file_path)
+      File.delete(file_path)
+      puts "PDF file deleted successfully."
+    else
+      puts "PDF file does not exist."
+    end
   end
 end

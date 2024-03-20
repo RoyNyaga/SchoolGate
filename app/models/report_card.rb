@@ -5,6 +5,7 @@ class ReportCard < ApplicationRecord
   belongs_to :term
   belongs_to :student
   belongs_to :academic_year
+  belongs_to :report_card_generators
   validates :student_id, uniqueness: { scope: :term_id,
                                        message: "This student already has a report for this term" }
 

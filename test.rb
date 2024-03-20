@@ -1,9 +1,16 @@
-arr = [1, 2, 3, 4, 5, 6, 7]
+class Person
+  attr_accessor :name, :gender
 
-arr.each do |v|
-  p "first loop #{v}"
-  arr.each do |sl|
-    next if sl == 5
-    p "second loop #{sl}"
+  def initialize(name, gender)
+    @name = name
+    @gender = gender
+  end
+
+  def full_name
+    name + "other names"
   end
 end
+
+pe = Person.new("Andre", "male")
+puts pe.name
+puts pe.full_name
