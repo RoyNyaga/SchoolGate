@@ -1,6 +1,9 @@
 <div>
   <div class="d-flex justify-content-between light-grey-card p-2">
     <p class="margin-zero">Generate Status: <span class="text-white badge <%= success_state_badge_color(report_card_generator.is_successful) %>"><%= report_card_generator.is_successful %></span></p>
+    <% if report_card_generator.report_card_file.attached? %>
+      <%= link_to "View PDF", url_for(report_card_generator.report_card_file), class: "edit-link" %>
+    <% end %>
     <%= button_to "Regenerate", report_card_generator_path(report_card_generator), method: :put, class: "general-btn"%>
   </div>
   <div class="my-3 row white-section-div">

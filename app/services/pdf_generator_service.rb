@@ -7,7 +7,7 @@ class PdfGeneratorService
     # @document_width = @pdf.bounds.width
     @report_card_generator = report_card_generator
     @file_name = "#{@report_card_generator.title(with_school: true).gsub(" ", "_").gsub("-", "_").gsub("/", "_")}_#{@report_card_generator.id}.pdf"
-    @report_cards = report_card_generator.report_cards
+    @report_cards = @report_card_generator.report_cards
     @school = @report_card_generator.school
   end
 
@@ -27,7 +27,7 @@ class PdfGeneratorService
       table = [] << table_head
       subject_info = parse_subject_info(report_card.details)
       subject_info.each_with_index do |info, index|
-        table << [index + 1, info[:name], info[:first_seq_mark], info[:second_seq_mark], info[:average_mark], info[:coefficient], info[:score], info[:grade], info[:rank], info[:teacher], "Very Good"]
+        table << [index + 1, info["name"], info["first_seq_mark"], info["second_seq_mark"], info["average_mark"], info["coefficient"], info["score"], info["grade"], info["rank"], info["teacher"], info["remark"]]
       end
 
       table << ["", "", "", "", "Total", report_card.total_coefficient, report_card.total_score, "", "", "", ""]

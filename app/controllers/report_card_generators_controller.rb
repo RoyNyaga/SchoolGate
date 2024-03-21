@@ -23,7 +23,6 @@ class ReportCardGeneratorsController < ApplicationController
 
   # POST /report_card_generators or /report_card_generators.json
   def create
-    @report_card_generator.update(is_processing: true, progress_state: 0)
     @report_card_generator = ReportCardGenerator.new(report_card_generator_params)
 
     respond_to do |format|
@@ -80,6 +79,7 @@ class ReportCardGeneratorsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def report_card_generator_params
-    params.require(:report_card_generator).permit(:academic_year_id, :school_class_id, :term_id, :student_passed_num, :class_average, :school_id, :status, :failed_errors, :most_performed_students)
+    params.require(:report_card_generator).permit(:academic_year_id, :school_class_id, :term_id, :student_passed_num,
+                                                  :class_average, :is_processing, :school_id, :status, :failed_errors, :most_performed_students)
   end
 end

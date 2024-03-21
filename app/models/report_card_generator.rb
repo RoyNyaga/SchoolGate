@@ -44,7 +44,8 @@ class ReportCardGenerator < ApplicationRecord
         next unless student.active?
         total_score = 0
         total_coefficient = 0
-        report_card_object = { school_id: @school.id, school_class_id: @school_class.id, term_id: @term.id, student_id: student.id, academic_year_id: @academic_year.id }
+        report_card_object = { school_id: @school.id, school_class_id: @school_class.id, term_id: @term.id,
+                               student_id: student.id, academic_year_id: @academic_year.id, report_card_generator_id: @report_card_generator.id }
         details = []
         passed_subjects = 0
         @subjects.each do |subject|
@@ -118,7 +119,6 @@ class ReportCardGenerator < ApplicationRecord
       pdf_data = pdf_generator.generate_pdf
       file_name = pdf_generator.file_name
       @report_card_generator.update(progress_state: 3)
-
       pdf_data.render_file Rails.root.join("public/report_cards", file_name)
       pdf_path = File.open Rails.root.join("public/report_cards/#{file_name}")
       @report_card_generator.report_card_file.attach(io: pdf_path, filename: file_name)
