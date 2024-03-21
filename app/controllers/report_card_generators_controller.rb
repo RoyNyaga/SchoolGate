@@ -23,13 +23,14 @@ class ReportCardGeneratorsController < ApplicationController
 
   # POST /report_card_generators or /report_card_generators.json
   def create
+    @report_card_generator.update(is_processing: true, progress_state: 0)
     @report_card_generator = ReportCardGenerator.new(report_card_generator_params)
 
     respond_to do |format|
       if @report_card_generator.save
         GenerateReportCardJob.perform_later(@report_card_generator.id)
 
-        format.html { redirect_to report_card_generator_url(@report_card_generator), notice: "Report card generator was successfully created." }
+        format.html { redirect_to loading_report_card_generator_path(@report_card_generator), notice: "Report card generator was successfully created." }
         format.json { render :show, status: :created, location: @report_card_generator }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,10 +42,11 @@ class ReportCardGeneratorsController < ApplicationController
   # PATCH/PUT /report_card_generators/1 or /report_card_generators/1.json
   def update
     # ReportCardGenerator.generate_school_class_report_cards(@report_card_generator)
+    @report_card_generator.update(is_processing: true, progress_state: 0)
     GenerateReportCardJob.perform_later(@report_card_generator.id)
 
     respond_to do |format|
-      format.html { redirect_to report_card_generator_url(@report_card_generator), notice: "Report card generator was successfully Regenerated." }
+      format.html { redirect_to loading_report_card_generator_path(@report_card_generator), notice: "Report card generator was successfully Regenerated." }
     end
   end
 
@@ -63,7 +65,7 @@ class ReportCardGeneratorsController < ApplicationController
 
   def progress_state_api
     render json: {
-      progress_state: @report_card_generator.progress_state,
+      progress_state: @report_card_generator.progress_state.humanize,
       is_processing: @report_card_generator.is_processing,
       redirect_url: report_card_generator_path(@report_card_generator),
     }

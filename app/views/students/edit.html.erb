@@ -1,29 +1,25 @@
-<div class="flash" id="custom-flash">
-</div>
-<h1>Editing student</h1>
-<div data-controller="photoUploads" class="row">
-  <div class="col-md-2">
-    <div>
-      <% if @student.photo.attached? %>
-        <%= image_tag url_for(@student.photo), class: "img-fluid", data: { photoUploads_target: "image" } %>
-      <% else %>
-        <%= image_tag "user_photo.webp", class: "img-fluid", data: { photoUploads_target: "image" }, alt: "your photo is missing" %>
-      <% end %>
-    </div>
-    <%= render partial: "shared/photo_form", 
+<div class="container">
+  <%= link_to "<- Back", student_path(@student), class: "general-link" %>
+  <h4 class="text-center my-3">Editing student</h4>
+  <div data-controller="photoUploads" class="row">
+    <div class="col-md-3">
+      <div>
+        <% if @student.photo.attached? %>
+          <%= image_tag url_for(@student.photo), class: "img-fluid", data: { photoUploads_target: "image" } %>
+        <% else %>
+          <%= image_tag "user_photo.webp", class: "img-fluid", data: { photoUploads_target: "image" }, alt: "your photo is missing" %>
+        <% end %>
+      </div>
+      <%= render partial: "shared/photo_form", 
         layout: "layouts/modal_layout", 
         locals: { record: @student, modal_id: generate_modal_id("photo_form", record: @student), 
         action_name: photo_action_name(@student),
         url: update_photo_student_path(@student), action_title: "" }%>
-  </div>
-  <div class="col-md-8">
-    <div class="section-div">
-      <%= render "form", student: @student %>
+    </div>
+    <div class="col-md-9">
+      <div class="section-div">
+        <%= render "form", student: @student %>
+      </div>
     </div>
   </div>
-</div>
-<br>
-<div>
-  <%= link_to "Show this student", @student %> |
-  <%= link_to "Back to students", students_path %>
 </div>

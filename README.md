@@ -68,3 +68,6 @@ Things you may want to cover:
 
 ## loader feature
 - https://www.youtube.com/watch?v=ZcXJCBe1UZU
+
+## starting solid queue
+- bundle exec rake solid_queue:start

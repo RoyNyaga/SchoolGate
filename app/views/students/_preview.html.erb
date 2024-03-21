@@ -1,3 +1,21 @@
 <div class="student-preview">
-  <%= link_to "Edit", edit_student_path(student) %>
+  <div class="d-flex justify-content-around">
+    <%= link_to "Details", student_path(student), class: "general-link" %>
+    <%= link_to "Edit", edit_student_path(student), class: "general-link" %>
+  </div>
+  <div class="row">
+    <div class="col-md-4 my-3">
+      <div class="dark-blue-section-div">
+        <%= render partial: "students/photo_and_other_details", locals: { student: student } %>
+      </div>
+    </div>
+    <div class="col-md-8 my-3">
+      <div class="light-grey-card custom-border-medium p-3">
+        <%= render partial: "students/basic_info_card", locals: { student: student }%>
+      </div>
+    </div>
+  </div>
+  <%= turbo_frame_tag custom_id_generator("performance", record: student) do %>
+    <%= link_to "load performance", student_path(student), class: "general-link" %>
+  <% end %>
 </div>

@@ -27,7 +27,6 @@ class ReportCardGenerator < ApplicationRecord
 
   def self.generate_school_class_report_cards(report_card_generator)
     @report_card_generator = report_card_generator
-    @report_card_generator.update(progress_state: 1, is_processing: true)
     start_time = Time.now
     @school_class = @report_card_generator.school_class
     @school = @school_class.school
