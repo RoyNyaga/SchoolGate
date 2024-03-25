@@ -2,7 +2,7 @@ class StudentsController < ApplicationController
   include ApplicationHelper # this is to enable us access the generate_modal_id helper method from this controller
   layout "school_layout"
   before_action :check_for_current_school
-  before_action :set_student, only: %i[ show edit update destroy update_photo ]
+  before_action :set_student, only: %i[ show edit update destroy update_photo id_card ]
 
   # GET /students or /students.json
   def index
@@ -75,6 +75,9 @@ class StudentsController < ApplicationController
     @subject = Subject.find(params[:subject_id])
     @students = Student.where("lower(students.full_name) like '%#{params[:student_name].downcase}%' AND school_class_id = #{@subject.school_class_id}")
     render json: @students.select(:id, :full_name)
+  end
+
+  def id_card
   end
 
   private

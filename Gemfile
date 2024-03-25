@@ -80,3 +80,5 @@ gem "figaro", "~> 1.2"
 gem "font_awesome5_rails"
 gem "solid_queue", "~> 0.2.2"
 gem "mission_control-jobs", "~> 0.1.1"
+gem "rqrcode", "~> 2.0"
+gem 'chunky_png', '~> 1.4'

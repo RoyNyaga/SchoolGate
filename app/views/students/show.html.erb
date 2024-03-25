@@ -3,6 +3,7 @@
     <div class="col-md-4 mx-auto">
       <div class="my-3 d-flex justify-content-between">
         <%= link_to "<-- Back", students_schools_path, class: "general-link" %>
+        <%= link_to "ID card", id_card_student_path(@student), class: "general-link" %>
         <%= link_to "Edit", edit_student_path(@student), class: "general-link" %>
         <%= button_to "Destroy", @student, method: :delete, class: "general-link" %>
       </div>
@@ -26,6 +27,18 @@
           <% @report_cards.each do |report_card| %>
             <%= render partial: "students/performance_record", locals: { report_card: report_card }%>
           <% end %>
+        </div>
+        <div class="qr my-5">
+          <% qrcode = RQRCode::QRCode.new("http://github.com/") %>
+          <% svg = qrcode.as_svg(
+  color: "000",
+  shape_rendering: "crispEdges",
+  module_size: 11,
+  standalone: true,
+  use_path: true
+
+          ) %>
+          <%= raw svg %>
         </div>
       <% end %>
     </div>

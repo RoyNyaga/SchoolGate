@@ -53,6 +53,7 @@ Rails.application.routes.draw do
 
     member do
       put :update_photo
+      get :id_card
     end
   end
   resources :school_classes
