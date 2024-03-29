@@ -2,4 +2,95 @@
   <div class="back-btn-div my-3">
     <%= link_to "<-- Back", @student, class: "general-link" %>
   </div>
+  <div class="id-cards-div">
+    <div class="row">
+      <div class="col-md-5 mx-auto">
+        <div class="id-card-front-section p-3">
+          <div class="row id-card-header">
+            <div class="col-3">
+              <%= image_tag("school-logo.png", class: "school-logo-id-style")%>
+            </div>
+            <div class="col-9 text-center">
+              <p class="margin-zero id-card-header-one">Republic of Cameroon</p>
+              <p class="margin-zero id-card-header-two">Peace - Work - Fatherland</p>
+              <p class="margin-zero id-card-header-two">Ministery Of Secondary Education</p>
+              <p class="margin-zero id-card-header-three"><%= @student.school.full_name %></p>
+            </div>
+          </div>
+          <div class="row id-card-front-body">
+            <div class="col-4 student-id-photo">
+              <%= render partial: "students/avatar", locals: { student: @student }%>
+            </div>
+            <div class="col-7 id-student-info">
+              <div class="d-flex justify-content-between align-items-center margin-zero">
+                <p class="margin-zero">Surname</p>
+                <p class="margin-zero"><%= @student.first_name %></p>
+              </div>
+              <div class="d-flex justify-content-between align-items-center margin-zero">
+                <p class="margin-zero">Given Name</p>
+                <p class="margin-zero"><%= @student.last_name %></p>
+              </div>
+              <div class="d-flex justify-content-between align-items-center margin-zero">
+                <p class="margin-zero">Date of Birth</p>
+                <p class="margin-zero"><%= @student.date_of_birth %></p>
+              </div>
+              <div class="d-flex justify-content-between align-items-center margin-zero">
+                <p class="margin-zero">Class</p>
+                <p class="margin-zero"><%= @student.school_class.name %></p>
+              </div>
+              <div class="d-flex justify-content-between align-items-center margin-zero">
+                <p class="margin-zero">Matricule</p>
+                <p class="margin-zero"><%= @student.matricule %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button onclick="captureAndDownload()">Download</button>
+        <div class="id-card-back-section p-3 my-5">
+          <div class="row">
+            <div class="col-5">
+              <%= raw @svg %>
+            </div>
+            <div class="col-7">
+              <div class="d-flex justify-content-between align-items-center margin-zero">
+                <p class="margin-zero">Father's Name</p>
+                <p class="margin-zero"><%= @student.fathers_name %></p>
+              </div>
+              <div class="d-flex justify-content-between align-items-center margin-zero">
+                <p class="margin-zero">Father's contact</p>
+                <p class="margin-zero"><%= @student.fathers_contact %></p>
+              </div>
+              <div class="d-flex justify-content-between align-items-center margin-zero">
+                <p class="margin-zero">Mother's name</p>
+                <p class="margin-zero"><%= @student.mothers_name %></p>
+              </div>
+              <div class="d-flex justify-content-between align-items-center margin-zero">
+                <p class="margin-zero">Mother's contact</p>
+                <p class="margin-zero"><%= @student.mothers_contact %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+<script>
+  async function captureAndDownload() {
+    const frontSection = document.querySelector('.id-card-front-section')
+    html2canvas(frontSection).then(function (canvas) {
+      console.log("ready");
+      var dataUrl = canvas.toDataURL("image/png");
+      download(dataUrl, `${Date.now()}.png`, 'image/png');
+    })
+  // const dataURL = canvas.toDataURL('image/png');
+  // downloadjs(dataURL, `${Date.now()}.png`, 'image/png');
+    // const nodeTo = document.querySelector('.id-card-front-section')
+    // console.log("this is the node", nodeTo)
+    // htmlToImage.toPng(nodeTo)
+    // .then(function (dataUrl) {
+    //   download(dataUrl, 'my-node.png');
+    // });
+
+  }
+</script>

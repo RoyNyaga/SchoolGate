@@ -19,6 +19,8 @@ class School < ApplicationRecord
 
   store_accessor :student_id_settings, :school_identifier
 
+  enum education_level: { basic_education: 1, secondary_education: 2, higher_education: 3 }
+
   scope :without_settings_attr, -> {
       select(:full_name, :id, :teacher_id, :abbreviation, :town,
              :address, :moto)

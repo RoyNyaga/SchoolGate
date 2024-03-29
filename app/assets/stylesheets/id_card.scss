@@ -1,0 +1,24 @@
+.id-card-front-section{
+  background-color: white;
+  border: 2px solid grey;
+  .id-card-header-one{
+    font-size: 17px;
+    font-weight: 900;
+  }
+  .id-card-header-two{
+    font-size: 14px;
+  }
+  .id-card-header-three{
+    font-size: 18px;
+    font-weight: 900;
+  }
+  .school-logo-id-style{
+    width: 80px;
+  }
+}
+
+.id-card-back-section {
+  background-color: white;
+  width: 525px;
+  height: 250px;
+}

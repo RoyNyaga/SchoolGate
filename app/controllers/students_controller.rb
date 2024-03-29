@@ -78,6 +78,15 @@ class StudentsController < ApplicationController
   end
 
   def id_card
+    qrcode = RQRCode::QRCode.new("https://schoolgate.org/students/#{@student.id}")
+    @svg = qrcode.as_svg(
+      color: "000",
+      shape_rendering: "crispEdges",
+      module_size: 4,
+      standalone: true,
+      use_path: true,
+
+    )
   end
 
   private

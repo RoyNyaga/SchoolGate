@@ -29,19 +29,9 @@
           <% end %>
         </div>
         <div class="qr my-5">
-          <% qrcode = RQRCode::QRCode.new("http://github.com/") %>
-          <% svg = qrcode.as_svg(
-  color: "000",
-  shape_rendering: "crispEdges",
-  module_size: 11,
-  standalone: true,
-  use_path: true
-
-          ) %>
-          <%= raw svg %>
+          <div class="col-md-8"></div>
         </div>
       <% end %>
     </div>
-    <div class="col-md-8"></div>
   </div>
 </div>
