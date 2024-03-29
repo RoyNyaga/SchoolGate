@@ -1,0 +1,2 @@
+module FactultiesHelper
+end

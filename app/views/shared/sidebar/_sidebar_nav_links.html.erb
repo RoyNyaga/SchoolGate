@@ -1,24 +1,5 @@
-<div data-controller="sidebars">
-  <%= render partial: "shared/sidebar/sidebar_link_component", locals: { main_icon_class: "camera-retro",
-  main_link_text: "Progresses", main_link_path: progresses_schools_path } %>
-  <%= render partial: "shared/sidebar/sidebar_link_component", locals: { main_icon_class: "camera-retro",
-  main_link_text: "Sequences", main_link_path: sequences_path } %>
-  <%= render partial: "shared/sidebar/sidebar_link_dropdown_component", locals: { main_icon_class: "camera-retro",
-  main_link_text: "Classes", main_link_path: classes_schools_path,
-  dropdown_links: current_school_classes_link_data } %>
-  <%= render partial: "shared/sidebar/sidebar_link_component", locals: { main_icon_class: "camera-retro",
-  main_link_text: "Students", main_link_path: students_schools_path } %>
-  <%= render partial: "shared/sidebar/sidebar_link_dropdown_component", locals: { main_icon_class: "camera-retro",
-  main_link_text: "Teachers", main_link_path: teachers_schools_path,
-  dropdown_links: current_school_teachers_link_data } %>
-  <%= render partial: "shared/sidebar/sidebar_link_dropdown_component", locals: { main_icon_class: "camera-retro",
-  main_link_text: "Report Card Generator", main_link_path: report_card_generators_path,
-  dropdown_links: current_school_report_cards_link_data } %>
-  <%= render partial: "shared/sidebar/sidebar_link_component", locals: { main_icon_class: "camera-retro",
-  main_link_text: "School Fees", main_link_path: fees_path } %>
-  <%= render partial: "shared/sidebar/sidebar_link_component", locals: { main_icon_class: "camera-retro",
-  main_link_text: "Academic Years", main_link_path: academic_years_path } %>
-  <hr>
-  <%= render partial: "shared/sidebar/sidebar_link_dropdown_component", locals: { main_icon_class: "camera-retro",
-  main_link_text: "Your Subjects", main_link_path: subjects_teachers_path, dropdown_links: current_teacher_subject_link_data } %>
-</div>
+<% if current_school.basic_education? %>
+<% elsif current_school.secondary_education? %>
+  <%= render "secondary_school_links" %>
+<% elsif current_school.higher_education? %>
+<% end %>

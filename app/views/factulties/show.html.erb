@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @factulty %>
+
+<div>
+  <%= link_to "Edit this factulty", edit_factulty_path(@factulty) %> |
+  <%= link_to "Back to factulties", factulties_path %>
+
+  <%= button_to "Destroy this factulty", @factulty, method: :delete %>
+</div>
