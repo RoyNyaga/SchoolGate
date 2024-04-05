@@ -15,13 +15,15 @@
   </div>
   <div>
     <%= form.label :faculty_id, style: "display: block" %>
-    <%= form.text_field :faculty_id %>
+    <%= form.collection_select :faculty_id, current_school.faculties, :id, :name, { prompt: "Select a faculty"}, { class: "general-input-styles", required: true } %>
   </div>
   <div>
     <%= form.label :name %>
-    <%= form.text_field :name, class: "general-input-styles" %>
+    <%= form.text_field :name, class: "general-input-styles", required: true %>
   </div>
   <div>
-    <%= form.submit class: "model-form-btn" %>
+    <div class="my-2">
+      <%= form.submit class: "model-form-btn" %>
+    </div>
   </div>
 <% end %>

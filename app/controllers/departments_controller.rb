@@ -25,7 +25,7 @@ class DepartmentsController < ApplicationController
 
     respond_to do |format|
       if @department.save
-        format.html { redirect_to department_url(@department), notice: "Department was successfully created." }
+        format.html { redirect_to departments_schools_path, notice: "Department was successfully created." }
         format.json { render :show, status: :created, location: @department }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -58,13 +58,14 @@ class DepartmentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_department
-      @department = Department.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def department_params
-      params.require(:department).permit(:school_id, :faculty_id, :name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_department
+    @department = Department.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def department_params
+    params.require(:department).permit(:school_id, :faculty_id, :name)
+  end
 end

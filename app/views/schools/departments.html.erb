@@ -1,7 +1,7 @@
 <div class="container">
   <%= render partial: "departments/form", 
               layout: "layouts/modal_layout", 
-              locals: { department: Department.new, action_name: "Add Faculty", action_title: "Create A New Faculty",
+              locals: { department: Department.new, action_name: "Add Department", action_title: "Create A New Department",
               modal_id: generate_modal_id("new", record: Department.new) }%>
   <div class="faculty-list row">
     <% @departments.each do |department| %>
