@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :factulties
+  resources :faculties
   mount MissionControl::Jobs::Engine, at: "/jobs"
   resources :report_card_generators do
     member do
@@ -89,6 +89,7 @@ Rails.application.routes.draw do
       get :contracts
       get :permissions
       get :progresses
+      get :faculties
     end
   end
 

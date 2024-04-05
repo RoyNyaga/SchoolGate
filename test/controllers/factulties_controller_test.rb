@@ -1,8 +1,8 @@
 require "test_helper"
 
-class FactultiesControllerTest < ActionDispatch::IntegrationTest
+class FacultiesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @factulty = factulties(:one)
+    @faculty = factulties(:one)
   end
 
   test "should get index" do
@@ -15,32 +15,32 @@ class FactultiesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create factulty" do
+  test "should create faculty" do
     assert_difference("Factulty.count") do
-      post factulties_url, params: { factulty: { name: @factulty.name, school_id: @factulty.school_id } }
+      post factulties_url, params: { faculty: { name: @faculty.name, school_id: @faculty.school_id } }
     end
 
     assert_redirected_to factulty_url(Factulty.last)
   end
 
-  test "should show factulty" do
-    get factulty_url(@factulty)
+  test "should show faculty" do
+    get factulty_url(@faculty)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_factulty_url(@factulty)
+    get edit_factulty_url(@faculty)
     assert_response :success
   end
 
-  test "should update factulty" do
-    patch factulty_url(@factulty), params: { factulty: { name: @factulty.name, school_id: @factulty.school_id } }
-    assert_redirected_to factulty_url(@factulty)
+  test "should update faculty" do
+    patch factulty_url(@faculty), params: { faculty: { name: @faculty.name, school_id: @faculty.school_id } }
+    assert_redirected_to factulty_url(@faculty)
   end
 
-  test "should destroy factulty" do
+  test "should destroy faculty" do
     assert_difference("Factulty.count", -1) do
-      delete factulty_url(@factulty)
+      delete factulty_url(@faculty)
     end
 
     assert_redirected_to factulties_url

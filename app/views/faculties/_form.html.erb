@@ -1,0 +1,25 @@
+<%= form_with(model: faculty) do |form| %>
+  <% if faculty.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(faculty.errors.count, "error") %> prohibited this faculty from being saved:</h2>
+      <ul>
+        <% faculty.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= form.label :school_id, class: "d-none" %>
+    <%= form.hidden_field :school_id, value: current_school.id  %>
+  </div>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "general-input-styles" %>
+  </div>
+  <div>
+    <div class="my-3">
+      <%= form.submit class: "model-form-btn" %>
+    </div>
+  </div>
+<% end %>

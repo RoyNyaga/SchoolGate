@@ -96,6 +96,10 @@ class SchoolsController < ApplicationController
     @absentist_num = @progresses.map { |p| p.absent_students.count }.sum
   end
 
+  def faculties
+    @faculties = current_school.faculties
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
