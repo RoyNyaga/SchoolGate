@@ -1,1 +1,1 @@
-json.array! @factulties, partial: "factulties/faculty", as: :faculty
+json.array! @faculties, partial: "faculties/faculty", as: :faculty

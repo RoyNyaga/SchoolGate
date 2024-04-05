@@ -2,16 +2,16 @@ require "application_system_test_case"
 
 class FactultiesTest < ApplicationSystemTestCase
   setup do
-    @faculty = factulties(:one)
+    @faculty = faculties(:one)
   end
 
   test "visiting the index" do
-    visit factulties_url
+    visit faculties_url
     assert_selector "h1", text: "Factulties"
   end
 
   test "should create faculty" do
-    visit factulties_url
+    visit faculties_url
     click_on "New faculty"
 
     fill_in "Name", with: @faculty.name
@@ -23,7 +23,7 @@ class FactultiesTest < ApplicationSystemTestCase
   end
 
   test "should update Factulty" do
-    visit factulty_url(@faculty)
+    visit faculty_url(@faculty)
     click_on "Edit this faculty", match: :first
 
     fill_in "Name", with: @faculty.name
@@ -35,7 +35,7 @@ class FactultiesTest < ApplicationSystemTestCase
   end
 
   test "should destroy Factulty" do
-    visit factulty_url(@faculty)
+    visit faculty_url(@faculty)
     click_on "Destroy this faculty", match: :first
 
     assert_text "Factulty was successfully destroyed"
