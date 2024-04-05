@@ -91,6 +91,7 @@ Rails.application.routes.draw do
       get :permissions
       get :progresses
       get :faculties
+      get :departments
     end
   end
 

@@ -100,6 +100,10 @@ class SchoolsController < ApplicationController
     @faculties = current_school.faculties
   end
 
+  def departments
+    @departments = current_school.departments
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

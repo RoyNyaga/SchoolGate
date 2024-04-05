@@ -63,6 +63,12 @@ module ApplicationHelper
     end
   end
 
+  def current_school_faculties_link_data
+    current_school.departments.map do |department|
+      { name: department.name, path: department_path(department) }
+    end
+  end
+
   def current_school_report_cards_link_data
     [
       { name: "Auto Generate (bulk)", path: auto_generate_report_cards_path },
