@@ -3,4 +3,11 @@
               layout: "layouts/modal_layout", 
               locals: { faculty: Faculty.new, action_name: "Add Faculty", action_title: "Create A New Faculty",
               modal_id: generate_modal_id("new", record: Faculty.new) }%>
+  <div class="faculty-list row">
+    <% @faculties.each do |faculty| %>
+      <div class="col-md-3">
+        <%= render faculty %>
+      </div>
+    <% end %>
+  </div>
 </div>
