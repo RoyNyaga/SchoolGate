@@ -59,7 +59,7 @@ module ApplicationHelper
 
   def current_school_faculties_link_data
     current_school.faculties.map do |faculty|
-      { name: faculty.name, path: faculty_schools_path(faculty) }
+      { name: faculty.name, path: faculty_path(faculty) }
     end
   end
 
