@@ -1,6 +1,6 @@
-class Faculty < ApplicationRecord
+class Department < ApplicationRecord
   belongs_to :school
-  has_many :departments
+  belongs_to :faculty
 
   validates :name, presence: true
 end
