@@ -1,10 +1,10 @@
 <div class="container">
-  <%= render partial: "deparments/form", 
+  <%= render partial: "departments/form", 
               layout: "layouts/modal_layout", 
               locals: { department: Department.new, action_name: "Add Faculty", action_title: "Create A New Faculty",
               modal_id: generate_modal_id("new", record: Department.new) }%>
   <div class="faculty-list row">
-    <% @department.each do |department| %>
+    <% @departments.each do |department| %>
       <div class="col-md-3">
         <%= render department %>
       </div>
