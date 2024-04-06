@@ -20,16 +20,23 @@
         locals: { course: Course.new, action_name: "Add Course", action_title: "Create Course",
         department_id: @department.id, faculty_id: @department.faculty_id ,modal_id: generate_modal_id("new", record: Course.new) }%>
         </div>
-        <%# @subjects.each do |subject| %>
-          <p><%#= link_to subject.name, subject_path(subject), class: "grey-link-text dashboard-normal-font-size" %></p>
-          <%# end %>
-        </div>
+        <% @courses.each do |course| %>
+          <div class="my-2">
+            <%= link_to course.long_title, "##{generate_drawer_id("preview", record: course)}", 
+          class: "grey-link-text dashboard-small-font-size", data: { bs_toggle: "offcanvas" },
+          role: "button", aria: {controls: "#{generate_drawer_id("preview", record: course)}_drawer"} %>
+            <%= render partial: "courses/preview", layout: "layouts/drawer_layout", 
+              locals: { course: course, title: course.long_title, 
+              item_id: generate_drawer_id("preview", record: course) , position: "end", btn_text: "View", btn_visibility: false } %>
+          </div>
+        <% end %>
       </div>
-      <div class="col-md-4 py-5">
-        <div class="section-div">
-          <h5>Lecturers</h5>
-        </div>
+    </div>
+    <div class="col-md-4 py-5">
+      <div class="section-div">
+        <h5>Lecturers</h5>
       </div>
     </div>
   </div>
-  <%#= button_to "Destroy this department", @department, method: :delete %>
+</div>
+<%#= button_to "Destroy this department", @department, method: :delete %>

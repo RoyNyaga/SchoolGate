@@ -9,6 +9,7 @@ class DepartmentsController < ApplicationController
 
   # GET /departments/1 or /departments/1.json
   def show
+    @courses = @department.courses
   end
 
   # GET /departments/new
