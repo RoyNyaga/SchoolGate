@@ -2,7 +2,6 @@
   <% if course.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
-
       <ul>
         <% course.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,33 +9,27 @@
       </ul>
     </div>
   <% end %>
-
   <div>
-    <%= form.label :school_id, style: "display: block" %>
-    <%= form.text_field :school_id %>
+    <%= form.label :school_id, style: class: "d-none" %>
+    <%= form.hidden_field :school_id, value: current_school.id %>
   </div>
-
   <div>
-    <%= form.label :faculty_id, style: "display: block" %>
-    <%= form.text_field :faculty_id %>
+    <%= form.label :faculty_id, class: "d-none" %>
+    <%= form.hidden_field :faculty_id, value: faculty_id %>
   </div>
-
   <div>
-    <%= form.label :department_id, style: "display: block" %>
-    <%= form.text_field :department_id %>
+    <%= form.label :department_id, class: "d-none" %>
+    <%= form.hidden_field :department_id, value: department_id %>
   </div>
-
   <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "general-input-styles" %>
   </div>
-
   <div>
-    <%= form.label :credit_value, style: "display: block" %>
-    <%= form.number_field :credit_value %>
+    <%= form.label :credit_value %>
+    <%= form.number_field :credit_value, class: "general-input-styles" %>
   </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="my-2">
+    <%= form.submit class: "model-form-btn" %>
   </div>
 <% end %>
