@@ -1,4 +1,5 @@
 class CoursesController < ApplicationController
+  layout "school_layout"
   before_action :set_course, only: %i[ show edit update destroy ]
 
   # GET /courses or /courses.json
@@ -25,7 +26,7 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
-        format.html { redirect_to course_url(@course), notice: "Course was successfully created." }
+        format.html { redirect_to department_path(@course.department_id), notice: "Course was successfully created." }
         format.json { render :show, status: :created, location: @course }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -58,13 +59,14 @@ class CoursesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_course
-      @course = Course.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def course_params
-      params.require(:course).permit(:school_id, :faculty_id, :department_id, :name, :credit_value)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_course
+    @course = Course.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def course_params
+    params.require(:course).permit(:school_id, :faculty_id, :department_id, :name, :credit_value)
+  end
 end
