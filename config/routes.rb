@@ -93,6 +93,7 @@ Rails.application.routes.draw do
       get :progresses
       get :faculties
       get :departments
+      get :levels
     end
   end
 
