@@ -10,5 +10,26 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-4 py-5">
+      <h5 class="text-center light-grey-card py-2 my-2">Courses</h5>
+      <div class="white-section-div scrollable-tbody">
+        <div>
+          <%= render partial: "subjects/form", 
+        layout: "layouts/modal_layout", 
+        locals: { subject: @subject, action_name: "Add Subject", action_title: "Create Subject",
+        modal_id: generate_modal_id("subject_create_form") }%>
+        </div>
+        <% @subjects.each do |subject| %>
+          <p><%= link_to subject.name, subject_path(subject), class: "grey-link-text dashboard-normal-font-size" %></p>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-4 py-5">
+      <div class="section-div">
+        <h5>Lecturers</h5>
+      </div>
+    </div>
+  </div>
 </div>
 <%#= button_to "Destroy this department", @department, method: :delete %>

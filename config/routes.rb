@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :courses
   resources :departments
   resources :faculties
   mount MissionControl::Jobs::Engine, at: "/jobs"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_05_130657) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_06_005430) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -63,6 +63,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_05_130657) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "faculty_id", null: false
+    t.bigint "department_id", null: false
+    t.string "name", null: false
+    t.integer "credit_value", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["department_id"], name: "index_courses_on_department_id"
+    t.index ["faculty_id"], name: "index_courses_on_faculty_id"
+    t.index ["school_id"], name: "index_courses_on_school_id"
   end
 
   create_table "curriculums", force: :cascade do |t|
@@ -463,6 +476,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_05_130657) do
   add_foreign_key "academic_years", "schools"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "courses", "departments"
+  add_foreign_key "courses", "faculties"
+  add_foreign_key "courses", "schools"
   add_foreign_key "curriculums", "school_classes"
   add_foreign_key "curriculums", "schools"
   add_foreign_key "curriculums", "subjects"
