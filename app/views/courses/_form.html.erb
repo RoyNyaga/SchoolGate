@@ -23,11 +23,21 @@
   </div>
   <div>
     <%= form.label :name %>
-    <%= form.text_field :name, class: "general-input-styles" %>
+    <%= form.text_field :name, class: "general-input-styles", required: true %>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <%= form.label :abbreviation %>
+      <%= form.text_field :abbreviation, class: "general-input-styles", required: true %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :code %>
+      <%= form.number_field :code, class: "general-input-styles", required: true %>
+    </div>
   </div>
   <div>
     <%= form.label :credit_value %>
-    <%= form.number_field :credit_value, class: "general-input-styles" %>
+    <%= form.number_field :credit_value, class: "general-input-styles", required: true %>
   </div>
   <div class="my-2">
     <%= form.submit class: "model-form-btn" %>

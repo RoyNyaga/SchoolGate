@@ -1,7 +1,7 @@
 <%= turbo_frame_tag custom_id_generator("edit", record: department) do %>
   <div class="dark-blue-section-div dashboard-normal-font-size p-2">
-    <h5 class="text-center">Class Info</h5>
-    <p class="margin-zero">Name: <span class="text-color-grey">------</span></p>
+    <h5 class="text-center">Department Info</h5>
+    <p class="margin-zero">Name: <span class="text-color-grey"><%= department.name %></span></p>
     <p class="margin-zero">Level: <span class="text-color-grey">------</span></p>
     <div class="d-flex justify-content-between">
       <p>Students: <span class="text-color-grey">------</span></p>

@@ -71,6 +71,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_06_005430) do
     t.bigint "department_id", null: false
     t.string "name", null: false
     t.integer "credit_value", null: false
+    t.string "abbreviation", null: false
+    t.string "code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["department_id"], name: "index_courses_on_department_id"
