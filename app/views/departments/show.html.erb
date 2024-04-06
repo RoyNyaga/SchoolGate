@@ -1,10 +1,14 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @department %>
-
-<div>
-  <%= link_to "Edit this department", edit_department_path(@department) %> |
-  <%= link_to "Back to departments", departments_path %>
-
-  <%= button_to "Destroy this department", @department, method: :delete %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render partial: "departments/department_show_card", locals: { department: @department } %>
+    </div>
+    <div class="col-md-9">
+      <h5 class="text-center light-grey-card py-2">Students</h5>
+      <div class="students-list-div white-section-div my-2 scrollable-tbody">
+        <%#= render partial: "students/table", locals: { students: @school_class.students } %>
+      </div>
+    </div>
+  </div>
 </div>
+<%#= button_to "Destroy this department", @department, method: :delete %>

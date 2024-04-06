@@ -1,4 +1,5 @@
 class DepartmentsController < ApplicationController
+  layout "school_layout"
   before_action :set_department, only: %i[ show edit update destroy ]
 
   # GET /departments or /departments.json
