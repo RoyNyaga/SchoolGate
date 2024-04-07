@@ -1,0 +1,11 @@
+<div class="light-grey-card p-2" id="<%= dom_id level %>">
+  <p class="margin-zero">Level <span class="text-color-grey-2"><%= level.name %></span></p>
+  <p class="margin-zero">Order <span class="text-color-grey-2"><%= level.level %></span></p>
+  <div class="d-flex justify-content-between">
+    <p>Students: <span class="text-color-grey-2"><%= level.students.size%></span></p>
+    <p>Lecturers <span class="text-color-grey-2"><%= level.teachers.size%></span></p>
+  </div>
+  <div class="my-2 text-center">
+    <%= link_to "details", level, class: "general-link" %>
+  </div>
+</div>

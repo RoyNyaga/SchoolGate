@@ -1,14 +1,14 @@
 <div class="container">
-  <h4 class="text-center my-3">Classes</h4>
+  <h4 class="text-center my-3">Levels</h4>
   <div class="">
     <%= render partial: "school_classes/form", 
               layout: "layouts/modal_layout", 
-              locals: { school_class: SchoolClass.new, action_name: "Add Class", action_title: "Create A New Class",
+              locals: { school_class: SchoolClass.new, action_name: "Add Level", action_title: "Create A New Level",
               modal_id: generate_modal_id("new", record: SchoolClass.new) }%>
     <div class="row">
       <% @school_classes.each do |school_class| %>
         <div class="col-md-3 my-3">
-          <%= render school_class %>
+          <%= render partial: "school_classes/level_card", locals: { level: school_class } %>
         </div>
       <% end %>
     </div>
