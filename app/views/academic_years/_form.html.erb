@@ -15,7 +15,7 @@
   </div>
   <div>
     <%= form.label :year, style: "display: block" %>
-    <%= form.select :year, generate_years.map { |v| [v,v] }, {include_blank: 'Select start Year'}, { class: "general-input-styles" } %>
+    <%= form.select :year, generate_years.map { |v| [v,v] }, {include_blank: 'Select year'}, { class: "general-input-styles" } %>
   </div>
   <div>
     <%= form.label :is_active, style: "display: block" %>
