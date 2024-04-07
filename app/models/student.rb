@@ -9,6 +9,9 @@ class Student < ApplicationRecord
 
   before_create do
     generate_matricule
+  end
+
+  after_create do
     create_fees
   end
   before_save :set_full_name # this method is defined in the application_record
