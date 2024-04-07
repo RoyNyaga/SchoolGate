@@ -11,6 +11,7 @@
   <% end %>
   <div>
     <%= form.hidden_field :school_id, value: current_school.id %>
+    <%= form.hidden_field :education_level, value: current_school.education_level %>
   </div>
   <div class="row">
     <div class="col-md-4">
@@ -25,8 +26,22 @@
       <%= form.label :date_of_birth, style: "display: block" %>
       <%= form.date_field :date_of_birth, class: "general-input-styles" %>
     </div>
+    <% if current_school.higher_education? %>
+      <div class="col-md-6">
+        <%= form.label :faculty, style: "display: block" %>
+        <%= form.collection_select :faculty_id, current_school.faculties, :id, :name, { prompt: "Select a faculty"}, { class: "general-input-styles", required: true } %>
+      </div>
+      <div class="col-md-6">
+        <%= form.label :department, style: "display: block" %>
+        <%= form.collection_select :department_id, current_school.departments, :id, :name, { prompt: "Select a faculty"}, { class: "general-input-styles", required: true } %>
+      </div>
+    <% end %>
     <div class="col-md-6">
-      <%= form.label :school_class_id, style: "display: block" %>
+      <% if current_school.higher_education? %>
+        <%= form.label :level, style: "display: block" %>
+      <% else %>
+        <%= form.label :school_class_id, style: "display: block" %>
+      <% end %>
       <%= form.collection_select :school_class_id, current_school.school_classes, :id, :name %>
     </div>
     <div class="col-md-6">
