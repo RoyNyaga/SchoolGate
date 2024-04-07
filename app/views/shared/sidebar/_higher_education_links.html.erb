@@ -10,4 +10,6 @@
   dropdown_links: current_school_classes_link_data } %>
   <%= render partial: "shared/sidebar/sidebar_link_component", locals: { main_icon_class: "camera-retro",
   main_link_text: "Students", main_link_path: students_schools_path } %>
+  <%= render partial: "shared/sidebar/sidebar_link_component", locals: { main_icon_class: "camera-retro",
+  main_link_text: "Settings", main_link_path: edit_school_path(current_school) } %>
 </div>
