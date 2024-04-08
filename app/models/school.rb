@@ -27,4 +27,8 @@ class School < ApplicationRecord
       select(:full_name, :id, :teacher_id, :abbreviation, :town,
              :address, :moto)
     }
+
+  def active_academmic_year
+    academic_years.active.first
+  end
 end
