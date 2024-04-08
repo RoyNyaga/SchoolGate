@@ -48,7 +48,7 @@ class Student < ApplicationRecord
   end
 
   def create_fees
-    fees.create(school_id: school_id, school_class_id: school_class_id, academic_year: Student.generate_current_academic_year)
+    fees.create(school_id: school_id, school_class_id: school_class_id, academic_year: school.active_academmic_year)
   end
 
   def student_number_code
@@ -60,7 +60,7 @@ class Student < ApplicationRecord
   end
 
   def generate_matricule
-    "#{current_year_abbreviation}#{school.school_identifier}#{student_number_code}".upcase
+    self.matricule = "#{current_year_abbreviation}#{school.school_identifier}#{student_number_code}".upcase
   end
 
   def all_classes_attended_ids
@@ -69,6 +69,14 @@ class Student < ApplicationRecord
 
   def attended_academic_years
     fees.where("percentage_complete > 1").map(&:academic_year)
+  end
+
+  def faculty
+    Faculty.find(faculty_id)
+  end
+
+  def department
+    Department.find(department_id)
   end
 
   # def save_matricule
