@@ -18,8 +18,8 @@
           class: "grey-link-text", data: { bs_toggle: "offcanvas" },
           role: "button", aria: {controls: "#{generate_drawer_id("preview", record: student)}_drawer"} %>
         </td>
-        <td class="table-row-data"><%= student.school_class.name %></td>
         <td class="table-row-data"><%= student.matricule %></td>
+        <td class="table-row-data"><%= student.school_class.name %></td>
         <td class="table-row-data d-none d-md-table-cell"><%= student.date_of_birth %></td>
         <td class="table-row-data d-none d-md-table-cell"><%= student.fathers_name %></td>
         <td class="table-row-data d-none d-md-table-cell"><%= student.mothers_name %></td>
