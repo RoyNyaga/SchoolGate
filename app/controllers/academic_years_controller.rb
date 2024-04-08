@@ -29,7 +29,7 @@ class AcademicYearsController < ApplicationController
 
     respond_to do |format|
       if @academic_year.save
-        format.html { redirect_to academic_years_path, success: "Academic year was successfully created." }
+        format.html { redirect_to academic_years_url, success: "Academic year was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
