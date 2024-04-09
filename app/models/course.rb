@@ -2,6 +2,8 @@ class Course < ApplicationRecord
   belongs_to :school
   belongs_to :faculty
   belongs_to :department
+  has_many :lecturings, dependent: :destroy
+  has_many :lecturers, through: :lecturings, source: "teacher"
 
   validates :name, presence: true
   validates :credit_value, presence: true
