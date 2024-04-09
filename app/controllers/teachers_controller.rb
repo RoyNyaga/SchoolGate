@@ -15,6 +15,11 @@ class TeachersController < ApplicationController
     render layout: "school_layout"
   end
 
+  def courses
+    @courses = current_teacher.courses
+    render layout: "school_layout"
+  end
+
   def edit
   end
 

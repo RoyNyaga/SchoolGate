@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :lecturings
-  resources :courses
+  resources :courses do
+    member do
+      get :for_lecturer
+    end
+  end
   resources :departments
   resources :faculties
   mount MissionControl::Jobs::Engine, at: "/jobs"
@@ -66,6 +70,7 @@ Rails.application.routes.draw do
     collection do
       get :invitations
       get :subjects
+      get :courses
     end
 
     member do

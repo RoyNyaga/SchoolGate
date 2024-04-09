@@ -78,7 +78,13 @@ module ApplicationHelper
 
   def current_teacher_subject_link_data
     current_teacher.class_subjects.where(school_id: current_school.id).map do |c_s|
-      { name: c_s.name, path: for_teacher_subject_path(c_s) }
+      { name: c_s.short_title, path: for_teacher_subject_path(c_s) }
+    end
+  end
+
+  def current_teacher_courses_link_data
+    current_teacher.courses.where(school_id: current_school.id).map do |course|
+      { name: course.name, path: for_lecturer_course_path(course) }
     end
   end
 
