@@ -1,7 +1,7 @@
 <div class="container" data-controller="academicYears">
   <h5 class="text-center">Academic Years</h5>
   <div class="text-center">
-    <%= render partial: "academic_years/index_form_holder", 
+    <%= render partial: "academic_years/form", 
               layout: "layouts/modal_layout", 
               locals: { academic_year: @academic_year, action_name: "New", action_title: "Create A New Academic Year",
               modal_id: generate_modal_id("new", record: @academic_year) }%>
