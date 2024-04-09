@@ -15,6 +15,33 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def log_in_student(student)
+    cookies.permanent.signed[:logged_in_student_id] = student.id
+  end
+
+  def current_student
+    @current_student ||= Student.find_by(id: cookies.signed[:logged_in_student_id]) if cookies.signed[:logged_in_student_id]
+  end
+
+  def is_student_logged_in?
+    !current_student.nil?
+  end
+
+  def forget_student_cookies
+    cookies.delete(:logged_in_student_id)
+  end
+
+  def log_out_student
+    forget_student_cookies
+    @current_student = nil
+  end
+
+  def check_for_current_student
+    unless cookies.signed[:logged_in_student_id]
+      # redirect_to ------
+    end
+  end
+
   private
 
   def configure_permitted_parameters
