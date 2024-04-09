@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_07_175056) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_09_000500) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -146,6 +146,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_07_175056) do
     t.index ["school_id"], name: "index_invitations_on_school_id"
     t.index ["sender_id"], name: "index_invitations_on_sender_id"
     t.index ["teacher_id"], name: "index_invitations_on_teacher_id"
+  end
+
+  create_table "lecturings", force: :cascade do |t|
+    t.bigint "course_id", null: false
+    t.bigint "teacher_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_lecturings_on_course_id"
+    t.index ["teacher_id"], name: "index_lecturings_on_teacher_id"
   end
 
   create_table "main_topics", force: :cascade do |t|
@@ -496,6 +505,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_07_175056) do
   add_foreign_key "fees", "students"
   add_foreign_key "invitations", "schools"
   add_foreign_key "invitations", "teachers"
+  add_foreign_key "lecturings", "courses"
+  add_foreign_key "lecturings", "teachers"
   add_foreign_key "main_topics", "curriculums"
   add_foreign_key "main_topics", "subjects"
   add_foreign_key "main_topics", "teachers"
