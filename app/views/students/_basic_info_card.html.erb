@@ -1,7 +1,19 @@
 <div class="dashboard-normal-font-size" id="<%= dom_id student %>">
-  <p>
-    Current Class: <span class="text-color-grey-2"><%= student.school_class_name %></span>
-  </p>
+  <% if current_school.higher_education? %>
+    <p>
+      Level: <span class="text-color-grey-2"><%= student.school_class_name %></span>
+    </p>
+    <p>
+      Faculty: <span class="text-color-grey-2"><%= student.faculty.name %></span>
+    </p>
+    <p>
+      Department: <span class="text-color-grey-2"><%= student.department.name %></span>
+    </p>
+  <% else %>
+    <p>
+      Current Class: <span class="text-color-grey-2"><%= student.school_class_name %></span>
+    </p>
+  <% end %>
   <p>
     Date Of Birth: <span class="text-color-grey-2"><%= student.readable_date(date: student.date_of_birth, with_year: true) %></span>
   </p>
