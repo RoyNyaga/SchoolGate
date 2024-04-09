@@ -1,9 +1,6 @@
 <h1>New lecturing</h1>
-
-<%= render "form", lecturing: @lecturing %>
-
+<%= render partial: "lecturings/form", locals: { lecturing: @lecturing, course: @course } %>
 <br>
-
 <div>
   <%= link_to "Back to lecturings", lecturings_path %>
 </div>

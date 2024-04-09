@@ -22,10 +22,10 @@ class LecturingsController < ApplicationController
   # POST /lecturings or /lecturings.json
   def create
     @lecturing = Lecturing.new(lecturing_params)
-
+    @course = @lecturing.course
     respond_to do |format|
       if @lecturing.save
-        format.html { redirect_to lecturing_url(@lecturing), notice: "Lecturing was successfully created." }
+        format.html { redirect_to department_url(@lecturing.course.department), notice: "Course was successfully assigned." }
         format.json { render :show, status: :created, location: @lecturing }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -58,13 +58,14 @@ class LecturingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_lecturing
-      @lecturing = Lecturing.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def lecturing_params
-      params.require(:lecturing).permit(:course_id, :teacher_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_lecturing
+    @lecturing = Lecturing.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def lecturing_params
+    params.require(:lecturing).permit(:course_id, :teacher_id)
+  end
 end

@@ -28,10 +28,10 @@
             <%= render partial: "courses/preview", layout: "layouts/drawer_layout", 
               locals: { course: course, title: course.long_title, 
               item_id: generate_drawer_id("preview", record: course) , position: "end", btn_text: "View", btn_visibility: false } %>
-            <%= render partial: "invitations/form", 
+            <%= render partial: "lecturings/form", 
               layout: "layouts/modal_layout", 
-              locals: { invitation: Invitation.new, action_name: "Assign", action_title: "Invitation",
-              modal_id: generate_modal_id("new", record: Invitation.new) } %>
+              locals: { lecturing: Lecturing.new, course: course, action_name: "Assign", action_title: "Invitation",
+              modal_id: generate_modal_id("new", record: course) } %>
           </div>
         <% end %>
       </div>

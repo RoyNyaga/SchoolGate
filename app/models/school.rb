@@ -15,6 +15,7 @@ class School < ApplicationRecord
   has_many :report_card_generators
   has_many :faculties
   has_many :departments
+  has_many :courses
 
   store_accessor :school_fees_settings, :level_1_fees, :level_2_fees, :level_3_fees, :level_4_fees,
                  :level_5_fees, :level_6_fees, :level_7_fees
