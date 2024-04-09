@@ -21,13 +21,17 @@
         department_id: @department.id, faculty_id: @department.faculty_id ,modal_id: generate_modal_id("new", record: Course.new) }%>
         </div>
         <% @courses.each do |course| %>
-          <div class="my-2">
+          <div class="my-2 d-flex justify-content-between">
             <%= link_to course.long_title, "##{generate_drawer_id("preview", record: course)}", 
           class: "grey-link-text dashboard-small-font-size", data: { bs_toggle: "offcanvas" },
           role: "button", aria: {controls: "#{generate_drawer_id("preview", record: course)}_drawer"} %>
             <%= render partial: "courses/preview", layout: "layouts/drawer_layout", 
               locals: { course: course, title: course.long_title, 
               item_id: generate_drawer_id("preview", record: course) , position: "end", btn_text: "View", btn_visibility: false } %>
+            <%= render partial: "invitations/form", 
+              layout: "layouts/modal_layout", 
+              locals: { invitation: Invitation.new, action_name: "Assign", action_title: "Invitation",
+              modal_id: generate_modal_id("new", record: Invitation.new) } %>
           </div>
         <% end %>
       </div>
