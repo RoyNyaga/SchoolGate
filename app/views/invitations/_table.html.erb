@@ -12,7 +12,7 @@
     <% invitations.each do |i| %>
       <tr>
         <td><%= i.school.full_name %></td>
-        <td><%= i.sender.name %></td>
+        <td><%= i.sender.full_name %></td>
         <td><%= i.proposed_salary %></td>
         <td><%= i.status %></td>
         <td><%= i.created_at %></td>
