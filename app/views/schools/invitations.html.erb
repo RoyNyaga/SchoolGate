@@ -1,0 +1,6 @@
+<div class="container">
+  <%= render partial: "invitations/form", 
+        layout: "layouts/modal_layout", 
+        locals: { invitation: Invitation.new, action_name: "Send Invit",
+         action_title: "Create an Invitation", modal_id: generate_modal_id("new", record: Invitation.new) }%>
+</div>
