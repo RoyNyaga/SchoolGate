@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_10_054531) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_10_065415) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -63,6 +63,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_054531) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "course_registrations", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "student_id", null: false
+    t.bigint "academic_year_id", null: false
+    t.bigint "semester_id", null: false
+    t.string "credit_val"
+    t.text "courses", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["academic_year_id"], name: "index_course_registrations_on_academic_year_id"
+    t.index ["school_id"], name: "index_course_registrations_on_school_id"
+    t.index ["semester_id"], name: "index_course_registrations_on_semester_id"
+    t.index ["student_id"], name: "index_course_registrations_on_student_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -500,6 +515,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_054531) do
   add_foreign_key "academic_years", "schools"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "course_registrations", "academic_years"
+  add_foreign_key "course_registrations", "schools"
+  add_foreign_key "course_registrations", "semesters"
+  add_foreign_key "course_registrations", "students"
   add_foreign_key "courses", "departments"
   add_foreign_key "courses", "faculties"
   add_foreign_key "courses", "schools"
