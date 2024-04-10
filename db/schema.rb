@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_09_000500) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_10_054531) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -261,6 +261,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_09_000500) do
     t.jsonb "student_id_settings", default: {}
     t.integer "education_level", default: 1
     t.index ["teacher_id"], name: "index_schools_on_teacher_id"
+  end
+
+  create_table "semesters", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "academic_year_id", null: false
+    t.integer "type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["academic_year_id"], name: "index_semesters_on_academic_year_id"
+    t.index ["school_id"], name: "index_semesters_on_school_id"
   end
 
   create_table "sequences", force: :cascade do |t|
@@ -527,6 +537,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_09_000500) do
   add_foreign_key "report_cards", "terms"
   add_foreign_key "school_classes", "schools"
   add_foreign_key "schools", "teachers"
+  add_foreign_key "semesters", "academic_years"
+  add_foreign_key "semesters", "schools"
   add_foreign_key "sequences", "academic_years"
   add_foreign_key "sequences", "school_classes"
   add_foreign_key "sequences", "schools"
