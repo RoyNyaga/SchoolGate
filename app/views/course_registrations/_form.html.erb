@@ -26,8 +26,9 @@
     <%= form.collection_select :semester_id, current_school.semesters, :id, :semester_type, { prompt: "Select Semester" }, { class: "general-input-styles" } %>
   </div>
   <div>
-    <%= form.label :courses, style: "display: block" %>
-    <%= form.text_area :courses %>
+    <%= text_field :search, :search, class: "general-input-styles", placeholder: "Search Student Name",
+          data: { searchpath: json_search,
+          action: "input->students#search" } %>
   </div>
   <div class="my-2">
     <%= form.submit class: "model-form-btn" %>

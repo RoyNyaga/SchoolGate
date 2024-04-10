@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resources :semesters
   resources :lecturings
   resources :courses do
+    collection do
+      get :json_search
+    end
     member do
       get :for_lecturer
     end

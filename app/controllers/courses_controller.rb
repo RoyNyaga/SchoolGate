@@ -61,6 +61,12 @@ class CoursesController < ApplicationController
   def for_lecturer
   end
 
+  def json_search
+    # @subject = Subject.find(params[:subject_id])
+    # @students = Student.where("lower(students.full_name) like '%#{params[:student_name].downcase}%' AND school_class_id = #{@subject.school_class_id}")
+    # render json: @students.select(:id, :full_name)
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
