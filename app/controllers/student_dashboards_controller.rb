@@ -2,6 +2,7 @@ class StudentDashboardsController < ApplicationController
   layout "student_dashboard_layout"
   skip_before_action :authenticate_teacher!
   before_action :check_for_current_student, except: [:login]
+  before_action :check_for_current_school, except: [:login]
 
   def login
   end
@@ -29,6 +30,9 @@ class StudentDashboardsController < ApplicationController
       # redirect_to login_student_dashboards_path
       render :login, status: :unprocessable_entity
     end
+  end
+
+  def course_registrations
   end
 end
 

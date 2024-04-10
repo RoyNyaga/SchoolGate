@@ -35,14 +35,23 @@ class ApplicationController < ActionController::Base
     cookies.delete(:logged_in_student_id)
   end
 
+  def forget_current_school_session
+    session.delete(:current_school_id)
+  end
+
   def log_out_student
     forget_student_cookies
+    forget_current_school_session
+    @current_school = nil
     @current_student = nil
   end
 
   def check_for_current_student
-    unless cookies.signed[:logged_in_student_id]
-      # redirect_to ------
+    if cookies.signed[:logged_in_student_id] #set current_school if student is singed in and school session is missing
+      school = School.find_by(id: current_student.school_id)
+      set_current_school(school)
+    else
+      redirect_to login_student_dashboards_path
     end
   end
 

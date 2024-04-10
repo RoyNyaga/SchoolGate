@@ -71,3 +71,7 @@ Things you may want to cover:
 
 ## starting solid queue
 - bundle exec rake solid_queue:start
+
+Ngodi is my friend and colleague. We went to the same school called microverse where we studied software engineering. Tod Ngodi is a professional develop with so much motivation and ideas. One thing I like about Ngodi is the way he learns fast. He quickly picks up technology skills.
+
+write a recommendation for Ngodi

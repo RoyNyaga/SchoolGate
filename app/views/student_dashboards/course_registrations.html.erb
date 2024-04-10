@@ -1,0 +1,10 @@
+<div class="container">
+  <h4 class="text-center">Course Registrations</h4>
+  <div class="registration-form-div">
+    <%= render partial: "course_registrations/form", 
+        layout: "layouts/modal_layout", 
+        locals: { course_registration: CourseRegistration.new,
+        action_name: "New Registration", action_title: "Register Your courses",
+        modal_id: generate_modal_id("new", record: CourseRegistration.new) }%>
+  </div>
+</div>

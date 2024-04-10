@@ -2,7 +2,6 @@
   <% if course_registration.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(course_registration.errors.count, "error") %> prohibited this course_registration from being saved:</h2>
-
       <ul>
         <% course_registration.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,38 +9,27 @@
       </ul>
     </div>
   <% end %>
-
   <div>
-    <%= form.label :school_id, style: "display: block" %>
-    <%= form.text_field :school_id %>
+    <%= form.label :school_id, class: "d-none" %>
+    <%= form.hidden_field :school_id, value: current_school.id %>
   </div>
-
   <div>
-    <%= form.label :student_id, style: "display: block" %>
-    <%= form.text_field :student_id %>
+    <%= form.label :student_id, class: "d-none" %>
+    <%= form.hidden_field :student_id, value: current_student.id %>
   </div>
-
   <div>
     <%= form.label :academic_year_id, style: "display: block" %>
-    <%= form.text_field :academic_year_id %>
+    <%= form.collection_select :academic_year_id, current_school.academic_years.active, :id, :year, { prompt: "Select Year" }, { class: "general-input-styles" } %>
   </div>
-
   <div>
     <%= form.label :semester_id, style: "display: block" %>
-    <%= form.text_field :semester_id %>
+    <%= form.collection_select :semester_id, current_school.semesters, :id, :semester_type, { prompt: "Select Semester" }, { class: "general-input-styles" } %>
   </div>
-
-  <div>
-    <%= form.label :credit_val, style: "display: block" %>
-    <%= form.text_field :credit_val %>
-  </div>
-
   <div>
     <%= form.label :courses, style: "display: block" %>
     <%= form.text_area :courses %>
   </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="my-2">
+    <%= form.submit class: "model-form-btn" %>
   </div>
 <% end %>
