@@ -1,0 +1,13 @@
+<div class="text-center my-3">
+  <%= render partial: "semesters/form", 
+        layout: "layouts/modal_layout", 
+        locals: { semester: Semester.new, academic_year: academic_year, action_name: "Add A Semester", action_title: "Create A New Semester",
+        modal_id: generate_modal_id("new_semester", record: Semester.new) }%>
+</div>
+<div class="row">
+  <% academic_year.semesters.each do |semester| %>
+    <div class="col-md-3">
+      <%= render semester %>
+    </div>
+  <% end %>
+</div>

@@ -11,7 +11,6 @@ class AcademicYearsController < ApplicationController
 
   # GET /academic_years/1 or /academic_years/1.json
   def show
-    @term = Term.new
   end
 
   # GET /academic_years/new
