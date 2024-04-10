@@ -24,8 +24,9 @@ class SemestersController < ApplicationController
     @semester = Semester.new(semester_params)
 
     respond_to do |format|
+      @academic_year = @semester.academic_year
       if @semester.save
-        format.html { redirect_to semester_url(@semester), notice: "Semester was successfully created." }
+        format.html { redirect_to academic_year_url(@academic_year), notice: "Semester was successfully created." }
         format.json { render :show, status: :created, location: @semester }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -58,13 +59,14 @@ class SemestersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_semester
-      @semester = Semester.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def semester_params
-      params.require(:semester).permit(:school_id, :academic_year_id, :type)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_semester
+    @semester = Semester.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def semester_params
+    params.require(:semester).permit(:school_id, :academic_year_id, :semester_type)
+  end
 end

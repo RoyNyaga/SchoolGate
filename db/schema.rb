@@ -266,7 +266,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_054531) do
   create_table "semesters", force: :cascade do |t|
     t.bigint "school_id", null: false
     t.bigint "academic_year_id", null: false
-    t.integer "type", null: false
+    t.integer "semester_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["academic_year_id"], name: "index_semesters_on_academic_year_id"
