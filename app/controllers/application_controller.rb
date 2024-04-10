@@ -1,11 +1,15 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_school
+  helper_method :current_school, :is_student_logged_in?, :current_student
   protect_from_forgery with: :exception
   before_action :authenticate_teacher!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def current_school
     @current_school ||= School.find(session[:current_school_id]) if session[:current_school_id]
+  end
+
+  def set_current_school(school)
+    session[:current_school_id] = school.id
   end
 
   def check_for_current_school

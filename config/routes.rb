@@ -121,4 +121,15 @@ Rails.application.routes.draw do
       get :report_card_performance_line
     end
   end
+
+  resources :student_dashboards do
+    collection do
+      get :login
+      post :create_session
+    end
+
+    member do
+      delete :destroy_session_path
+    end
+  end
 end

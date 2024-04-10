@@ -1,0 +1,17 @@
+<%= form_with(url: create_session_student_dashboards_path) do |form| %>
+  <div class="field">
+    <%= form.label :school %>
+    <%= form.collection_select :school_id, School.without_settings_attr, :id, :full_name, { prompt: "Select Your School" }, { class: "general-input-styles", required: true } %>
+  </div>
+  <div class="field">
+    <%= form.label :matricule %>
+    <%= form.text_field :matricule, class: "general-input-styles" %>
+  </div>
+  <div class="field">
+    <%= form.label :portal_code %><br />
+    <%= form.password_field :portal_code, autocomplete: "current-password", class: "general-input-styles" %>
+  </div>
+  <div class="my-3">
+    <%= form.submit :log_in, class: "model-form-btn" %>
+  </div>
+<% end %>

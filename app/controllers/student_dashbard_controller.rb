@@ -1,2 +1,0 @@
-class StudentDashbardController < ApplicationController
-end
