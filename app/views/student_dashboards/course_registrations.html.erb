@@ -1,10 +1,19 @@
-<div class="container">
+<div class="container" data-controller="courseRegistration">
   <h4 class="text-center">Course Registrations</h4>
-  <div class="registration-form-div">
+  <div class="registration-form-div my-3">
     <%= render partial: "course_registrations/form", 
         layout: "layouts/modal_layout", 
         locals: { course_registration: CourseRegistration.new,
         action_name: "New Registration", action_title: "Register Your courses",
         modal_id: generate_modal_id("new", record: CourseRegistration.new) }%>
+  </div>
+  <div class="course-registration-list">
+    <div class="row">
+      <% @course_registrations.each do |registration| %>
+        <div class="col-md-3">
+          <%= render partial: "course_registrations/course_registration", locals: { course_registration: registration } %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

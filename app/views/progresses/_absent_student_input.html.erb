@@ -1,6 +1,6 @@
 <div class="added-student d-flex justify-content-between px-2" id="added_student_<%= student['id'] %>" data-studentid="<%= student['id'] %>">
   <p class="absent-student-name">🧨 <%= student['full_name'] %></p>
-  <p class="absent-student-remove-btn" data-action="click->students#remove" data-addedstudentid="added_student_<%= student['id'] %>">Remove</p>
+  <p class="remove-from-list-btn" data-action="click->students#remove" data-addedstudentid="added_student_<%= student['id'] %>">Remove</p>
   <input autocomplete="off" type="hidden" name="progress[absent_students][][id]" value=<%= student['id'] %>>
   <input autocomplete="off" type="hidden" name="progress[absent_students][][full_name]" value="Roland Dickens">
 </div>

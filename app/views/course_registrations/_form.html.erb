@@ -26,9 +26,13 @@
     <%= form.collection_select :semester_id, current_school.semesters, :id, :semester_type, { prompt: "Select Semester" }, { class: "general-input-styles" } %>
   </div>
   <div>
-    <%= text_field :search, :search, class: "general-input-styles", placeholder: "Search Student Name",
-          data: { searchpath: json_search,
-          action: "input->students#search" } %>
+    <h5 class="my-2">Search and Add your courses</h5>
+    <div class="added-courses" data-courseRegistration-target="addedCoursesWrapper"></div>
+    <%= text_field :complete_name, :complete_name, class: "general-input-styles", placeholder: "Search Student Name",
+          data: { searchpath: json_search_courses_path,
+          action: "input->courseRegistration#search" } %>
+    <div class="search-results" data-courseRegistration-target="searchResults">
+    </div>
   </div>
   <div class="my-2">
     <%= form.submit class: "model-form-btn" %>

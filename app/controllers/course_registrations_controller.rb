@@ -1,5 +1,7 @@
 class CourseRegistrationsController < ApplicationController
   before_action :set_course_registration, only: %i[ show edit update destroy ]
+  skip_before_action :authenticate_teacher!, only: [:create, :update, :new]
+  before_action :check_for_current_student, only: [:create, :update, :new]
 
   # GET /course_registrations or /course_registrations.json
   def index
@@ -22,11 +24,9 @@ class CourseRegistrationsController < ApplicationController
   # POST /course_registrations or /course_registrations.json
   def create
     @course_registration = CourseRegistration.new(course_registration_params)
-
     respond_to do |format|
       if @course_registration.save
-        format.html { redirect_to course_registration_url(@course_registration), notice: "Course registration was successfully created." }
-        format.json { render :show, status: :created, location: @course_registration }
+        format.html { redirect_to course_registrations_student_dashboards_path, notice: "Course registration was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @course_registration.errors, status: :unprocessable_entity }
@@ -58,13 +58,15 @@ class CourseRegistrationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_course_registration
-      @course_registration = CourseRegistration.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def course_registration_params
-      params.require(:course_registration).permit(:school_id, :student_id, :academic_year_id, :semester_id, :credit_val, :courses)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_course_registration
+    @course_registration = CourseRegistration.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def course_registration_params
+    params.require(:course_registration).permit(:school_id, :student_id, :academic_year_id, :semester_id,
+                                                courses: [:id, :complete_name, :credit_val])
+  end
 end

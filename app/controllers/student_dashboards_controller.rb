@@ -1,8 +1,8 @@
 class StudentDashboardsController < ApplicationController
   layout "student_dashboard_layout"
   skip_before_action :authenticate_teacher!
-  before_action :check_for_current_student, except: [:login]
-  before_action :check_for_current_school, except: [:login]
+  before_action :check_for_current_student, except: [:login, :create_session]
+  before_action :check_for_current_school, except: [:login, :create_session]
 
   def login
   end
@@ -19,7 +19,7 @@ class StudentDashboardsController < ApplicationController
   def create_session
     @school = School.find_by(id: params[:school_id])
     @student = @school.students.find_by(matricule: params[:matricule])
-    # binding.break
+
     if @student && @student.portal_code == params[:portal_code]
       log_in_student(@student)
       set_current_school(@school)
@@ -33,6 +33,7 @@ class StudentDashboardsController < ApplicationController
   end
 
   def course_registrations
+    @course_registrations = current_student.course_registrations
   end
 end
 

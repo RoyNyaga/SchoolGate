@@ -5,7 +5,7 @@ class CreateCourseRegistrations < ActiveRecord::Migration[7.1]
       t.references :student, null: false, foreign_key: true
       t.references :academic_year, null: false, foreign_key: true
       t.references :semester, null: false, foreign_key: true
-      t.string :credit_val
+      t.integer :credit_val, default: 0
       t.text :courses, array: true, default: []
 
       t.timestamps

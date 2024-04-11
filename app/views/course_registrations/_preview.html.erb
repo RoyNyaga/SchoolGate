@@ -1,0 +1,12 @@
+<div class="course-registration-preview">
+  <div class="light-grey-card p-2">
+    <p class="margin-zero">Year: <span class="text-color-grey-2"><%= course_registration.academic_year.year %></span></p>
+    <p class="margin-zero">Semester: <span class="text-color-grey-2"><%= course_registration.semester.semester_type %></span></p>
+    <p class="margin-zero">Tt Credit val: <span class="text-color-grey-2"><%= course_registration.credit_val %></span></p>
+    <p class="margin-zero">Num of courses: <span class="text-color-grey-2"><%= course_registration.courses.size %></span></p>
+  </div>
+  <div class="coures-stats">
+    <h5 class="my-3">Course Registered</h5>
+    <%= render partial: "course_registrations/table", locals: { course_registration: course_registration }%>
+  </div>
+</div>

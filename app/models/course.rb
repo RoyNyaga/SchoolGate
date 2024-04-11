@@ -20,6 +20,8 @@ class Course < ApplicationRecord
     name + " " + short_title
   end
 
+  private
+
   def set_complete_name
     self.complete_name = long_title.downcase
   end
