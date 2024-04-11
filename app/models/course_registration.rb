@@ -6,9 +6,22 @@ class CourseRegistration < ApplicationRecord
   belongs_to :semester
 
   before_save :set_credit_value
+  after_safe :generate_enrollments
 
   def title
     "#{academic_year.year} - #{semester.semester_type.humanize}"
+  end
+
+  def create_enrollments
+    enrollments.destroy_all
+  end
+
+  def parse_enrollments
+    current_year_id = school.active_academmic_year.id
+    CourseRegistration.string_to_hash_arr(courses).map do |course|
+      { school_id: school_id, student_id: student_id, course_id: course_id,
+        academic_year_id: current_year_id, semester_id: semester_id, course_registration_id: id }
+    end
   end
 
   private
