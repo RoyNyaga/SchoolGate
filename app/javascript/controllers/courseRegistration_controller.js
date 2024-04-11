@@ -39,11 +39,11 @@ export default class extends Controller {
       <p class="remove-from-list-btn" data-action="click->courseRegistration#remove" 
            data-addedcourseId="added_course_${courseId}">Remove</p>
       <input autocomplete="off" type="hidden" name="course_registration[courses][][id]" 
-      value=${courseId}">
+      value=${courseId}>
       <input autocomplete="off" type="hidden" name="course_registration[courses][][complete_name]" 
       value="${completeName}">
       <input autocomplete="off" type="hidden" name="course_registration[courses][][credit_val]" 
-      value="${creditVal}">
+      value=${creditVal}>
     </div>
     `
   }
