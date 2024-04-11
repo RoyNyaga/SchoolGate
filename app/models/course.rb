@@ -4,6 +4,7 @@ class Course < ApplicationRecord
   belongs_to :department
   has_many :lecturings, dependent: :destroy
   has_many :lecturers, through: :lecturings, source: "teacher"
+  has_many :enrollments, dependent: :destroy
 
   validates :name, presence: true
   validates :credit_value, presence: true

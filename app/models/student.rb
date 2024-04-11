@@ -7,6 +7,7 @@ class Student < ApplicationRecord
   has_many :report_cards
   has_many :fees, dependent: :destroy
   has_many :course_registrations
+  has_many :enrollments, dependent: :destroy
 
   validate :contact_check_for_higher_education_student
 

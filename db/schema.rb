@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_10_133516) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_11_101903) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -121,6 +121,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_133516) do
     t.datetime "updated_at", null: false
     t.index ["faculty_id"], name: "index_departments_on_faculty_id"
     t.index ["school_id"], name: "index_departments_on_school_id"
+  end
+
+  create_table "enrollments", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "student_id", null: false
+    t.bigint "course_id", null: false
+    t.bigint "academic_year_id", null: false
+    t.bigint "semester_id", null: false
+    t.bigint "course_registration_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["academic_year_id"], name: "index_enrollments_on_academic_year_id"
+    t.index ["course_id"], name: "index_enrollments_on_course_id"
+    t.index ["course_registration_id"], name: "index_enrollments_on_course_registration_id"
+    t.index ["school_id"], name: "index_enrollments_on_school_id"
+    t.index ["semester_id"], name: "index_enrollments_on_semester_id"
+    t.index ["student_id"], name: "index_enrollments_on_student_id"
   end
 
   create_table "faculties", force: :cascade do |t|
@@ -529,6 +546,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_133516) do
   add_foreign_key "curriculums", "teachers"
   add_foreign_key "departments", "faculties"
   add_foreign_key "departments", "schools"
+  add_foreign_key "enrollments", "academic_years"
+  add_foreign_key "enrollments", "course_registrations"
+  add_foreign_key "enrollments", "courses"
+  add_foreign_key "enrollments", "schools"
+  add_foreign_key "enrollments", "semesters"
+  add_foreign_key "enrollments", "students"
   add_foreign_key "faculties", "schools"
   add_foreign_key "fees", "school_classes"
   add_foreign_key "fees", "schools"
