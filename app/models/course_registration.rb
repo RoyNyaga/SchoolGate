@@ -7,15 +7,10 @@ class CourseRegistration < ApplicationRecord
   has_many :enrollments
 
   before_save :set_credit_value
-  after_save :generate_enrollments
+  after_save :create_enrollments
 
   def title
     "#{academic_year.year} - #{semester.semester_type.humanize}"
-  end
-
-  def create_enrollments
-    enrollments.destroy_all
-    Enrollment.insert_all parse_enrollments
   end
 
   def parse_enrollments
@@ -27,6 +22,11 @@ class CourseRegistration < ApplicationRecord
   end
 
   private
+
+  def create_enrollments
+    enrollments.destroy_all
+    Enrollment.insert_all parse_enrollments
+  end
 
   def set_credit_value
     self.credit_val = CourseRegistration.string_to_hash_arr(courses).map { |c| c["credit_val"].to_i }.sum

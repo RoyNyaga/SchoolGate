@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   layout "school_layout"
-  before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :set_course, only: %i[ show edit update destroy for_lecturer ]
   skip_before_action :authenticate_teacher!, only: [:json_search]
 
   # GET /courses or /courses.json
@@ -60,6 +60,7 @@ class CoursesController < ApplicationController
   end
 
   def for_lecturer
+    @enrollments = @course.enrollments.where(academic_year_id: current_school.active_academmic_year.id)
   end
 
   def json_search

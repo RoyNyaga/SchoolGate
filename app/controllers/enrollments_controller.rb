@@ -57,14 +57,18 @@ class EnrollmentsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_enrollment
-      @enrollment = Enrollment.find(params[:id])
-    end
+  def search
+  end
 
-    # Only allow a list of trusted parameters through.
-    def enrollment_params
-      params.require(:enrollment).permit(:school_id, :student_id, :course_id, :academic_year_id, :semester_id)
-    end
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_enrollment
+    @enrollment = Enrollment.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def enrollment_params
+    params.require(:enrollment).permit(:school_id, :student_id, :course_id, :academic_year_id, :semester_id)
+  end
 end

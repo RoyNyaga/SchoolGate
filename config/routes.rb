@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :enrollments
+  resources :assessments
+  resources :enrollments do
+    collection do
+      get :search
+    end
+  end
   resources :course_registrations
   resources :semesters
   resources :lecturings
