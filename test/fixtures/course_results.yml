@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  school: one
+  student: one
+  course: one
+  academic_year: one
+  semester: one
+  ca_mark: 1.5
+  exam_mark: 1.5
+  resit_mark: 1.5
+  total_mark: 1.5
+  has_resit: false
+  is_validated: false
+  credit_val: 1
+
+two:
+  school: two
+  student: two
+  course: two
+  academic_year: two
+  semester: two
+  ca_mark: 1.5
+  exam_mark: 1.5
+  resit_mark: 1.5
+  total_mark: 1.5
+  has_resit: false
+  is_validated: false
+  credit_val: 1

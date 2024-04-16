@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :course_results
   resources :assessments do
     collection do
       post :redirect_to_new

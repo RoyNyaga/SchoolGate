@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_16_035938) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_16_042216) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -94,6 +94,28 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_035938) do
     t.index ["school_id"], name: "index_course_registrations_on_school_id"
     t.index ["semester_id"], name: "index_course_registrations_on_semester_id"
     t.index ["student_id"], name: "index_course_registrations_on_student_id"
+  end
+
+  create_table "course_results", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "student_id", null: false
+    t.bigint "course_id", null: false
+    t.bigint "academic_year_id", null: false
+    t.bigint "semester_id", null: false
+    t.float "ca_mark"
+    t.float "exam_mark"
+    t.float "resit_mark"
+    t.float "total_mark"
+    t.boolean "has_resit", default: false
+    t.boolean "is_validated", default: false
+    t.integer "credit_val"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["academic_year_id"], name: "index_course_results_on_academic_year_id"
+    t.index ["course_id"], name: "index_course_results_on_course_id"
+    t.index ["school_id"], name: "index_course_results_on_school_id"
+    t.index ["semester_id"], name: "index_course_results_on_semester_id"
+    t.index ["student_id"], name: "index_course_results_on_student_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -558,6 +580,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_035938) do
   add_foreign_key "course_registrations", "schools"
   add_foreign_key "course_registrations", "semesters"
   add_foreign_key "course_registrations", "students"
+  add_foreign_key "course_results", "academic_years"
+  add_foreign_key "course_results", "courses"
+  add_foreign_key "course_results", "schools"
+  add_foreign_key "course_results", "semesters"
+  add_foreign_key "course_results", "students"
   add_foreign_key "courses", "departments"
   add_foreign_key "courses", "faculties"
   add_foreign_key "courses", "schools"
