@@ -30,16 +30,20 @@ class AssessmentsController < ApplicationController
   # POST /assessments or /assessments.json
   def create
     @assessment = Assessment.new(assessment_params)
+    @course = @assessment.course
 
-    # respond_to do |format|
-    #   if @assessment.save
-    #     format.html { redirect_to assessment_url(@assessment), notice: "Assessment was successfully created." }
-    #     format.json { render :show, status: :created, location: @assessment }
-    #   else
-    #     format.html { render :new, status: :unprocessable_entity }
-    #     format.json { render json: @assessment.errors, status: :unprocessable_entity }
-    #   end
-    # end
+    respond_to do |format|
+      if @assessment.save
+        format.html { redirect_to for_lecturer_course_path(@course), notice: "Assessment was successfully created." }
+        format.json { render :show, status: :created, location: @assessment }
+      else
+        @academic_year = current_school.active_academic_year
+        @semester = current_school.active_semester
+        @enrollments = @course.enrollments.includes(:student).where(semester_id: @semester.id, academic_year_id: @academic_year.id)
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @assessment.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # PATCH/PUT /assessments/1 or /assessments/1.json
