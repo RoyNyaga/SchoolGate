@@ -60,7 +60,7 @@ class CoursesController < ApplicationController
   end
 
   def for_lecturer
-    @enrollments = @course.enrollments.where(academic_year_id: current_school.active_academmic_year.id)
+    @enrollments = @course.enrollments.where(academic_year_id: current_school.active_academic_year.id)
   end
 
   def json_search

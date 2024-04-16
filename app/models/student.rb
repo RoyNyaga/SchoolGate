@@ -33,6 +33,11 @@ class Student < ApplicationRecord
     mark["mark"] unless mark.nil?
   end
 
+  def assessment_mark_per_subject(marks) # marks should be hashed
+    mark = get_mark_object(marks)
+    mark["mark"] unless mark.nil?
+  end
+
   def was_enrolled?(marks)
     mark = get_mark_object(marks)
     mark.nil? ? false : mark["is_enrolled"]
@@ -55,7 +60,7 @@ class Student < ApplicationRecord
   end
 
   def create_fees
-    fees.create(school_id: school_id, school_class_id: school_class_id, academic_year: school.active_academmic_year)
+    fees.create(school_id: school_id, school_class_id: school_class_id, academic_year: school.active_academic_year)
   end
 
   def student_number_code

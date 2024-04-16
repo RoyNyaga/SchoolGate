@@ -1,5 +1,5 @@
 class SemestersController < ApplicationController
-  before_action :set_semester, only: %i[ show edit update destroy ]
+  before_action :set_semester, only: %i[ show edit update destroy toggle_activeness ]
 
   # GET /semesters or /semesters.json
   def index
@@ -55,6 +55,16 @@ class SemestersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to semesters_url, notice: "Semester was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def toggle_activeness
+    is_active = ActiveRecord::Type::Boolean.new.cast(params[:is_active])
+    if @semester.update(is_active: is_active)
+      respond_to do |format|
+        flash[:success] = "Successfully updated Semester"
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("semester_#{@semester.id}", partial: "semesters/semester", locals: { semester: @semester }) }
+      end
     end
   end
 

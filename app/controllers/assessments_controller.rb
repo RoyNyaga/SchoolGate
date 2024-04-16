@@ -1,4 +1,5 @@
 class AssessmentsController < ApplicationController
+  layout "school_layout"
   before_action :set_assessment, only: %i[ show edit update destroy ]
 
   # GET /assessments or /assessments.json
@@ -12,6 +13,10 @@ class AssessmentsController < ApplicationController
 
   # GET /assessments/new
   def new
+    @course = Course.find_by(id: params[:course_id])
+    @academic_year = current_school.active_academic_year
+    @semester = current_school.active_semester
+    @enrollments = @course.enrollments.includes(:student).where(semester_id: @semester.id, academic_year_id: @academic_year.id)
     @assessment = Assessment.new
   end
 
@@ -19,19 +24,22 @@ class AssessmentsController < ApplicationController
   def edit
   end
 
+  def redirect_to_new
+  end
+
   # POST /assessments or /assessments.json
   def create
     @assessment = Assessment.new(assessment_params)
 
-    respond_to do |format|
-      if @assessment.save
-        format.html { redirect_to assessment_url(@assessment), notice: "Assessment was successfully created." }
-        format.json { render :show, status: :created, location: @assessment }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @assessment.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @assessment.save
+    #     format.html { redirect_to assessment_url(@assessment), notice: "Assessment was successfully created." }
+    #     format.json { render :show, status: :created, location: @assessment }
+    #   else
+    #     format.html { render :new, status: :unprocessable_entity }
+    #     format.json { render json: @assessment.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /assessments/1 or /assessments/1.json
@@ -58,13 +66,15 @@ class AssessmentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_assessment
-      @assessment = Assessment.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def assessment_params
-      params.require(:assessment).permit(:school_id, :academic_year_id, :course_id, :semester_id, :type, :marks)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_assessment
+    @assessment = Assessment.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def assessment_params
+    params.require(:assessment).permit(:school_id, :academic_year_id, :course_id, :assessment_type, :semester_id, :type,
+                                       marks: [:id, :full_name, :mark, :is_present])
+  end
 end

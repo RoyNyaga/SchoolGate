@@ -30,7 +30,11 @@ class School < ApplicationRecord
              :address, :moto)
     }
 
-  def active_academmic_year
+  def active_academic_year
     academic_years.active.first
+  end
+
+  def active_semester
+    semesters.active.first
   end
 end

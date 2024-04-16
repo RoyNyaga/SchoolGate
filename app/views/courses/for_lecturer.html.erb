@@ -1,4 +1,9 @@
 <div class="container">
+  <div class="row my-3">
+    <div class="col-md-4 mx-auto">
+      <%= link_to "Creat Assessment", new_assessment_path(course_id: @course.id), class: "general-link" %>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-3">
       <%= render partial: "courses/course", locals: { course: @course } %>

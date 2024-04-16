@@ -5,7 +5,7 @@ class CreateAssessments < ActiveRecord::Migration[7.1]
       t.references :academic_year, null: false, foreign_key: true
       t.references :course, null: false, foreign_key: true
       t.references :semester, null: false, foreign_key: true
-      t.integer :assessment_type, default: 1
+      t.integer :assessment_type, default: 0
       t.text :marks, array: true, default: []
 
       t.timestamps

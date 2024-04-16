@@ -70,7 +70,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_14_123515) do
     t.bigint "academic_year_id", null: false
     t.bigint "course_id", null: false
     t.bigint "semester_id", null: false
-    t.integer "assessment_type", default: 1
+    t.integer "assessment_type", default: 0
     t.text "marks", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

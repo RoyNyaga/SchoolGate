@@ -14,7 +14,7 @@ class CourseRegistration < ApplicationRecord
   end
 
   def parse_enrollments
-    current_year_id = school.active_academmic_year.id
+    current_year_id = school.active_academic_year.id
     CourseRegistration.string_to_hash_arr(courses).map do |course|
       { school_id: school_id, student_id: student_id, course_id: course["id"].to_i,
         academic_year_id: current_year_id, semester_id: semester_id, course_registration_id: id }

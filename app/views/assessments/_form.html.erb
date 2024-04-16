@@ -2,7 +2,6 @@
   <% if assessment.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(assessment.errors.count, "error") %> prohibited this assessment from being saved:</h2>
-
       <ul>
         <% assessment.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,37 +9,56 @@
       </ul>
     </div>
   <% end %>
-
   <div>
-    <%= form.label :school_id, style: "display: block" %>
-    <%= form.text_field :school_id %>
+    <%= form.label :school_id, class: "d-none" %>
+    <%= form.hidden_field :school_id, value: current_school.id %>
   </div>
-
   <div>
-    <%= form.label :academic_year_id, style: "display: block" %>
-    <%= form.text_field :academic_year_id %>
+    <%= form.label :academic_year_id, class: "d-none" %>
+    <%= form.hidden_field :academic_year_id, value: @academic_year.id %>
   </div>
-
   <div>
-    <%= form.label :course_id, style: "display: block" %>
-    <%= form.text_field :course_id %>
+    <%= form.label :course_id, class: "d-none" %>
+    <%= form.hidden_field :course_id, value: @course.id %>
   </div>
-
   <div>
-    <%= form.label :semester_id, style: "display: block" %>
-    <%= form.text_field :semester_id %>
+    <%= form.label :semester_id, class: "d-none" %>
+    <%= form.hidden_field :semester_id, value: @semester.id %>
   </div>
-
   <div>
-    <%= form.label :type, style: "display: block" %>
-    <%= form.number_field :type %>
+    <%= form.label :assessment_type, style: "display: block" %>
+    <%= form.select :assessment_type, Assessment.assessment_types.map { |k,v| [k.humanize, k] }, {include_blank: 'Select Assessment type'}, { class: "general-input-styles" } %>
   </div>
-
-  <div>
-    <%= form.label :marks, style: "display: block" %>
-    <%= form.text_area :marks %>
-  </div>
-
+  <table class="table table-hover my-3">
+    <thead>
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Name/matricule</th>
+        <th scope="col">mark</th>
+        <th scope="col">presence</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% marks = @assessment.hashed_marks %>
+      <% num = 1 %>
+      <% @enrollments.each do |enrollment| %>
+        <% student = enrollment.student %>
+        <%= form.hidden_field :id, name: "assessment[marks][][id]", value: student.id %>
+        <%= form.hidden_field :id, name: "assessment[marks][][full_name]", value: student.full_name %>
+        <tr>
+          <td><%= num %></td>
+          <td><%= student.full_name %></td>
+          <td><%= generate_student_assessment_mark_input(form, assessment, student, marks) %></td>
+          <td>
+            <div>
+              <%= generate_is_present_input(form, assessment, student, marks) %>
+            </div>
+          </td>
+        </tr>
+        <% num += 1 %>
+      <% end %>
+    </tbody>
+  </table>
   <div>
     <%= form.submit %>
   </div>

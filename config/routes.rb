@@ -1,12 +1,20 @@
 Rails.application.routes.draw do
-  resources :assessments
+  resources :assessments do
+    collection do
+      post :redirect_to_new
+    end
+  end
   resources :enrollments do
     collection do
       get :search
     end
   end
   resources :course_registrations
-  resources :semesters
+  resources :semesters do
+    member do
+      put :toggle_activeness
+    end
+  end
   resources :lecturings
   resources :courses do
     collection do
