@@ -26,6 +26,10 @@
     <%= form.hidden_field :semester_id, value: @semester.id %>
   </div>
   <div>
+    <%= form.label :course_name, class: "d-none" %>
+    <%= form.hidden_field :course_name, value: @course.long_title %>
+  </div>
+  <div>
     <%= form.label :assessment_type, style: "display: block" %>
     <%= form.select :assessment_type, Assessment.assessment_types.map { |k,v| [k.humanize, k] }, {include_blank: 'Select Assessment type'}, { class: "general-input-styles" } %>
   </div>
