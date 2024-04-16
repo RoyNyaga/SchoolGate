@@ -10,7 +10,11 @@ class Assessment < ApplicationRecord
     # parsing marks to ruby hash and converting the mark value to float
     self.marks.map { |m| eval(m) }.map { |a|
       { "id" => a["id"], "full_name" => a["full_name"], "mark" => a[
-        "mark"].to_f, "is_present" => string_to_boolean(a["is_present"]) }
+        "mark"].to_f, "is_present" => string_to_boolean(a["is_present"]),
+        "enrollment_id" => a["enrollment_id"].to_id }
     }
+  end
+
+  def create_course_ressults
   end
 end
