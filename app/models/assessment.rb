@@ -3,6 +3,8 @@ class Assessment < ApplicationRecord
   belongs_to :academic_year
   belongs_to :course
   belongs_to :semester
+  belongs_to :academic_year
+  belongs_to :teacher
 
   validates :assessment_type, presence: true
 
@@ -31,6 +33,26 @@ class Assessment < ApplicationRecord
 
   def course_results_for_the_year_exists?
     course_results_for_the_year.present?
+  end
+
+  def title
+    "#{assessment_type.titleize} - #{semester.semester_type.humanize} - #{academic_year.year}"
+  end
+
+  def student_num_above_average
+    hashed_marks.count { |mark| mark["mark"] >= 15 }
+  end
+
+  def highest_mark
+    hashed_marks.max_by { |mark| mark["mark"] }["mark"]
+  end
+
+  def student_with_highest_mark # returns an array
+    hashed_marks.select { |mark| mark["mark"] == highest_mark }
+  end
+
+  def percent_success
+    ((student_num_above_average.to_f / hashed_marks.size.to_f) * 100).round(2)
   end
 
   private

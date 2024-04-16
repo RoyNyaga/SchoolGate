@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_16_042216) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_16_234909) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,10 +75,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_042216) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "course_name"
+    t.bigint "teacher_id", null: false
     t.index ["academic_year_id"], name: "index_assessments_on_academic_year_id"
     t.index ["course_id"], name: "index_assessments_on_course_id"
     t.index ["school_id"], name: "index_assessments_on_school_id"
     t.index ["semester_id"], name: "index_assessments_on_semester_id"
+    t.index ["teacher_id"], name: "index_assessments_on_teacher_id"
   end
 
   create_table "course_registrations", force: :cascade do |t|
@@ -576,6 +578,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_042216) do
   add_foreign_key "assessments", "courses"
   add_foreign_key "assessments", "schools"
   add_foreign_key "assessments", "semesters"
+  add_foreign_key "assessments", "teachers"
   add_foreign_key "course_registrations", "academic_years"
   add_foreign_key "course_registrations", "schools"
   add_foreign_key "course_registrations", "semesters"

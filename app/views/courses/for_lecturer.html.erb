@@ -9,6 +9,15 @@
       <%= render partial: "courses/course", locals: { course: @course } %>
     </div>
     <div class="col-md-9">
+      <div class="row">
+        <% @assessments.each do |assessment| %>
+          <%= render partial: "assessments/assessment", locals: { assessment: assessment } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-9 mx-auto">
       <%= render partial: "enrollments/search_bar" %>
       <div class="white-section-div my-2 scrollable-tbody">
         <%= render partial: "enrollments/table", locals: { enrollments: @enrollments }%>

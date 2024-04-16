@@ -6,6 +6,7 @@ class Course < ApplicationRecord
   has_many :lecturers, through: :lecturings, source: "teacher"
   has_many :enrollments, dependent: :destroy
   has_many :course_results
+  has_many :assessments
 
   validates :name, presence: true
   validates :credit_value, presence: true
