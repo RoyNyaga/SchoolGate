@@ -6,10 +6,10 @@ class CreateCourseResults < ActiveRecord::Migration[7.1]
       t.references :course, null: false, foreign_key: true
       t.references :academic_year, null: false, foreign_key: true
       t.references :semester, null: false, foreign_key: true
-      t.float :ca_mark
-      t.float :exam_mark
-      t.float :resit_mark
-      t.float :total_mark
+      t.float :ca_mark, default: 0.0
+      t.float :exam_mark, default: 0.0
+      t.float :resit_mark, default: 0.0
+      t.float :total_mark, default: 0.0
       t.boolean :has_resit, default: false
       t.boolean :is_validated, default: false
       t.integer :credit_val

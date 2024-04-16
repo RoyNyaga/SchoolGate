@@ -49,7 +49,7 @@
         <% student = enrollment.student %>
         <%= form.hidden_field :id, name: "assessment[marks][][id]", value: student.id %>
         <%= form.hidden_field :id, name: "assessment[marks][][full_name]", value: student.full_name %>
-        <%= form.hidden_field :id, name: "assessment[marks][][enrollment_id]", value: student.full_name %>
+        <%= form.hidden_field :id, name: "assessment[marks][][enrollment_id]", value: enrollment.id %>
         <tr>
           <td><%= num %></td>
           <td><%= student.full_name %></td>

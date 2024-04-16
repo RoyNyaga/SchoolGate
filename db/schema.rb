@@ -102,10 +102,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_042216) do
     t.bigint "course_id", null: false
     t.bigint "academic_year_id", null: false
     t.bigint "semester_id", null: false
-    t.float "ca_mark"
-    t.float "exam_mark"
-    t.float "resit_mark"
-    t.float "total_mark"
+    t.float "ca_mark", default: 0.0
+    t.float "exam_mark", default: 0.0
+    t.float "resit_mark", default: 0.0
+    t.float "total_mark", default: 0.0
     t.boolean "has_resit", default: false
     t.boolean "is_validated", default: false
     t.integer "credit_val"
