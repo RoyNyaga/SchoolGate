@@ -11,6 +11,7 @@ class Assessment < ApplicationRecord
   after_save :manage_course_results
 
   enum assessment_type: { ca: 1, exam: 2, resit: 3 }
+  enum status: { in_progress: 0, submitted: 1, rejected: 2, approved: 3 }
 
   def hashed_marks
     # parsing marks to ruby hash and converting the mark value to float
