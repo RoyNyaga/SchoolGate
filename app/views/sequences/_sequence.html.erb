@@ -11,7 +11,7 @@
         locals: { sequence: sequence, title: sequence.seq_title,
         item_id: generate_drawer_id("preview_sequence", record: sequence), 
         position: "end", btn_text: "View", btn_visibility: true }%>
-    <span class="text-white p-1 badge <%= sequence_status_badge_color(sequence) %>"><%= sequence.status.humanize %></span>
+    <span class="text-white p-1 badge <%= status_badge_color(sequence) %>"><%= sequence.status.humanize %></span>
     <%= link_to "Edit", edit_sequence_path(sequence), class: "general-link" %>
   </div>
 </div>

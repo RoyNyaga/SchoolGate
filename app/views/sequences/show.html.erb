@@ -7,7 +7,7 @@
     </div>
   </div>
   <div class="light-grey-card p-3">
-    <p class="margin-zero">Status <span class="text-white p-1 badge <%= sequence_status_badge_color(@sequence) %>"><%= @sequence.status.humanize %></span></p>
+    <p class="margin-zero">Status <span class="text-white p-1 badge <%= status_badge_color(@sequence) %>"><%= @sequence.status.humanize %></span></p>
     <p class="margin-zero">Student enrolled: <span class="text-color-grey-2 px-2"><%= @sequence.enrolled_num %></span></p>
     <p class="margin-zero">Number of students above average: <span class="text-color-grey-2 px-2"><%= @sequence.student_num_above_average %></span> </p>
     <p class="margin-zero">Percent success: <span class="text-color-grey-2 px-2"><%= @sequence.percent_success %> %</span></p>

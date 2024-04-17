@@ -22,7 +22,7 @@ module SequencesHelper
     end
   end
 
-  def sequence_status_badge_color(sequence)
+  def status_badge_color(sequence)
     if sequence.status == "in_progress"
       "bg-secondary"
     elsif sequence.status == "submitted"
