@@ -11,12 +11,14 @@
     <div class="col-md-9">
       <div class="row">
         <% @assessments.each do |assessment| %>
-          <%= render partial: "assessments/assessment", locals: { assessment: assessment } %>
+          <div class="col-md-6">
+            <%= render partial: "assessments/assessment", locals: { assessment: assessment } %>
+          </div>
         <% end %>
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row my-4">
     <div class="col-md-9 mx-auto">
       <%= render partial: "enrollments/search_bar" %>
       <div class="white-section-div my-2 scrollable-tbody">

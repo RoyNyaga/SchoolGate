@@ -18,7 +18,7 @@ class Assessment < ApplicationRecord
     self.marks.map { |m| eval(m) }.map { |a|
       { "id" => a["id"].to_i, "full_name" => a["full_name"], "mark" => a[
         "mark"].to_f, "is_present" => ActiveRecord::Type::Boolean.new.cast((a["is_present"])),
-        "enrollment_id" => a["enrollment_id"].to_i }
+        "course_registration_id" => a["course_registration_id"].to_i, "enrollment_id" => a["enrollment_id"].to_i }
     }
   end
 
@@ -59,20 +59,21 @@ class Assessment < ApplicationRecord
   private
 
   def update_course_results
-    course_results = CourseResults.get_hash_values(course_results_for_the_year)
+    course_results = CourseResult.get_hash_values(course_results_for_the_year)
     marks = hashed_marks
+    updated_course_results = []
     ids_of_student_with_result = course_results.map { |course_result| course_result["student_id"] }
     ids_from_marks_submission = marks.map { |mark| mark["id"] }
     ids_of_new_students = ids_from_marks_submission - ids_of_student_with_result
-    updated_course_results = course_results.map do |course_result|
+    course_results.each do |course_result|
       mark_type_field = "#{assessment_type}_mark"
       mark = marks.find { |m| m["id"] == course_result["student_id"] }
       course_result[mark_type_field] = mark["mark"]
       course_result["total_mark"] = course_result["ca_mark"] + course_result["exam_mark"] + course_result["resit_mark"]
+      updated_course_results << course_result
     end
-
-    CourseResult.upsert(updated_course_results) # update existing course results
-    if ids_of_new_students.present? # create course results for new students
+    CourseResult.upsert_all(updated_course_results) # update existing course results
+    if ids_of_new_students.present? # create course results for students who registered later
       marks = marks.select { |m| ids_of_new_students.include?(m["id"]) }
       create_course_results(marks: marks)
     end

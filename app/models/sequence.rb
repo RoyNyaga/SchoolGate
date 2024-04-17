@@ -18,7 +18,7 @@ class Sequence < ApplicationRecord
   def hashed_marks
     # parsing marks to ruby hash and converting the mark value to float
     self.marks.map { |m| eval(m) }.map { |a|
-      { "id" => a["id"], "name" => a["name"], "mark" => a[
+      { "id" => a["id"].to_i, "name" => a["name"], "mark" => a[
         "mark"].to_f, "is_enrolled" => string_to_boolean(a["is_enrolled"]) }
     }
   end

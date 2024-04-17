@@ -14,6 +14,7 @@ class CourseResult < ApplicationRecord
       "semester_id" => assessment.semester_id,
       "total_mark" => mark["mark"],
       "credit_val" => credit_val,
+      "course_registration_id" => mark["course_registration_id"],
     }
 
     h_obj["#{assessment.assessment_type}_mark"] = mark["mark"]

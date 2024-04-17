@@ -22,6 +22,10 @@ class AssessmentsController < ApplicationController
 
   # GET /assessments/1/edit
   def edit
+    @course = @assessment.course
+    @academic_year = current_school.active_academic_year
+    @semester = current_school.active_semester
+    @enrollments = @course.enrollments.includes(:student).where(semester_id: @semester.id, academic_year_id: @academic_year.id)
   end
 
   def redirect_to_new
@@ -79,7 +83,7 @@ class AssessmentsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def assessment_params
     params.require(:assessment).permit(:school_id, :academic_year_id, :course_id, :assessment_type,
-                                       :semester_id, :course_name,
-                                       marks: [:id, :full_name, :mark, :is_present, :enrollment_id])
+                                       :semester_id, :course_name, :teacher_id,
+                                       marks: [:id, :full_name, :mark, :is_present, :enrollment_id, :course_registration_id])
   end
 end

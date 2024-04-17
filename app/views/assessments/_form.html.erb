@@ -14,6 +14,10 @@
     <%= form.hidden_field :school_id, value: current_school.id %>
   </div>
   <div>
+    <%= form.label :teacher_id, class: "d-none" %>
+    <%= form.hidden_field :teacher_id, value: current_teacher.id %>
+  </div>
+  <div>
     <%= form.label :academic_year_id, class: "d-none" %>
     <%= form.hidden_field :academic_year_id, value: @academic_year.id %>
   </div>
@@ -31,7 +35,7 @@
   </div>
   <div>
     <%= form.label :assessment_type, style: "display: block" %>
-    <%= form.select :assessment_type, Assessment.assessment_types.map { |k,v| [k.humanize, k] }, {include_blank: 'Select Assessment type'}, { class: "general-input-styles" } %>
+    <%= form.select :assessment_type, Assessment.assessment_types.map { |k,v| [k.humanize, k] }, {include_blank: 'Select Assessment type'}, { class: "general-input-styles", required: true } %>
   </div>
   <table class="table table-hover my-3">
     <thead>
@@ -50,6 +54,7 @@
         <%= form.hidden_field :id, name: "assessment[marks][][id]", value: student.id %>
         <%= form.hidden_field :id, name: "assessment[marks][][full_name]", value: student.full_name %>
         <%= form.hidden_field :id, name: "assessment[marks][][enrollment_id]", value: enrollment.id %>
+        <%= form.hidden_field :id, name: "assessment[marks][][course_registration_id]", value: enrollment.course_registration_id %>
         <tr>
           <td><%= num %></td>
           <td><%= student.full_name %></td>

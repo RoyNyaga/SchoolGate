@@ -44,7 +44,7 @@ class Student < ApplicationRecord
   end
 
   def get_mark_object(marks)
-    marks.find { |student| student["id"] == id.to_s }
+    marks.find { |student| student["id"] == id }
   end
 
   def rank_per_subject(marks)
