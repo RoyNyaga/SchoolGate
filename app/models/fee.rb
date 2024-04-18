@@ -76,8 +76,8 @@ class Fee < ApplicationRecord
   end
 
   def create_receipt
-    update_records = Fee.string_to_hash_arr(fee.update_records).last
-    Receipt.new(school_id: school_id, teacher_id: teacher_idupdate_records[:updator_id], academic_year_id: academic_year_id,
+    update_records = Fee.string_to_hash_arr(fee.update_records)
+    Receipt.new(school_id: school_id, teacher_id: update_records[:updator_id], academic_year_id: academic_year_id,
                 student_id: student_id, fee_id: id, transaction_reference: Receipt.generate_transaction_reference)
   end
 end
