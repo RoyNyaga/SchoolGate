@@ -1,0 +1,38 @@
+<table class="table table-hover">
+  <thead class="table-head-styles">
+    <tr>
+      <th scope="col">S/N</th>
+      <th scope="col">Course Code</th>
+      <th scope="col">Code Title</th>
+      <th scope="col">CV</th>
+      <th scope="col">CA</th>
+      <th scope="col">Exam</th>
+      <th scope="col">Final Mark</th>
+      <th scope="col">Grade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% course_results = course_registion.course_results %>
+    <% course_results.each_with_index do |result, index| %>
+      <tr>
+        <td class="table-row-data"><%= index+=1 %></td>
+        <td class="table-row-data"><%= result.course.short_title %></td>
+        <td class="table-row-data"><%= result.course.long_title %></td>
+        <td class="table-row-data"><%= result.course.credit_value %></td>
+        <td class="table-row-data"><%= result.ca_mark %></td>
+        <td class="table-row-data"><%= result.exam_mark %></td>
+        <td class="table-row-data"><%= result.total_mark %></td>
+        <td class="table-row-data"><%= result.grade %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<table>
+  <tbody>
+    <tr>
+      <td class="table-row-data bold"><strong>Attempted credit:</strong> <%= CourseResult.attempted_credit_val(course_results) %></td>
+      <td class="table-row-data bold"><strong>Credit Earned:</strong> <%= CourseResult.earned_credit_val(course_results) %></td>
+      <td class="table-row-data bold"><strong>GPA <%= CourseResult.calc_gpa(course_results) %> / 4 </strong></td>
+    </tr>
+  </tbody>
+</table>

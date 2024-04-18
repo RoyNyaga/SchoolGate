@@ -35,6 +35,10 @@ class StudentDashboardsController < ApplicationController
   def course_registrations
     @course_registrations = current_student.course_registrations
   end
+
+  def results
+    @course_registions = current_student.course_registrations
+  end
 end
 
 # student_dashboards_controller

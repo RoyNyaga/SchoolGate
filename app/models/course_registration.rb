@@ -5,6 +5,8 @@ class CourseRegistration < ApplicationRecord
   belongs_to :academic_year
   belongs_to :semester
   has_many :enrollments
+  has_many :course_results
+  belongs_to :student
 
   before_save :set_credit_value
   after_save :create_enrollments

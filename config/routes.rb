@@ -147,6 +147,7 @@ Rails.application.routes.draw do
       get :login
       post :create_session
       get :course_registrations
+      get :results
     end
 
     member do
