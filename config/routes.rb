@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :receipts
   resources :course_results
   resources :assessments do
     collection do
@@ -51,6 +52,7 @@ Rails.application.routes.draw do
     collection do
       get :statistics
       post :search
+      get :pdf_download
     end
   end
   resources :report_cards do

@@ -86,6 +86,22 @@ class FeesController < ApplicationController
     end
   end
 
+  def pdf_download
+    pdf_file = ReceiptPdfGeneratorService.new
+    qrcode = RQRCode::QRCode.new("https://schoolgate.org/students/")
+    @qrcode_svg = qrcode.as_svg(
+      color: "000",
+      shape_rendering: "crispEdges",
+      module_size: 4,
+      standalone: true,
+      use_path: true,
+
+    )
+
+    # binding.break
+    send_data(pdf_file.generate_pdf(@qrcode_svg).render, filename: "test-file", type: "application/pdf", disposition: "inline")
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
