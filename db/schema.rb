@@ -280,7 +280,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_18_135500) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "amount"
-    t.text "update_history", default: [], array: true
+    t.json "update_history", default: {}
     t.index ["academic_year_id"], name: "index_receipts_on_academic_year_id"
     t.index ["fee_id"], name: "index_receipts_on_fee_id"
     t.index ["school_id"], name: "index_receipts_on_school_id"

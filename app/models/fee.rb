@@ -76,8 +76,41 @@ class Fee < ApplicationRecord
   end
 
   def create_receipt
-    update_records = Fee.string_to_hash_arr(fee.update_records)
-    Receipt.new(school_id: school_id, teacher_id: update_records[:updator_id], academic_year_id: academic_year_id,
-                student_id: student_id, fee_id: id, transaction_reference: Receipt.generate_transaction_reference)
+    all_update_records = Fee.string_to_hash_arr(update_records)
+    last_update_record = all_update_records.last
+    last_update_record_amounts = last_update_record[:changes] # [10000, 20000, 40000]
+    last_created_receipt = recipts.order(id: :asc).last
+    if last_created_receipt.present? # when fee has existing receipts
+      update_history = last_created_receipt.update_history
+      update_history_amounts = update_history["changes"] # get the amount changes recorded in the last receipt that was created etc [2000, 4000]
+      changed_amounts = values_in_a_not_in_b(last_update_record_amounts, update_history_amounts)
+      changed_amounts.each do |amount|
+        Receipt.new(school_id: school_id, teacher_id: last_update_record[:updator_id], academic_year_id: academic_year_id,
+                    student_id: student_id, fee_id: id, transaction_reference: Receipt.generate_transaction_reference,
+                    update_history: last_update_record, amount: amount.to_f)
+      end
+    else
+      last_update_record_amounts.each do |amount|
+        Receipt.new(school_id: school_id, teacher_id: last_update_record[:updator_id], academic_year_id: academic_year_id,
+                    student_id: student_id, fee_id: id, transaction_reference: Receipt.generate_transaction_reference,
+                    update_history: last_update_record, amount: amount.to_f)
+      end
+    end
+  end
+
+  def values_in_a_not_in_b(arr_a, arr_b)
+    frequency_a = Hash.new(0)
+    frequency_b = Hash.new(0)
+
+    arr_a.each { |item| frequency_a[item] += 1 }
+    arr_b.each { |item| frequency_b[item] += 1 }
+
+    result = []
+
+    frequency_a.each do |item, count|
+      (count - frequency_b[item]).times { result << item }
+    end
+
+    result
   end
 end
