@@ -24,5 +24,9 @@ module TimeManipulation
       end_of_week = date.end_of_week
       { start: start_of_week, end: end_of_week }
     end
+
+    def generate_time_stamp
+      Time.now.to_i.to_s
+    end
   end
 end

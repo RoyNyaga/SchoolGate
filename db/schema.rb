@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_18_130028) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_18_133910) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -279,6 +279,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_18_130028) do
     t.boolean "has_error", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "amount"
     t.index ["academic_year_id"], name: "index_receipts_on_academic_year_id"
     t.index ["fee_id"], name: "index_receipts_on_fee_id"
     t.index ["school_id"], name: "index_receipts_on_school_id"
