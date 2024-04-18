@@ -1,4 +1,5 @@
 class Fee < ApplicationRecord
+  include DataTrans
   include TimeManipulation
 
   belongs_to :school
@@ -14,6 +15,7 @@ class Fee < ApplicationRecord
                           fifth_installment: 5, sith_installment: 6 }
 
   before_save :set_other_field_values
+  after_update :create_receipt
 
   scope :completed, -> { where(is_completed: true) }
   scope :incompleted, -> { where(is_completed: false) }
@@ -71,5 +73,10 @@ class Fee < ApplicationRecord
     #{required_fee} 
     fcfa. We hope you know what you are doing?, please visit the school 
     seting page under school fees setting for this class to update this toal fee.") if calc_total_fees > required_fee
+  end
+
+  def create_receipt
+    update_records = Fee.string_to_hash_arr(fee.update_records).last
+    Receipt.new(school_id: school_id)
   end
 end
