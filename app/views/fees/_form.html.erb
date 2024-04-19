@@ -12,7 +12,8 @@
   <%= form.hidden_field :school_id, value: fee.school_id %>
   <%= form.hidden_field :school_class_id, value: fee.school_class_id %>
   <%= form.hidden_field :student_id,  value: fee.student_id %>
-  <%= form.hidden_field :academic_year, value: fee.academic_year %>
+  <%= form.hidden_field :academic_year_id, value: fee.academic_year_id %>
+  <%= form.hidden_field :academic_year_text, value: fee.academic_year_text %>
   <div data-controller="fees">
     <div class="text-center">
       <%= total_fee_paid_span(fee.percentage_complete, number_to_currency(fee.total_fee_paid, unit: "frs", precision: 0, format: "%n %u")) %>

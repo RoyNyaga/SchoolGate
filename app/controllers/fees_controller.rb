@@ -112,7 +112,7 @@ class FeesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def fee_params
     params[:fee][:installments] = params[:fee][:installments].select { |v| v.present? } # remove empty installment values
-    params.require(:fee).permit(:school_id, :school_class_id, :teacher_id, :student_id, :academic_year, :installment_num,
+    params.require(:fee).permit(:school_id, :school_class_id, :teacher_id, :student_id, :academic_year_id, :academic_year_text, :installment_num,
                                 :total_fee_paid, :is_completed, installments: [])
   end
 end

@@ -6,7 +6,7 @@ module DataTrans
       string_hash_arr.map { |s| eval(s) }
     end
 
-    def generate_blob(lenth)
+    def generate_blob(length)
       return SecureRandom.hex(length)
     end
   end
