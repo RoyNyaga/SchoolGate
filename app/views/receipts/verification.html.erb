@@ -1,0 +1,9 @@
+<div class="container">
+  <% if @receipt %>
+    <%= render partial: "receipts/receipt_show_card", locals: { receipt: @receipt, fee: @receipt.fee } %>
+  <% else%>
+    <div class="form-error-div py-5 my-5">
+      <p class="text-center py-3">Receipt Verification Failed!!!!!!! We Think this receipt is not Authentic</p>
+    </div>
+  <% end %>
+</div>

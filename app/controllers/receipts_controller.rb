@@ -1,4 +1,5 @@
 class ReceiptsController < ApplicationController
+  layout "school_layout"
   before_action :set_receipt, only: %i[ show edit update destroy ]
 
   # GET /receipts or /receipts.json
@@ -8,6 +9,16 @@ class ReceiptsController < ApplicationController
 
   # GET /receipts/1 or /receipts/1.json
   def show
+    @fee = @receipt.fee
+    qrcode = RQRCode::QRCode.new("https://square-suddenly-sole.ngrok-free.app/receipts/verification?transaction_reference=asdfasdfasdfasfasdfa")
+    @svg = qrcode.as_svg(
+      color: "000",
+      shape_rendering: "crispEdges",
+      module_size: 4,
+      standalone: true,
+      use_path: true,
+
+    )
   end
 
   # GET /receipts/new
@@ -57,14 +68,19 @@ class ReceiptsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_receipt
-      @receipt = Receipt.find(params[:id])
-    end
+  def verification
+    @receipt = Receipt.find_by(transaction_reference: params[:transaction_reference])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def receipt_params
-      params.require(:receipt).permit(:school_id, :teacher_id, :academic_year_id, :student_id, :fee_id, :transaction_reference, :has_error)
-    end
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_receipt
+    @receipt = Receipt.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def receipt_params
+    params.require(:receipt).permit(:school_id, :teacher_id, :academic_year_id, :student_id, :fee_id, :transaction_reference, :has_error)
+  end
 end

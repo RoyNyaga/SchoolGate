@@ -1,10 +1,11 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @receipt %>
-
-<div>
-  <%= link_to "Edit this receipt", edit_receipt_path(@receipt) %> |
-  <%= link_to "Back to receipts", receipts_path %>
-
-  <%= button_to "Destroy this receipt", @receipt, method: :delete %>
+<div class="container">
+  <%= render partial: "receipts/receipt_show_card", locals: { receipt: @receipt, fee: @fee } %>
+  <%#= render @receipt %>
+  <div class="light-grey-card my-5 py-5 px-3">
+    <h5>Update History</h5>
+    <% @fee.update_records.map { |r| eval(r) }.each do |record| %>
+      <p><%= record[:date] %></p>
+      <p><%= record[:updator] %> updated the total fee to <%= record[:changes].map(&:to_i).sum %> with installments <%= record[:changes] %></p>
+    <% end %>
+  </div>
 </div>

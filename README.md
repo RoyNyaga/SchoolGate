@@ -71,3 +71,6 @@ Things you may want to cover:
 
 ## starting solid queue
 - bundle exec rake solid_queue:start
+
+## Starting Ngronk
+- ngrok http --domain=square-suddenly-sole.ngrok-free.app 3000

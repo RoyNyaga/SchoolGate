@@ -65,11 +65,14 @@ class Fee < ApplicationRecord
     current_school.fees.group(:academic_year_id).count.keys
   end
 
+  def required_fee
+    school.send(school_class.generate_fee_string).to_i
+  end
+
   private
 
   def fee_not_above_required_fee
-    required_fee = school.send(school_class.generate_fee_string).to_i
-    errors.add(:installment, "total fee paid (#{total_fee_paid} fcfa) is above the required class fee which is 
+    errors.add(:installment, "total fee paid is above the required class fee which is 
     #{required_fee} 
     fcfa. We hope you know what you are doing?, please visit the school 
     seting page under school fees setting for this class to update this toal fee.") if calc_total_fees > required_fee

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :receipts
+  resources :receipts do
+    collection do
+      get :verification
+    end
+  end
   resources :course_results
   resources :assessments do
     collection do

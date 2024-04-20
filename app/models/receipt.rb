@@ -1,4 +1,5 @@
 class Receipt < ApplicationRecord
+  include TimeManipulation
   belongs_to :school
   belongs_to :teacher
   belongs_to :academic_year

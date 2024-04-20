@@ -1,0 +1,30 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Amount Payed</td>
+      <td><%= receipt.amount %> frs</td>
+    </tr>
+    <tr>
+      <td>Installment No</td>
+      <td><%= receipt.update_history["changes"].size %> frs</td>
+    </tr>
+    <tr>
+      <td>Total Fee payed</td>
+      <td><%= fee.total_fee_paid %> frs</td>
+    </tr>
+    <tr>
+      <td>Required Fee</td>
+      <td><%= fee.required_fee %> frs</td>
+    </tr>
+    <tr>
+      <td>Balance</td>
+      <td><%= fee.balance %> frs</td>
+    </tr>
+  </tbody>
+</table>
