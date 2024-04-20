@@ -1,11 +1,12 @@
 class Fee < ApplicationRecord
+  include DataTrans
   include TimeManipulation
 
   belongs_to :school
   belongs_to :school_class
   belongs_to :student
+  has_many :receipts
 
-  validates :academic_year, presence: true
   validates :student_id, uniqueness: { scope: :school_class_id,
                                        message: "Two Fees can't exist for the same student in the same class" }
   validate :fee_not_above_required_fee
@@ -14,6 +15,7 @@ class Fee < ApplicationRecord
                           fifth_installment: 5, sith_installment: 6 }
 
   before_save :set_other_field_values
+  after_update :create_receipt
 
   scope :completed, -> { where(is_completed: true) }
   scope :incompleted, -> { where(is_completed: false) }
@@ -60,16 +62,64 @@ class Fee < ApplicationRecord
   end
 
   def self.academic_year_list_per_school(current_school)
-    current_school.fees.group(:academic_year).count.keys
+    current_school.fees.group(:academic_year_id).count.keys
+  end
+
+  def required_fee
+    school.send(school_class.generate_fee_string).to_i
   end
 
   private
 
   def fee_not_above_required_fee
-    required_fee = school.send(school_class.generate_fee_string).to_i
-    errors.add(:installment, "total fee paid (#{total_fee_paid} fcfa) is above the required class fee which is 
+    errors.add(:installment, "total fee paid is above the required class fee which is 
     #{required_fee} 
     fcfa. We hope you know what you are doing?, please visit the school 
     seting page under school fees setting for this class to update this toal fee.") if calc_total_fees > required_fee
+  end
+
+  def create_receipt
+    all_update_records = Fee.string_to_hash_arr(update_records)
+    last_update_record = all_update_records.last
+    last_update_record_amounts = last_update_record[:changes] # [10000, 20000, 40000]
+    last_created_receipt = receipts.order(id: :asc).last
+
+    if last_created_receipt.present? # when fee has existing receipts
+      update_history = last_created_receipt.update_history
+      update_history_amounts = update_history["changes"] # get the amount changes recorded in the last receipt that was created etc [2000, 4000]
+      changed_amounts = values_in_a_not_in_b(last_update_record_amounts, update_history_amounts)
+      changed_amounts.each do |amount|
+        Receipt.create(school_id: school_id, teacher_id: last_update_record[:updator_id], academic_year_id: academic_year_id,
+                       student_id: student_id, fee_id: id, transaction_reference: Receipt.generate_transaction_reference,
+                       update_history: last_update_record, amount: amount.to_f)
+      end
+    else
+      last_update_record_amounts.each do |amount|
+        Receipt.create(school_id: school_id, teacher_id: last_update_record[:updator_id], academic_year_id: academic_year_id,
+                       student_id: student_id, fee_id: id, transaction_reference: Receipt.generate_transaction_reference,
+                       update_history: last_update_record, amount: amount.to_f)
+      end
+    end
+
+    receipt_amount = receipts.map(&:amount).sum
+    is_receipt_in_phase = receipt_amount == total_fee_paid
+    # use update_columns to avoid call_backs from being triggered
+    update_columns(receipt_amount: receipt_amount, is_receipt_and_fee_amount_in_phase: is_receipt_in_phase)
+  end
+
+  def values_in_a_not_in_b(arr_a, arr_b)
+    frequency_a = Hash.new(0)
+    frequency_b = Hash.new(0)
+
+    arr_a.each { |item| frequency_a[item] += 1 }
+    arr_b.each { |item| frequency_b[item] += 1 }
+
+    result = []
+
+    frequency_a.each do |item, count|
+      (count - frequency_b[item]).times { result << item }
+    end
+
+    result
   end
 end

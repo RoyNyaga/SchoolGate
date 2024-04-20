@@ -3,6 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="academic-years"
 export default class extends Controller {
   connect() {
+    console.log("Academic year controller connected")
     this.csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
   }
 

@@ -1,6 +1,31 @@
 Rails.application.routes.draw do
+  resources :receipts do
+    collection do
+      get :verification
+    end
+  end
+  resources :course_results
+  resources :assessments do
+    collection do
+      post :redirect_to_new
+    end
+  end
+  resources :enrollments do
+    collection do
+      get :search
+    end
+  end
+  resources :course_registrations
+  resources :semesters do
+    member do
+      put :toggle_activeness
+    end
+  end
   resources :lecturings
   resources :courses do
+    collection do
+      get :json_search
+    end
     member do
       get :for_lecturer
     end
@@ -31,6 +56,7 @@ Rails.application.routes.draw do
     collection do
       get :statistics
       post :search
+      get :pdf_download
     end
   end
   resources :report_cards do
@@ -119,6 +145,19 @@ Rails.application.routes.draw do
       get :complete_fee_per_class
       get :revenue_per_class_over_time_line_chart
       get :report_card_performance_line
+    end
+  end
+
+  resources :student_dashboards do
+    collection do
+      get :login
+      post :create_session
+      get :course_registrations
+      get :results
+    end
+
+    member do
+      delete :destroy_session_path
     end
   end
 end

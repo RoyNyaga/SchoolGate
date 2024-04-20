@@ -1,0 +1,12 @@
+<div id="<%= dom_id course_registration %>" class="light-grey-card dashboard-normal-font-size p-2">
+  <p class="margin-zero">Year: <span class="text-color-grey-2"><%= course_registration.academic_year.year %></span></p>
+  <p class="margin-zero">Semester: <span class="text-color-grey-2"><%= course_registration.semester.semester_type %></span></p>
+  <p class="margin-zero">Tt Credit val: <span class="text-color-grey-2"><%= course_registration.credit_val %></span></p>
+  <p class="margin-zero">Num of courses: <span class="text-color-grey-2"><%= course_registration.courses.size %></span></p>
+  <%= link_to "view", "##{generate_drawer_id("preview", record: course_registration)}", 
+    class: "grey-link-text dashboard-normal-font-size", data: { bs_toggle: "offcanvas" },
+     role: "button", aria: {controls: "#{generate_drawer_id("preview", record: course_registration)}_drawer"} %>
+  <%= render partial: "course_registrations/preview", layout: "layouts/drawer_layout", 
+              locals: { course_registration: course_registration, title: course_registration.title, 
+              item_id: generate_drawer_id("preview", record: course_registration) , position: "end", btn_text: "View", btn_visibility: false } %>
+</div>

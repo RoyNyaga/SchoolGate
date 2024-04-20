@@ -1,11 +1,11 @@
  <!-- Rounded switch -->
 <div>
-  <% if academic_year.is_active %>
+  <% if resource.is_active %>
     <%= fas_icon("toggle-on", class: "toggle-icons toggle-icon-active", data: { action: "click->academicYears#toggleActiveness",
     btnid: "toggle-submit-btn" } ) %>
     <p class="margin-zero dashboard-extra-small">deactivate</p>
     <%= button_to "deactivate",
-                toggle_activeness_academic_year_path(id: academic_year.id, is_active: false),
+                resource_deactivate_path,
                 method: :put,
                 class: "d-none",
                 id: "toggle-submit-btn"
@@ -15,7 +15,7 @@
     btnid: "toggle-submit-btn" } ) %>
     <p class="margin-zero dashboard-extra-small">activate</p>
     <%= button_to "activate",
-                toggle_activeness_academic_year_path(id: academic_year.id, is_active: true),
+                resource_activate_path,
                 method: :put,
                 class: "d-none",
                 id: "toggle-submit-btn"

@@ -1,0 +1,22 @@
+<table class="table table-hover">
+  <thead class="table-head-styles">
+    <tr>
+      <th scope="col">Course</th>
+      <th scope="col">Credit Val</th>
+      <th scope="col">lecturer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% CourseRegistration.string_to_hash_arr(course_registration.courses).each do |course| %>
+      <tr class="progress-table-rows">
+        <td class="table-row-data"><%= course["complete_name"] %></td>
+        <td class="table-row-data"><%= course["credit_val"] %></td>
+        <td class="table-row-data">name</td>
+      </tr>
+    <% end %>
+    <tr>
+      <td class="table-row-data">Total</td>
+      <td class="table-row-data"><%= course_registration.credit_val %></td>
+    </tr>
+  </tbody>
+</table>

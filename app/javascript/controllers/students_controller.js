@@ -40,7 +40,7 @@ export default class extends Controller {
     return `
     <div class="added-student d-flex justify-content-between px-2" id="added_student_${studentId}" data-studentid=${studentId}>
       <p class="absent-student-name">🧨 ${fullName}</p>
-      <p class="absent-student-remove-btn" data-action="click->students#remove" 
+      <p class="remove-from-list-btn" data-action="click->students#remove" 
            data-addedstudentid="added_student_${studentId}">Remove</p>
       <input autocomplete="off" type="hidden" name="progress[absent_students][][id]" 
       value=${studentId}">
@@ -71,9 +71,9 @@ export default class extends Controller {
       }
 
       this.absentStudentDivTarget.appendChild(generatedElement)
-      e.target.classList.add("progress-student-select")
+      e.target.classList.add("dropdown-selection-anim")
       setTimeout(() => {
-        e.target.classList.remove("progress-student-select")
+        e.target.classList.remove("dropdown-selection-anim")
       }, 1000);
     }
   }

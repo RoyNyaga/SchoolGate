@@ -1,0 +1,10 @@
+<div class="light-grey-card p-2 dashboard-normal-font-size">
+  <%= link_to course_registion.title , "##{generate_drawer_id("preview", record: course_registion)}", 
+    class: "grey-link-text dashboard-normal-font-size", data: { bs_toggle: "offcanvas" },
+     role: "button", aria: {controls: "#{generate_drawer_id("preview", record: course_registion)}_drawer"} %>
+  <%= render partial: "course_results/preview", 
+        layout: "layouts/drawer_layout", 
+        locals: { course_registion: course_registion, title: course_registion.title,
+        item_id: generate_drawer_id("preview", record: course_registion), 
+        position: "end", btn_text: "View", btn_visibility: false } %>
+</div>

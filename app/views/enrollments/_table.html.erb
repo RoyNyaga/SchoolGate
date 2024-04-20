@@ -1,0 +1,18 @@
+<table class="table table-hover">
+  <thead class="table-head-styles">
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Student</th>
+      <th scope="col">Semester</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% enrollments.each_with_index do |e, i| %>
+      <tr class="progress-table-rows">
+        <td class="table-row-data"><%= i+1 %></td>
+        <td class="table-row-data"><%= e.student.full_name %></td>
+        <td class="table-row-data"><%= e.title %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

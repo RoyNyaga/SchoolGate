@@ -8,6 +8,7 @@ class School < ApplicationRecord
   has_many :invitations, dependent: :destroy
   has_many :sequences, dependent: :destroy
   has_many :terms, dependent: :destroy
+  has_many :semesters, dependent: :destroy
   has_many :report_cards, dependent: :destroy
   has_many :fees, dependent: :destroy
   has_many :progresses, dependent: :destroy
@@ -29,7 +30,11 @@ class School < ApplicationRecord
              :address, :moto)
     }
 
-  def active_academmic_year
+  def active_academic_year
     academic_years.active.first
+  end
+
+  def active_semester
+    semesters.active.first
   end
 end

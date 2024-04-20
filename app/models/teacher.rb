@@ -17,6 +17,7 @@ class Teacher < ApplicationRecord
   has_many :progresses, dependent: :destroy
   has_many :lecturings, dependent: :destroy
   has_many :courses, through: :lecturings
+  has_many :assessments
 
   validates :phone_number, uniqueness: true
 

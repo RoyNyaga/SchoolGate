@@ -1,0 +1,40 @@
+<%= form_with(model: course_registration) do |form| %>
+  <% if course_registration.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(course_registration.errors.count, "error") %> prohibited this course_registration from being saved:</h2>
+      <ul>
+        <% course_registration.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= form.label :school_id, class: "d-none" %>
+    <%= form.hidden_field :school_id, value: current_school.id %>
+  </div>
+  <div>
+    <%= form.label :student_id, class: "d-none" %>
+    <%= form.hidden_field :student_id, value: current_student.id %>
+  </div>
+  <div>
+    <%= form.label :academic_year_id, style: "display: block" %>
+    <%= form.collection_select :academic_year_id, current_school.academic_years.active, :id, :year, { prompt: "Select Year" }, { class: "general-input-styles" } %>
+  </div>
+  <div>
+    <%= form.label :semester_id, style: "display: block" %>
+    <%= form.collection_select :semester_id, current_school.semesters, :id, :semester_type, { prompt: "Select Semester" }, { class: "general-input-styles" } %>
+  </div>
+  <div>
+    <h5 class="my-2">Search and Add your courses</h5>
+    <div class="added-courses" data-courseRegistration-target="addedCoursesWrapper"></div>
+    <%= text_field :complete_name, :complete_name, class: "general-input-styles", placeholder: "Search Student Name",
+          data: { searchpath: json_search_courses_path,
+          action: "input->courseRegistration#search" } %>
+    <div class="search-results" data-courseRegistration-target="searchResults">
+    </div>
+  </div>
+  <div class="my-2">
+    <%= form.submit class: "model-form-btn" %>
+  </div>
+<% end %>

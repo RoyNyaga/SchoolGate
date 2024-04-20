@@ -1,11 +1,11 @@
-<%#= turbo_frame_tag dom_id academic_year do %>
-  <div class="light-grey-card p-2" id="<%= dom_id academic_year %>">
-    <h4 class="text-center">
-      <%= academic_year.year %>
-    </h4>
-    <div class="d-flex justify-content-between align-items-start">
-      <%= link_to "View", academic_year, class: "general-link" %>
-      <%= render partial: "active_toggle_form", locals: { academic_year: academic_year }%>
-    </div>
+<div class="light-grey-card p-2" id="<%= dom_id academic_year %>">
+  <h4 class="text-center">
+    <%= academic_year.year %>
+  </h4>
+  <div class="d-flex justify-content-between align-items-start">
+    <%= link_to "View", academic_year, class: "general-link" %>
+    <%= render partial: "shared/active_toggle_form", locals: { resource: academic_year,
+      resource_deactivate_path: toggle_activeness_academic_year_path(id: academic_year.id, is_active: false),
+      resource_activate_path: toggle_activeness_academic_year_path(id: academic_year.id, is_active: true) }%>
   </div>
-  <% #end %>
+</div>

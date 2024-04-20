@@ -1,27 +1,7 @@
-<div id="<%= dom_id course %>">
-  <p>
-    <strong>School:</strong>
-    <%= course.school_id %>
-  </p>
-
-  <p>
-    <strong>Faculty:</strong>
-    <%= course.faculty_id %>
-  </p>
-
-  <p>
-    <strong>Department:</strong>
-    <%= course.department_id %>
-  </p>
-
-  <p>
-    <strong>Name:</strong>
-    <%= course.name %>
-  </p>
-
-  <p>
-    <strong>Credit value:</strong>
-    <%= course.credit_value %>
-  </p>
-
+<div class="dark-blue-section-div dashboard-normal-font-size p-2">
+  <p class="text-center"> <%= course.long_title %></p>
+  <p class="margin-zero">Faculty: <span class="text-color-grey"><%= course.faculty.name %></span></p>
+  <p class="margin-zero">Department: <span class="text-color-grey"><%= course.department.name %></span></p>
+  <p class="margin-zero">Credit Val: <span class="text-color-grey"><%= course.credit_value %></span></p>
+  <p class="margin-zero">Tot Enrollments: <span class="text-color-grey"><%= course.enrollments.size %></span></p>
 </div>

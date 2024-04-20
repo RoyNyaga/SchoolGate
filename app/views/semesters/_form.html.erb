@@ -1,0 +1,27 @@
+<%= form_with(model: semester) do |form| %>
+  <% if semester.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(semester.errors.count, "error") %> prohibited this semester from being saved:</h2>
+      <ul>
+        <% semester.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= form.label :school_id, class: "d-none" %>
+    <%= form.hidden_field :school_id, value: current_school.id %>
+  </div>
+  <div>
+    <%= form.label :academic_year_id, class: "d-none" %>
+    <%= form.hidden_field :academic_year_id, value: academic_year.id %>
+  </div>
+  <div>
+    <%= form.label :type, style: "display: block" %>
+    <%= form.select :semester_type, Semester.semester_types.map { |k,v| [k.humanize, k] }, {include_blank: 'Select Semester'}, { class: "general-input-styles" } %>
+  </div>
+  <div class="my-2">
+    <%= form.submit class: "model-form-btn" %>
+  </div>
+<% end %>

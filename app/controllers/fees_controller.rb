@@ -41,7 +41,7 @@ class FeesController < ApplicationController
   def update
     @fee.attributes = fee_params
     if @fee.valid?
-      @fee.update_records << { updator: current_teacher.full_name, changes: params[:fee][:installments], date: Date.today.to_s }.to_s
+      @fee.update_records << { updator: current_teacher.full_name, updator_id: current_teacher.id, changes: params[:fee][:installments], date: Date.today.to_s }.to_s
       @fee.save
       respond_to do |format|
         # format.html { redirect_to fee_url(@fee), success: "Fee was successfully updated." }
@@ -86,6 +86,22 @@ class FeesController < ApplicationController
     end
   end
 
+  def pdf_download
+    pdf_file = ReceiptPdfGeneratorService.new
+    qrcode = RQRCode::QRCode.new("https://schoolgate.org/students/")
+    @qrcode_svg = qrcode.as_svg(
+      color: "000",
+      shape_rendering: "crispEdges",
+      module_size: 4,
+      standalone: true,
+      use_path: true,
+
+    )
+
+    # binding.break
+    send_data(pdf_file.generate_pdf(@qrcode_svg).render, filename: "test-file", type: "application/pdf", disposition: "inline")
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -96,7 +112,7 @@ class FeesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def fee_params
     params[:fee][:installments] = params[:fee][:installments].select { |v| v.present? } # remove empty installment values
-    params.require(:fee).permit(:school_id, :school_class_id, :teacher_id, :student_id, :academic_year, :installment_num,
+    params.require(:fee).permit(:school_id, :school_class_id, :teacher_id, :student_id, :academic_year_id, :academic_year_text, :installment_num,
                                 :total_fee_paid, :is_completed, installments: [])
   end
 end

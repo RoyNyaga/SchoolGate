@@ -11,7 +11,7 @@ class SchoolsController < ApplicationController
 
   # GET /schools/1 or /schools/1.json
   def show
-    session[:current_school_id] = @school.id
+    set_current_school(@school)
   end
 
   # GET /schools/new

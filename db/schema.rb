@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_09_000500) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_18_203202) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,6 +65,64 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_09_000500) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "assessments", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "academic_year_id", null: false
+    t.bigint "course_id", null: false
+    t.bigint "semester_id", null: false
+    t.integer "assessment_type", default: 0
+    t.text "marks", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "course_name"
+    t.bigint "teacher_id", null: false
+    t.integer "status", default: 0
+    t.index ["academic_year_id"], name: "index_assessments_on_academic_year_id"
+    t.index ["course_id"], name: "index_assessments_on_course_id"
+    t.index ["school_id"], name: "index_assessments_on_school_id"
+    t.index ["semester_id"], name: "index_assessments_on_semester_id"
+    t.index ["teacher_id"], name: "index_assessments_on_teacher_id"
+  end
+
+  create_table "course_registrations", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "student_id", null: false
+    t.bigint "academic_year_id", null: false
+    t.bigint "semester_id", null: false
+    t.integer "credit_val", default: 0
+    t.text "courses", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["academic_year_id"], name: "index_course_registrations_on_academic_year_id"
+    t.index ["school_id"], name: "index_course_registrations_on_school_id"
+    t.index ["semester_id"], name: "index_course_registrations_on_semester_id"
+    t.index ["student_id"], name: "index_course_registrations_on_student_id"
+  end
+
+  create_table "course_results", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "student_id", null: false
+    t.bigint "course_id", null: false
+    t.bigint "academic_year_id", null: false
+    t.bigint "semester_id", null: false
+    t.float "ca_mark", default: 0.0
+    t.float "exam_mark", default: 0.0
+    t.float "resit_mark", default: 0.0
+    t.float "total_mark", default: 0.0
+    t.boolean "has_resit", default: false
+    t.boolean "is_validated", default: false
+    t.integer "credit_val"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "course_registration_id"
+    t.index ["academic_year_id"], name: "index_course_results_on_academic_year_id"
+    t.index ["course_id"], name: "index_course_results_on_course_id"
+    t.index ["course_registration_id"], name: "index_course_results_on_course_registration_id"
+    t.index ["school_id"], name: "index_course_results_on_school_id"
+    t.index ["semester_id"], name: "index_course_results_on_semester_id"
+    t.index ["student_id"], name: "index_course_results_on_student_id"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.bigint "school_id", null: false
     t.bigint "faculty_id", null: false
@@ -75,6 +133,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_09_000500) do
     t.string "code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "complete_name"
     t.index ["department_id"], name: "index_courses_on_department_id"
     t.index ["faculty_id"], name: "index_courses_on_faculty_id"
     t.index ["school_id"], name: "index_courses_on_school_id"
@@ -107,6 +166,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_09_000500) do
     t.index ["school_id"], name: "index_departments_on_school_id"
   end
 
+  create_table "enrollments", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "student_id", null: false
+    t.bigint "course_id", null: false
+    t.bigint "academic_year_id", null: false
+    t.bigint "semester_id", null: false
+    t.bigint "course_registration_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["academic_year_id"], name: "index_enrollments_on_academic_year_id"
+    t.index ["course_id"], name: "index_enrollments_on_course_id"
+    t.index ["course_registration_id"], name: "index_enrollments_on_course_registration_id"
+    t.index ["school_id"], name: "index_enrollments_on_school_id"
+    t.index ["semester_id"], name: "index_enrollments_on_semester_id"
+    t.index ["student_id"], name: "index_enrollments_on_student_id"
+  end
+
   create_table "faculties", force: :cascade do |t|
     t.bigint "school_id", null: false
     t.string "name"
@@ -120,7 +196,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_09_000500) do
     t.bigint "school_class_id", null: false
     t.bigint "student_id", null: false
     t.text "update_records", default: [], array: true
-    t.string "academic_year", null: false
+    t.string "academic_year_text", null: false
     t.text "installments", default: [], array: true
     t.integer "installment_num", default: 0
     t.integer "total_fee_paid", default: 0
@@ -128,6 +204,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_09_000500) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "percentage_complete", default: 0.0
+    t.bigint "academic_year_id"
+    t.float "receipt_amount"
+    t.boolean "is_receipt_and_fee_amount_in_phase", default: true
+    t.index ["academic_year_id"], name: "index_fees_on_academic_year_id"
     t.index ["school_class_id"], name: "index_fees_on_school_class_id"
     t.index ["school_id"], name: "index_fees_on_school_id"
     t.index ["student_id"], name: "index_fees_on_student_id"
@@ -189,6 +269,26 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_09_000500) do
     t.index ["subject_id"], name: "index_progresses_on_subject_id"
     t.index ["teacher_id"], name: "index_progresses_on_teacher_id"
     t.index ["term_id"], name: "index_progresses_on_term_id"
+  end
+
+  create_table "receipts", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "teacher_id", null: false
+    t.bigint "academic_year_id", null: false
+    t.bigint "student_id", null: false
+    t.bigint "fee_id", null: false
+    t.string "transaction_reference", null: false
+    t.boolean "has_error", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float "amount"
+    t.json "update_history", default: {}
+    t.index ["academic_year_id"], name: "index_receipts_on_academic_year_id"
+    t.index ["fee_id"], name: "index_receipts_on_fee_id"
+    t.index ["school_id"], name: "index_receipts_on_school_id"
+    t.index ["student_id"], name: "index_receipts_on_student_id"
+    t.index ["teacher_id"], name: "index_receipts_on_teacher_id"
+    t.index ["transaction_reference"], name: "index_receipts_on_transaction_reference"
   end
 
   create_table "report_card_generators", force: :cascade do |t|
@@ -261,6 +361,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_09_000500) do
     t.jsonb "student_id_settings", default: {}
     t.integer "education_level", default: 1
     t.index ["teacher_id"], name: "index_schools_on_teacher_id"
+  end
+
+  create_table "semesters", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "academic_year_id", null: false
+    t.integer "semester_type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "is_active", default: false
+    t.index ["academic_year_id"], name: "index_semesters_on_academic_year_id"
+    t.index ["school_id"], name: "index_semesters_on_school_id"
   end
 
   create_table "sequences", force: :cascade do |t|
@@ -490,6 +601,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_09_000500) do
   add_foreign_key "academic_years", "schools"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "assessments", "academic_years"
+  add_foreign_key "assessments", "courses"
+  add_foreign_key "assessments", "schools"
+  add_foreign_key "assessments", "semesters"
+  add_foreign_key "assessments", "teachers"
+  add_foreign_key "course_registrations", "academic_years"
+  add_foreign_key "course_registrations", "schools"
+  add_foreign_key "course_registrations", "semesters"
+  add_foreign_key "course_registrations", "students"
+  add_foreign_key "course_results", "academic_years"
+  add_foreign_key "course_results", "course_registrations"
+  add_foreign_key "course_results", "courses"
+  add_foreign_key "course_results", "schools"
+  add_foreign_key "course_results", "semesters"
+  add_foreign_key "course_results", "students"
   add_foreign_key "courses", "departments"
   add_foreign_key "courses", "faculties"
   add_foreign_key "courses", "schools"
@@ -499,7 +625,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_09_000500) do
   add_foreign_key "curriculums", "teachers"
   add_foreign_key "departments", "faculties"
   add_foreign_key "departments", "schools"
+  add_foreign_key "enrollments", "academic_years"
+  add_foreign_key "enrollments", "course_registrations"
+  add_foreign_key "enrollments", "courses"
+  add_foreign_key "enrollments", "schools"
+  add_foreign_key "enrollments", "semesters"
+  add_foreign_key "enrollments", "students"
   add_foreign_key "faculties", "schools"
+  add_foreign_key "fees", "academic_years"
   add_foreign_key "fees", "school_classes"
   add_foreign_key "fees", "schools"
   add_foreign_key "fees", "students"
@@ -515,6 +648,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_09_000500) do
   add_foreign_key "progresses", "subjects"
   add_foreign_key "progresses", "teachers"
   add_foreign_key "progresses", "terms"
+  add_foreign_key "receipts", "academic_years"
+  add_foreign_key "receipts", "fees"
+  add_foreign_key "receipts", "schools"
+  add_foreign_key "receipts", "students"
+  add_foreign_key "receipts", "teachers"
   add_foreign_key "report_card_generators", "academic_years"
   add_foreign_key "report_card_generators", "school_classes"
   add_foreign_key "report_card_generators", "schools"
@@ -527,6 +665,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_09_000500) do
   add_foreign_key "report_cards", "terms"
   add_foreign_key "school_classes", "schools"
   add_foreign_key "schools", "teachers"
+  add_foreign_key "semesters", "academic_years"
+  add_foreign_key "semesters", "schools"
   add_foreign_key "sequences", "academic_years"
   add_foreign_key "sequences", "school_classes"
   add_foreign_key "sequences", "schools"

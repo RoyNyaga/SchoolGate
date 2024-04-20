@@ -1,6 +1,7 @@
 class CoursesController < ApplicationController
   layout "school_layout"
-  before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :set_course, only: %i[ show edit update destroy for_lecturer ]
+  skip_before_action :authenticate_teacher!, only: [:json_search]
 
   # GET /courses or /courses.json
   def index
@@ -59,6 +60,14 @@ class CoursesController < ApplicationController
   end
 
   def for_lecturer
+    @enrollments = @course.enrollments.where(academic_year_id: current_school.active_academic_year.id)
+    @assessments = @course.assessments
+  end
+
+  def json_search
+    @courses = Course.where("lower(courses.complete_name) like '%#{params[:query].downcase}%' AND school_id = #{current_school.id}")
+    render json: @courses
+    # render json: { status: "it is working" }
   end
 
   private

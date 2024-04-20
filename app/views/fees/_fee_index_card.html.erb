@@ -1,7 +1,7 @@
 <tr id="<%= fee.id %>_fee_index_card">
   <td><%= fee.student.full_name %></td>
   <td><%= fee.school_class.name %> / <%= fee.school.send(fee.school_class.generate_fee_string) %></td>
-  <td><%= fee.academic_year %></td>
+  <td><%= fee.academic_year_text %></td>
   <td>
     <div class="text-center"><%= number_to_currency(fee.total_fee_paid, unit: "frs", precision: 0, format: "%n %u") %></div>
     <div class="progress">
