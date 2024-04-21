@@ -4,9 +4,8 @@ class TeachersController < ApplicationController
   before_action :check_for_current_school, only: [:subjects, :progresses]
 
   def invitations
-    @pending = current_teacher.invitations.pending
-    @accepted = current_teacher.invitations.accepted
-    @rejected = current_teacher.invitations.rejected
+    @status = params[:status] || "pending"
+    @invitations = current_teacher.invitations.send(@status)
   end
 
   def subjects

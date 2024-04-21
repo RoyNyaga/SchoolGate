@@ -85,6 +85,18 @@
   font-size: 0.9em;
 }
 
+.invitation-accept-link{
+  border: none;
+  background: white;
+  text-decoration: underline;
+}
+
+.invitation-decline-link{
+  border: none;
+  background: white;
+  text-decoration: underline;
+}
+
 @media screen and (max-width: 425px) {
   #sign-in-colum-div {
     padding-left: 15px;
