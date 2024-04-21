@@ -41,13 +41,14 @@
 .sign-in-form-div {
   background-color: white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  label{
+
+  label {
     color: #4a5358;
     font-family: 'Josefin Sans', sans-serif;
   }
 }
 
-.sign-in-inputs{
+.sign-in-inputs {
   width: 100%;
   padding: 5px 10px;
   box-shadow: none;
@@ -56,18 +57,18 @@
   background-color: transparent !important;
 }
 
-.sign-in-inputs:focus{
+.sign-in-inputs:focus {
   outline: none;
   border: 2px solid #aaa9a9;
 }
 
-.sign-in-btn{
+.sign-in-btn {
   background: var(--main-blue-color);
   width: 100%;
   color: white;
   border-radius: 5px;
   border: 2px var(--main-blue-color);
-  padding: 5px; 
+  padding: 5px;
 }
 
 .sign-in-headers {
@@ -75,12 +76,13 @@
   font-weight: 900;
 }
 
-.no-account-yet{
+.no-account-yet {
   color: #aaa9a9;
 }
 
-.sign-up-link{
-  color: var(--main-blue-color);
+.sign-up-link {
+  color: #02a6ba;
+  font-size: 0.9em;
 }
 
 @media screen and (max-width: 425px) {
