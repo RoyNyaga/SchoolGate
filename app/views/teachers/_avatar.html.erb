@@ -1,0 +1,7 @@
+<div>
+  <% if teacher.photo.attached? %>
+    <%= image_tag url_for(teacher.photo), class: "img-fluid", data: { photoUploads_target: "image" } %>
+  <% else %>
+    <%= image_tag "user_photo.webp", class: "img-fluid", data: { photoUploads_target: "image" }, alt: "your photo is missing" %>
+  <% end %>
+</div>

@@ -1,27 +1,17 @@
 <div id="<%= dom_id working %>">
-  <p>
-    <strong>School:</strong>
-    <%= working.school_id %>
-  </p>
-
-  <p>
-    <strong>Teacher:</strong>
-    <%= working.teacher_id %>
-  </p>
-
+  <h5 class="text-center">
+    <%= working.teacher.full_name %>
+  </h5>
   <p>
     <strong>Permission:</strong>
     <%= working.permission %>
   </p>
-
   <p>
     <strong>Agreed salary:</strong>
     <%= working.agreed_salary %>
   </p>
-
   <p>
     <strong>Job description:</strong>
     <%= working.job_description %>
   </p>
-
 </div>

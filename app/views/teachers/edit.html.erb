@@ -1,13 +1,7 @@
 <div class="container">
   <div data-controller="photoUploads" class="row">
     <div class="col-md-2">
-      <div>
-        <% if @teacher.photo.attached? %>
-          <%= image_tag url_for(@teacher.photo), class: "img-fluid", data: { photoUploads_target: "image" } %>
-        <% else %>
-          <%= image_tag "user_photo.webp", class: "img-fluid", data: { photoUploads_target: "image" }, alt: "your photo is missing" %>
-        <% end %>
-      </div>
+      <%= render partial: "teachers/avatar", locals: { teacher: @teacher } %>
       <%= render partial: "shared/photo_form", 
         layout: "layouts/modal_layout", 
         locals: { record: @teacher, modal_id: generate_modal_id("photo_form", record: @teacher), 
