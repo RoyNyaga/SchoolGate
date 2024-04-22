@@ -1,6 +1,21 @@
 <div class="container">
-  <%= render partial: "invitations/form", 
+  <div class="container">
+    <div class="text-center">
+      <%= render partial: "invitations/form", 
         layout: "layouts/modal_layout", 
-        locals: { invitation: Invitation.new, action_name: "Send Invit",
-         action_title: "Create an Invitation", modal_id: generate_modal_id("new", record: Invitation.new) }%>
+        locals: { invitation: Invitation.new, action_name: "New Invit",
+         action_title: "Send an Invitation", modal_id: generate_modal_id("new", record: Invitation.new) }%>
+    </div>
+    <div class="row my-3">
+      <div class="col-md-3 d-flex justify-content-between align-item-center">
+        <%= link_to "Pending", invitations_schools_path(status: "pending"), class: "general-link" %>
+        <%= link_to "Accepted", invitations_schools_path(status: "accepted"), class: "general-link" %>
+        <%= link_to "Rejected", invitations_schools_path(status: "rejected"), class: "general-link" %>
+      </div>
+    </div>
+    <div>
+      <h5 class="my-4 text-center"><%= @status.titleize %> Invitations</h5>
+      <%= render partial: "invitations/table", locals: { invitations: @invitations, status: @status, is_admin_dashboard: true } %>
+    </div>
+  </div>
 </div>

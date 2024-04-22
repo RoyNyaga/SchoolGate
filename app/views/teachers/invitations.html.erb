@@ -8,6 +8,6 @@
   </div>
   <div>
     <h5 class="my-4 text-center"><%= @status.titleize %> Invitations</h5>
-    <%= render partial: "invitations/table", locals: { invitations: @invitations, status: @status } %>
+    <%= render partial: "invitations/table", locals: { invitations: @invitations, status: @status, is_admin_dashboard: false } %>
   </div>
 </div>

@@ -18,10 +18,16 @@
         <td class="table-row-data table-row-data-medium-fonts"><%= i.proposed_salary %></td>
         <td class="table-row-data table-row-data-medium-fonts"><%= i.status %></td>
         <% if status == "pending" %>
-          <td>
-            <%= button_to "Accept", accept_invitation_path(i), method: :put, class: "invitation-accept-link" %><br>
-            <%= button_to "Reject", reject_invitation_path(i), method: :put, class: "cancel-text-link invitation-decline-link" %>
-          </td>
+          <% if is_admin_dashboard %>
+            <td>
+              <%= button_to "Cancel", reject_invitation_path(i), method: :put, class: "cancel-text-link invitation-decline-link" %>
+            </td>
+          <% else %>
+            <td>
+              <%= button_to "Accept", accept_invitation_path(i), method: :put, class: "invitation-accept-link" %><br>
+              <%= button_to "Reject", reject_invitation_path(i), method: :put, class: "cancel-text-link invitation-decline-link" %>
+            </td>
+          <% end %>
         <% end %>
       </tr>
     <% end %>
