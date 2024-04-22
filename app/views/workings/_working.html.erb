@@ -1,17 +1,14 @@
-<div id="<%= dom_id working %>">
+<div class="light-grey-card p-2 dashboard-normal-font-size" id="<%= dom_id working %>">
+  <%= render partial: "teachers/avatar", locals: { teacher: working.teacher } %>
   <h5 class="text-center">
     <%= working.teacher.full_name %>
   </h5>
-  <p>
-    <strong>Permission:</strong>
-    <%= working.permission %>
+  <p class="margin-zero d-flex justify-content-between">
+    <span>Salary</span>
+    <span class="text-color-grey-2 px-3"><%= working.agreed_salary %></span>
   </p>
-  <p>
-    <strong>Agreed salary:</strong>
-    <%= working.agreed_salary %>
-  </p>
-  <p>
-    <strong>Job description:</strong>
-    <%= working.job_description %>
+  <p class="margin-zero d-flex justify-content-between">
+    <span>Permission</span>
+    <span class="text-color-grey-2 px-3"><%= working.permission %></span>
   </p>
 </div>
