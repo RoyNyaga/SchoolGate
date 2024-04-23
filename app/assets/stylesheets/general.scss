@@ -100,7 +100,14 @@ label {
   background-color: transparent !important;
   color: var(--grey-color-1) !important;
   padding: 10px 8px !important;
+}
+
+.table-row-data-small-fonts{
   font-size: 0.8em;
+}
+
+.table-row-data-medium-fonts{
+  font-size: 1em;
 }
 
 .fee-progress-fonts {
@@ -258,7 +265,7 @@ label {
   color: var(--error-text-color);
 }
 
-#school-layout-body {
+.background-grey {
   background-color: var(--background-grey-color);
 }
 
@@ -330,13 +337,21 @@ label {
   }
 }
 
+.cancel-text-link{
+  color: var(--error-text-color);
+}
+
 @media screen and (max-width: 425px) {
   .canvas-custom-class {
     width: 90% !important;
   }
 
-  .table-row-data {
+  .table-row-data-small-fonts{
     font-size: 0.7em;
+  }
+
+  .table-row-data-medium-fonts{
+    font-size: 0.9em;
   }
 
   .table-head-styles {

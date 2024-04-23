@@ -1,13 +1,11 @@
 class TeachersController < ApplicationController
   include ApplicationHelper # this is to enable us access the generate_modal_id helper method from this controller
-  before_action :set_teacher, only: [:edit, :update_photo]
+  before_action :set_teacher, only: [:edit, :update_photo, :update]
   before_action :check_for_current_school, only: [:subjects, :progresses]
 
   def invitations
-    @pending = current_teacher.invitations.pending
-    @accepted = current_teacher.invitations.accepted
-    @rejected = current_teacher.invitations.rejected
-    render layout: "school_layout"
+    @status = params[:status] || "pending"
+    @invitations = current_teacher.invitations.send(@status)
   end
 
   def subjects
@@ -21,6 +19,16 @@ class TeachersController < ApplicationController
   end
 
   def edit
+    render layout: "school_layout"
+  end
+
+  def update
+    if @teacher.update(teacher_params)
+      flash[:success] = "Profile successfully updated"
+      redirect_to edit_teacher_path(@teacher)
+    else
+      render :edit
+    end
   end
 
   def update_photo
@@ -50,5 +58,9 @@ class TeachersController < ApplicationController
 
   def photo_params
     params.require(:student).permit(:photo)
+  end
+
+  def teacher_params
+    params.require(:teacher).permit(:phone_number, :first_name, :last_name, :town)
   end
 end

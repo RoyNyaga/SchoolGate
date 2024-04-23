@@ -62,4 +62,9 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: %i[phone_number first_name other_names address date_of_birth gender])
     devise_parameter_sanitizer.permit(:sign_in, keys: %i[phone_number])
   end
+
+  def after_sign_in_path_for(resource)
+    # stored_location_for(resource) || schools_path
+    schools_path
+  end
 end

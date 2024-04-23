@@ -1,22 +1,9 @@
-<div id="<%= dom_id school %>">
-  <p>
-    <strong>Full name:</strong>
-    <%= school.full_name %>
-  </p>
-  <p>
-    <strong>Abbreviation:</strong>
-    <%= school.abbreviation %>
-  </p>
-  <p>
-    <strong>Town:</strong>
-    <%= school.town %>
-  </p>
-  <p>
-    <strong>Address:</strong>
-    <%= school.address %>
-  </p>
-  <p>
-    <strong>Moto:</strong>
-    <%= school.moto %>
-  </p>
+<div class="dark-blue-section-div dashboard-normal-font-size p-2">
+  <h5 class="text-center my-2"> <%= school.full_name %></h5>
+  <p class="margin-zero">Abbreviation: <span class="text-color-grey"><%= school.abbreviation %></span></p>
+  <p class="margin-zero">Town: <span class="text-color-grey"><%= school.town %></span></p>
+  <p class="margin-zero">Address: <span class="text-color-grey"><%= school.address %></span></p>
+  <p class="margin-zero">Moto: <span class="text-color-grey"><%= school.moto %></span></p>
+  <br>
+  <%= link_to "View", school, class: "general-link" %>
 </div>

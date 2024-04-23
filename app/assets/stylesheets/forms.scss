@@ -11,7 +11,7 @@
   margin-top: 7px;
 }
 
-.enrollment-search-query-input{
+.enrollment-search-query-input {
   padding: 2px;
   font-size: 0.9em;
   height: 25px;
@@ -21,10 +21,84 @@
   border: 1px solid grey;
 }
 
-.enrollment-search-submit-btn{
+.enrollment-search-submit-btn {
   padding: 0px 2px;
   font-size: 0.9em;
   height: 25px;
   border-radius: 0px;
   border: 1px solid grey;
+}
+
+#sign-in-div {
+  height: 90vh;
+  padding-top: 90px;
+}
+
+#sign-in-colum-div {
+  padding-left: 30px;
+}
+
+.sign-in-form-div {
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+  label {
+    color: #4a5358;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+}
+
+.sign-in-inputs {
+  width: 100%;
+  padding: 5px 10px;
+  box-shadow: none;
+  border: 2px solid #aaa9a9;
+  border-radius: 5px;
+  background-color: transparent !important;
+}
+
+.sign-in-inputs:focus {
+  outline: none;
+  border: 2px solid #aaa9a9;
+}
+
+.sign-in-btn {
+  background: var(--main-blue-color);
+  width: 100%;
+  color: white;
+  border-radius: 5px;
+  border: 2px var(--main-blue-color);
+  padding: 5px;
+}
+
+.sign-in-headers {
+  color: black;
+  font-weight: 900;
+}
+
+.no-account-yet {
+  color: #aaa9a9;
+}
+
+.sign-up-link {
+  color: #02a6ba;
+  font-size: 0.9em;
+}
+
+.invitation-accept-link{
+  border: none;
+  background: white;
+  text-decoration: underline;
+}
+
+.invitation-decline-link{
+  border: none;
+  background: white;
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 425px) {
+  #sign-in-colum-div {
+    padding-left: 15px;
+  }
 }

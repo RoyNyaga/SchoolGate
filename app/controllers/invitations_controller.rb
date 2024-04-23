@@ -1,5 +1,6 @@
 class InvitationsController < ApplicationController
   before_action :set_invitation, only: [:accept, :reject]
+  before_action :check_for_current_school, only: [:create]
 
   def new
   end
@@ -7,27 +8,35 @@ class InvitationsController < ApplicationController
   # POST /invitations or /invitations.json
   def create
     @invitation = Invitation.new(invitation_params)
-
-    respond_to do |format|
-      if @invitation.save
-        format.html { redirect_to request.referer, notice: "invitation was successfully created." }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @invitation.errors, status: :unprocessable_entity }
+    if current_school.workers.where(teacher_id: params[:teacher_id]).present?
+      @status = "accepted"
+      flash[:warning] = "This teacher is already a worker in this school"
+      redirect_to invitations_schools_path(status: @status)
+    else
+      respond_to do |format|
+        if @invitation.save
+          format.html { redirect_to request.referer, notice: "invitation was successfully created." }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @invitation.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
 
   def accept
     @invitation.update(status: Invitation.statuses["accepted"])
-    Working.create(school_id: @invitation.school_id,
-                   teacher_id: @invitation.teacher_id,
-                   permission: @invitation.permission,
-                   agreed_salary: @invitation.proposed_salary,
-                   job_description: @invitation.job_description)
+    unless current_school.workers.where(teacher_id: @invitation.teacher.id).present?
+      Working.create(school_id: @invitation.school_id,
+                     teacher_id: @invitation.teacher_id,
+                     permission: @invitation.permission,
+                     agreed_salary: @invitation.proposed_salary,
+                     job_description: @invitation.job_description)
+    end
 
     flash[:success] = "Successfully Accepted Invitation"
-    redirect_to request.referer
+    @status = "pending"
+    redirect_to invitations_teachers_path(status: @status)
   end
 
   def reject

@@ -1,7 +1,7 @@
 class SchoolsController < ApplicationController
   layout "school_layout"
   before_action :set_school, only: %i[ show edit update destroy ]
-  before_action :check_for_current_school, except: %i[show index new]
+  before_action :check_for_current_school, except: %i[show index]
 
   # GET /schools or /schools.json
   def index
@@ -73,11 +73,12 @@ class SchoolsController < ApplicationController
   end
 
   def teachers
-    @teachers = current_school.workers
+    @workings = current_school.workings
   end
 
   def invitations
-    @invitations = current_school.invitations
+    @status = params[:status] || "pending"
+    @invitations = current_school.invitations.send(@status)
   end
 
   def contracts
@@ -89,8 +90,9 @@ class SchoolsController < ApplicationController
   end
 
   def progresses
-    week_start_and_end_dates = Progress.generate_start_and_end_week_dates(Time.now)
-    @progresses = current_school.progresses.where("created_at >= '#{week_start_and_end_dates[:start]}' AND created_at <= '#{week_start_and_end_dates[:end]}'")
+    # week_start_and_end_dates = Progress.generate_start_and_end_week_dates(Time.now)
+    # @progresses = current_school.progresses.where("created_at >= '#{week_start_and_end_dates[:start]}' AND created_at <= '#{week_start_and_end_dates[:end]}'")
+    @progresses = current_school.progresses
     @total_hours_mins_time = Progress.calc_total_time(@progresses)
     @topics_covered = @progresses.map { |p| p.topics.count }.sum
     @absentist_num = @progresses.map { |p| p.absent_students.count }.sum
