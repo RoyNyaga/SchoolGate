@@ -83,3 +83,4 @@ gem "solid_queue", "~> 0.2.2"
 gem "mission_control-jobs", "~> 0.1.1"
 gem "rqrcode", "~> 2.0"
 gem "chunky_png", "~> 1.4"
+gem 'bundler', '~> 2.5'
