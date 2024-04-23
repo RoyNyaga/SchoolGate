@@ -335,6 +335,7 @@ DEPENDENCIES
   prawn-table (~> 0.2.2)
   puma (>= 5.0)
   rails (~> 7.1.2)
+  rexml
   rqrcode (~> 2.0)
   sassc-rails
   selenium-webdriver
