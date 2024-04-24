@@ -1,11 +1,7 @@
 <div class="container">
   <h1>Editing school</h1>
-  <div class="section-div">
+  <div class="light-grey-card p-3">
     <%= render partial: "form", locals: { school: @school, edit: true } %>
     <br>
-  </div>
-  <div>
-    <%= link_to "Show this school", @school %> |
-    <%= link_to "Back to schools", schools_path %>
   </div>
 </div>

@@ -1,0 +1,9 @@
+<div class="light-grey-card dashboard-normal-font-size p-2">
+  <h5 class="text-center"><%= subject.name %></h5>
+  <p class="margin-zero">Class: <span class="text-color-grey-2"><%= subject.school_class.name %></span></p>
+  <p class="margin-zero">Students: <span class="text-color-grey-2"><%= subject.school_class.students.count %></span></p>
+  <p class="margin-zero">Coefficient: <span class="text-color-grey-2"><%= subject.coefficient %></span></p>
+  <p class="my-2">
+    <%= link_to "View", for_teacher_subject_path(subject), class: "general-link" %>
+  </p>
+</div>

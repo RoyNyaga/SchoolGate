@@ -30,6 +30,12 @@ class School < ApplicationRecord
              :address, :moto)
     }
 
+  after_create :add_teachers_permission
+
+  def add_teachers_permission
+    self.workings.create(teacher_id: teacher_id, permission: 3)
+  end
+
   def active_academic_year
     academic_years.active.first
   end
