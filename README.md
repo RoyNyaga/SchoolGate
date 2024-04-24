@@ -80,4 +80,5 @@ Things you may want to cover:
 - https://devcenter.heroku.com/articles/background-jobs-queueing#process-model
 - http://stuff-things.net/2024/01/27/using-solid-queue-in-development-with-docker-and-on-heroku/
 
-
+## Figaro
+- figaro heroku:set -e production
