@@ -345,6 +345,7 @@ DEPENDENCIES
   figaro (~> 1.2)
   font_awesome5_rails
   importmap-rails
+  irb (~> 1.12)
   jbuilder
   mission_control-jobs (~> 0.1.1)
   pg (~> 1.1)

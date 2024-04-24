@@ -85,3 +85,4 @@ gem "rqrcode", "~> 2.0"
 gem "chunky_png", "~> 1.4"
 gem 'rexml'
 gem "aws-sdk-s3", require: false
+gem 'irb', '~> 1.12'
