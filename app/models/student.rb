@@ -61,7 +61,9 @@ class Student < ApplicationRecord
   end
 
   def create_fees
-    fees.create(school_id: school_id, school_class_id: school_class_id, academic_year: school.active_academic_year)
+    year = school.active_academic_year
+    fees.create(school_id: school_id, school_class_id: school_class_id,
+                academic_year_id: year.id, academic_year_text: year.year)
   end
 
   def student_number_code

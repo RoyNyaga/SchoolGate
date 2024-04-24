@@ -75,4 +75,7 @@ Things you may want to cover:
 ## Starting Ngronk
 - ngrok http --domain=square-suddenly-sole.ngrok-free.app 3000
 
-
+## Profile and solid_queue heroku setups
+- https://devcenter.heroku.com/articles/getting-started-with-rails7#create-a-procfile
+- https://devcenter.heroku.com/articles/background-jobs-queueing#process-model
+- http://stuff-things.net/2024/01/27/using-solid-queue-in-development-with-docker-and-on-heroku/
