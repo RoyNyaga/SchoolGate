@@ -6,7 +6,19 @@
           <h4 class="sign-in-headers">New Account</h4>
           <p class="no-account-yet">Already have an account?  <%= link_to "Log In", new_session_path(resource_name), class: "sign-up-link" %></p>
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-            <%= render "devise/shared/error_messages", resource: resource %>
+            <div class="form-error-div">
+              <%= render "devise/shared/error_messages", resource: resource %>
+            </div>
+            <div class="row">
+              <div class="col-md-6 field my-2">
+                <%= f.label :last_name %><br />
+                <%= f.text_field :last_name, class: "sign-in-inputs" %>
+              </div>
+              <div class="col-md-6 field my-2">
+                <%= f.label :first_name %><br />
+                <%= f.text_field :first_name, class: "sign-in-inputs" %>
+              </div>
+            </div>
             <div class="field my-3">
               <%= f.label :phone %><br />
               <%= f.number_field :phone_number, autofocus: true, autocomplete: "phone-number", class: "sign-in-inputs" %>

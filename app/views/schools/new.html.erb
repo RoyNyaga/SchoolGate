@@ -1,6 +1,10 @@
 <div class="container">
-  <h1>New school</h1>
-  <%= render partial: "form", locals: { school: @school, edit: false } %>
+  <h4 class="text-center">New school</h4>
+  <div class="row">
+    <div class="col-md-7 mx-auto white-section-div">
+      <%= render partial: "form", locals: { school: @school, edit: false } %>
+    </div>
+  </div>
   <br>
   <div>
     <%= link_to "Back to schools", schools_path %>
