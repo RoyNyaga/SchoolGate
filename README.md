@@ -82,3 +82,9 @@ Things you may want to cover:
 
 ## Figaro
 - figaro heroku:set -e production
+
+## Puma configs
+- WEB_CONCURRENCY: "2" # this configuration constrols the number of puma instances to be created
+- RAILS_MAX_THREADS: "5" # This configuration constrols the maximum number of threads per a puma instance
+- RAILS_MAX_THREADS: "2"
+- https://justin.searls.co/posts/brand-new-rails-7-apps-exceed-heroku-s-memory-quotas/
