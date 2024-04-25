@@ -9,7 +9,7 @@
 #   end
 
 # teachers = [
-#   { phone_number: "000000001", first_name: "Ade", last_name: "George", password: "123456" },
+#   { phone_number: "000000011", first_name: "Ade", last_name: "George", password: "123456" },
 #   { phone_number: "000000002", first_name: "Tanga", last_name: "John", password: "123456" },
 #   { phone_number: "000000003", first_name: "Brilliant", last_name: "Ashu", password: "123456" },
 #   { phone_number: "000000004", first_name: "Nestor", last_name: "King", password: "123456" },
@@ -28,11 +28,11 @@
 
 @school = School.first
 
-# school_classes = [{ name: "Form One", level: 1, school_id: @school.id },
-#                   { name: "Form Two", level: 2, school_id: @school.id },
-#                   { name: "Form Three", level: 3, school_id: @school.id },
-#                   { name: "Form Four", level: 4, school_id: @school.id },
-#                   { name: "Form Five", level: 5, school_id: @school.id }]
+school_classes = [{ name: "Form One", level: 1, school_id: @school.id },
+                  { name: "Form Two", level: 2, school_id: @school.id },
+                  { name: "Form Three", level: 3, school_id: @school.id },
+                  { name: "Form Four", level: 4, school_id: @school.id },
+                  { name: "Form Five", level: 5, school_id: @school.id }]
 
 # subjects = [
 #   { name: "English Language", coefficient: 5 }, { name: "French", coefficient: 5 },
@@ -44,9 +44,9 @@
 #   { name: "Geography", coefficient: 3 },
 # ]
 
-# # teachers.each do |teacher|
-# #   Teacher.create(teacher)
-# # end
+# teachers.each do |teacher|
+#   Teacher.create(teacher)
+# end
 
 # SchoolClass.insert_all school_classes
 
@@ -135,3 +135,5 @@ Student.all.each do |student|
   student.fees.create(school_id: student.school_id, school_class_id: student.school_class_id,
                       academic_year: Student.generate_current_academic_year, installments: fees_hash["#{rand(1..7)}"])
 end
+
+teachers.map { |t| Working.create(school_id: @school.id, teacher_id: t.id, permission: 0, agreed_salary: 70000, job_description: "Responsible for teacher studenst") }

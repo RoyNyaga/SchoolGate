@@ -27,7 +27,7 @@ class TeachingsController < ApplicationController
 
     respond_to do |format|
       if @teaching.save
-        format.html { redirect_to teaching_url(@teaching), notice: "Teaching was successfully created." }
+        format.html { redirect_to request.referer, notice: "Teacher was successfully assigned!!" }
         format.json { render :show, status: :created, location: @teaching }
       else
         format.html { render :new, status: :unprocessable_entity }
