@@ -4,8 +4,8 @@ class Term < ApplicationRecord
   has_many :report_cards
   belongs_to :academic_year
 
-  validates :term_type, uniqueness: { scope: :academic_year_id,
-                                      message: "Term already exist for this academic year" }
+  validates :term_type, presence: true, uniqueness: { scope: :academic_year_id,
+                                                      message: "Term already exist for this academic year" }
   enum term_type: { first_term: 1, second_term: 2, third_term: 3 }
 
   def title
