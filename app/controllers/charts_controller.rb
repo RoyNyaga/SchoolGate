@@ -17,19 +17,19 @@ class ChartsController < ApplicationController
   end
 
   def incomplete_fee_per_class
-    data = Charts::DataParsing.completeness_fee_per_class(params[:academic_year], "incompleted", current_school)
+    data = Charts::DataParsing.completeness_fee_per_class(params[:academic_year_text], "incompleted", current_school)
     render json: data
   end
 
   def complete_fee_per_class
-    data = Charts::DataParsing.completeness_fee_per_class(params[:academic_year], "completed", current_school)
+    data = Charts::DataParsing.completeness_fee_per_class(params[:academic_year_text], "completed", current_school)
     render json: data
   end
 
   def revenue_per_class_over_time_line_chart
     main_data = {}
     school_classes = current_school.school_classes.includes(:fees)
-    data = Charts::DataParsing.revenue_per_class_over_time(school_classes, params[:academic_year])
+    data = Charts::DataParsing.revenue_per_class_over_time(school_classes, params[:academic_year_text])
     render json: data
   end
 
@@ -42,6 +42,6 @@ class ChartsController < ApplicationController
   private
 
   def set_fees
-    @fees = Fee.where(academic_year: params[:academic_year])
+    @fees = Fee.where(academic_year_text: params[:academic_year_text])
   end
 end

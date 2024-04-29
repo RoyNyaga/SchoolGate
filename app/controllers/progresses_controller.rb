@@ -17,14 +17,14 @@ class ProgressesController < ApplicationController
     @progress = Progress.new
     @subject = Subject.find(params[:subject_id])
     @curriculums = Curriculum.where(subject_id: @subject.id, teacher_id: current_teacher.id,
-                                    academic_year: Curriculum.generate_current_academic_year)
+                                    academic_year: current_school.active_academic_year.year)
   end
 
   # GET /progresses/1/edit
   def edit
     @subject = @progress.subject
     @curriculums = Curriculum.where(subject_id: @subject.id, teacher_id: current_teacher.id,
-                                    academic_year: Curriculum.generate_current_academic_year)
+                                    academic_year: current_school.active_academic_year.year)
 
     topic_ids = Progress.string_to_hash_arr(@progress.topics).map { |t| t["id"] }
     @topics = Topic.where(id: topic_ids)
@@ -43,7 +43,7 @@ class ProgressesController < ApplicationController
       else
         @subject = Subject.find(@progress.subject_id)
         @curriculums = Curriculum.where(subject_id: @subject.id, teacher_id: current_teacher.id,
-                                        academic_year: Curriculum.generate_current_academic_year)
+                                        academic_year: current_school.active_academic_year.year)
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @progress.errors, status: :unprocessable_entity }
       end

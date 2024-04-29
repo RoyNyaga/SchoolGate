@@ -1,4 +1,5 @@
 class TermsController < ApplicationController
+  before_action :check_for_current_school
   before_action :set_term, only: %i[ show edit update destroy ]
 
   # GET /terms or /terms.json
@@ -13,6 +14,7 @@ class TermsController < ApplicationController
   # GET /terms/new
   def new
     @term = Term.new
+    @academic_year = current_school.active_academic_year
   end
 
   # GET /terms/1/edit
@@ -22,13 +24,13 @@ class TermsController < ApplicationController
   # POST /terms or /terms.json
   def create
     @term = Term.new(term_params)
-
-    if @term.save
-      flash[:success] = "Successfully created a term"
-      redirect_to request.referer
-    else
-      flash.now[:error] = "There was an issue while saving this Term"
-      render :new
+    @academic_year = AcademicYear.find_by(id: params[:term][:academic_year_id])
+    respond_to do |format|
+      if @term.save
+        format.html { redirect_to academic_year_path(@academic_year), success: "Successfully created a term" }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 

@@ -5,8 +5,17 @@ class FeesController < ApplicationController
 
   # GET /fees or /fees.json
   def index
-    @academic_year_list = Fee.academic_year_list_per_school(current_school)
-    @fees = current_school.fees.includes(:school, :school_class, :student)
+    if params[:is_search].present?
+      sql = "fees.school_id = #{current_school.id}"
+      sql += " AND academic_year_id = #{params[:academic_year_id].to_i}" if params[:academic_year_id].present?
+      sql += " AND lower(students.full_name) like '%#{params[:student_name].downcase}%'" if params[:student_name].present?
+      sql += " AND percentage_complete > #{params[:percent_complete_greater_than]}" if params[:percent_complete_greater_than].present?
+      sql += " AND percentage_complete < #{params[:percent_complete_lesser_than]}" if params[:percent_complete_lesser_than].present?
+      sql += " AND fees.school_class_id = #{params[:school_class_id]}" if params[:school_class_id].present?
+      @fees = Fee.joins(:student).includes(:school, :school_class, :student).where(sql)
+    else
+      @fees = current_school.fees.includes(:school, :school_class, :student)
+    end
   end
 
   # GET /fees/1 or /fees/1.json
@@ -63,27 +72,30 @@ class FeesController < ApplicationController
   end
 
   def statistics
-    @academic_year = if params[:academic_year].present?
-        params[:academic_year]
+    @academic_year_id = if params[:academic_year_id].present?
+        params[:academic_year_id].to_i
       else
-        Fee.generate_current_academic_year
+        current_school.active_academic_year.id
       end
-    @fees = Fee.where(academic_year: @academic_year)
+    @academic_year = AcademicYear.find_by(id: @academic_year_id)
+    @fees = @academic_year.fees
+    @academic_year_text = @academic_year.year
     @overall_fee_paid = @fees.map(&:total_fee_paid).sum
   end
 
   def search
     sql = "fees.school_id = #{current_school.id}"
-    sql += " AND academic_year = '#{params[:academic_year]}'" if params[:academic_year].present?
+    sql += " AND academic_year = '#{params[:academic_year_id]}'" if params[:academic_year_id].present?
     sql += " AND lower(students.full_name) like '%#{params[:student_name].downcase}%'" if params[:student_name].present?
     sql += " AND percentage_complete > #{params[:percent_complete_greater_than]}" if params[:percent_complete_greater_than].present?
     sql += " AND percentage_complete < #{params[:percent_complete_lesser_than]}" if params[:percent_complete_lesser_than].present?
     sql += " AND fees.school_class_id = #{params[:school_class_id]}" if params[:school_class_id].present?
     @fees = Fee.joins(:student).includes(:school, :school_class, :student).where(sql)
-    respond_to do |format|
-      # format.html { render "fees#index", success: "Fee was successfully updated." }
-      format.turbo_stream { flash.now[:success] = "#{@fees.count} Results Found" }
-    end
+    # respond_to do |format|
+    #   # format.html { render "fees#index", success: "Fee was successfully updated." }
+    #   format.turbo_stream { flash.now[:success] = "#{@fees.count} Results Found" }
+    # end
+    redirect_to request.referer
   end
 
   def pdf_download
