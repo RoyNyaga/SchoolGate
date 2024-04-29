@@ -1,3 +1,10 @@
-<%= turbo_frame_tag custom_id_generator("new", record: @academic_year) do %>
-  <%= render "form", academic_year: @academic_year %>
-<% end %>
+<div class="container">
+  <h4 class="text-center my-4">New Academic Year</h4>
+  <div class="row">
+    <div class="col-md-4 mx-auto p-3 light-grey-card">
+      <%= turbo_frame_tag custom_id_generator("new", record: @academic_year) do %>
+        <%= render "form", academic_year: @academic_year %>
+      <% end %>
+    </div>
+  </div>
+</div>
