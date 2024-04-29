@@ -1,4 +1,4 @@
-<%= form_with(model: academic_year) do |form| %>
+  <%= form_with(model: academic_year) do |form| %>
   <% if academic_year.errors.any? %>
     <div class="form-error-div">
       <p><%= pluralize(academic_year.errors.count, "error") %> prohibited this academic_year from being saved:</p>
@@ -15,7 +15,7 @@
   </div>
   <div>
     <%= form.label :year, style: "display: block" %>
-    <%= form.select :year, generate_years.map { |v| [v,v] }, {include_blank: 'Select year'}, { class: "general-input-styles" } %>
+    <%= form.select :year, generate_years.map { |v| [v,v] }, {include_blank: 'Select year'}, { class: "general-input-styles", required: true } %>
   </div>
   <div>
     <%= form.label :is_active, style: "display: block" %>
