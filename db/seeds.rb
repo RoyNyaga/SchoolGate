@@ -96,6 +96,7 @@ end
 
 # subjects = @school.subjects.where(school_class_id: 3) # subjects for form one
 
+# N::::BBBBBB, always make sure to update the term
 subjects.each do |subject|
   [1, 2].each do |v|
     students = Student.where(school_class_id: subject.school_class_id)
@@ -104,10 +105,12 @@ subjects.each do |subject|
     if subject.teachers.present?
       puts "create for #{subject.name} - #{subject.id}"
       sequence = Sequence.new(school_id: school.id, subject_id: subject.id, school_class_id: 3, teacher_id: subject.teachers.first.id,
-                              seq_num: v, term_id: 1, marks: marks, academic_year_id: school.active_academic_year.id)
+                              seq_num: v, term_id: 4, marks: marks, academic_year_id: school.active_academic_year.id)
       puts sequence.valid?
       unless sequence.valid?
         puts sequence.errors.full_messages
+      else
+        sequence.save
       end
     else
       puts "create for #{subject.name} - #{subject.id}"

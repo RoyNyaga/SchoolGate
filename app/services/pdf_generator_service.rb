@@ -99,8 +99,16 @@ class PdfGeneratorService
     @pdf
   end
 
+  def save_file
+    @pdf.render_file Rails.root.join("public", @file_name)
+  end
+
+  def access_file
+    File.open Rails.root.join("public/#{@file_name}")
+  end
+
   def delete_pdf_file
-    file_path = Rails.root.join("public/report_cards", @file_name)
+    file_path = Rails.root.join("public", @file_name)
 
     # Check if the file exists before attempting to delete it
     if File.exist?(file_path)
