@@ -12,7 +12,7 @@ class Sequence < ApplicationRecord
   enum seq_num: { first_sequence: 1, second_sequence: 2, third_sequence: 3, forth_sequence: 4, fifth_sequence: 5, sith_sequence: 6 }
   enum status: { in_progress: 0, submitted: 1, rejected: 2, approved: 3 }
 
-  validate :sequences_per_term
+  # validate :sequences_per_term
   validate :enrollment_num_not_zero
 
   def hashed_marks
@@ -62,11 +62,11 @@ class Sequence < ApplicationRecord
 
   private
 
-  def sequences_per_term
-    unless self.persisted?
-      errors.add(:term, "Can not have more than 2 sequences per term") if term.sequences.count == 2
-    end
-  end
+  # def sequences_per_term
+  #   unless self.persisted?
+  #     errors.add(:term, "Can not have more than 2 sequences per term") if term.sequences.count == 2
+  #   end
+  # end
 
   def enrollment_num_not_zero
     errors.add(:enrollment, "should exist atleast for one student") if enrolled_students.size == 0

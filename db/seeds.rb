@@ -102,8 +102,15 @@ subjects.each do |subject|
     marks = students.map { |s| "{\"id\"=>\"#{s.id}\", \"name\"=>\"#{s.full_name}\", \"mark\"=>\"#{rand(1..20)}\", \"is_enrolled\"=>\"true\"}" }
     # take not of the term id
     if subject.teachers.present?
-      Sequence.create(school_id: school.id, subject_id: subject.id, school_class_id: 3, teacher_id: subject.teachers.first.id,
-                      seq_num: v, term_id: 4, marks: marks, academic_year_id: school.active_academic_year.id)
+      puts "create for #{subject.name} - #{subject.id}"
+      sequence = Sequence.new(school_id: school.id, subject_id: subject.id, school_class_id: 3, teacher_id: subject.teachers.first.id,
+                              seq_num: v, term_id: 1, marks: marks, academic_year_id: school.active_academic_year.id)
+      puts sequence.valid?
+      unless sequence.valid?
+        puts sequence.errors.full_messages
+      end
+    else
+      puts "create for #{subject.name} - #{subject.id}"
     end
   end
 end
