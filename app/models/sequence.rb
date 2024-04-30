@@ -64,7 +64,7 @@ class Sequence < ApplicationRecord
 
   def sequences_per_term
     unless self.persisted?
-      errors.add(:term, "Can not have more than 2 sequences per term") if term.sequences.count > 2
+      errors.add(:term, "Can not have more than 2 sequences per term") if term.sequences.count == 2
     end
   end
 
