@@ -84,7 +84,7 @@ class SequencesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def sequence_params
-    params.require(:sequence).permit(:school_id, :school_class_id, :term_id, :teacher_id, :seq_num, :subject_id,
+    params.require(:sequence).permit(:school_id, :school_class_id, :academic_year_id, :term_id, :teacher_id, :seq_num, :subject_id,
                                      :academic_year_start, :academic_year_end, marks: [:id, :name, :mark, :is_enrolled])
   end
 end

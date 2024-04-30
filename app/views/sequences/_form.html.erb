@@ -13,6 +13,9 @@
     <%= form.hidden_field :school_id, value: current_school.id %>
   </div>
   <div>
+    <%= form.hidden_field :academic_year_id, value: current_school.active_academic_year.id %>
+  </div>
+  <div>
     <%= form.hidden_field :school_class_id, value: @school_class.id %>
   </div>
   <div>

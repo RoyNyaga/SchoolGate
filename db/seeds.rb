@@ -56,16 +56,17 @@ school_classes = [{ name: "Form One", level: 1, school_id: @school.id },
 #   end
 # end
 
-# SchoolClass.all.each do |school_class|
-#   25.times do
-#     Student.create(school_id: @school.id, school_class_id: school_class.id,
-#                    full_name: Faker::Name.name_with_middle, fathers_name: Faker::Name.name_with_middle,
-#                    fathers_contact: "#{Faker::Number.number(digits: 7)}", mothers_name: Faker::Name.name_with_middle,
-#                    mothers_contact: "#{Faker::Number.number(digits: 7)}", guidance_name: Faker::Name.name_with_middle,
-#                    guidance_contact: "#{Faker::Number.number(digits: 7)}", date_of_birth: Faker::Date.birthday(min_age: 18, max_age: 65),
-#                    address: Faker::Address.full_address)
-#   end
-# end
+SchoolClass.all.each do |school_class|
+  25.times do
+    Student.create(school_id: @school.id, school_class_id: school_class.id,
+                   first_name: Faker::Name.name_with_middle, last_name: Faker::Name.name_with_middle,
+                   fathers_name: Faker::Name.last_name, contact: "#{Faker::Number.number(digits: 7)}",
+                   gender: [0, 1].sample, address: Faker::Address.full_address,
+                   fathers_contact: "#{Faker::Number.number(digits: 7)}", mothers_name: Faker::Name.name_with_middle,
+                   mothers_contact: "#{Faker::Number.number(digits: 7)}", guidance_name: Faker::Name.name_with_middle,
+                   guidance_contact: "#{Faker::Number.number(digits: 7)}", date_of_birth: Faker::Date.birthday(min_age: 18, max_age: 65))
+  end
+end
 
 # marks = ["{\"id\"=>\"4\", \"name\"=>\"Allan Powlowski Marquardt\", \"mark\"=>\"#{rand(1..20)}\"}",
 #          "{\"id\"=>\"5\", \"name\"=>\"Melynda Bernier Kemmer DDS\", \"mark\"=>\"#{rand(1..20)}\"}",
