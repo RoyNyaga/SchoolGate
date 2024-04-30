@@ -28,6 +28,7 @@ class Student < ApplicationRecord
   delegate :name, to: :school_class, prefix: true
 
   enum education_level: { not_assigned: 0, basic_education: 1, secondary_education: 2, higher_education: 3 }
+  enum gender: { female: 0, male: 1 }
 
   def sequence_mark_per_subject(marks) # marks should be hashed
     mark = get_mark_object(marks)
