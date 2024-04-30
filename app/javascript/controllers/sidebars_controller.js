@@ -16,9 +16,14 @@ export default class extends Controller {
     }
 
     const expandedDivId = elementWithEventListener.getAttribute("data-expand-div-id")
-    const expandedDiv = document.querySelector(`#${expandedDivId}`)
+    const queryFooter = `#footer-navbar #${expandedDivId}`// for the footer sidebar
+    const querySidebar = `#${expandedDivId}` // for the normal sidebar
+    const screenWidth = window.screen.width;
+    console.log("Screen width", screenWidth)
+
+    const expandedDiv = screenWidth <= 768 ? document.querySelector(queryFooter) : document.querySelector(querySidebar)
     expandedDiv.classList.toggle("d-none")
-    const arrowUp = document.querySelector(`#${expandedDivId}_arrow_up`)
+    const arrowUp = screenWidth <= 768 ? document.querySelector(`#footer-navbar #${expandedDivId}_arrow_up`) : document.querySelector(`#${expandedDivId}_arrow_up`)
     elementWithEventListener.classList.toggle("d-none");
     arrowUp.classList.toggle("d-none")
 
@@ -35,9 +40,13 @@ export default class extends Controller {
     }
 
     const expandedDivId = elementWithEventListener.getAttribute("data-expand-div-id")
-    const expandedDiv = document.querySelector(`#${expandedDivId}`)
+    const queryFooter = `#footer-navbar #${expandedDivId}`// for the footer sidebar
+    const querySidebar = `#${expandedDivId}` // for the normal sidebar
+    const screenWidth = window.screen.width;
+    const expandedDiv = screenWidth <= 768 ? document.querySelector(queryFooter) : document.querySelector(querySidebar)
     expandedDiv.classList.toggle("d-none")
-    const arrowDown = document.querySelector(`#${expandedDivId}_arrow_down`)
+    const arrowDown = screenWidth <= 768 ? document.querySelector(`#footer-navbar #${expandedDivId}_arrow_down`) : document.querySelector(`#${expandedDivId}_arrow_down`)
+
 
     elementWithEventListener.classList.toggle("d-none");
     arrowDown.classList.toggle("d-none")

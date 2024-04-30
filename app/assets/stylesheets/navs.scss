@@ -28,6 +28,13 @@
   z-index: 10;
 }
 
+#footer-navbar{
+  background-color: var(--main-blue-color);
+  border-bottom: 5px solid var(--background-grey-color);
+  z-index: 10;
+  display: none;
+}
+
 .navbar-toggler {
   background: white;
 }
@@ -97,8 +104,21 @@
 
 }
 
-@media screen and (max-width: 425px) {
+.footer-nav-link{
+  color: white;
+  font-size: 1.2em;
+  font-weight: 100;
+}
+
+#mobile_nav_drawer{
+  background-color: var(--main-blue-color);
+}
+
+@media screen and (max-width: 768px) {
   .sidebar {
     display: none;
+  }
+  #footer-navbar{
+    display: block;
   }
 }

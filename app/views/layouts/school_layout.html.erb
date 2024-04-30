@@ -16,6 +16,7 @@
   </head>
   <body class="background-grey">
     <div class="container-fluid" id="school-layout-main-wrapper">
+      <span></span>
       <div class="row">
         <div class="col-md-2 p-0">
           <%= render "shared/sidebar/sidebar" %>
@@ -26,15 +27,16 @@
           <br>
           <br>
           <br>
-          <%#= render partial: "shared/sidebar/sidebar_nav_links", 
-                    layout: "layouts/drawer_layout", 
-                    locals: { item_id: "0000000", title: "", position: "start", btn_text: "Open", btn_visibility: true }%>
           <div id="main-flash" class="flash">
             <%= render "shared/flash_messages" %>
           </div>
           <%= yield %>
         </div>
       </div>
+      <br>
+      <br>
+      <br>
+      <%= render "shared/mobile_footer" %>
     </div>
   </body>
 </html>

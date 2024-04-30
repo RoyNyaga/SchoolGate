@@ -1,0 +1,15 @@
+<nav id="footer-navbar" class="navbar fixed-bottom navbar-expand-lg py-2">
+  <div class="container-fluid">
+    <% if teacher_signed_in? %>
+      <a class="footer-nav-link" data-bs-toggle="offcanvas" href="#<%= generate_drawer_id("mobile_nav") %>" role="button" aria-controls="<%= generate_drawer_id("mobile_nav") %>_drawer">
+        <%= fas_icon("ellipsis-v") %>
+        <%= fas_icon("ellipsis-v") %>
+        <%= fas_icon("ellipsis-v") %>
+      </a>
+      <%= render partial: "shared/sidebar/sidebar_nav_links", 
+                    layout: "layouts/mobile_nav_drawer", 
+                    locals: { item_id: generate_drawer_id("mobile_nav"), title: "", 
+                    position: "start", btn_text: "Open", btn_visibility: false }%>
+    <% end %>
+  </div>
+</nav>
