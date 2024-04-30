@@ -100,9 +100,11 @@ subjects.each do |subject|
   [1, 2].each do |v|
     students = Student.where(school_class_id: subject.school_class_id)
     marks = students.map { |s| "{\"id\"=>\"#{s.id}\", \"name\"=>\"#{s.full_name}\", \"mark\"=>\"#{rand(1..20)}\", \"is_enrolled\"=>\"true\"}" }
-
-    Sequence.create(school_id: school.id, subject_id: subject.id, school_class_id: 3, teacher_id: subject.teachers.first.id,
-                    seq_num: v, term_id: 4, marks: marks, academic_year_id: school.active_academic_year.id)
+    # take not of the term id
+    if subject.teachers.present?
+      Sequence.create(school_id: school.id, subject_id: subject.id, school_class_id: 3, teacher_id: subject.teachers.first.id,
+                      seq_num: v, term_id: 4, marks: marks, academic_year_id: school.active_academic_year.id)
+    end
   end
 end
 

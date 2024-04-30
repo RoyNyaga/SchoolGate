@@ -1,7 +1,7 @@
 <%= form_with(model: teaching) do |form| %>
   <% if teaching.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(teaching.errors.count, "error") %> prohibited this teaching from being saved:</h2>
+    <div class="form-error-div p-2">
+      <h4><%= pluralize(teaching.errors.count, "error") %> prohibited this teaching from being saved:</h4>
       <ul>
         <% teaching.errors.each do |error| %>
           <li><%= error.full_message %></li>

@@ -24,6 +24,7 @@ class TeachingsController < ApplicationController
   # POST /teachings or /teachings.json
   def create
     @teaching = Teaching.new(teaching_params)
+    @subject = Subject.find_by(id: params[:teaching][:subject_id])
 
     respond_to do |format|
       if @teaching.save
