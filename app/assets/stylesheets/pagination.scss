@@ -1,0 +1,16 @@
+.pagination{
+  flex-wrap: wrap;
+  a{
+    padding: 1px 5px;
+    border: 1px solid var(--grey-color-1);
+    margin: 5px;
+    color: var(--grey-color-1)
+  }
+  em{
+    padding: 1px 5px;
+    border: 1px solid var(--grey-color-1);
+    margin: 5px;
+    background-color: var(--grey-color-1);
+    color: white;
+  }
+}

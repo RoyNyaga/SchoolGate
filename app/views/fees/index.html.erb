@@ -14,5 +14,6 @@
   </div>
   <div class="white-section-div">
     <%= render partial: "fees_index_table", locals: { fees: @fees } %>
+    <%= will_paginate @fees %>
   </div>
 </div>

@@ -86,4 +86,5 @@ gem "chunky_png", "~> 1.4"
 gem 'rexml'
 gem "aws-sdk-s3", require: false
 gem 'irb', '~> 1.12'
+gem 'will_paginate', '~> 4.0'
 # gem 'newrelic_rpm'
