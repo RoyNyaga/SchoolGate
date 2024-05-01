@@ -69,7 +69,7 @@ class SchoolsController < ApplicationController
 
   def students
     @student = Student.new
-    @students = current_school.students
+    @students = current_school.students.includes(:school_class, photo_attachment: :blob).paginate(page: params[:page], per_page: 20)
     @school_classes = current_school.school_classes.includes(:students)
   end
 

@@ -17,5 +17,6 @@
   </div>
   <div class="students-list-div white-section-div my-5">
     <%= render partial: "students/table", locals: { students: @students } %>
+    <%= will_paginate @students %>
   </div>
 </div>
