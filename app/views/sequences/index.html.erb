@@ -3,9 +3,9 @@
   <div id="sequences">
     <% @sequences.each do |sequence| %>
       <%= render sequence %>
-      <p>
-        <%= link_to "Show this sequence", sequence %>
-      </p>
     <% end %>
+  </div>
+  <div class="white-section-div my-2">
+    <%= will_paginate @sequences %>
   </div>
 </div>

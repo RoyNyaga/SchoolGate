@@ -5,7 +5,7 @@ class SequencesController < ApplicationController
 
   # GET /sequences or /sequences.json
   def index
-    @sequences = current_school.sequences.order(created_at: :desc)
+    @sequences = current_school.sequences.includes(:school_class, :teacher, :subject).paginate(page: params[:page], per_page: 10).order(created_at: :desc)
   end
 
   # GET /sequences/1 or /sequences/1.json
