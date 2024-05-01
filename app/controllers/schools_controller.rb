@@ -74,7 +74,7 @@ class SchoolsController < ApplicationController
   end
 
   def teachers
-    @workings = current_school.workings
+    @workings = current_school.workings.includes(teacher: :photo_attachment)
   end
 
   def invitations
