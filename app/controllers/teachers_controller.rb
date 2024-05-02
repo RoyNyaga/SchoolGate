@@ -19,7 +19,7 @@ class TeachersController < ApplicationController
   end
 
   def edit
-    render layout: "school_layout"
+    # render layout: "school_layout"
   end
 
   def update
