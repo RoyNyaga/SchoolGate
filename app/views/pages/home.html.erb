@@ -1,3 +1,88 @@
-<div class="container section-div">
-  <h1>This page is Under development</h1>
+<div class="container-fluid p-0 white-background">
+  <div class="section-one">
+    <h1 class="text-center text-white pt-5">Manage your school <br>
+      with a click <%= image_tag("fluent-mdl2_touch.png") %></h1>
+    <div class="text-white">
+      <p class="home-page-faint-text margin-zero">Discover a smarter way to manage school operations. Our comprehensive solution simplifies tasks like</p>
+      <p class="home-page-faint-text margin-zero">attendance tracking and parent communication, so you can focus on educating the next generation.</p>
+    </div>
+    <div class="d-flex justify-content-center my-3">
+      <%= link_to "Get Started", new_registration_path("teacher"), class: "home-page-btn home-page-btn-white mx-2" %>
+      <%= link_to "Get Started", new_registration_path("teacher"), class: "home-page-btn home-page-btn-transparent mx-2" %>
+    </div>
+    <div class="section-one-photo">
+      <div class="row">
+        <div class="col-md-10 mx-auto">
+          <%= image_tag("home-page-student-photo.png", class: "img-fluid") %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-two white-background py-5">
+    <h4 class="text-center text-info my-2">A simple solution for school management</h4>
+    <p class="section-one-role-p text-center my-3">Everyone Has A Role To Play<br>
+      For A Successful Academic Performance</p>
+    <div class="row my-5">
+      <div class="col-md-9 d-flex justify-content-center mx-auto">
+        <p class="role-to-play role-to-play-blue mx-2"><span class="mx-2">👮🏼</span>Administration</p>
+        <p class="role-to-play role-to-play-white mx-2"><span class="mx-2">👨🏼‍🏫</span>Teacher</p>
+        <p class="role-to-play role-to-play-white mx-2"><span class="mx-2">🧑🏼‍🎓</span>Student</p>
+        <p class="role-to-play role-to-play-white mx-2"><span class="mx-2">👨🏻</span>Parent</p>
+      </div>
+    </div>
+  </div>
+  <div class="section-three white-background container">
+    <h4 class="text-center text-info">Key Features</h4>
+    <p class="section-one-role-p text-center my-3">Our solution cuts across Primary, Secondary and Higher institutions.</p>
+    <div class="row justify-content-center">
+      <div class="col-md-4 my-2">
+        <div class="homepage-key-feature-card">
+          <%= image_tag("student-id-graphics.png", class: "homepage-key-feature-photo") %>
+          <div>
+            <h4>Student Identification</h4>
+            <p class="homepage-faint-text-dark">Administrators automatically generate unique student IDs for continuous tracking of school records, crucial for attendance and assessments</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 my-2">
+        <div class="homepage-key-feature-card">
+          <%= image_tag("school-fee-manage.png", class: "homepage-key-feature-photo") %>
+          <div>
+            <h4>School Fees Management</h4>
+            <p class="homepage-faint-text-dark">Manage school fees effortlessly with tools for installment tracking, receipt generation, and automated reminders for overdue payments.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 my-2">
+        <div class="homepage-key-feature-card">
+          <%= image_tag("result-portal-graphics.png", class: "homepage-key-feature-photo") %>
+          <div>
+            <h4>Result Portal</h4>
+            <p class="homepage-faint-text-dark">This provides a private platform for parents and students to view grades, assignments, and academic progress, facilitating engagement and enabling digital sharing of results.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 my-2">
+        <div class="homepage-key-feature-card">
+          <%= image_tag("report-cards.png", class: "homepage-key-feature-photo") %>
+          <div>
+            <h4>Auto-Generated Report Cards</h4>
+            <p class="homepage-faint-text-dark">This streamlines grading, attendance, and remarks, pulling data from SchoolGate for easy customization, digital sharing, and cloud storage.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 my-2">
+        <div class="homepage-key-feature-card">
+          <%= image_tag("curriculum-graphics.png", class: "homepage-key-feature-photo") %>
+          <div>
+            <h4>Curriculum & Teachers performance</h4>
+            <p class="homepage-faint-text-dark">This enables the generation of performance statistics, analysis of daily progress on curriculum completion, and easy tracking of teaching hours and lessons taught remotely.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bg-info section-four">
+    <%= image_tag("everyone-graphics.png", class: "img-fluid", style: "width: 100%;") %>
+  </div>
 </div>

@@ -10,7 +10,7 @@ class ReceiptsController < ApplicationController
   # GET /receipts/1 or /receipts/1.json
   def show
     @fee = @receipt.fee
-    qrcode = RQRCode::QRCode.new("https://square-suddenly-sole.ngrok-free.app/receipts/verification?transaction_reference=asdfasdfasdfasfasdfa")
+    qrcode = RQRCode::QRCode.new("https://school-gate-0e6fc8fcd208.herokuapp.com/receipts/verification?transaction_reference=asdfasdfasdfasfasdfa")
     @svg = qrcode.as_svg(
       color: "000",
       shape_rendering: "crispEdges",

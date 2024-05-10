@@ -13,13 +13,11 @@
   </head>
   <body class="background-grey">
     <%= render "shared/navbar" %>
-    <br>
-    <br>
-    <br>
-    <br>
     <div id="main-flash" class="flash">
       <%= render "shared/flash_messages" %>
     </div>
-    <%= yield %>
+    <div class="overall-wrapper-div" style="margin-top: 86px;">
+      <%= yield %>
+    </div>
   </body>
 </html>

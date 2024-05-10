@@ -91,3 +91,6 @@ Things you may want to cover:
 
 ## Heroku commmands
 - heroku run bash
+
+## Gradien
+- https://cssgradient.io/
