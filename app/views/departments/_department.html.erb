@@ -1,6 +1,6 @@
 <div id="<%= dom_id department %>" class="light-grey-card p-3">
   <p>
-    <strong>Name:</strong>
     <%= department.name %>
   </p>
+  <%= link_to "View", department_path(department), class: "edit-link" %>
 </div>
