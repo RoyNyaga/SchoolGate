@@ -23,7 +23,7 @@
     <p class="section-one-role-p text-center my-3">Everyone Has A Role To Play<br>
       For A Successful Academic Performance</p>
     <div class="row my-5">
-      <div class="col-md-9 d-flex justify-content-center mx-auto">
+      <div class="col-md-9 d-flex justify-content-center mx-auto flex-wrap">
         <p class="role-to-play role-to-play-blue mx-2"><span class="mx-2">👮🏼</span>Administration</p>
         <p class="role-to-play role-to-play-white mx-2"><span class="mx-2">👨🏼‍🏫</span>Teacher</p>
         <p class="role-to-play role-to-play-white mx-2"><span class="mx-2">🧑🏼‍🎓</span>Student</p>
@@ -91,7 +91,7 @@
       <div class="row">
         <div class="col-md-6 d-flex justify-content-center align-items-center">
           <div>
-            <h5 class="text-center text-info my-2">Academic Progress</h5>
+            <h5 class="text-center text-info my-2 homepage-green-purple">Academic Progress</h5>
             <h4 class="my-3">Enhance Academic Performance Tracking.</h4>
             <p class="homepage-faint-text-dark dashboard-normal-font-size">School Gate enables students to monitor their academic progress
               through features like sequential marks management and student
@@ -110,7 +110,7 @@
         </div>
         <div class="col-md-6 d-flex justify-content-center align-items-center">
           <div>
-            <h5 class="text-center text-info my-2">Empowering students</h5>
+            <h5 class="text-center text-info my-2 homepage-green-color">Empowering students</h5>
             <h4 class="my-3">Improved communication & Access to information</h4>
             <p class="homepage-faint-text-dark dashboard-normal-font-size">Students easily access grades, 
               timetable, and ID details via online portals, fostering responsibility. SMS notifications 
@@ -123,7 +123,7 @@
         </div>
         <div class="col-md-6 d-flex justify-content-center align-items-center">
           <div>
-            <h5 class="text-center text-info my-2">Efficiency & Progress</h5>
+            <h5 class="text-center text-info my-2 homepage-skyblue-color">Efficiency & Progress</h5>
             <h4 class="my-3">Streamlined Administrative Processes & Personalized Learning Experience</h4>
             <p class="homepage-faint-text-dark dashboard-normal-font-size">School Gate automates administrative tasks like report card generation and student identification, freeing up time for students to focus on studies and extracurriculars. Additionally, it supports personalized learning through curriculum management and daily progress tracking, empowering teachers to tailor education to individual student needs.</p>
             <div class="my-4">
@@ -132,7 +132,34 @@
           </div>
         </div>
         <div class="col-md-6">
-          <%= image_tag("homepage-graphic2.png", class: "img-fluid")%>
+          <%= image_tag("homepage-graphic3.png", class: "img-fluid")%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-six py-5" style="background: #F7FAFA;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5 d-flex justify-content-center align-item-center">
+          <div>
+            <h4 class="my-3 section-one-role-p">Start with</h4>
+            <p class="homepage-skyblue-color section-one-role-p">600frs / Student</p>
+            <p class="homepage-faint-text-dark">Customized Solutions for Your Institution's Needs - Pay Only for What You Use</p>
+            <div class="row">
+              <div class="col-md-6">
+                <%= link_to "#", class: "home-page-btn home-page-btn-black my-5 d-block text-center" do %>
+                  <span>Try it free</span>
+                  <span><%= fas_icon("arrow-right") %></span>
+                <% end %>
+              </div>
+              <div class="col-md-6">
+                <%= link_to "Book a demo", "#", class: "home-page-btn home-page-btn-white my-5 d-block text-center" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7">
+          <%= image_tag("homepage-graphics4.png", class: "img-fluid", style: "width: 100%;") %>
         </div>
       </div>
     </div>
