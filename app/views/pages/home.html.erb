@@ -20,9 +20,11 @@
   </div>
   <div class="section-two white-background py-5">
     <h4 class="text-center text-info my-2">A simple solution for school management</h4>
-    <p class="section-one-role-p text-center my-3">Everyone Has A Role To Play<br>
+    <p class="section-one-role-p text-center my-3 d-none d-md-block">Everyone Has A Role To Play<br>
       For A Successful Academic Performance</p>
-    <div class="row my-5">
+    <p class="section-one-role-p text-center my-3 d-md-none">Everyone Has A Role To Play
+      For A Successful Academic Performance</p>
+    <div class="row my-5 width-100">
       <div class="col-md-9 d-flex justify-content-center mx-auto flex-wrap">
         <p class="role-to-play role-to-play-blue mx-2"><span class="mx-2">👮🏼</span>Administration</p>
         <p class="role-to-play role-to-play-white mx-2"><span class="mx-2">👨🏼‍🏫</span>Teacher</p>
@@ -89,6 +91,9 @@
     <div class="container py-2">
       <p class="section-one-role-p text-center my-3">Why School Gate ?</p>
       <div class="row">
+        <div class="d-md-none col-md-6">
+          <%= image_tag("homepage-graphics1.png", class: "img-fluid")%>
+        </div>
         <div class="col-md-6 d-flex justify-content-center align-items-center">
           <div>
             <h5 class="text-center my-2 homepage-purple-color">Academic Progress</h5>
@@ -102,7 +107,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="d-none d-md-block col-md-6">
           <%= image_tag("homepage-graphics1.png", class: "img-fluid")%>
         </div>
         <div class="col-md-6">
@@ -121,6 +126,9 @@
             </div>
           </div>
         </div>
+        <div class="d-md-none col-md-6">
+          <%= image_tag("homepage-graphic3.png", class: "img-fluid")%>
+        </div>
         <div class="col-md-6 d-flex justify-content-center align-items-center">
           <div>
             <h5 class="text-center my-2 homepage-skyblue-color">Efficiency & Progress</h5>
@@ -131,7 +139,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="d-none d-md-block col-md-6">
           <%= image_tag("homepage-graphic3.png", class: "img-fluid")%>
         </div>
       </div>

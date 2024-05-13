@@ -95,6 +95,13 @@
   color: #2297FF;
 }
 
+@media screen and (max-width: 425px) {
+  .section-one-role-p{
+    font-size: 1.8em;
+  }
+
+}
+
 // .section-four{
 //   background-image: url("everyone-graphics.png");
 //   background-position: center;
