@@ -114,6 +114,10 @@
   background-color: var(--main-blue-color);
 }
 
+#footer-wrapper-div{
+  background: red;
+}
+
 @media screen and (max-width: 768px) {
   .sidebar {
     display: none;
