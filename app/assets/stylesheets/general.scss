@@ -102,11 +102,11 @@ label {
   padding: 10px 8px !important;
 }
 
-.table-row-data-small-fonts{
+.table-row-data-small-fonts {
   font-size: 0.9em;
 }
 
-.table-row-data-medium-fonts{
+.table-row-data-medium-fonts {
   font-size: 1em;
 }
 
@@ -185,15 +185,15 @@ label {
   border-radius: 30px;
 }
 
-.toggle-icons{
+.toggle-icons {
   font-size: 1.5em;
 }
 
-.toggle-icon-active{
+.toggle-icon-active {
   color: #10c310;
 }
 
-.toggle-icon-deactivated{
+.toggle-icon-deactivated {
   color: grey;
 }
 
@@ -260,7 +260,7 @@ label {
   }
 }
 
-.form-error-div{
+.form-error-div {
   background: var(--error-background-color);
   color: var(--error-text-color);
 }
@@ -289,7 +289,7 @@ label {
   font-size: 0.8em;
 }
 
-.dashboard-extra-small{
+.dashboard-extra-small {
   font-size: 0.6em;
 }
 
@@ -313,23 +313,28 @@ label {
   border: 2px solid #6e757d;
 }
 
-.report-card-table-font-size{
+.report-card-table-font-size {
   font-size: 0.9em;
 }
 
-.horizontal-scroll{
+.horizontal-scroll {
   // white-space: nowrap;
-  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-x: auto;
+  /* Enable horizontal scrolling */
 }
 
-.report-card-detail-input-size{
+.report-card-detail-input-size {
   width: 60px;
 }
 
 .scrollable-tbody {
-  height: 400px; /* Set the desired height */
-  overflow-y: auto; /* Add vertical scrollbar when content exceeds the height */
-  border: 1px solid #ccc; /* Optional: Add border for visual clarity */
+  height: 400px;
+  /* Set the desired height */
+  overflow-y: auto;
+  /* Add vertical scrollbar when content exceeds the height */
+  border: 1px solid #ccc;
+
+  /* Optional: Add border for visual clarity */
   thead {
     /* Make sure the header cells align with the body cells */
     position: sticky;
@@ -337,8 +342,17 @@ label {
   }
 }
 
-.cancel-text-link{
+.cancel-text-link {
   color: var(--error-text-color);
+}
+
+.list-style-none {
+  list-style-type: none;
+  padding: 0;
+}
+
+.font-weight-light{
+  font-weight: 300;
 }
 
 @media screen and (max-width: 425px) {
@@ -346,11 +360,11 @@ label {
     width: 90% !important;
   }
 
-  .table-row-data-small-fonts{
+  .table-row-data-small-fonts {
     font-size: 0.7em;
   }
 
-  .table-row-data-medium-fonts{
+  .table-row-data-medium-fonts {
     font-size: 0.9em;
   }
 

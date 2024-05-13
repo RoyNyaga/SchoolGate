@@ -115,7 +115,20 @@
 }
 
 #footer-wrapper-div{
-  background: red;
+  background: #131b2b;
+}
+
+.footer-links{
+  color: white;
+  font-weight: 100;
+}
+
+.footer-links:hover{
+  color: aqua;
+}
+
+.footer-logo{
+  width: 40%;
 }
 
 @media screen and (max-width: 768px) {
