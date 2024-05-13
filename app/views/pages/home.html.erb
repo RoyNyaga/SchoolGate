@@ -6,9 +6,37 @@
       <p class="home-page-faint-text margin-zero">Discover a smarter way to manage school operations. Our comprehensive solution simplifies tasks like</p>
       <p class="home-page-faint-text margin-zero">attendance tracking and parent communication, so you can focus on educating the next generation.</p>
     </div>
-    <div class="d-flex justify-content-center my-3">
-      <%= link_to "Get Started", new_registration_path("teacher"), class: "home-page-btn home-page-btn-white mx-2" %>
-      <%= link_to "Get Started", new_registration_path("teacher"), class: "home-page-btn home-page-btn-transparent mx-2" %>
+    <div class="d-none d-md-flex d-flex justify-content-center my-3">
+      <%= link_to new_registration_path("teacher"), class: "home-page-btn home-page-btn-white mx-2" do %>
+        <span>Get Started</span>
+        <span class="mx-2">
+          <%= fas_icon("arrow-right") %>
+        </span>
+      <% end %>
+      <%= link_to new_registration_path("teacher"), class: "home-page-btn home-page-btn-transparent mx-2" do %>
+        <span>See how it works</span>
+        <span class="mx-2">
+          <%= fas_icon("play-circle") %>
+        </span>
+      <% end %>
+    </div>
+    <div class="row d-md-none">
+      <div class="col-12 my-3 text-center">
+        <%= link_to new_registration_path("teacher"), class: "home-page-btn home-page-btn-white mx-2 d-block" do %>
+          <span>Get Started</span>
+          <span class="mx-2">
+            <%= fas_icon("arrow-right") %>
+          </span>
+        <% end %>
+      </div>
+      <div class="col-12 my-3 text-center">
+        <%= link_to new_registration_path("teacher"), class: "home-page-btn home-page-btn-transparent mx-2 d-block" do %>
+          <span>See how it works</span>
+          <span class="mx-2">
+            <%= fas_icon("play-circle") %>
+          </span>
+        <% end %>
+      </div>
     </div>
     <div class="section-one-photo">
       <div class="row width-100">
