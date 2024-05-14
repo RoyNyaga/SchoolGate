@@ -38,4 +38,9 @@ class Teacher < ApplicationRecord
   def subjects_for_class(school_class)
     class_subjects.where(school_class_id: school_class.id)
   end
+
+  def can_access_admin?(school)
+    work = workings.where(school_id: school.id).first
+    work.principal? || work.buster? || work.descipline_master?
+  end
 end
