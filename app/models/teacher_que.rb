@@ -1,0 +1,2 @@
+class TeacherQue < ApplicationRecord
+end

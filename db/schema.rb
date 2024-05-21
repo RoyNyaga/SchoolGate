@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_30_064409) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_21_073635) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -529,6 +529,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_30_064409) do
     t.jsonb "remarks", default: {"less_than_equal_to_5"=>"Very poor", "less_than_equal_to_9"=>"Poor", "less_than_equal_to_12"=>"Average", "less_than_equal_to_15"=>"Good", "less_than_equal_to_18"=>"V good", "less_than_equal_to_20"=>"Excellent"}
     t.index ["school_class_id"], name: "index_subjects_on_school_class_id"
     t.index ["school_id"], name: "index_subjects_on_school_id"
+  end
+
+  create_table "teacher_ques", force: :cascade do |t|
+    t.string "full_name"
+    t.string "phone_number"
+    t.string "name_of_schools_taught"
+    t.string "location_of_schools"
+    t.string "education_level"
+    t.text "subjects_taught", default: [], array: true
+    t.string "progress_importance"
+    t.text "most_usefull_feature", default: [], array: true
+    t.string "comfort_in_filling_progress"
+    t.string "track_hours_usefulness"
+    t.string "online_report_cards"
+    t.jsonb "referal", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "teachers", force: :cascade do |t|

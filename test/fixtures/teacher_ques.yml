@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  full_name: MyString
+  phone_number: MyString
+  name_of_schools_taught: MyString
+  education_level: MyString
+  subjects_taught: MyString
+  progress_importance: MyString
+  most_usefull_feature: MyString
+  comfort_in_filling_progress: MyString
+  track_hours_usefulness: MyString
+  online_report_cards: MyString
+  referal: MyString
+
+two:
+  full_name: MyString
+  phone_number: MyString
+  name_of_schools_taught: MyString
+  education_level: MyString
+  subjects_taught: MyString
+  progress_importance: MyString
+  most_usefull_feature: MyString
+  comfort_in_filling_progress: MyString
+  track_hours_usefulness: MyString
+  online_report_cards: MyString
+  referal: MyString
