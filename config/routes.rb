@@ -105,6 +105,7 @@ Rails.application.routes.draw do
     end
   end
   get "pages/home"
+  get "teacher-questionnaire", to: "pages#teacher_questionnaire"
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
