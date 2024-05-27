@@ -1,0 +1,38 @@
+<div class="container" style="padding-bottom: 80px;">
+  <div class="my-5 light-grey-card py-3 px-3">
+    <h4 class="text-center my-4">Thank you for taking out time to complete our Survey form 🙏</h4>
+    <h5 class="text-center my-4">Please Select your Role Bellow 👇</h5>
+  </div>
+  <div class="d-none d-md-flex d-flex justify-content-center my-5">
+    <%= link_to teacher_questionnaire_questionnaires_path, class: "home-page-btn home-page-btn-white mx-2" do %>
+      <span>Teacher</span>
+      <span class="mx-2">
+        <%= fas_icon("arrow-right") %>
+      </span>
+    <% end %>
+    <%= link_to proprietor_questionnaire_questionnaires_path, class: "home-page-btn home-page-btn-white mx-2" do %>
+      <span>Proprietor</span>
+      <span class="mx-2">
+        <%= fas_icon("arrow-right") %>
+      </span>
+    <% end %>
+  </div>
+  <div class="row d-md-none">
+    <div class="col-12 my-3 text-center">
+      <%= link_to teacher_questionnaire_questionnaires_path, class: "home-page-btn home-page-btn-white mx-2 d-block" do %>
+        <span>Teacher</span>
+        <span class="mx-2">
+          <%= fas_icon("arrow-right") %>
+        </span>
+      <% end %>
+    </div>
+    <div class="col-12 my-3 text-center">
+      <%= link_to proprietor_questionnaire_questionnaires_path, class: "home-page-btn home-page-btn-white mx-2 d-block" do %>
+        <span>Proprietor</span>
+        <span class="mx-2">
+          <%= fas_icon("arrow-right") %>
+        </span>
+      <% end %>
+    </div>
+  </div>
+</div>

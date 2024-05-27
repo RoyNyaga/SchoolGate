@@ -167,6 +167,7 @@ Rails.application.routes.draw do
       post :create_teacher
       get "proprietor-questionnaire", to: "questionnaires#new_proprietor_questionnaire"
       post :create_proprietor
+      get :thanks
     end
   end
 end

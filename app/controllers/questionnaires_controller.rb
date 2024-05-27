@@ -17,6 +17,12 @@ class QuestionnairesController < ApplicationController
   def create_proprietor
   end
 
+  def index
+  end
+
+  def thanks
+  end
+
   private
 
   def teacher_questionnaire_params
