@@ -1,0 +1,107 @@
+<%= form_with(model: @questionnaire, url: create_teacher_questionnaires_path) do |form| %>
+  <div data-controller="mixins">
+    <% if @questionnaire.errors.any? %>
+      <div style="form-error-div">
+        <h2><%= pluralize(@questionnaire.errors.count, "error") %> prohibited this school from being saved:</h2>
+        <ul>
+          <% @questionnaire.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h5>Personal Information</h5>
+        <p>This section is optional, feel free not fill it if you are not comfortable</p>
+      </div>
+      <div class="col-md-4 my-2">
+        <%= form.label :full_name %>
+        <%= form.text_field :full_name, class: "general-input-styles" %>
+      </div>
+      <div class="col-md-4 my-2">
+        <%= form.label :phone_number %>
+        <%= form.number_field :phone_number, class: "general-input-styles" %>
+      </div>
+      <div class="col-md-4 my-2">
+        <%= form.label :name_of_school %>
+        <%= form.text_field :name_of_school, class: "general-input-styles" %>
+      </div>
+      <div class="col-md-4 my-2">
+        <%= form.label :education_level_of_the_school %>
+        <%= form.select :education_level, TeacherQue.education_levels , {include_blank: 'Select Education level'}, { class: "general-input-styles", required: true } %>
+      </div>
+      <div class="col-md-4 my-2">
+        <%= form.label :location_of_school %>
+        <%= form.text_field :location, class: "general-input-styles" %>
+      </div>
+    </div>
+    <div class="feature-related-questions my-5">
+      <h5 class="my-4 text-center">App Functionality Preferences</h5>
+      <p>In a scale of 1 to 10 how important are the following functionalities?</p>
+      <div class="my-5 row">
+        <div class="col-md-3 my-3">
+          <%= form.label :student_profile %>
+          <%= form.number_field :student_profile, class: "general-input-styles" %>
+        </div>
+        <div class="col-md-3 my-3">
+          <%= form.label :tracking_of_student_performance %>
+          <%= form.number_field :student_performance, class: "general-input-styles" %>
+        </div>
+        <div class="col-md-3 my-3">
+          <%= form.label :tracking_of_student_attendance %>
+          <%= form.number_field :student_attendance, class: "general-input-styles" %>
+        </div>
+        <div class="col-md-3 my-3">
+          <%= form.label :curriculum_tracking %>
+          <%= form.number_field :curriculum_tracking, class: "general-input-styles" %>
+        </div>
+        <div class="col-md-3 my-3">
+          <%= form.label :time_taught_tracking %>
+          <%= form.number_field :time_taught_tracking, class: "general-input-styles" %>
+        </div>
+        <div class="col-md-3 my-3">
+          <%= form.label :report_card_auto_generation %>
+          <%= form.number_field :report_card_auto_generation, class: "general-input-styles" %>
+        </div>
+        <div class="col-md-3 my-3">
+          <%= form.label :school_fees_management %>
+          <%= form.number_field :school_fees_management, class: "general-input-styles" %>
+        </div>
+        <div class="col-md-3 my-3">
+          <%= form.label :electronic_school_fees_receipt %>
+          <%= form.number_field :electronic_school_fees_receipt, class: "general-input-styles" %>
+        </div>
+        <div class="col-md-3 my-3">
+          <%= form.label :verifyable_school_fees_receipt %>
+          <%= form.number_field :verifyable_school_fees_receipt, class: "general-input-styles" %>
+        </div>
+        <div class="col-md-3 my-3">
+          <%= form.label :school_fees_reminder %>
+          <%= form.number_field :school_fees_reminder, class: "general-input-styles" %>
+        </div>
+        <div class="col-md-3 my-3">
+          <%= form.label :teachers_payroll %>
+          <%= form.number_field :teachers_payroll, class: "general-input-styles" %>
+        </div>
+        <div class="col-md-3 my-3">
+          <%= form.label :online_admission_form %>
+          <%= form.number_field :online_admission_form, class: "general-input-styles" %>
+        </div>
+      </div>
+      <div>
+        <%= form.label :suggest_more_features %>
+        <%= form.text_area :additional_features, style: "height: 100px;", class: "general-input-styles"%>
+      </div>
+    </div>
+    <h5>Are you interested to Join our whatsapp community to get updates of the progress of this App?</h5>
+    <div class="row">
+      <div class="col-md-2">
+        <%= form.select :should_join_community, ["NO", "YES"], {include_blank: 'Select an option'}, { class: "general-input-styles" } %>
+      </div>
+    </div>
+    <div class="my-5">
+      <%= form.submit "Submit Form", class: "model-form-btn" %>
+    </div>
+  </div>
+<% end %>

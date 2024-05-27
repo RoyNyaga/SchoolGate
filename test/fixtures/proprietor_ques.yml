@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  full_name: MyString
+  phone_number: MyString
+  name_of_school: MyString
+  location: MyString
+  functionalities_to_have: MyString
+  additional_features: MyString
+  cost: MyString
+  should_join_community: false
+
+two:
+  full_name: MyString
+  phone_number: MyString
+  name_of_school: MyString
+  location: MyString
+  functionalities_to_have: MyString
+  additional_features: MyString
+  cost: MyString
+  should_join_community: false

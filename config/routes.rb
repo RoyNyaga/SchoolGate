@@ -105,7 +105,6 @@ Rails.application.routes.draw do
     end
   end
   get "pages/home"
-  get "teacher-questionnaire", to: "pages#teacher_questionnaire"
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -159,6 +158,15 @@ Rails.application.routes.draw do
 
     member do
       delete :destroy_session_path
+    end
+  end
+
+  resources :questionnaires do
+    collection do
+      get "teacher-questionnaire", to: "questionnaires#new_teacher_questionnaire"
+      post :create_teacher
+      get "proprietor-questionnaire", to: "questionnaires#new_proprietor_questionnaire"
+      post :create_proprietor
     end
   end
 end

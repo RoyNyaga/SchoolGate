@@ -1,0 +1,165 @@
+<%= form_with(model: @questionnaire, url: create_teacher_questionnaires_path) do |form| %>
+  <div data-controller="mixins">
+    <% if @questionnaire.errors.any? %>
+      <div style="form-error-div">
+        <h2><%= pluralize(@questionnaire.errors.count, "error") %> prohibited this school from being saved:</h2>
+        <ul>
+          <% @questionnaire.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h5>Personal Information</h5>
+        <p>This section is optional, feel free not fill it if you are not comfortable</p>
+      </div>
+      <div class="col-md-4 my-2">
+        <%= form.label :full_name %>
+        <%= form.text_field :full_name, class: "general-input-styles" %>
+      </div>
+      <div class="col-md-4 my-2">
+        <%= form.label :phone_number %>
+        <%= form.number_field :phone_number, class: "general-input-styles" %>
+      </div>
+      <div class="col-md-4 my-2">
+        <%= form.label :current_school %>
+        <%= form.text_field :name_of_schools_taught, class: "general-input-styles" %>
+      </div>
+      <div class="col-md-4 my-2">
+        <%= form.label :location_of_current_school %>
+        <%= form.text_field :location_of_schools, class: "general-input-styles" %>
+      </div>
+      <div class="col-md-4 my-2">
+        <%= form.label :education_level_of_current_school %>
+        <%= form.select :education_level, TeacherQue.education_levels , {include_blank: 'Select Education level'}, { class: "general-input-styles", required: true } %>
+      </div>
+    </div>
+    <div class="feature-related-questions my-5">
+      <h5 class="my-4 text-center">App Functionality Preferences</h5>
+      <div class="my-5">
+        <h5 class="text-color-grey-2">1) How important is it for you to track the progress of your curriculum based on covered chapters and topics?
+        </h5>
+        <div>
+          <%= form.radio_button :progress_importance, 'Very Important' %>
+          <span>Very Important</span>
+        </div>
+        <div>
+          <%= form.radio_button :progress_importance, 'Important' %>
+          <span>Important</span>
+        </div>
+        <div>
+          <%= form.radio_button :progress_importance, 'Slightly Important' %>
+          <span>Slightly Important</span>
+        </div>
+        <div>
+          <%= form.radio_button :progress_importance, 'Not Important' %>
+          <span>Not Important</span>
+        </div>
+      </div>
+      <div class="my-5">
+        <h5 class="text-color-grey-2">2) Which of the following features would you find most useful in a school management system?</h5>
+        <div>
+          <%= form.check_box :most_usefull_feature, { multiple: true }, 'Percentage of the curriculum covered.', nil %>
+          <span>Percentage of the curriculum covered.</span>
+        </div>
+        <div>
+          <%= form.check_box :most_usefull_feature, { multiple: true }, 'Number of hours spent teaching.', nil %>
+          <span>Number of hours spent teaching..</span>
+        </div>
+        <div>
+          <%= form.check_box :most_usefull_feature, { multiple: true }, 'Sequential marks entry.', nil %>
+          <span>Sequential marks entry.</span>
+        </div>
+        <div>
+          <%= form.check_box :most_usefull_feature, { multiple: true }, 'Job listing board for teachers', nil %>
+          <span>Job listing board for teachers.</span>
+        </div>
+        <div>
+          <%= form.check_box :most_usefull_feature, { multiple: true }, 'Student attendance tracking', nil %>
+          <span>Student attendance tracking.</span>
+        </div>
+        <div>
+          <%= form.check_box :most_usefull_feature, { multiple: true }, 'Payroll', nil %>
+          <span>Payroll.</span>
+        </div>
+        <div>
+          <%= form.check_box :most_usefull_feature, { multiple: true }, 'School Fees Management', nil %>
+          <span>School Fees Management.</span>
+        </div>
+        <div>
+          <%= form.check_box :most_usefull_feature, { multiple: true }, 'generation of report cards', nil %>
+          <span>generation of report cards.</span>
+        </div>
+      </div>
+      <div class="my-5">
+        <h5 class="text-color-grey-2">3) How comfortable are you to take out 2 minutes after every class you teach to fill out a progress form?
+        </h5>
+        <p>(this progress form will help you determine how far you have covered the curriculum and the number of hours that you have taught).</p>
+        <div>
+          <%= form.radio_button :comfort_in_filling_progress, 'Very Comfortable' %>
+          <span>Very comfortable</span>
+        </div>
+        <div>
+          <%= form.radio_button :comfort_in_filling_progress, 'Comfortable' %>
+          <span>Comfortable</span>
+        </div>
+        <div>
+          <%= form.radio_button :comfort_in_filling_progress, 'Not comfortable because i will not have data' %>
+          <span>Not comfortable because i will not have data</span>
+        </div>
+        <div>
+          <%= form.radio_button :comfort_in_filling_progress, "Not comfortable because i don't know how to use the app." %>
+          <span>Not comfortable because i don't know how to use the app.</span>
+        </div>
+        <div>
+          <%= form.radio_button :comfort_in_filling_progress, "Not comfortable, I don't think that it's a good idea.." %>
+          <span>Not comfortable, I don't think that it's a good idea..</span>
+        </div>
+      </div>
+      <div class="my-5">
+        <h5 class="text-color-grey-2">4) Would you prefer to fill out report cards online from your mobile device?
+        </h5>
+        <div>
+          <%= form.radio_button :online_report_cards, 'Yes' %>
+          <span>Yes</span>
+        </div>
+        <div>
+          <%= form.radio_button :online_report_cards, 'No' %>
+          <span>No</span>
+        </div>
+        <div>
+          <%= form.radio_button :online_report_cards, 'May Be' %>
+          <span>May Be</span>
+        </div>
+      </div>
+    </div>
+    <h5>Are you interested in a referral Bonus? Get up to 10% of the profit by referring us to a school proprietor. </h5>
+    <div class="">
+      <span class="interested-btn mx-3 badge bg-info" data-action="click->mixins#showReferal">Interested</span>
+      <span class="not-interested-btn mx-3 badge bg-warning" data-action="click->mixins#hideReferal">Not Interested</span>
+    </div>
+    <div class="row d-none" id="referal-div" data-mixins-target="referal">
+      <div class="col-md-3">
+        <%= form.label :school_name %>
+        <%= form.text_field :referal_school_name, class: "general-input-styles" %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :school_location %>
+        <%= form.text_field :referal_location, class: "general-input-styles" %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :proprietors_name %>
+        <%= form.text_field :referal_proprietors_name, class: "general-input-styles" %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :proprietors_contact %>
+        <%= form.text_field :referal_proprietors_contact, class: "general-input-styles" %>
+      </div>
+    </div>
+    <div class="my-5">
+      <%= form.submit "Submit Form", class: "model-form-btn" %>
+    </div>
+  </div>
+<% end %>
