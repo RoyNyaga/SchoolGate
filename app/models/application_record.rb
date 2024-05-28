@@ -5,6 +5,10 @@ class ApplicationRecord < ActiveRecord::Base
     full_name.split(" ")[0..1].join(" ")
   end
 
+  def self.ransackable_attributes(auth_object = nil) # this method is to avoid errors on active admin dashboard
+    self.attribute_names
+  end
+
   private
 
   def set_full_name
