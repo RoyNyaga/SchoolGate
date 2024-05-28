@@ -127,3 +127,4 @@ Student.all.each do |student|
 end
 
 teachers.map { |t| Working.create(school_id: @school.id, teacher_id: t.id, permission: 0, agreed_salary: 70000, job_description: "Responsible for teacher studenst") }
+# AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

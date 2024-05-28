@@ -88,3 +88,4 @@ gem "aws-sdk-s3", require: false
 gem 'irb', '~> 1.12'
 gem 'will_paginate', '~> 4.0'
 # gem 'newrelic_rpm'
+gem 'activeadmin', '~> 3.2', '>= 3.2.1'
