@@ -15,7 +15,7 @@ class PagesController < ApplicationController
 
     if @message.save
       flash[:success] = "Thanks for contacting us, we will get back to you as soon as we can."
-      redirect_to :root_path
+      redirect_to root_path
     else
       flash[:error] = "You message Could not be sent, please fill in the required fields."
       render :contact, status: :unprocessable_entity
