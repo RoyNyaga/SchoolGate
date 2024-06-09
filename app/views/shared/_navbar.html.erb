@@ -1,6 +1,8 @@
-<nav id="main-navbar" class="navbar fixed-top navbar-expand-lg py-3">
+<nav id="main-navbar" class="navbar fixed-top navbar-expand-lg py-2">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">SchoolGate</a>
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <%= image_tag("main-logo.png", style: "width: 140px;")%>
+    <% end %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
