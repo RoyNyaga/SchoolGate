@@ -1,0 +1,35 @@
+<%= form_with(model: message, url: create_message_path) do |form| %>
+  <div>
+    <% if message.errors.any? %>
+      <div style="form-error-div">
+        <h2><%= pluralize(message.errors.count, "error") %> prohibited this school from being saved:</h2>
+        <ul>
+          <% message.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="row">
+      <div class="col-md-12">
+        <%= form.label :email %>
+        <%= form.text_field :email, class: "general-input-styles" %>
+      </div>
+      <div class="col-md-4">
+        <%= form.label :country_code %>
+        <%= form.text_field :phone_number_code, class: "general-input-styles" %>
+      </div>
+      <div class="col-md-8">
+        <%= form.label :phone_number %>
+        <%= form.text_field :phone_number, class: "general-input-styles", required: true %>
+      </div>
+      <div class="col-md-12">
+        <%= form.label :message %>
+        <%= form.text_area :message, class: "general-input-styles", style: "height: 100px;", required: true %>
+      </div>
+    </div>
+    <div class="my-3">
+      <%= form.submit "Send Message", class: "model-form-btn" %>
+    </div>
+  </div>
+<% end %>

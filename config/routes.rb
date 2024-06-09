@@ -106,7 +106,8 @@ Rails.application.routes.draw do
       get :progresses
     end
   end
-  get "pages/home"
+  get "contact-us", to: "pages#contact"
+  post "create-message", to: "pages#create_message"
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
