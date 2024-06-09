@@ -13,191 +13,196 @@
           <%= fas_icon("arrow-right") %>
         </span>
       <% end %>
-      <%= link_to new_registration_path("teacher"), class: "home-page-btn home-page-btn-transparent mx-2" do %>
+      <a class="home-page-btn home-page-btn-transparent mx-2" href='#how-it-works-section'>
         <span>See how it works</span>
         <span class="mx-2">
           <%= fas_icon("play-circle") %>
         </span>
-      <% end %>
-    </div>
-    <div class="row d-md-none">
-      <div class="col-12 my-3 text-center">
-        <%= link_to new_registration_path("teacher"), class: "home-page-btn home-page-btn-white mx-2 d-block" do %>
-          <span>Get Started</span>
-          <span class="mx-2">
-            <%= fas_icon("arrow-right") %>
-          </span>
-        <% end %>
-      </div>
-      <div class="col-12 my-3 text-center">
-        <%= link_to new_registration_path("teacher"), class: "home-page-btn home-page-btn-transparent mx-2 d-block" do %>
-          <span>See how it works</span>
-          <span class="mx-2">
-            <%= fas_icon("play-circle") %>
-          </span>
-        <% end %>
-      </div>
-    </div>
-    <div class="section-one-photo">
-      <div class="row width-100">
-        <div class="col-md-10 mx-auto">
-          <%= image_tag("home-page-student-photo.png", class: "img-fluid") %>
+        <a>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="section-two white-background py-5">
-    <h4 class="text-center text-info my-2">A simple solution for school management</h4>
-    <p class="section-one-role-p text-center my-3 d-none d-md-block">Everyone Has A Role To Play<br>
-      For A Successful Academic Performance</p>
-    <p class="section-one-role-p text-center my-3 d-md-none">Everyone Has A Role To Play
-      For A Successful Academic Performance</p>
-    <div class="row my-5 width-100">
-      <div class="col-md-9 d-flex justify-content-center mx-auto flex-wrap">
-        <p class="role-to-play role-to-play-blue mx-2"><span class="mx-2">👮🏼</span>Administration</p>
-        <p class="role-to-play role-to-play-white mx-2"><span class="mx-2">👨🏼‍🏫</span>Teacher</p>
-        <p class="role-to-play role-to-play-white mx-2"><span class="mx-2">🧑🏼‍🎓</span>Student</p>
-        <p class="role-to-play role-to-play-white mx-2"><span class="mx-2">👨🏻</span>Parent</p>
-      </div>
-    </div>
-  </div>
-  <div class="section-three white-background container">
-    <h4 class="text-center text-info">Key Features</h4>
-    <p class="section-one-role-p text-center my-3">Our solution cuts across Primary, Secondary and Higher institutions.</p>
-    <div class="row justify-content-center">
-      <div class="col-md-4 my-2">
-        <div class="homepage-key-feature-card">
-          <%= image_tag("student-id-graphics.png", class: "homepage-key-feature-photo") %>
-          <div>
-            <h4>Student Identification</h4>
-            <p class="homepage-faint-text-dark">Administrators automatically generate unique student IDs for continuous tracking of school records, crucial for attendance and assessments</p>
+        <div class="row d-md-none">
+          <div class="col-12 my-3 text-center">
+            <%= link_to new_registration_path("teacher"), class: "home-page-btn home-page-btn-white mx-2 d-block" do %>
+              <span>Get Started</span>
+              <span class="mx-2">
+                <%= fas_icon("arrow-right") %>
+              </span>
+            <% end %>
+          </div>
+          <div class="col-12 my-3 text-center">
+            <%= link_to new_registration_path("teacher"), class: "home-page-btn home-page-btn-transparent mx-2 d-block" do %>
+              <span>See how it works</span>
+              <span class="mx-2">
+                <%= fas_icon("play-circle") %>
+              </span>
+            <% end %>
           </div>
         </div>
-      </div>
-      <div class="col-md-4 my-2">
-        <div class="homepage-key-feature-card">
-          <%= image_tag("school-fee-manage.png", class: "homepage-key-feature-photo") %>
-          <div>
-            <h4>School Fees Management</h4>
-            <p class="homepage-faint-text-dark">Manage school fees effortlessly with tools for installment tracking, receipt generation, and automated reminders for overdue payments.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 my-2">
-        <div class="homepage-key-feature-card">
-          <%= image_tag("result-portal-graphics.png", class: "homepage-key-feature-photo") %>
-          <div>
-            <h4>Result Portal</h4>
-            <p class="homepage-faint-text-dark">This provides a private platform for parents and students to view grades, assignments, and academic progress, facilitating engagement and enabling digital sharing of results.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 my-2">
-        <div class="homepage-key-feature-card">
-          <%= image_tag("report-cards.png", class: "homepage-key-feature-photo") %>
-          <div>
-            <h4>Auto-Generated Report Cards</h4>
-            <p class="homepage-faint-text-dark">This streamlines grading, attendance, and remarks, pulling data from SchoolGate for easy customization, digital sharing, and cloud storage.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 my-2">
-        <div class="homepage-key-feature-card">
-          <%= image_tag("curriculum-graphics.png", class: "homepage-key-feature-photo") %>
-          <div>
-            <h4>Curriculum & Teachers performance</h4>
-            <p class="homepage-faint-text-dark">This enables the generation of performance statistics, analysis of daily progress on curriculum completion, and easy tracking of teaching hours and lessons taught remotely.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="section-four">
-    <%= image_tag("everyone-graphics.png", class: "img-fluid", style: "width: 100%;") %>
-  </div>
-  <div class="section-five white-background py-5">
-    <div class="container py-2">
-      <p class="section-one-role-p text-center my-3">Why School Gate ?</p>
-      <div class="row">
-        <div class="d-md-none col-md-6">
-          <%= image_tag("homepage-graphics1.png", class: "img-fluid")%>
-        </div>
-        <div class="col-md-6 d-flex justify-content-center align-items-center">
-          <div>
-            <h5 class="text-center my-2 homepage-purple-color">Academic Progress</h5>
-            <h4 class="my-3">Enhance Academic Performance Tracking.</h4>
-            <p class="homepage-faint-text-dark dashboard-normal-font-size">School Gate enables students to monitor their academic progress
-              through features like sequential marks management and student
-              performance reports. This transparency empowers students to identify areas for
-              improvement and track their achievements over time.</p>
-            <div class="my-4">
-              <%= link_to "Request Demo", "#", class: "home-page-btn home-page-btn-black my-5" %>
+        <div class="section-one-photo">
+          <div class="row width-100">
+            <div class="col-md-10 mx-auto">
+              <%= image_tag("home-page-student-photo.png", class: "img-fluid") %>
             </div>
           </div>
         </div>
-        <div class="d-none d-md-block col-md-6">
-          <%= image_tag("homepage-graphics1.png", class: "img-fluid")%>
-        </div>
-        <div class="col-md-6">
-          <%= image_tag("homepage-graphic2.png", class: "img-fluid")%>
-        </div>
-        <div class="col-md-6 d-flex justify-content-center align-items-center">
-          <div>
-            <h5 class="text-center my-2 homepage-green-color">Empowering students</h5>
-            <h4 class="my-3">Improved communication & Access to information</h4>
-            <p class="homepage-faint-text-dark dashboard-normal-font-size">Students easily access grades, 
-              timetable, and ID details via online portals, fostering responsibility. SMS notifications 
-              ensure students are informed about updates, events, and deadlines, promoting collaboration 
-              within the school community.</p>
-            <div class="my-4">
-              <%= link_to "Request Demo", "#", class: "home-page-btn home-page-btn-black my-5" %>
-            </div>
+      </div>
+      <div class="section-two white-background py-5">
+        <h4 class="text-center text-info my-2">A simple solution for school management</h4>
+        <p class="section-one-role-p text-center my-3 d-none d-md-block">Everyone Has A Role To Play<br>
+          For A Successful Academic Performance</p>
+        <p class="section-one-role-p text-center my-3 d-md-none">Everyone Has A Role To Play
+          For A Successful Academic Performance</p>
+        <div class="row my-5 width-100">
+          <div class="col-md-9 d-flex justify-content-center mx-auto flex-wrap">
+            <p class="role-to-play role-to-play-blue mx-2"><span class="mx-2">👮🏼</span>Administration</p>
+            <p class="role-to-play role-to-play-white mx-2"><span class="mx-2">👨🏼‍🏫</span>Teacher</p>
+            <p class="role-to-play role-to-play-white mx-2"><span class="mx-2">🧑🏼‍🎓</span>Student</p>
+            <p class="role-to-play role-to-play-white mx-2"><span class="mx-2">👨🏻</span>Parent</p>
           </div>
-        </div>
-        <div class="d-md-none col-md-6">
-          <%= image_tag("homepage-graphic3.png", class: "img-fluid")%>
-        </div>
-        <div class="col-md-6 d-flex justify-content-center align-items-center">
-          <div>
-            <h5 class="text-center my-2 homepage-skyblue-color">Efficiency & Progress</h5>
-            <h4 class="my-3">Streamlined Administrative Processes & Personalized Learning Experience</h4>
-            <p class="homepage-faint-text-dark dashboard-normal-font-size">School Gate automates administrative tasks like report card generation and student identification, freeing up time for students to focus on studies and extracurriculars. Additionally, it supports personalized learning through curriculum management and daily progress tracking, empowering teachers to tailor education to individual student needs.</p>
-            <div class="my-4">
-              <%= link_to "Request Demo", "#", class: "home-page-btn home-page-btn-black my-5" %>
-            </div>
-          </div>
-        </div>
-        <div class="d-none d-md-block col-md-6">
-          <%= image_tag("homepage-graphic3.png", class: "img-fluid")%>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="section-six py-5" style="background: #F7FAFA;">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-5 d-flex justify-content-center align-item-center">
-          <div>
-            <h4 class="my-3 section-one-role-p">Start with</h4>
-            <p class="homepage-skyblue-color section-one-role-p">600frs / Student</p>
-            <p class="homepage-faint-text-dark">Customized Solutions for Your Institution's Needs - Pay Only for What You Use</p>
-            <div class="row">
-              <div class="col-md-6">
-                <%= link_to "#", class: "home-page-btn home-page-btn-black my-5 d-block text-center" do %>
-                  <span>Try it free </span>
-                  <span class="px-3"><%= fas_icon("arrow-right") %></span>
-                <% end %>
+      <div class="section-three white-background container">
+        <h4 class="text-center text-info">Key Features</h4>
+        <p class="section-one-role-p text-center my-3">Our solution cuts across Primary, Secondary and Higher institutions.</p>
+        <div class="row justify-content-center">
+          <div class="col-md-4 my-2">
+            <div class="homepage-key-feature-card">
+              <%= image_tag("student-id-graphics.png", class: "homepage-key-feature-photo") %>
+              <div>
+                <h4>Student Identification</h4>
+                <p class="homepage-faint-text-dark">Administrators automatically generate unique student IDs for continuous tracking of school records, crucial for attendance and assessments</p>
               </div>
-              <div class="col-md-6">
-                <%= link_to "Book a demo", "#", class: "home-page-btn home-page-btn-white my-5 d-block text-center" %>
+            </div>
+          </div>
+          <div class="col-md-4 my-2">
+            <div class="homepage-key-feature-card">
+              <%= image_tag("school-fee-manage.png", class: "homepage-key-feature-photo") %>
+              <div>
+                <h4>School Fees Management</h4>
+                <p class="homepage-faint-text-dark">Manage school fees effortlessly with tools for installment tracking, receipt generation, and automated reminders for overdue payments.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 my-2">
+            <div class="homepage-key-feature-card">
+              <%= image_tag("result-portal-graphics.png", class: "homepage-key-feature-photo") %>
+              <div>
+                <h4>Result Portal</h4>
+                <p class="homepage-faint-text-dark">This provides a private platform for parents and students to view grades, assignments, and academic progress, facilitating engagement and enabling digital sharing of results.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 my-2">
+            <div class="homepage-key-feature-card">
+              <%= image_tag("report-cards.png", class: "homepage-key-feature-photo") %>
+              <div>
+                <h4>Auto-Generated Report Cards</h4>
+                <p class="homepage-faint-text-dark">This streamlines grading, attendance, and remarks, pulling data from SchoolGate for easy customization, digital sharing, and cloud storage.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 my-2">
+            <div class="homepage-key-feature-card">
+              <%= image_tag("curriculum-graphics.png", class: "homepage-key-feature-photo") %>
+              <div>
+                <h4>Curriculum & Teachers performance</h4>
+                <p class="homepage-faint-text-dark">This enables the generation of performance statistics, analysis of daily progress on curriculum completion, and easy tracking of teaching hours and lessons taught remotely.</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-7">
-          <%= image_tag("homepage-graphics4.png", class: "img-fluid", style: "width: 100%;") %>
+      </div>
+      <div class="section-four">
+        <%= image_tag("everyone-graphics.png", class: "img-fluid", style: "width: 100%;") %>
+      </div>
+      <div id="how-it-works-section" class="py-4">
+        <div class="container">
+          <%= render partial: "shared/youtube_frames/summary_frame", locals: { height: "500" } %>
+        </div>
+      </div>
+      <div class="section-five white-background py-5">
+        <div class="container py-2">
+          <p class="section-one-role-p text-center my-3">Why School Gate ?</p>
+          <div class="row">
+            <div class="d-md-none col-md-6">
+              <%= image_tag("homepage-graphics1.png", class: "img-fluid")%>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+              <div>
+                <h5 class="text-center my-2 homepage-purple-color">Academic Progress</h5>
+                <h4 class="my-3">Enhance Academic Performance Tracking.</h4>
+                <p class="homepage-faint-text-dark dashboard-normal-font-size">School Gate enables students to monitor their academic progress
+                  through features like sequential marks management and student
+                  performance reports. This transparency empowers students to identify areas for
+                  improvement and track their achievements over time.</p>
+                <div class="my-4">
+                  <%= link_to "Request Demo", contact_us_path, class: "home-page-btn home-page-btn-black my-5" %>
+                </div>
+              </div>
+            </div>
+            <div class="d-none d-md-block col-md-6">
+              <%= image_tag("homepage-graphics1.png", class: "img-fluid")%>
+            </div>
+            <div class="col-md-6">
+              <%= image_tag("homepage-graphic2.png", class: "img-fluid")%>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+              <div>
+                <h5 class="text-center my-2 homepage-green-color">Empowering students</h5>
+                <h4 class="my-3">Improved communication & Access to information</h4>
+                <p class="homepage-faint-text-dark dashboard-normal-font-size">Students easily access grades, 
+                  timetable, and ID details via online portals, fostering responsibility. SMS notifications 
+                  ensure students are informed about updates, events, and deadlines, promoting collaboration 
+                  within the school community.</p>
+                <div class="my-4">
+                  <%= link_to "Request Demo", contact_us_path, class: "home-page-btn home-page-btn-black my-5" %>
+                </div>
+              </div>
+            </div>
+            <div class="d-md-none col-md-6">
+              <%= image_tag("homepage-graphic3.png", class: "img-fluid")%>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+              <div>
+                <h5 class="text-center my-2 homepage-skyblue-color">Efficiency & Progress</h5>
+                <h4 class="my-3">Streamlined Administrative Processes & Personalized Learning Experience</h4>
+                <p class="homepage-faint-text-dark dashboard-normal-font-size">School Gate automates administrative tasks like report card generation and student identification, freeing up time for students to focus on studies and extracurriculars. Additionally, it supports personalized learning through curriculum management and daily progress tracking, empowering teachers to tailor education to individual student needs.</p>
+                <div class="my-4">
+                  <%= link_to "Request Demo", contact_us_path, class: "home-page-btn home-page-btn-black my-5" %>
+                </div>
+              </div>
+            </div>
+            <div class="d-none d-md-block col-md-6">
+              <%= image_tag("homepage-graphic3.png", class: "img-fluid")%>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-six py-5" style="background: #F7FAFA;">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-5 d-flex justify-content-center align-item-center">
+              <div>
+                <h4 class="my-3 section-one-role-p">Start with</h4>
+                <p class="homepage-skyblue-color section-one-role-p">600frs / Student</p>
+                <p class="homepage-faint-text-dark">Customized Solutions for Your Institution's Needs - Pay Only for What You Use</p>
+                <div class="row">
+                  <div class="col-md-6">
+                    <%= link_to "#", class: "home-page-btn home-page-btn-black my-5 d-block text-center" do %>
+                      <span>Try it free </span>
+                      <span class="px-3"><%= fas_icon("arrow-right") %></span>
+                    <% end %>
+                  </div>
+                  <div class="col-md-6">
+                    <%= link_to "Book a demo", "#", class: "home-page-btn home-page-btn-white my-5 d-block text-center" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-7">
+              <%= image_tag("homepage-graphics4.png", class: "img-fluid", style: "width: 100%;") %>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
