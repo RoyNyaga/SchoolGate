@@ -1,24 +1,61 @@
-<div class="row">
-  <div class="col-md-6 mx-auto white-section-div">
-    <div class="row">
-      <div class="col-md-2">
-        <%= image_tag("school-logo.png", class: "img-fluid") %>
+<div class="container">
+  <div class="text-center">
+    <span onclick="captureAndDownload()">Print</span>
+    <span onclick="captureAndPrint()">Download</span>
+  </div>
+  <div class="horizontal-scroll">
+    <div style="width: 650px;" class="mx-auto white-section-div receipt-div">
+      <div class="row">
+        <div class="col-2">
+          <%= image_tag("school-logo.png", class: "img-fluid") %>
+        </div>
+        <div class="col-10">
+          <h4 class="text-center"><%= receipt.school.full_name %></h4>
+          <p class="text-center">Hand Work Brings Success</p>
+          <p>School fees receipt</p>
+          <p class="d-flex justify-content-between">Transaction Date: <span class="text-color-grey-2"><%= @receipt.readable_date %></span></p>
+          <p class="margin-zero d-flex justify-content-between">Reference No: <span class="text-color-grey-2"><%= @receipt.transaction_reference %></span></p>
+          <p class="margin-zero d-flex justify-content-between">Student: <span class="text-color-grey-2"><%= @receipt.student.full_name %></span></p>
+          <p class="margin-zero d-flex justify-content-between">Amuont Payed: <span class="text-color-grey-2"><%= @receipt.amount %></span> frs</p>
+        </div>
       </div>
-      <div class="col-md-8">
-        <h4 class="text-center"><%= receipt.school.full_name %></h4>
-        <p class="text-center">Hand Work Brings Success</p>
-        <p>School fees receipt</p>
-        <p class="d-flex justify-content-between">Transaction Date: <span class="text-color-grey-2"><%= @receipt.readable_date %></span></p>
-        <p class="margin-zero d-flex justify-content-between">Reference No: <span class="text-color-grey-2"><%= @receipt.transaction_reference %></span></p>
-        <p class="margin-zero d-flex justify-content-between">Student: <span class="text-color-grey-2"><%= @receipt.student.full_name %></span></p>
-        <p class="margin-zero d-flex justify-content-between">Amuont Payed: <span class="text-color-grey-2"><%= @receipt.amount %></span> frs</p>
+      <div class="receipt-show-table-section">
+        <%= render partial: "receipts/receipt_show_table", locals: { receipt: receipt, fee: fee }%>
       </div>
-    </div>
-    <div class="receipt-show-table-section">
-      <%= render partial: "receipts/receipt_show_table", locals: { receipt: receipt, fee: fee }%>
-    </div>
-    <div class="qrcode">
-      <%= raw @svg %>
+      <div class="qrcode">
+        <%= raw @svg %>
+      </div>
     </div>
   </div>
 </div>
+<script>
+  async function captureAndDownload() {
+    const frontSection = document.querySelector('.receipt-div')
+    html2canvas(frontSection).then(function (canvas) {
+      console.log("ready");
+      var dataUrl = canvas.toDataURL("image/png");
+      download(dataUrl, `${Date.now()}.png`, 'image/png');
+    })
+  }
+
+  async function captureAndPrint() {
+    const frontSection = document.querySelector('.receipt-div');
+
+    html2canvas(frontSection).then(function (canvas) {
+      console.log("ready");
+      var dataUrl = canvas.toDataURL("image/png");
+
+      // Create a new window and add the image to it
+      var printWindow = window.open('', '_blank');
+      printWindow.document.write('<html><head><title>Print Receipt</title></head><body>');
+      printWindow.document.write('<img src="' + dataUrl + '" />');
+      printWindow.document.write('</body></html>');
+      printWindow.document.close();
+
+      // Wait for the image to load before printing
+      printWindow.onload = function() {
+        printWindow.print();
+      };
+    });
+  }
+</script>
