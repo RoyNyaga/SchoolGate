@@ -12,11 +12,11 @@
     </tr>
     <tr>
       <td>Installment No</td>
-      <td><%= receipt.update_history["changes"].size %></td>
+      <td><%= receipt.installment_num %></td>
     </tr>
     <tr>
       <td>Total Fee payed</td>
-      <td><%= fee.total_fee_paid %> frs</td>
+      <td><%= receipt.total_fees_paid_at_this_point %> frs</td>
     </tr>
     <tr>
       <td>Required Fee</td>
@@ -24,7 +24,7 @@
     </tr>
     <tr>
       <td>Balance</td>
-      <td><%= fee.balance %> frs</td>
+      <td><%= receipt.balance %> frs</td>
     </tr>
   </tbody>
 </table>

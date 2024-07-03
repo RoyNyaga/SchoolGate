@@ -22,6 +22,12 @@ class PagesController < ApplicationController
     end
   end
 
+  def privacy_policy
+  end
+
+  def service_terms
+  end
+
   private
 
   def message_params
