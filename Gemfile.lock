@@ -151,6 +151,10 @@ GEM
     execjs (2.9.1)
     faker (3.3.1)
       i18n (>= 1.8.11, < 2)
+    faraday (2.9.2)
+      faraday-net_http (>= 2.0, < 3.2)
+    faraday-net_http (3.1.0)
+      net-http
     ffi (1.16.3)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
@@ -219,6 +223,8 @@ GEM
       turbo-rails
     msgpack (1.7.2)
     mutex_m (0.2.0)
+    net-http (0.4.1)
+      uri
     net-imap (0.4.10)
       date
       net-protocol
@@ -353,6 +359,7 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    uri (0.13.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -390,6 +397,7 @@ DEPENDENCIES
   devise (~> 4.9, >= 4.9.3)
   error_highlight (>= 0.4.0)
   faker (~> 3.2, >= 3.2.2)
+  faraday (~> 2.9, >= 2.9.2)
   figaro (~> 1.2)
   font_awesome5_rails
   importmap-rails
