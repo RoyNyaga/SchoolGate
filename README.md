@@ -94,3 +94,11 @@ Things you may want to cover:
 
 ## Gradien
 - https://cssgradient.io/
+
+## Notes on facebook / whatsapp api
+- To have a permanent user token i had to create a system user calledd schoolgate_system_user. I also gave permissions to the schoolgate app. Meta business suits calls these permissions assests. visit this link to learn more about facebook business suits system users: https://developers.facebook.com/docs/whatsapp/business-management-api/get-started#1--acquire-an-access-token-using-a-system-user-or-facebook-login
+- In order to send whatsapp messages to any number, i had to register a phone number to business whatsapp that i then added to the from list of numbers that can send messages. this registration is done on https://developers.facebook.com/ or https://developers.facebook.com/apps/775709887968266/whatsapp-business/wa-dev-console/?business_id=147061361252910.
+- Adding a registered phone number to the list of to numbers is on step 5 of the API setup page.
+- the registered phone number should not originally have a whatsapp account associated to it. I used my orange number.
+- Every registered phone number or to number has it's own Phone number ID which is added on the API base url to make request.
+- Every registered phone number also have it's own templates.
