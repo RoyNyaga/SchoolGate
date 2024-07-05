@@ -12,9 +12,9 @@ class FeesController < ApplicationController
       sql += " AND percentage_complete > #{params[:percent_complete_greater_than]}" if params[:percent_complete_greater_than].present?
       sql += " AND percentage_complete < #{params[:percent_complete_lesser_than]}" if params[:percent_complete_lesser_than].present?
       sql += " AND fees.school_class_id = #{params[:school_class_id]}" if params[:school_class_id].present?
-      @fees = Fee.joins(:student).includes(:school, :school_class, :student).where(sql).paginate(page: params[:page], per_page: 20)
+      @fees = Fee.joins(:student).includes(:school, :school_class, :student).where(sql).order(updated_at: :desc).paginate(page: params[:page], per_page: 20)
     else
-      @fees = current_school.fees.includes(:school, :school_class, :student).paginate(page: params[:page], per_page: 20)
+      @fees = current_school.fees.includes(:school, :school_class, :student).order(updated_at: :desc).paginate(page: params[:page], per_page: 20)
     end
   end
 
