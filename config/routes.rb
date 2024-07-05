@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount MissionControl::Jobs::Engine, at: "/jobs"
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :receipts do
@@ -34,7 +36,6 @@ Rails.application.routes.draw do
   end
   resources :departments
   resources :faculties
-  mount MissionControl::Jobs::Engine, at: "/jobs"
   resources :report_card_generators do
     member do
       get :loading
