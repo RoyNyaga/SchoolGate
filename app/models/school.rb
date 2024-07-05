@@ -22,6 +22,7 @@ class School < ApplicationRecord
                  :level_5_fees, :level_6_fees, :level_7_fees
 
   store_accessor :student_id_settings, :school_identifier
+  store_accessor :whatsapp_notification_settings, :activate_notification, :notification_contact
 
   enum education_level: { basic_education: 1, secondary_education: 2, higher_education: 3 }
 
