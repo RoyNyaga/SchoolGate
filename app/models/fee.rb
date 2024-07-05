@@ -89,17 +89,21 @@ class Fee < ApplicationRecord
       update_history_amounts = update_history["changes"] # get the amount changes recorded in the last receipt that was created etc [2000, 4000]
       changed_amounts = values_in_a_not_in_b(last_update_record_amounts, update_history_amounts)
       changed_amounts.each do |amount|
-        Receipt.create(school_id: school_id, teacher_id: last_update_record[:updator_id], academic_year_id: academic_year_id,
-                       student_id: student_id, fee_id: id, transaction_reference: Receipt.generate_transaction_reference,
-                       update_history: last_update_record, amount: amount.to_f, total_fees_paid_at_this_point: self.total_fee_paid,
-                       installment_num: self.installment_num)
+        receipt = Receipt.create(school_id: school_id, teacher_id: last_update_record[:updator_id], academic_year_id: academic_year_id,
+                                 student_id: student_id, fee_id: id, transaction_reference: Receipt.generate_transaction_reference,
+                                 update_history: last_update_record, amount: amount.to_f, total_fees_paid_at_this_point: self.total_fee_paid,
+                                 installment_num: self.installment_num)
+
+        WhatsappNotificationJob.perform_later(receipt.id, "fees_instant_pay_template")
       end
     else
       last_update_record_amounts.each do |amount|
-        Receipt.create(school_id: school_id, teacher_id: last_update_record[:updator_id], academic_year_id: academic_year_id,
-                       student_id: student_id, fee_id: id, transaction_reference: Receipt.generate_transaction_reference,
-                       update_history: last_update_record, amount: amount.to_f, total_fees_paid_at_this_point: self.total_fee_paid,
-                       installment_num: self.installment_num)
+        receipt = Receipt.create(school_id: school_id, teacher_id: last_update_record[:updator_id], academic_year_id: academic_year_id,
+                                 student_id: student_id, fee_id: id, transaction_reference: Receipt.generate_transaction_reference,
+                                 update_history: last_update_record, amount: amount.to_f, total_fees_paid_at_this_point: self.total_fee_paid,
+                                 installment_num: self.installment_num)
+
+        WhatsappNotificationJob.perform_later(receipt.id, "fees_instant_pay_template")
       end
     end
 
