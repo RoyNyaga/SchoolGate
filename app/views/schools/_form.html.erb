@@ -74,6 +74,17 @@
         <%= form.text_field :school_identifier, class: "general-input-styles" %>
       </div>
     </div>
+    <h5 class="text-center my-3">Whatsapp Notification Settings</h6>
+    <div class="row">
+      <div class="col-md-2">
+        <%= form.label :activate_notification %>
+        <%= form.check_box :activate_notification %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :notification_contact %>
+        <%= form.text_field :notification_contact, class: "general-input-styles" %>
+      </div>
+    </div>
   <% end %>
   <div class="my-3">
     <%= form.submit class: "model-form-btn" %>
