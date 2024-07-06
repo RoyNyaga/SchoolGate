@@ -110,6 +110,7 @@ Rails.application.routes.draw do
   get "contact-us", to: "pages#contact"
   get "privacy-policy", to: "pages#privacy_policy"
   get "service-terms", to: "pages#service_terms"
+  get "pricing", to: "pages#pricing"
   post "create-message", to: "pages#create_message"
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
