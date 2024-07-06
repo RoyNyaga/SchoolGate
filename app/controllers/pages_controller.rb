@@ -28,6 +28,9 @@ class PagesController < ApplicationController
   def service_terms
   end
 
+  def pricing
+  end
+
   private
 
   def message_params
