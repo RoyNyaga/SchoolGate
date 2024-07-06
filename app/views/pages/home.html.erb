@@ -117,7 +117,7 @@
       </div>
       <div id="how-it-works-section" class="py-4">
         <div class="container">
-          <%= render partial: "shared/youtube_frames/summary_frame", locals: { height: "500" } %>
+          <%= render partial: "shared/youtube_frames/summary_frame", locals: { height: "600", auto_play: false } %>
         </div>
       </div>
       <div class="section-five white-background py-5">
@@ -184,7 +184,7 @@
             <div class="col-md-5 d-flex justify-content-center align-item-center">
               <div>
                 <h4 class="my-3 section-one-role-p">Start with</h4>
-                <p class="homepage-skyblue-color section-one-role-p">600frs / Student</p>
+                <p class="homepage-skyblue-color section-one-role-p">0 frs / Student</p>
                 <p class="homepage-faint-text-dark">Customized Solutions for Your Institution's Needs - Pay Only for What You Use</p>
                 <div class="row">
                   <div class="col-md-6">
@@ -194,7 +194,7 @@
                     <% end %>
                   </div>
                   <div class="col-md-6">
-                    <%= link_to "Book a demo", "#", class: "home-page-btn home-page-btn-white my-5 d-block text-center" %>
+                    <%= link_to "Book a demo", contact_us_path, class: "home-page-btn home-page-btn-white my-5 d-block text-center" %>
                   </div>
                 </div>
               </div>
