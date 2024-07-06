@@ -95,6 +95,66 @@
   color: #2297FF;
 }
 
+.pricing-header {
+  margin: 2rem 0;
+}
+.card-deck .card {
+  margin-bottom: 2rem;
+}
+
+.pricing-list-item{
+  color: black;
+}
+
+.free-card-background{
+  background: var(--free-card-color);
+}
+.free-card-body-border{
+  border: 3px solid var(--free-card-color);
+}
+
+.free-card-body-border:hover{
+  background-color: #cfe5f9;
+}
+
+.basic-card-background{
+  background-color: var(--basic-card-color);
+}
+
+.basic-card-body-border{
+  border: 3px solid var(--basic-card-color);
+}
+
+.advanced-card-background{
+  background-color: var(--advanced-card-color);
+}
+
+.advanced-card-body-border{
+  border: 3px solid var(--advanced-card-color);
+}
+
+.basic-pro-card-background{
+  background-color: var(--basic-pro-card-color);
+}
+
+.basic-pro-card-body-border{
+  border: 3px solid var(--basic-pro-card-color);
+}
+
+.advanced-pro-card-background{
+  background-color: var(--advanced-pro-card-color);
+}
+
+.advanced-pro-card-body-border{
+  border: 3px solid var(--advanced-pro-card-color);
+}
+
+.pricing-list-item{
+  margin: 6px 2px;
+  border-bottom: 1px solid grey;
+  padding: 5px;
+}
+
 @media screen and (max-width: 425px) {
   .section-one-role-p{
     font-size: 1.8em;
