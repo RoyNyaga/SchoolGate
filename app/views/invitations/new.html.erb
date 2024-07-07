@@ -1,2 +1,9 @@
-<h1>Invitations#new</h1>
-<p>Find me in app/views/invitations/new.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 mx-auto light-grey-card py-3">
+      <%= render "shared/buttons/back_btn" %>
+      <br>
+      <%= render partial: "invitations/form", locals: { invitation: @invitation } %>
+    </div>
+  </div>
+</div>
