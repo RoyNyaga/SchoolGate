@@ -1,6 +1,6 @@
 <%= form_with(model: invitation) do |form| %>
   <% if invitation.errors.any? %>
-    <div style="color: red">
+    <div class="form-error-div">
       <h2><%= pluralize(invitation.errors.count, "error") %> prohibited this invitation from being saved:</h2>
       <ul>
         <% invitation.errors.each do |error| %>
@@ -16,8 +16,8 @@
     <%= form.hidden_field :sender_id, value: current_teacher.id %>
   </div>
   <div>
-    <%= form.label :teacher_id, style: "display: block" %>
-    <%= form.collection_select :teacher_id, current_school.workers.all, :id, :full_name, { prompt: "Select Teacher" }, { class: "general-input-styles" } %>
+    <%= form.label :teacher_phone_number, style: "display: block" %>
+    <%= form.number_field :teachers_phone_number, class: "general-input-styles", required: true %>
   </div>
   <div>
     <%= form.label :permission, style: "display: block" %>
@@ -31,7 +31,7 @@
     <%= form.label :job_description, style: "display: block" %>
     <%= form.text_field :job_description, class: "general-input-styles" %>
   </div>
-  <div>
-    <%= form.submit %>
+  <div class="my-2">
+    <%= form.submit :send, class: "model-form-btn" %>
   </div>
 <% end %>
