@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_07_131244) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_07_233023) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -628,6 +628,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_07_131244) do
     t.boolean "is_class_master"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "status", default: true
     t.index ["school_class_id"], name: "index_teachings_on_school_class_id"
     t.index ["subject_id"], name: "index_teachings_on_subject_id"
     t.index ["teacher_id"], name: "index_teachings_on_teacher_id"
