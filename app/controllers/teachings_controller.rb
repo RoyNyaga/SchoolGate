@@ -1,7 +1,7 @@
 class TeachingsController < ApplicationController
   layout "school_layout"
   before_action :check_for_current_school
-  before_action :set_teaching, only: %i[ show edit update destroy ]
+  before_action :set_teaching, only: %i[ show edit update destroy toggle_status ]
 
   # GET /teachings or /teachings.json
   def index
@@ -57,6 +57,16 @@ class TeachingsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to teachings_url, notice: "Teaching was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def toggle_status
+    if @teaching.update(status: ActiveRecord::Type::Boolean.new.cast(params[:status]))
+      flash[:success] = "Successfully Updated Assignment"
+      redirect_to subject_path(@teaching.subject_id)
+    else
+      flash[:error] = "Sorry, Action could not be performed!!!"
+      redirect_to subject_path(@teaching.subject_id)
     end
   end
 
