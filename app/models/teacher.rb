@@ -43,4 +43,8 @@ class Teacher < ApplicationRecord
     work = workings.where(school_id: school.id).first
     work.principal? || work.buster? || work.descipline_master?
   end
+
+  def active_subjects
+    class_subjects.joins(:teachings).where(teachings: { status: true })
+  end
 end
