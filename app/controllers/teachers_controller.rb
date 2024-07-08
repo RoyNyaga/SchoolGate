@@ -9,7 +9,7 @@ class TeachersController < ApplicationController
   end
 
   def subjects
-    @subjects = current_teacher.class_subjects
+    @subjects = current_teacher.active_subjects
     render layout: "school_layout"
   end
 
