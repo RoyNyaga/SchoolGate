@@ -11,6 +11,8 @@ class SubjectsController < ApplicationController
   # GET /subjects/1 or /subjects/1.json
   def show
     @school_class = @subject.school_class
+    @active_teachings = @subject.teachings.where(status: true)
+    @inactive_teachings = @subject.teachings.where(status: false)
   end
 
   # GET /subjects/new
