@@ -1,11 +1,15 @@
 <div class="container-fluid dark-blue-section-div" id="sign-in-div">
   <div class="container">
     <div class="row light-grey-card py-5">
-      <div class="col-md-4" id="sign-in-colum-div">
+      <div class="col-lg-4" id="sign-in-colum-div">
         <div class="sign-in-form-div py-5 px-4">
           <h4 class="sign-in-headers">Log in</h4>
+          <% flash.each do |message_type, message| %>
+            <p class="text-danger"><%= message %></p>
+            <p class="text-muted">Having trouble accessing your accout? <%= link_to "Contact Us", contact_us_path, class: "sign-up-link" %></p>
+          <% end %>
           <p class="no-account-yet">Do not have an account yet?  <%= link_to "Create new account", new_registration_path(resource_name), class: "sign-up-link" %></p>
-          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name), data: {turbo: false}) do |f| %>
             <div class="field my-3">
               <%= f.label :phone %><br />
               <%= f.number_field :phone_number, placeholder: "Enter your phone number", class: "sign-in-inputs" %>
@@ -26,7 +30,7 @@
           <% end %>
         </div>
       </div>
-      <div class="d-none d-md-block col-md-8">
+      <div class="d-none d-lg-block col-md-8">
         <%= image_tag("sign-in.png", class: "img-fluid")%>
       </div>
     </div>
