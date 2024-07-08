@@ -77,7 +77,11 @@ Rails.application.routes.draw do
     end
   end
   resources :workings
-  resources :teachings
+  resources :teachings do
+    member do
+      put :toggle_status
+    end
+  end
   resources :subjects do
     member do
       get :for_teacher
