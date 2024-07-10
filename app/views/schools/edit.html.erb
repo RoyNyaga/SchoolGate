@@ -1,6 +1,17 @@
 <div class="container">
-  <h1>Editing school</h1>
+  <%= render "shared/buttons/back_btn" %>
+  <h4 class="text-center my-3">Editing school</h4>
   <div class="light-grey-card p-3">
+    <div class="row" data-controller="photoUploads">
+      <div class="col-md-2 col-5 p-3">
+        <%= render partial: "schools/logo", locals: { school: @school }%>
+        <%= render partial: "shared/photo_form", 
+        layout: "layouts/modal_layout", 
+        locals: { record: @school, modal_id: generate_modal_id("photo_form", record: @school), 
+        action_name: photo_action_name(@school, "logo"),
+        url: update_logo_school_path(@school), action_title: "" }%>
+      </div>
+    </div>
     <%= render partial: "form", locals: { school: @school, edit: true } %>
     <br>
   </div>

@@ -13,7 +13,7 @@
       <%= render partial: "shared/photo_form", 
         layout: "layouts/modal_layout", 
         locals: { record: @student, modal_id: generate_modal_id("photo_form", record: @student), 
-        action_name: photo_action_name(@student),
+        action_name: photo_action_name(@student, "photo"),
         url: update_photo_student_path(@student), action_title: "" }%>
     </div>
     <div class="col-md-9">

@@ -1,4 +1,6 @@
 class School < ApplicationRecord
+  has_one_attached :photo
+
   belongs_to :teacher
   has_many :school_classes, dependent: :destroy
   has_many :students, dependent: :destroy

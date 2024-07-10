@@ -35,8 +35,8 @@ module ApplicationHelper
     "https://maps.googleapis.com/maps/api/js?key=#{ENV["GOOGLE_PLACES_API_KEY"]}&loading=async&libraries=places&callback=initAutocomplete"
   end
 
-  def photo_action_name(record)
-    record.photo.attached? ? "Change Photo" : "Upload Photo"
+  def photo_action_name(record, photo_type)
+    record.photo.attached? ? "Change #{photo_type}" : "Upload #{photo_type}"
   end
 
   def generate_sidebar_expanded_div_id(link_name)

@@ -10,9 +10,8 @@ class SchoolClass < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { scope: :school_id,
                                                  message: ": Every Class Should be Unique" }
-  validates :level, presence: true, uniqueness: { scope: :school_id,
-                                                  message: ": Every Class should have a unique Level" }
 
+  validates :required_fee, presence: true
   before_save :name_to_lowercase
 
   def generate_fee_string

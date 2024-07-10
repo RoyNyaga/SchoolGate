@@ -1,11 +1,11 @@
-<div class="container">
-  <div data-controller="photoUploads" class="row">
+<div class="container py-5">
+  <div data-controller="photoUploads" class="row py-5">
     <div class="col-md-2">
       <%= render partial: "teachers/avatar", locals: { teacher: @teacher } %>
       <%= render partial: "shared/photo_form", 
         layout: "layouts/modal_layout", 
         locals: { record: @teacher, modal_id: generate_modal_id("photo_form", record: @teacher), 
-        action_name: photo_action_name(@teacher),
+        action_name: photo_action_name(@teacher, "photo"),
         url: update_photo_teacher_path(@teacher), action_title: "" }%>
     </div>
     <div class="col-md-10">

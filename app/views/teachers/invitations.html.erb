@@ -1,13 +1,16 @@
 <div class="container">
-  <div class="row my-3">
+  <div class="row py-5">
     <div class="col-md-4">
       <%= link_to "Pending", invitations_teachers_path(status: "pending"), class: "general-link" %>
       <%= link_to "Accepted", invitations_teachers_path(status: "accepted"), class: "general-link" %>
       <%= link_to "Rejected", invitations_teachers_path(status: "rejected"), class: "general-link" %>
     </div>
   </div>
-  <div>
+  <div class="pb-5">
     <h5 class="my-4 text-center"><%= @status.titleize %> Invitations</h5>
     <%= render partial: "invitations/table", locals: { invitations: @invitations, status: @status, is_admin_dashboard: false } %>
   </div>
 </div>
+<br>
+<br>
+<br>

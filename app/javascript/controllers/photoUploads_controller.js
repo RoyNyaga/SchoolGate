@@ -54,6 +54,7 @@ export default class extends Controller {
 
   savePhoto = () => {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    const recordName = this.photoFormTarget.getAttribute("data-record-name")
     console.log("this.imageTarget", this.imageTarget)
 
     const canvas = this.cropper.getCroppedCanvas({
@@ -63,7 +64,7 @@ export default class extends Controller {
 
     canvas.toBlob((blob) => {
       const formData = new FormData();
-      formData.append('student[photo]', blob);
+      formData.append(`${recordName}[photo]`, blob);
       const options = {
         method: 'PUT',
         headers: {

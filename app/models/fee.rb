@@ -49,7 +49,7 @@ class Fee < ApplicationRecord
   end
 
   def required_fee
-    school.send(school_class.generate_fee_string).to_i
+    school_class.required_fee
   end
 
   def balance

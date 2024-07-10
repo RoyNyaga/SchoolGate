@@ -1,6 +1,7 @@
 class SchoolsController < ApplicationController
+  include ApplicationHelper # this is to enable us access the generate_modal_id helper method from this controller
   layout "school_layout"
-  before_action :set_school, only: %i[ show edit update destroy ]
+  before_action :set_school, only: %i[ show edit update destroy update_logo ]
   before_action :check_for_current_school, except: %i[show index new create]
 
   # GET /schools or /schools.json
@@ -111,7 +112,21 @@ class SchoolsController < ApplicationController
     @school_classes = current_school.school_classes
   end
 
+  def update_logo
+    if @school.update(logo_params)
+      render json: { image_url: url_for(@school.photo),
+                     modal_id: generate_modal_id("photo_form", record: @school),
+                     message: "Successfully Updated Logo", success: true }, status: :ok
+    else
+      render json: { message: @teacher.errors.full_messages, success: false }, status: :unprocessable_entity
+    end
+  end
+
   private
+
+  def logo_params
+    params.require(:school).permit(:photo)
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_school

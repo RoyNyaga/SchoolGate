@@ -10,7 +10,6 @@ class InvitationsController < ApplicationController
   # POST /invitations or /invitations.json
   def create
     @invitation = Invitation.new(invitation_params)
-    binding.break
     @teacher = Teacher.find_by(phone_number: params[:invitation][:teachers_phone_number])
     if @teacher && current_school.workers.where(id: @teacher.id).present?
       @status = "accepted"

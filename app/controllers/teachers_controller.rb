@@ -57,7 +57,7 @@ class TeachersController < ApplicationController
   end
 
   def photo_params
-    params.require(:student).permit(:photo)
+    params.require(:teacher).permit(:photo)
   end
 
   def teacher_params

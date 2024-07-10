@@ -138,6 +138,9 @@ Rails.application.routes.draw do
       get :departments
       get :levels
     end
+    member do
+      put :update_logo
+    end
   end
 
   resources :invitations do
