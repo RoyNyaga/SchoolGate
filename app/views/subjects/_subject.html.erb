@@ -1,17 +1,19 @@
 <% if is_admin_dashboard %>
-  <div class="light-grey-card dashboard-normal-font-size p-2">
-    <p class="text-center"> <%= subject.title %></p>
-    <p class="margin-zero">Coefficient: <span class="text-color-grey-2"><%= subject.coefficient %></span></p>
-    <% subject.remarks.each do |k, v| %>
-      <div class="margin-zero d-flex justify-content-between">
-        <p class="margin-zero"><%= k.humanize %> </p>
-        <p class="text-color-grey-2 margin-zero"><%= v %></p>
+  <%= turbo_frame_tag custom_id_generator("edit", record: subject) do %>
+    <div class="light-grey-card dashboard-normal-font-size p-2">
+      <p class="text-center"> <%= subject.title %></p>
+      <p class="margin-zero">Coefficient: <span class="text-color-grey-2"><%= subject.coefficient %></span></p>
+      <% subject.remarks.each do |k, v| %>
+        <div class="margin-zero d-flex justify-content-between">
+          <p class="margin-zero"><%= k.humanize %> </p>
+          <p class="text-color-grey-2 margin-zero"><%= v %></p>
+        </div>
+      <% end %>
+      <div>
+        <%= link_to "Edit", edit_subject_path(subject), class: "general-link" %>
       </div>
-    <% end %>
-    <div>
-      <%= link_to "Edit", edit_subject_path(subject), class: "general-link" %>
     </div>
-  </div>
+  <% end %>
 <% else %>
   <div class="dark-blue-section-div dashboard-normal-font-size">
     <h5 class="text-center"><%= subject.name %></h5>
