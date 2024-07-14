@@ -22,6 +22,7 @@ class SubjectsController < ApplicationController
 
   # GET /subjects/1/edit
   def edit
+    @school_class = @subject.school_class
   end
 
   # POST /subjects or /subjects.json
@@ -79,6 +80,7 @@ class SubjectsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def subject_params
-    params.require(:subject).permit(:school_id, :school_class_id, :name, :coefficient)
+    params.require(:subject).permit(:school_id, :school_class_id, :name, :coefficient, :less_than_equal_to_5, :less_than_equal_to_9, :less_than_equal_to_12,
+                                    :less_than_equal_to_15, :less_than_equal_to_18, :less_than_equal_to_20)
   end
 end
