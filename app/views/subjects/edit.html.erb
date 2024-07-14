@@ -1,10 +1,14 @@
-<h1>Editing subject</h1>
-
-<%= render "form", subject: @subject %>
-
-<br>
-
-<div>
-  <%= link_to "Show this subject", @subject %> |
-  <%= link_to "Back to subjects", subjects_path %>
+<div class="container">
+  <h5 class="text-center">Editing subject</h5>
+  <%= turbo_frame_tag custom_id_generator("edit", record: @subject) do %>
+    <%= link_to "Cancel", @subject, class: "grey-link-text" %>
+    <div class="light-grey-card p-2 my-3">
+      <%= render "form", subject: @subject %>
+    </div>
+  <% end %>
+  <br>
+  <div>
+    <%= link_to "Show this subject", @subject %> |
+    <%= link_to "Back to subjects", subjects_path %>
+  </div>
 </div>
