@@ -7,7 +7,7 @@
   <%= form_with url: url, id: "photo-upload-form", data: { photoUploads_target: "photoForm", 
   record_name: record.class.name.downcase } do |form| %>
     <%= form.file_field :photo, data: { action: "change->photoUploads#previewPhoto",
-     photoUploads_target: "uploadInputField" },
+     photoUploads_target: "uploadInputField" }, 
      accept: "image/jpeg, image/png, image/gpg" %>
   <% end %>
   <div>
