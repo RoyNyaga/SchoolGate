@@ -15,13 +15,41 @@
   <div>
     <%= form.hidden_field :school_class_id, value: @school_class.id %>
   </div>
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name, class: "general-input-styles"%>
+  <div class="row">
+    <div class="col-9 col-md-8">
+      <%= form.label :name, style: "display: block" %>
+      <%= form.text_field :name, class: "general-input-styles"%>
+    </div>
+    <div class="col-3 col-md-4">
+      <%= form.label :coef, style: "display: block" %>
+      <%= form.number_field :coefficient,  class: "general-input-styles" %>
+    </div>
   </div>
-  <div>
-    <%= form.label :coefficient, style: "display: block" %>
-    <%= form.number_field :coefficient,  class: "general-input-styles" %>
+  <div class="row">
+    <div class="col-6 my-3">
+      <%= form.label :less_than_equal_to_5, style: "display: block" %>
+      <%= form.text_field :less_than_equal_to_5,  class: "general-input-styles" %>
+    </div>
+    <div class="col-6 my-3">
+      <%= form.label :less_than_equal_to_9, style: "display: block" %>
+      <%= form.text_field :less_than_equal_to_9,  class: "general-input-styles" %>
+    </div>
+    <div class="col-6 my-3">
+      <%= form.label :less_than_equal_to_12, style: "display: block" %>
+      <%= form.text_field :less_than_equal_to_12,  class: "general-input-styles" %>
+    </div>
+    <div class="col-6 my-3">
+      <%= form.label :less_than_equal_to_15, style: "display: block" %>
+      <%= form.text_field :less_than_equal_to_15,  class: "general-input-styles" %>
+    </div>
+    <div class="col-6 my-3">
+      <%= form.label :less_than_equal_to_18, style: "display: block" %>
+      <%= form.text_field :less_than_equal_to_18,  class: "general-input-styles" %>
+    </div>
+    <div class="col-6 my-3">
+      <%= form.label :less_than_equal_to_20, style: "display: block" %>
+      <%= form.text_field :less_than_equal_to_20,  class: "general-input-styles" %>
+    </div>
   </div>
   <div class="py-3">
     <%= form.submit class: "general-btn" %>
