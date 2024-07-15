@@ -40,18 +40,18 @@
     <div class="row">
       <div class="col-md-3">
         <%= form.label :school_identifier, style: "display: block" %>
-        <%= form.text_field :school_identifier, class: "general-input-styles" %>
+        <%= form.text_field :school_identifier, class: "general-input-styles", required: true %>
       </div>
     </div>
     <h5 class="text-center my-3">Whatsapp Notification Settings</h6>
     <div class="row">
       <div class="col-md-2">
         <%= form.label :activate_notification %>
-        <%= form.check_box :activate_notification %>
+        <%= form.check_box :activate_notification, disabled: true %>
       </div>
       <div class="col-md-3">
         <%= form.label :notification_contact %>
-        <%= form.text_field :notification_contact, class: "general-input-styles" %>
+        <%= form.text_field :notification_contact, class: "general-input-styles", disabled: true %>
       </div>
     </div>
   <% end %>
