@@ -20,6 +20,11 @@ class School < ApplicationRecord
   has_many :departments
   has_many :courses
 
+  validates :full_name, presence: true, uniqueness: { scope: :teacher_id,
+                                                      message: "You already have a school with this name" }
+  validates :abbreviation, presence: true
+  validates :moto, presence: true
+
   store_accessor :school_fees_settings, :level_1_fees, :level_2_fees, :level_3_fees, :level_4_fees,
                  :level_5_fees, :level_6_fees, :level_7_fees
 
@@ -34,6 +39,12 @@ class School < ApplicationRecord
     }
 
   after_create :add_teachers_permission
+  before_create :set_school_identifier
+
+  def self.random_capital_letters(length)
+    letters = ("A".."Z").to_a
+    letters.sample(length).join
+  end
 
   def add_teachers_permission
     self.workings.create(teacher_id: teacher_id, permission: 3)
@@ -45,5 +56,23 @@ class School < ApplicationRecord
 
   def active_semester
     semesters.active.first
+  end
+
+  private
+
+  def set_school_identifier
+    @existing_identifiers = School.all.map(&:school_identifier)
+    @letters = School.random_capital_letters(2)
+    @count = 1
+    while @existing_identifiers.include?(@letters)
+      puts "Stock in the set_school_identifier loop"
+      if @count < 676 # there are 676 possible combinations of 2 letters in the english alphabet.
+        @letters = School.random_capital_letters(2)
+      else # move to 3 combination if count is above 676
+        @letters = School.random_capital_letters(3)
+      end
+      @count += 1
+    end
+    self.school_identifier = @letters
   end
 end
