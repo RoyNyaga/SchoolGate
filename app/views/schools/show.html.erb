@@ -5,5 +5,10 @@
     <div class="col-md-3">
       <%= render partial: "schools/logo", locals: { school: @school }%>
     </div>
+    <div class="col-md-9 py-5">
+      <p class="dashboard-normal-font-size"><span class="px-2">Moto:</span> <span class="px-2"> <%= current_school.moto %></span></p>
+      <p class="dashboard-normal-font-size"><span class="px-2">Level:</span> <span class="px-2"><%= current_school.education_level.humanize %></span></p>
+      <p class="dashboard-normal-font-size"><span class="px-2">Address:</span> <span class="px-2"><%= current_school.address %></span></p>
+    </div>
   </div>
 </div>
