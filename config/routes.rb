@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tutorials
   mount MissionControl::Jobs::Engine, at: "/jobs"
 
   devise_for :admin_users, ActiveAdmin::Devise.config
