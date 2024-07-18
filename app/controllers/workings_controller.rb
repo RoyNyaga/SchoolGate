@@ -41,7 +41,7 @@ class WorkingsController < ApplicationController
   def update
     respond_to do |format|
       if @working.update(working_params)
-        format.html { redirect_to working_url(@working), notice: "Working was successfully updated." }
+        format.html { redirect_to teachers_schools_path, success: "Working was successfully updated." }
         format.json { render :show, status: :ok, location: @working }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -69,6 +69,6 @@ class WorkingsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def working_params
-    params.require(:working).permit(:school_id, :teacher_id, :permission, :agreed_salary, :job_description)
+    params.require(:working).permit(:school_id, :teacher_id, :permission, :agreed_salary, :job_description, :status)
   end
 end
