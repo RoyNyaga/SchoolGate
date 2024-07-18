@@ -118,4 +118,8 @@ module ApplicationHelper
   def success_state_badge_color(boolean)
     boolean ? "bg-success" : "bg-danger"
   end
+
+  def working_status(working)
+    working.active? ? content_tag(:span, "A", class: "badge bg-primary") : content_tag(:span, "S", class: "badge bg-secondary")
+  end
 end
