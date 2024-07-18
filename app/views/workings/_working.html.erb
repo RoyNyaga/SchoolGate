@@ -1,14 +1,24 @@
 <div class="light-grey-card p-2 dashboard-normal-font-size" id="<%= dom_id working %>">
   <%= render partial: "teachers/avatar", locals: { teacher: working.teacher } %>
-  <h5 class="text-center">
-    <%= working.teacher.full_name %>
-  </h5>
-  <p class="margin-zero d-flex justify-content-between">
-    <span>Salary</span>
-    <span class="text-color-grey-2 px-3"><%= working.agreed_salary %></span>
-  </p>
-  <p class="margin-zero d-flex justify-content-between">
-    <span>Permission</span>
-    <span class="text-color-grey-2 px-3"><%= working.permission %></span>
-  </p>
+  <%= turbo_frame_tag custom_id_generator("edit", record: working) do %>
+    <div class="d-flex justify-content-between">
+      <h5 class="text-center">
+        <%= working.teacher.full_name %>
+      </h5>
+      <h5><%= working_status(working) %></h5>
+    </div>
+    <div>
+      <p class="margin-zero d-flex justify-content-between">
+        <span>Salary</span>
+        <span class="text-color-grey-2 px-3"><%= working.agreed_salary %></span>
+      </p>
+      <p class="margin-zero d-flex justify-content-between">
+        <span>Permission</span>
+        <span class="text-color-grey-2 px-3"><%= working.permission %></span>
+      </p>
+      <div class="text-center">
+        <%= link_to "Edit", edit_working_path(working), class: "edit-link"%>
+      </div>
+    </div>
+  <% end %>
 </div>
