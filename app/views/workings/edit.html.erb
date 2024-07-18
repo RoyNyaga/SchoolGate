@@ -1,10 +1,17 @@
-<h1>Editing working</h1>
-
-<%= render "form", working: @working %>
-
-<br>
-
-<div>
-  <%= link_to "Show this working", @working %> |
-  <%= link_to "Back to workings", workings_path %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto light-grey-card py-4 px-2">
+      <%= turbo_frame_tag custom_id_generator("edit", record: @working) do %>
+        <p class="text-center">
+          <%= link_to "Cancel", teachers_schools_path, class: "edit-link my-2" %>
+        </p>
+        <%= render "form", working: @working %>
+      <% end %>
+    </div>
+  </div>
+  <br>
+  <div>
+    <%= link_to "Show this working", @working %> |
+    <%= link_to "Back to workings", workings_path %>
+  </div>
 </div>
