@@ -1,0 +1,12 @@
+<div class="contianer">
+  <div class="row">
+    <div class="col-md-4 mx-auto py-5">
+      <h4 class="text-center">New tutorial</h4>
+      <%= render "form", tutorial: @tutorial %>
+    </div>
+  </div>
+  <br>
+  <div>
+    <%= link_to "Back to tutorials", tutorials_path %>
+  </div>
+</div>

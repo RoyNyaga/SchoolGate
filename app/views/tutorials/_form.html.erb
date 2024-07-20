@@ -1,0 +1,27 @@
+<%= form_with(model: tutorial) do |form| %>
+  <% if tutorial.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(tutorial.errors.count, "error") %> prohibited this tutorial from being saved:</h2>
+      <ul>
+        <% tutorial.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= form.label :youtube_frame, style: "display: block" %>
+    <%= form.text_area :youtube_frame, class: "general-input-styles" %>
+  </div>
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title, class: "general-input-styles" %>
+  </div>
+  <div>
+    <%= form.label :priority, style: "display: block" %>
+    <%= form.number_field :priority, class: "general-input-styles" %>
+  </div>
+  <div>
+    <%= form.submit class: "model-form-btn" %>
+  </div>
+<% end %>

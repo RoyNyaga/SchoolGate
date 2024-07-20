@@ -1,0 +1,23 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="d-md-none">
+        <%= render partial: "tutorials/tutorial_links", 
+        layout: "layouts/drawer_layout", 
+        locals: { tutorials: @tutorials, title: "Tutorials",
+        item_id: generate_drawer_id("tutorial",), 
+        position: "start", btn_text: "Tutorials List -> ", btn_visibility: true }%>
+      </div>
+      <div class="d-none d-md-block dark-blue-section-div ">
+        <h5 class="py-2 text-center">Tutorials</h5>
+        <%= render partial: "tutorials/tutorial_links", locals: { tutorials: @tutorials } %>
+      </div>
+    </div>
+    <div class="col-md-10">
+      <h4 class="text-center py-2"><%= @tutorial.title %></h4>
+      <div>
+        <%= render @tutorial %>
+      </div>
+    </div>
+  </div>
+</div>
