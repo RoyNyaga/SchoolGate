@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  youtube_frame: MyString
+  slug: MyString
+  title: MyString
+  views: 1
+
+two:
+  youtube_frame: MyString
+  slug: MyString
+  title: MyString
+  views: 1
