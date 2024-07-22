@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_18_142712) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_20_221619) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -598,6 +598,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_142712) do
     t.jsonb "remarks", default: {"less_than_equal_to_5"=>"Very poor", "less_than_equal_to_9"=>"Poor", "less_than_equal_to_12"=>"Average", "less_than_equal_to_15"=>"Good", "less_than_equal_to_18"=>"V good", "less_than_equal_to_20"=>"Excellent"}
     t.index ["school_class_id"], name: "index_subjects_on_school_class_id"
     t.index ["school_id"], name: "index_subjects_on_school_id"
+  end
+
+  create_table "subscription_academic_years", force: :cascade do |t|
+    t.string "year"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "teacher_ques", force: :cascade do |t|
