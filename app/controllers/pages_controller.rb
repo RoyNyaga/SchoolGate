@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  before_action :update_page_visits
   skip_before_action :authenticate_teacher!
 
   def home

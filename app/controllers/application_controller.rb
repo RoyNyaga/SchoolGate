@@ -55,6 +55,23 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def update_page_visits
+    key = PageVisit.generate_key(params[:controller], params[:action])
+    if PageVisit.count == 0
+      PageVisit.create(pages: { "#{key}" => 1 })
+    else
+      page_visit = PageVisit.first
+      pages = page_visit.pages
+      if pages["#{key}"].nil?
+        pages["#{key}"] = 1
+      else
+        pages["#{key}"] += 1
+      end
+
+      page_visit.update(pages: pages)
+    end
+  end
+
   private
 
   def configure_permitted_parameters
