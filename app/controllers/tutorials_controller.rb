@@ -1,4 +1,5 @@
 class TutorialsController < InheritedResources::Base
+  skip_before_action :authenticate_teacher!
   before_action :set_tutorial, only: [:show, :edit, :update]
 
   def index

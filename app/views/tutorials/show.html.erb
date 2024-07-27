@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-3">
       <div class="d-md-none">
         <%= render partial: "tutorials/tutorial_links", 
         layout: "layouts/drawer_layout", 
@@ -13,7 +13,7 @@
         <%= render partial: "tutorials/tutorial_links", locals: { tutorials: @tutorials } %>
       </div>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-9">
       <h4 class="text-center py-2"><%= @tutorial.title %></h4>
       <div>
         <%= render @tutorial %>
