@@ -10,7 +10,7 @@
       <div class="col-4 col-md-2">
         <h5 class="text-white">Product</h5>
         <ul>
-          <li><%= link_to "How it works", "#", class: "footer-links" %></li>
+          <li><%= link_to "How it works", tutorial_path(Tutorial.find_by(id: 1)), class: "footer-links" %></li>
           <li><%= link_to "Service", "#", class: "footer-links" %></li>
           <li><%= link_to "Blogs", "#", class: "footer-links" %></li>
         </ul>

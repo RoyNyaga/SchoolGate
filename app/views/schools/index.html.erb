@@ -1,4 +1,7 @@
 <div class="container main-wrapper-padding">
+  <%= render partial: "layouts/dismissable_notification", 
+  locals: { content: "Don't know where to Start? wait for an invitation to join a School or setup a new school by clicking on the <strong>New School</strong> button 
+  <div>- Checkout this Tutorial to see how to move forward. #{link_to 'Tutorials', tutorials_path} </div>" } %>
   <h4 class="text-center py-5">Your Schools</h4>
   <%= link_to "New school", new_school_path, class: "general-link" %>
   <div class="row">

@@ -8,7 +8,7 @@
             <p class="text-danger"><%= message %></p>
             <p class="text-muted">Having trouble accessing your accout? <%= link_to "Contact Us", contact_us_path, class: "sign-up-link" %></p>
           <% end %>
-          <p class="no-account-yet">Do not have an account yet?  <%= link_to "Create new account", new_registration_path(resource_name), class: "sign-up-link" %></p>
+          <p class="no-account-yet">Do not have an account yet?  <%= link_to "Create new account - free!!", new_registration_path(resource_name), class: "sign-up-link" %></p>
           <%= form_for(resource, as: resource_name, url: session_path(resource_name), data: {turbo: false}) do |f| %>
             <div class="field my-3">
               <%= f.label :phone %><br />
