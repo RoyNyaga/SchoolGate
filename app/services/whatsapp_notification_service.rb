@@ -72,4 +72,41 @@ class WhatsappNotificationService
 
     puts response.body
   end
+
+  def self.general_updates(content, template_name, users_info)
+    conn = Faraday.new(url: WHATSAPP_API_URL) do |faraday|
+      faraday.request :json
+      faraday.response :logger
+      faraday.adapter Faraday.default_adapter
+    end
+
+    response = conn.post do |req|
+      req.headers["Authorization"] = "Bearer #{ACCESS_TOKEN}"
+      req.headers["Content-Type"] = "application/json"
+      req.body = {
+        messaging_product: "whatsapp",
+        to: @school.notification_contact,
+        type: "template",
+        template: {
+          name: template_name,
+          language: { code: "en_US" },
+          components: [
+            {
+              type: "body",
+              parameters: [
+                {
+                  type: "text",
+                  text: @school.abbreviation,
+                },
+                {
+                  type: "text",
+                  text: @student.full_name,
+                },
+              ],
+            },
+          ],
+        },
+      }.to_json
+    end
+  end
 end
