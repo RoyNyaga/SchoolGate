@@ -22,6 +22,7 @@ class Teacher < ApplicationRecord
   validates :phone_number, uniqueness: true
 
   before_save :set_full_name #This method is defined int he application_record
+  after_create :notify_admins
 
   def email_required?
     false
@@ -46,5 +47,15 @@ class Teacher < ApplicationRecord
 
   def active_subjects
     class_subjects.joins(:teachings).where(teachings: { status: true })
+  end
+
+  def admin_content_notification_message
+    "NEW TEACHER ALERT!!!!, We have a new teacher on the platform. full_name: #{self.full_name}, id: #{self.id}"
+  end
+
+  private
+
+  def notify_admins
+    WhatsappNotificationJob.perform_later(self.id, "general_update_template", self.class.name)
   end
 end
