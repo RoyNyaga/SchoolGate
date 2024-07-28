@@ -47,7 +47,7 @@ Things you may want to cover:
 `rm ~/../../usr/local/var/postgresql@14/postmaster.pid`
 - Also make sure port number in ls ~/../../usr/local/var/postgresql@14/postgresql.conf is set to 5432 or the default value.
 - Restart postgres server.
-
+ `brew services restart postgresql `
 ### stimulus commands
 - stimulus generate command
 `bin/rails generate stimulus contraller_name_in_plural`

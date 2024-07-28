@@ -4,7 +4,7 @@ class AdminUser < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable
 
-  validates :phone_number, presence: true, length: { is: 9 }
+  validates :phone_number, presence: true, length: { is: 12 }
   validates :name, presence: true
 
   def self.parse_users_info

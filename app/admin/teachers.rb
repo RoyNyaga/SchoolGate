@@ -1,5 +1,5 @@
 ActiveAdmin.register Teacher do
-  permit_params :email, :password, :password_confirmation, :remember_created_at, :phone_number, :full_name, :first_name, :last_name, :town
+  permit_params :password, :password_confirmation, :remember_created_at, :phone_number, :full_name, :first_name, :last_name, :town
 
   index do
     selectable_column
@@ -19,7 +19,7 @@ ActiveAdmin.register Teacher do
 
   form do |f|
     f.inputs do
-      f.input :email
+      f.input :phone_number
       f.input :password
       f.input :password_confirmation
     end
