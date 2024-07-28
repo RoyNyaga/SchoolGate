@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   resources :tutorials
   mount MissionControl::Jobs::Engine, at: "/jobs"
 
-  devise_for :admin_users, ActiveAdmin::Devise.config
+  # devise_for :admin_users, ActiveAdmin::Devise.config
+  devise_for :admin_users, ActiveAdmin::Devise.config.merge(controllers: { sessions: "active_admin/sessions" })
   ActiveAdmin.routes(self)
   resources :receipts do
     collection do
