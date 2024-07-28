@@ -6,4 +6,8 @@ class AdminUser < ApplicationRecord
 
   validates :phone_number, presence: true, length: { is: 9 }
   validates :name, presence: true
+
+  def self.parse_users_info
+    all.map { |user| { name: user.name, phone_number: user.phone_number } }
+  end
 end
