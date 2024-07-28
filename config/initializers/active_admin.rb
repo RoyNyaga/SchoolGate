@@ -5,7 +5,31 @@ ActiveAdmin.setup do |config|
   # for each of the active admin pages.
   #
   config.site_title = "SchoolGate Admin Dashboard"
-
+  # skip teacher authentication so that you can access dashboard without being logged in as a teacher
+  config.skip_before_action :authenticate_teacher!
+  # This setting changes the method which Active Admin calls
+  # within the application controller.
+  config.authentication_method = :authenticate_admin_user!
+  # Default:
+  config.logout_link_path = :destroy_admin_user_session_path
+  # This setting changes the method which Active Admin calls
+  # (within the application controller) to return the currently logged in user.
+  # == Attribute Filters
+  #
+  # You can exclude possibly sensitive model attributes from being displayed,
+  # added to forms, or exported by default by ActiveAdmin
+  #
+  config.filter_attributes = [:encrypted_password, :password, :password_confirmation]
+  config.current_user_method = :current_admin_user
+  # == Batch Actions
+  #
+  # Enable and disable Batch Actions
+  #
+  config.batch_actions = true
+  # You can run `bin/rails runner 'puts I18n.t("date.formats")'` to see the
+  # available formats in your application.
+  #
+  config.localize_format = :long
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
   #
@@ -69,9 +93,6 @@ ActiveAdmin.setup do |config|
   # method in a before filter of all controller actions to
   # ensure that there is a currently logged in admin user.
   #
-  # This setting changes the method which Active Admin calls
-  # within the application controller.
-  config.authentication_method = :authenticate_admin_user!
 
   # == User Authorization
   #
@@ -106,9 +127,6 @@ ActiveAdmin.setup do |config|
   # Active Admin will associate actions with the current
   # user performing them.
   #
-  # This setting changes the method which Active Admin calls
-  # (within the application controller) to return the currently logged in user.
-  config.current_user_method = :current_admin_user
 
   # == Logging Out
   #
@@ -119,8 +137,6 @@ ActiveAdmin.setup do |config|
   # a string, the strings is used as the path. If it's a Symbol, we
   # will call the method to return the path.
   #
-  # Default:
-  config.logout_link_path = :destroy_admin_user_session_path
 
   # This setting changes the http method used when rendering the
   # link. For example :get, :delete, :put, etc..
@@ -156,12 +172,6 @@ ActiveAdmin.setup do |config|
   # You can customize the comment menu:
   # config.comments_menu = { parent: 'Admin', priority: 1 }
 
-  # == Batch Actions
-  #
-  # Enable and disable Batch Actions
-  #
-  config.batch_actions = true
-
   # == Controller Filters
   #
   # You can add before, after and around filters to all of your
@@ -169,24 +179,12 @@ ActiveAdmin.setup do |config|
   #
   # config.before_action :do_something_awesome
 
-  # == Attribute Filters
-  #
-  # You can exclude possibly sensitive model attributes from being displayed,
-  # added to forms, or exported by default by ActiveAdmin
-  #
-  config.filter_attributes = [:encrypted_password, :password, :password_confirmation]
-
   # == Localize Date/Time Format
   #
   # Set the localize format to display dates and times.
   # To understand how to localize your app with I18n, read more at
   # https://guides.rubyonrails.org/i18n.html
   #
-  # You can run `bin/rails runner 'puts I18n.t("date.formats")'` to see the
-  # available formats in your application.
-  #
-  config.localize_format = :long
-
   # == Setting a Favicon
   #
   # config.favicon = 'favicon.ico'
