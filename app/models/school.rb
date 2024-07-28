@@ -39,6 +39,7 @@ class School < ApplicationRecord
     }
 
   after_create :add_teachers_permission
+  after_create :notify_admins
   before_create :set_school_identifier
 
   def self.random_capital_letters(length)
@@ -58,6 +59,10 @@ class School < ApplicationRecord
     semesters.active.first
   end
 
+  def admin_content_notification_message
+    "NEW SCHOOL ALERT!!!!, The following school has been created #{self.full_name}"
+  end
+
   private
 
   def set_school_identifier
@@ -74,5 +79,9 @@ class School < ApplicationRecord
       @count += 1
     end
     self.school_identifier = @letters
+  end
+
+  def notify_admins
+    WhatsappNotificationJob.perform_later(self.id, "general_update_template", self.class.name)
   end
 end
