@@ -102,3 +102,7 @@ Things you may want to cover:
 - the registered phone number should not originally have a whatsapp account associated to it. I used my orange number.
 - Every registered phone number or to number has it's own Phone number ID which is added on the API base url to make request.
 - Every registered phone number also have it's own templates.
+
+# active admin
+- rails generate active_admin:resource [MyModelName]
+
