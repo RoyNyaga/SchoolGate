@@ -303,6 +303,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_27_234002) do
 
   create_table "page_visits", force: :cascade do |t|
     t.json "pages", default: {}
+    t.integer "total_visit_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
