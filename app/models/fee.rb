@@ -94,7 +94,7 @@ class Fee < ApplicationRecord
                                  update_history: last_update_record, amount: amount.to_f, total_fees_paid_at_this_point: self.total_fee_paid,
                                  installment_num: self.installment_num)
 
-        WhatsappNotificationJob.perform_later(receipt.id, "fees_instant_pay_template")
+        WhatsappNotificationJob.perform_later(receipt.id, "fees_instant_pay_template", self.class.name)
       end
     else
       last_update_record_amounts.each do |amount|
@@ -103,7 +103,7 @@ class Fee < ApplicationRecord
                                  update_history: last_update_record, amount: amount.to_f, total_fees_paid_at_this_point: self.total_fee_paid,
                                  installment_num: self.installment_num)
 
-        WhatsappNotificationJob.perform_later(receipt.id, "fees_instant_pay_template")
+        WhatsappNotificationJob.perform_later(receipt.id, "fees_instant_pay_template", self.class.name)
       end
     end
 
