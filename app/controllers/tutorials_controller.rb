@@ -1,6 +1,7 @@
 class TutorialsController < InheritedResources::Base
   skip_before_action :authenticate_teacher!
   before_action :set_tutorial, only: [:show, :edit, :update]
+  before_action :update_page_visits, only: [:show, :index]
 
   def index
     @tutorials = Tutorial.all.order(priority: :asc)
