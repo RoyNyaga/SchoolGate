@@ -28,7 +28,8 @@ class InvitationsController < ApplicationController
 
   def accept
     @invitation.update(status: Invitation.statuses["accepted"])
-    unless current_school.workers.where(teacher_id: @invitation.teacher.id).present?
+    @school = @invitation.school
+    unless @school.workers.where(id: @invitation.teacher.id).present?
       Working.create(school_id: @invitation.school_id,
                      teacher_id: @invitation.teacher_id,
                      permission: @invitation.permission,
