@@ -32,6 +32,10 @@ class School < ApplicationRecord
   store_accessor :whatsapp_notification_settings, :activate_notification, :notification_contact
 
   enum education_level: { basic_education: 1, secondary_education: 2, higher_education: 3 }
+  enum approval_state: { submitted_approval: 0, in_processing_approval: 1, rejected_approval: 2, accepted_approval: 3 }
+  enum environment_mode: { testing_mode: 0, school_gate_testing_mode: 1, live_mode: 2 }
+
+  delegate :full_name, to: :teacher, prefix: true
 
   scope :without_settings_attr, -> {
       select(:full_name, :id, :teacher_id, :abbreviation, :town,
@@ -41,6 +45,9 @@ class School < ApplicationRecord
   after_create :add_teachers_permission
   after_create :notify_admins
   before_create :set_school_identifier
+
+  # listing associations here to avoid Ransack errors on activeadmin.
+  # this prevents active admin from wanting to search the associations which leads to errors
 
   def self.random_capital_letters(length)
     letters = ("A".."Z").to_a
