@@ -10,27 +10,35 @@
     </div>
   <% end %>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 my-3">
       <%= form.label :full_name, style: "display: block" %>
       <%= form.text_field :full_name, class: "general-input-styles" %>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 my-3">
       <%= form.label :abbreviation, style: "display: block" %>
       <%= form.text_field :abbreviation, class: "general-input-styles" %>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 my-3">
       <%= form.label :education_level, style: "display: block" %>
       <%= form.select :education_level, School.education_levels.map { |k,v| [k.humanize, k] }, {include_blank: 'Select Education level Number'}, { class: "general-input-styles" } %>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 my-3">
       <%= form.label :town, style: "display: block" %>
       <%= form.text_field :town, class: "general-input-styles" %>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 my-3">
+      <%= form.label :phone_number, style: "display: block" %>
+      <%= form.number_field :phone_number, class: "general-input-styles", placeholder: "We recommend Whatsapp Numbers" %>
+    </div>
+    <div class="col-md-3 my-3">
+      <%= form.label :email_address, style: "display: block" %>
+      <%= form.text_field :email_address, class: "general-input-styles" %>
+    </div>
+    <div class="col-md-3 my-3">
       <%= form.label :address, style: "display: block" %>
       <%= form.text_field :address, class: "general-input-styles" %>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-9 my-3">
       <%= form.label :moto, style: "display: block" %>
       <%= form.text_field :moto, class: "general-input-styles" %>
     </div>
@@ -49,7 +57,7 @@
         <%= form.label :activate_notification %>
         <%= form.check_box :activate_notification, disabled: true %>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 my-3">
         <%= form.label :notification_contact %>
         <%= form.text_field :notification_contact, class: "general-input-styles", disabled: true %>
       </div>
