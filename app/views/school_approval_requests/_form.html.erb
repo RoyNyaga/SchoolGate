@@ -1,0 +1,51 @@
+<%= form_with(model: school_approval_request) do |form| %>
+  <% if school_approval_request.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(school_approval_request.errors.count, "error") %> prohibited this school_approval_request from being saved:</h2>
+      <ul>
+        <% school_approval_request.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= form.label :school_id, class: "d-none" %>
+    <%= form.hidden_field :school_id, value: current_school.id %>
+  </div>
+  <div>
+    <%= form.label :teacher_id, class: "d-none" %>
+    <%= form.hidden_field :teacher_id, value: current_teacher.id %>
+  </div>
+  <div class="my-3">
+    <%= form.label :school_name, style: "display: block" %>
+    <%= form.text_field :school_name, value: current_school.full_name, class: "general-input-styles", required: true %>
+  </div>
+  <div class="my-3">
+    <%= form.label :town, style: "display: block" %>
+    <%= form.text_field :town, value: current_school.town, class: "general-input-styles" %>
+  </div>
+  <div class="my-3">
+    <%= form.label :address, style: "display: block" %>
+    <%= form.text_field :address, value: current_school.address, class: "general-input-styles" %>
+  </div>
+  <div class="my-3">
+    <%= form.label :education_level, style: "display: block" %>
+    <%= form.text_field :education_level, value: current_school.education_level, class: "general-input-styles" %>
+  </div>
+  <div class="my-3">
+    <%= form.label "Provide an estimated number of students", style: "display: block" %>
+    <%= form.number_field :num_of_student, class: "general-input-styles", required: true %>
+  </div>
+  <div class="my-3">
+    <%= form.label "How do you intend to use this application?", style: "display: block" %>
+    <%= form.text_area :why_schoolgate, style: "height: 100px;", class: "general-input-styles" %>
+  </div>
+  <div class="my-3">
+    <%= form.label "How did you know about us?", style: "display: block" %>
+    <%= form.text_area :how_did_you_know_about_us,  style: "height: 100px;", class: "general-input-styles" %>
+  </div>
+  <div>
+    <%= form.submit "Send Request", class: "model-form-btn" %>
+  </div>
+<% end %>

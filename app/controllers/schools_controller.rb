@@ -23,6 +23,7 @@ class SchoolsController < ApplicationController
 
   # GET /schools/1/edit
   def edit
+    set_current_school(@school)
   end
 
   # POST /schools or /schools.json
@@ -31,6 +32,14 @@ class SchoolsController < ApplicationController
 
     respond_to do |format|
       if @school.save
+        SuperAdminWhatsappJob.perform_later("Super Admin Notification",
+                                            admin_school_path(@school), "New School Notification: #{@school.full_name}", "super_admin_notification_template")
+
+        school_admin_content = "Congratulations!!!!, You Succeeded in creating a school on SchoolGate. Please visit the tutorial page to see how to progress from here. For more help, please contact: (+237) 671-172-775"
+        SchoolAdminWhatsappJob.perform_later(@school.id, ["principal"],
+                                             school_path(id: @school.id, current_school_id: @school.id),
+                                             school_admin_content, "administrator_notification_template")
+
         format.html { redirect_to edit_school_path(@school), notice: "School was successfully created." }
         format.json { render :show, status: :created, location: @school }
       else

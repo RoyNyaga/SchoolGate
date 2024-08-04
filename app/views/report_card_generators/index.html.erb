@@ -1,6 +1,7 @@
 <div class="container">
   <h4 class="text-center my-3">Report card generators</h4>
-  <div id="report_card_generators" class="row">
+  <%= link_to "Generate Report Cards", new_report_card_generator_path, class: "general-link" %>
+  <div id="report_card_generators" class="row my-3">
     <% @report_card_generators.each do |report_card_generator| %>
       <div class="col-md-4 my-3">
         <%= render report_card_generator %>
@@ -8,4 +9,3 @@
     <% end %>
   </div>
 </div>
-<%= link_to "New report card generator", new_report_card_generator_path %>

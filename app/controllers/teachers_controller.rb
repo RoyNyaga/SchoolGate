@@ -27,7 +27,7 @@ class TeachersController < ApplicationController
       flash[:success] = "Profile successfully updated"
       redirect_to edit_teacher_path(@teacher)
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

@@ -83,6 +83,8 @@ Things you may want to cover:
 ## Figaro
 - figaro heroku:set -e production
 
+http://localhost:3000/school_classes/19?current_school_id=1
+
 ## Puma configs
 - WEB_CONCURRENCY: "2" # this configuration constrols the number of puma instances to be created
 - RAILS_MAX_THREADS: "5" # This configuration constrols the maximum number of threads per a puma instance

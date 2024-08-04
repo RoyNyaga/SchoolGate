@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_29_062438) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_31_033230) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -414,6 +414,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_29_062438) do
     t.index ["term_id"], name: "index_report_cards_on_term_id"
   end
 
+  create_table "school_approval_requests", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "teacher_id", null: false
+    t.string "school_name"
+    t.integer "num_of_student"
+    t.string "education_level"
+    t.string "why_schoolgate"
+    t.string "town"
+    t.string "address"
+    t.string "how_did_you_know_about_us"
+    t.integer "approval_state", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_id"], name: "index_school_approval_requests_on_school_id"
+    t.index ["teacher_id"], name: "index_school_approval_requests_on_teacher_id"
+  end
+
   create_table "school_classes", force: :cascade do |t|
     t.bigint "school_id", null: false
     t.string "name"
@@ -778,6 +795,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_29_062438) do
   add_foreign_key "report_cards", "schools"
   add_foreign_key "report_cards", "students"
   add_foreign_key "report_cards", "terms"
+  add_foreign_key "school_approval_requests", "schools"
+  add_foreign_key "school_approval_requests", "teachers"
   add_foreign_key "school_classes", "schools"
   add_foreign_key "schools", "teachers"
   add_foreign_key "semesters", "academic_years"

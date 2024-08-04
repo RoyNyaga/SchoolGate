@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>School approval requests</h1>
+
+<div id="school_approval_requests">
+  <% @school_approval_requests.each do |school_approval_request| %>
+    <%= render school_approval_request %>
+    <p>
+      <%= link_to "Show this school approval request", school_approval_request %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New school approval request", new_school_approval_request_path %>

@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="my-4">
+    <%= render "shared/buttons/back_btn" %>
+  </div>
+  <h4 class="text-center"><%= current_school.full_name %></h4>
+  <div class="light-grey-card py-4 px-3">
+    <%= render "form", school_approval_request: @school_approval_request %>
+  </div>
+  <br>
+</div>

@@ -8,6 +8,9 @@ class ReportCardGenerator < ApplicationRecord
   has_many :report_cards
 
   enum progress_state: { initializing: 0, report_card_creation: 1, generating_pdf: 2, attach_pdf_to_generator: 3, completed: 4 }
+
+  validate :student_presence_check
+
   delegate :year, to: :academic_year
   delegate :name, to: :school_class
   delegate :term_type, to: :term
@@ -188,5 +191,11 @@ class ReportCardGenerator < ApplicationRecord
                    { "error_code" => "missing_seq", "message" => "Missing Sequence for subject" }]
     error_object = error_names.find { |e| e["error_code"] == error_code }
     error_object
+  end
+
+  private
+
+  def student_presence_check
+    errors.add(:student_number, "Can't generate Report Card for a Class that has no student") if school_class.students.blank?
   end
 end

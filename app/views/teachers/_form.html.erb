@@ -19,12 +19,12 @@
       <%= form.text_field :last_name, class: "general-input-styles", required: true %>
     </div>
     <div class="col-md-6 my-2">
-      <%= form.label :phone_number, style: "display: block" %>
+      <%= form.label "Phone Number (whatsapp if possible)", style: "display: block" %>
       <%= form.number_field :phone_number, class: "general-input-styles", required: true %>
     </div>
     <div class="col-md-6 my-2">
       <%= form.label :town, style: "display: block" %>
-      <%= form.text_field :town, class: "general-input-styles", required: true %>
+      <%= form.text_field :town, class: "general-input-styles" %>
     </div>
   </div>
   <div class="my-3">

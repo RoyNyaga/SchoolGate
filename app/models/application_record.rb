@@ -5,8 +5,14 @@ class ApplicationRecord < ActiveRecord::Base
     full_name.split(" ")[0..1].join(" ")
   end
 
-  def self.ransackable_attributes(auth_object = nil) # this method is to avoid errors on active admin dashboard
+  # this method is to avoid Ransack errors on active admin dashboard
+  def self.ransackable_attributes(auth_object = nil)
     self.attribute_names
+  end
+
+  # this method is to avoid Ransack errors on active admin dashboard
+  def self.ransackable_associations(auth_object = nil)
+    []
   end
 
   private

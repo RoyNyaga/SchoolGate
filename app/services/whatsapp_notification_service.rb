@@ -12,73 +12,73 @@ class WhatsappNotificationService
     end
   end
 
-  def self.send_fees_alert_message(receipt_id, template_name)
-    @receipt = Receipt.find(receipt_id)
-    @school = @receipt.school
-    @student = @receipt.student
-
-    response = conn.post do |req|
-      req.headers["Authorization"] = "Bearer #{ACCESS_TOKEN}"
-      req.headers["Content-Type"] = "application/json"
-      req.body = {
-        messaging_product: "whatsapp",
-        to: @school.notification_contact,
-        type: "template",
-        template: {
-          name: template_name,
-          language: { code: "en_US" },
-          components: [
-            {
-              type: "body",
-              parameters: [
-                {
-                  type: "text",
-                  text: @school.abbreviation,
-                },
-                {
-                  type: "text",
-                  text: @student.full_name,
-                },
-                {
-                  type: "text",
-                  text: @student.matricule,
-                },
-                {
-                  type: "text",
-                  text: number_to_currency(@receipt.amount, unit: "", precision: 0),
-                },
-                {
-                  type: "text",
-                  text: @receipt.readable_date(with_year: true),
-                },
-                {
-                  type: "text",
-                  text: @receipt.update_history["updator"],
-                },
-              ],
-            },
-            {
-              type: "button",
-              sub_type: "url",
-              index: "0",
-              parameters: [
-                {
-                  type: "text",
-                  text: "#{@receipt.id}",
-                },
-              ],
-            },
-          ],
-        },
-      }.to_json
+  def self.send_fees_alert_message(receipt, school, school_admin_info, template_name)
+    student = receipt.student
+    super_admin_users_info.each do |user|
+      response = conn.post do |req|
+        req.headers["Authorization"] = "Bearer #{ACCESS_TOKEN}"
+        req.headers["Content-Type"] = "application/json"
+        req.body = {
+          messaging_product: "whatsapp",
+          to: user[:phone_number],
+          type: "template",
+          template: {
+            name: template_name,
+            language: { code: "en_US" },
+            components: [
+              {
+                type: "body",
+                parameters: [
+                  {
+                    type: "text",
+                    text: school.abbreviation,
+                  },
+                  {
+                    type: "text",
+                    text: student.full_name,
+                  },
+                  {
+                    type: "text",
+                    text: student.matricule,
+                  },
+                  {
+                    type: "text",
+                    text: number_to_currency(receipt.amount, unit: "", precision: 0),
+                  },
+                  {
+                    type: "text",
+                    text: receipt.readable_date(with_year: true),
+                  },
+                  {
+                    type: "text",
+                    text: receipt.update_history["updator"],
+                  },
+                ],
+              },
+              {
+                type: "button",
+                sub_type: "url",
+                index: "0",
+                parameters: [
+                  {
+                    type: "text",
+                    text: "#{receipt.id}?",
+                  },
+                ],
+              },
+            ],
+          },
+        }.to_json
+      end
     end
 
     puts response.body
   end
 
-  def self.send_admin_message(content, template_name, users_info, class_name)
+  def self.send_super_admin_message(header, link_path, content, template_name, super_admin_users_info)
+    link_path.slice!(0) if link_path.first == "/"
     content = Rails.env.production? ? content : "#{Rails.env}: " + content
-    users_info.each do |user|
+    super_admin_users_info.each do |user|
       response = conn.post do |req|
         req.headers["Authorization"] = "Bearer #{ACCESS_TOKEN}"
         req.headers["Content-Type"] = "application/json"
@@ -108,7 +108,73 @@ class WhatsappNotificationService
                 parameters: [
                   {
                     type: "text",
-                    text: class_name,
+                    text: header,
+                  },
+                ],
+              },
+              {
+                type: "button",
+                sub_type: "url",
+                index: "0",
+                parameters: [
+                  {
+                    type: "text",
+                    text: link_path,
+                  },
+                ],
+              },
+            ],
+          },
+        }.to_json
+      end
+    end
+  end
+
+  def self.send_school_administrator_message(school, school_admin_user_info, link_path, content, template_name)
+    link_path.slice!(0) if link_path.first == "/"
+    content = Rails.env.production? ? content : "#{Rails.env}: " + content
+    school_admin_user_info.each do |user|
+      response = conn.post do |req|
+        req.headers["Authorization"] = "Bearer #{ACCESS_TOKEN}"
+        req.headers["Content-Type"] = "application/json"
+        req.body = {
+          messaging_product: "whatsapp",
+          to: user[:phone_number],
+          type: "template",
+          template: {
+            name: template_name,
+            language: { code: "en_US" },
+            components: [
+              {
+                type: "body",
+                parameters: [
+                  {
+                    type: "text",
+                    text: user[:name],
+                  },
+                  {
+                    type: "text",
+                    text: content,
+                  },
+                ],
+              },
+              {
+                type: "header",
+                parameters: [
+                  {
+                    type: "text",
+                    text: school.abbreviation,
+                  },
+                ],
+              },
+              {
+                type: "button",
+                sub_type: "url",
+                index: "0",
+                parameters: [
+                  {
+                    type: "text",
+                    text: link_path,
                   },
                 ],
               },

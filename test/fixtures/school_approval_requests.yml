@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  school: one
+  teacher: one
+  school_name: MyString
+  num_of_student: 1
+  education_level: MyString
+  why_schoolgate: MyString
+  town: MyString
+  address: MyString
+  how_did_you_know_about_us: MyString
+
+two:
+  school: two
+  teacher: two
+  school_name: MyString
+  num_of_student: 1
+  education_level: MyString
+  why_schoolgate: MyString
+  town: MyString
+  address: MyString
+  how_did_you_know_about_us: MyString

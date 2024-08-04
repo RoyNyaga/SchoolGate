@@ -2,7 +2,6 @@ class SchoolClassesController < ApplicationController
   layout "school_layout"
   before_action :check_for_current_school
   before_action :set_school_class, only: %i[ show edit update destroy ]
-  before_action :set_current_school
   before_action :check_for_current_school
 
   # GET /school_classes or /school_classes.json
@@ -31,6 +30,10 @@ class SchoolClassesController < ApplicationController
 
     respond_to do |format|
       if @school_class.save
+        SchoolAdminWhatsappJob.perform_later(@school_class.school_id, ["principal"], school_class_path(id: @school_class.id,
+                                                                                                       current_school_id: current_school.id),
+                                             "A new Class has been added to your school: #{@school_class.name}",
+                                             "administrator_notification_template")
         format.html { redirect_to school_class_url(@school_class), notice: "School class was successfully created." }
         format.json { render :show, status: :created, location: @school_class }
       else
@@ -73,9 +76,5 @@ class SchoolClassesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def school_class_params
     params.require(:school_class).permit(:school_id, :name, :level, :required_fee)
-  end
-
-  def set_current_school
-    @current_school ||= School.find(session[:current_school_id]) if session[:current_school_id]
   end
 end

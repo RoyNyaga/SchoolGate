@@ -19,9 +19,11 @@ class Teacher < ApplicationRecord
   has_many :courses, through: :lecturings
   has_many :assessments
 
-  validates :phone_number, uniqueness: true
+  validates :first_name, presence: true
+  validate :phone_number_digits_validation
 
   before_save :set_full_name #This method is defined int he application_record
+  before_validation :set_phone_number
   after_create :notify_admins
 
   def email_required?
@@ -53,9 +55,25 @@ class Teacher < ApplicationRecord
     "NEW TEACHER ALERT!!!!, We have a new teacher on the platform. full_name: #{self.full_name}, id: #{self.id}"
   end
 
+  def format_phone_number
+    if phone_number.length == 9
+      return "237" + phone_number
+    end
+    return phone_number
+  end
+
   private
 
   def notify_admins
-    WhatsappNotificationJob.perform_later(self.id, "general_update_template", self.class.name)
+    SuperAdminWhatsappJob.perform_later("Super Admin Notification",
+                                        "/admin/teachers/#{id}", "New Account Notification: Teachers Name: #{full_name}", "super_admin_notification_template")
+  end
+
+  def set_phone_number
+    self.phone_number = format_phone_number
+  end
+
+  def phone_number_digits_validation
+    errors.add(:phone_number, "Must be 9 digits.") if self.phone_number.length != 12
   end
 end

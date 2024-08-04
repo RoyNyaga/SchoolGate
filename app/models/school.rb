@@ -19,6 +19,7 @@ class School < ApplicationRecord
   has_many :faculties
   has_many :departments
   has_many :courses
+  has_one :school_approval_request
 
   validates :full_name, presence: true, uniqueness: { scope: :teacher_id,
                                                       message: "You already have a school with this name" }
@@ -32,7 +33,7 @@ class School < ApplicationRecord
   store_accessor :whatsapp_notification_settings, :activate_notification, :notification_contact
 
   enum education_level: { basic_education: 1, secondary_education: 2, higher_education: 3 }
-  enum approval_state: { submitted_approval: 0, in_processing_approval: 1, rejected_approval: 2, accepted_approval: 3 }
+  enum approval_state: { no_approval: 0, in_review: 1, rejected_approval: 2, accepted_approval: 3 }
   enum environment_mode: { testing_mode: 0, school_gate_testing_mode: 1, live_mode: 2 }
 
   delegate :full_name, to: :teacher, prefix: true
@@ -43,7 +44,6 @@ class School < ApplicationRecord
     }
 
   after_create :add_teachers_permission
-  after_create :notify_admins
   before_create :set_school_identifier
 
   # listing associations here to avoid Ransack errors on activeadmin.
@@ -67,7 +67,11 @@ class School < ApplicationRecord
   end
 
   def admin_content_notification_message
-    "NEW SCHOOL ALERT!!!!, The following school has been created #{self.full_name}"
+    "NEW SCHOOL ALERT!!!!, The following school has been created full_name: #{self.full_name}, id: #{self.id}"
+  end
+
+  def administrators(permissions) # Can be an arr off permission ["principal", "teacher"] or simple string "principal"
+    Teacher.joins(:workings).where(workings: { school_id: id, permission: permissions, status: "active" })
   end
 
   private
@@ -86,9 +90,5 @@ class School < ApplicationRecord
       @count += 1
     end
     self.school_identifier = @letters
-  end
-
-  def notify_admins
-    WhatsappNotificationJob.perform_later(self.id, "general_update_template", self.class.name)
   end
 end

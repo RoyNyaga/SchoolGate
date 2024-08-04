@@ -13,9 +13,21 @@ class ApplicationController < ActionController::Base
   end
 
   def check_for_current_school
-    unless session[:current_school_id]
-      redirect_to schools_path
-      return
+    if params[:current_school_id].present?
+      school = School.find(params[:current_school_id])
+      if school
+        set_current_school(school)
+      else
+        flash[:error] = "This School Does Not Exist"
+        redirect_to schools_path
+        return
+      end
+    else
+      unless session[:current_school_id]
+        flash[:error] = "School Session has expired, please select a School"
+        redirect_to schools_path
+        return
+      end
     end
   end
 
@@ -68,7 +80,12 @@ class ApplicationController < ActionController::Base
         pages["#{key}"] += 1
       end
 
-      page_visit.update(pages: pages)
+      if page_visit.update(pages: pages)
+        content = "Page Visit updates: #{page_visit.stringify_page_visits}, Total_visit_count: #{page_visit.total_visit_count}"
+        SuperAdminWhatsappJob.perform_later("Super Admin Notification",
+                                            admin_page_visit_path(page_visit), content,
+                                            "super_admin_notification_template") if page_visit.total_visit_count % 10 == 0
+      end
     end
   end
 
@@ -81,7 +98,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    # stored_location_for(resource) || schools_path
-    schools_path
+    stored_location_for(resource) || schools_path
+    # schools_path
   end
 end

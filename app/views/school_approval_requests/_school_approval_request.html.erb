@@ -1,0 +1,24 @@
+<div id="<%= dom_id school_approval_request %>" class="dashboard-normal-font-size light-grey-card p-3">
+  <p class="my-5">
+    <% if school_approval_request.in_review? %>
+      <span class="text-white p-1 badge bg-warning bold">In Review</span>
+    <% elsif school_approval_request.accepted_approval? %>
+      <span class="text-white p-1 badge bg-success bold">Request Approved</span>
+    <% elsif school_approval_request.rejected_approval? %>
+      <span class="text-white p-1 badge bg-danger bold">Request Rejected</span>
+    <% end %>
+  </p>
+  <p class="">Education Level <span class="text-color-grey-2 px-3"><%= school_approval_request.education_level.humanize.titleize %></span></p>
+  <p class="">Approximate Number of Students <span class="text-color-grey-2 px-3"><%= school_approval_request.num_of_student %> Students</span></p>
+  <div>
+    <p>Why School Gate?</p>
+    <p class="text-color-grey-2 px-3 dashboard-normal-font-size" ><%= school_approval_request.why_schoolgate %></p>
+  </div>
+  <p class="">Town <span class="text-color-grey-2 px-3"><%= school_approval_request.town %></span></p>
+  <p class="">Address <span class="text-color-grey-2 px-3"><%= school_approval_request.address %></span></p>
+  <div>
+    <p>How did you know about us?</p>
+    <p class="text-color-grey-2 px-3"><%= school_approval_request.how_did_you_know_about_us %></p>
+  </div>
+  <p class="">Submitted by <span class="text-color-grey-2 px-3"><%= school_approval_request.teacher.full_name %></span></p>
+</div>

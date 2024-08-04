@@ -1,0 +1,12 @@
+<% if current_school %>
+  <% if current_school.no_approval? %>
+    <%= render partial: "layouts/dismissable_notification",
+                locals: { alert_type: "alert-warning", content: "Please submit an <strong>Approval Request</strong> for your school to be able to add Students: #{link_to 'Submit approval request', new_school_approval_request_path }" } %>
+  <% elsif current_school.in_review? && current_school.school_approval_request.present? %>
+    <%= render partial: "layouts/dismissable_notification",
+                locals: { alert_type: "alert-info", content: "We are <strong>Reviewing</strong> your approval request, it usually takes 24 to 48hrs. #{link_to 'View Approval Status', school_approval_request_path(current_school.school_approval_request) }" } %>
+  <% elsif current_school.rejected_approval? && current_school.school_approval_request.present? %>
+    <%= render partial: "layouts/dismissable_notification",
+                locals: { alert_type: "alert-danger", content: "Sorry, we can't grant approval to your school given that it doesn't meet with our requirements" } %>
+  <% end %>
+<% end %>
