@@ -25,12 +25,13 @@ class School < ApplicationRecord
                                                       message: "You already have a school with this name" }
   validates :abbreviation, presence: true
   validates :moto, presence: true
+  validates :phone_number, presence: true
+  validate :phone_number_digits_validation
 
   store_accessor :school_fees_settings, :level_1_fees, :level_2_fees, :level_3_fees, :level_4_fees,
                  :level_5_fees, :level_6_fees, :level_7_fees
 
   store_accessor :student_id_settings, :school_identifier
-  store_accessor :contacts, :phone_number, :email_address
 
   enum education_level: { basic_education: 1, secondary_education: 2, higher_education: 3 }
   enum approval_state: { no_approval: 0, in_review: 1, rejected_approval: 2, accepted_approval: 3 }
@@ -45,6 +46,7 @@ class School < ApplicationRecord
 
   after_create :add_teachers_permission
   before_create :set_school_identifier
+  before_validation :set_phone_number
 
   # listing associations here to avoid Ransack errors on activeadmin.
   # this prevents active admin from wanting to search the associations which leads to errors

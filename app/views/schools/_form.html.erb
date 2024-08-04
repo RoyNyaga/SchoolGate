@@ -1,7 +1,7 @@
 <%= form_with(model: school) do |form| %>
   <% if school.errors.any? %>
-    <div style="form-error-div">
-      <h2><%= pluralize(school.errors.count, "error") %> prohibited this school from being saved:</h2>
+    <div class="form-error-div p-2">
+      <p><%= pluralize(school.errors.count, "error") %> prohibited this school from being saved:</p>
       <ul>
         <% school.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -28,11 +28,7 @@
     </div>
     <div class="col-md-3 my-3">
       <%= form.label :phone_number, style: "display: block" %>
-      <%= form.number_field :phone_number, class: "general-input-styles", placeholder: "We recommend Whatsapp Numbers" %>
-    </div>
-    <div class="col-md-3 my-3">
-      <%= form.label :email_address, style: "display: block" %>
-      <%= form.text_field :email_address, class: "general-input-styles" %>
+      <%= form.number_field :phone_number, class: "general-input-styles", placeholder: "We recommend Whatsapp Numbers", required: true %>
     </div>
     <div class="col-md-3 my-3">
       <%= form.label :address, style: "display: block" %>

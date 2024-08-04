@@ -55,25 +55,10 @@ class Teacher < ApplicationRecord
     "NEW TEACHER ALERT!!!!, We have a new teacher on the platform. full_name: #{self.full_name}, id: #{self.id}"
   end
 
-  def format_phone_number
-    if phone_number.length == 9
-      return "237" + phone_number
-    end
-    return phone_number
-  end
-
   private
 
   def notify_admins
     SuperAdminWhatsappJob.perform_later("Super Admin Notification",
                                         "/admin/teachers/#{id}", "New Account Notification: Teachers Name: #{full_name}", "super_admin_notification_template")
-  end
-
-  def set_phone_number
-    self.phone_number = format_phone_number
-  end
-
-  def phone_number_digits_validation
-    errors.add(:phone_number, "Must be 9 digits.") if self.phone_number.length != 12
   end
 end

@@ -1,14 +1,17 @@
 <div class="container">
-  <h4 class="text-center"><%= current_school.full_name %></h4>
-  <h5 class="text-center"><%= current_school.abbreviation %></h5>
   <div class="row">
     <div class="col-md-3">
       <%= render partial: "schools/logo", locals: { school: @school }%>
     </div>
-    <div class="col-md-9 py-5">
-      <p class="dashboard-normal-font-size"><span class="px-2">Moto:</span> <span class="px-2"> <%= current_school.moto %></span></p>
-      <p class="dashboard-normal-font-size"><span class="px-2">Level:</span> <span class="px-2"><%= current_school.education_level.humanize %></span></p>
-      <p class="dashboard-normal-font-size"><span class="px-2">Address:</span> <span class="px-2"><%= current_school.address %></span></p>
+    <div class="col-md-9">
+      <div class="light-grey-card px-2 py-5">
+        <h4 class="text-center"><%= current_school.full_name %></h4>
+        <h5 class="text-center"><%= current_school.abbreviation %></h5>
+        <p class="dashboard-normal-font-size"><span class="px-2">Moto:</span> <span class="px-2 text-color-grey-2"> <%= current_school.moto %></span></p>
+        <p class="dashboard-normal-font-size"><span class="px-2">Level:</span> <span class="px-2 text-color-grey-2"><%= current_school.education_level.humanize %></span></p>
+        <p class="dashboard-normal-font-size"><span class="px-2">Address:</span> <span class="px-2 text-color-grey-2"><%= current_school.address %></span></p>
+        <p class="dashboard-normal-font-size"><span class="px-2">Phone Number:</span> <span class="px-2 text-color-grey-2"><%= current_school.phone_number %></span></p>
+      </div>
     </div>
   </div>
 </div>

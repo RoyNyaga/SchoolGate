@@ -453,7 +453,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_04_113313) do
     t.json "school_fees_settings", default: {}
     t.jsonb "student_id_settings", default: {}
     t.integer "education_level", default: 1
-    t.json "contacts", default: {}
+    t.string "phone_number", default: "{}"
     t.integer "approval_state", default: 0
     t.integer "environment_mode", default: 0
     t.index ["teacher_id"], name: "index_schools_on_teacher_id"
