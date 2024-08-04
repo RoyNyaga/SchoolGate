@@ -44,7 +44,7 @@ class Teacher < ApplicationRecord
 
   def can_access_admin?(school)
     work = workings.where(school_id: school.id).first
-    work.principal? || work.buster? || work.descipline_master?
+    work&.principal? || work&.buster? || work&.descipline_master?
   end
 
   def active_subjects

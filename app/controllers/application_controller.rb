@@ -89,6 +89,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def check_administrator
+    working = current_teacher.workings.where(school_id: current_school.id, permission: ["principal", "buster"], status: "active").first
+    unless working
+      flash[:error] = "You are not allowed to access this school"
+      redirect_to schools_path
+    end
+  end
+
   private
 
   def configure_permitted_parameters
