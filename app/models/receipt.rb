@@ -16,4 +16,6 @@ class Receipt < ApplicationRecord
   def balance
     fee.required_fee - total_fees_paid_at_this_point
   end
+
+  private
 end

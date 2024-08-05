@@ -15,7 +15,10 @@ class Fee < ApplicationRecord
                           fifth_installment: 5, sith_installment: 6 }
 
   before_save :set_other_field_values
-  after_update :create_receipt
+  after_update do
+    create_receipt
+    register_student
+  end
 
   scope :completed, -> { where(is_completed: true) }
   scope :incompleted, -> { where(is_completed: false) }
@@ -127,5 +130,11 @@ class Fee < ApplicationRecord
     end
 
     result
+  end
+
+  def register_student
+    if school.active_academic_year.id == academic_year_id
+      student.update(is_registered: total_fee_paid > 0)
+    end
   end
 end
