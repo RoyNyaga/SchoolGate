@@ -1,0 +1,19 @@
+<div data-controller="sidebars">
+  <% if current_teacher.can_access_admin?(current_school) %>
+    <%= render partial: "shared/sidebar/sidebar_link_dropdown_component", locals: { main_icon_class: "school",
+  main_link_text: "Classes", main_link_path: classes_schools_path,
+  dropdown_links: current_school_classes_link_data } %>
+    <%= render partial: "shared/sidebar/sidebar_link_component", locals: { main_icon_class: "user-graduate",
+  main_link_text: "Students", main_link_path: students_schools_path } %>
+    <%= render partial: "shared/sidebar/sidebar_link_dropdown_component", locals: { main_icon_class: "chalkboard-teacher",
+  main_link_text: "Teachers", main_link_path: teachers_schools_path,
+  dropdown_links: current_school_teachers_link_data } %>
+    <%= render partial: "shared/sidebar/sidebar_link_component", locals: { main_icon_class: "money-check-alt",
+  main_link_text: "School Fees", main_link_path: fees_path } %>
+    <%= render partial: "shared/sidebar/sidebar_link_component", locals: { main_icon_class: "satellite-dish",
+  main_link_text: "Academic Years", main_link_path: academic_years_path } %>
+    <%= render partial: "shared/sidebar/sidebar_link_component", locals: { main_icon_class: "cog",
+  main_link_text: "Settings", main_link_path: edit_school_path(current_school) } %>
+  <% end %>
+  <hr>
+</div>

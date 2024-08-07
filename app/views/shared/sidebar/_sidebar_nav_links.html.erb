@@ -1,4 +1,5 @@
 <% if current_school.basic_education? %>
+  <%= render "shared/sidebar/basic_education_links"%>
 <% elsif current_school.secondary_education? %>
   <%= render "shared/sidebar/secondary_education_links" %>
 <% elsif current_school.higher_education? %>
