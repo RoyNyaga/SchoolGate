@@ -1,6 +1,7 @@
 class ReceiptsController < ApplicationController
   layout "school_layout"
-  before_action :set_receipt, only: %i[ show edit update destroy ]
+  skip_before_action :authenticate_teacher!, only: [:parents]
+  before_action :set_receipt, only: %i[ show edit update destroy parents ]
 
   # GET /receipts or /receipts.json
   def index
@@ -10,7 +11,8 @@ class ReceiptsController < ApplicationController
   # GET /receipts/1 or /receipts/1.json
   def show
     @fee = @receipt.fee
-    qrcode = RQRCode::QRCode.new("https://school-gate-0e6fc8fcd208.herokuapp.com/receipts/verification?transaction_reference=#{@receipt.transaction_reference}")
+    @school = @receipt.school
+    qrcode = RQRCode::QRCode.new("https://www.schoolgate.org/receipts/verification?transaction_reference=#{@receipt.transaction_reference}")
     @svg = qrcode.as_svg(
       color: "000",
       shape_rendering: "crispEdges",
@@ -72,11 +74,25 @@ class ReceiptsController < ApplicationController
     @receipt = Receipt.find_by(transaction_reference: params[:transaction_reference])
   end
 
+  def parents
+    qrcode = RQRCode::QRCode.new("https://www.schoolgate.org/receipts/verification?transaction_reference=#{@receipt.transaction_reference}")
+    @school = @receipt.school
+    @svg = qrcode.as_svg(
+      color: "000",
+      shape_rendering: "crispEdges",
+      module_size: 4,
+      standalone: true,
+      use_path: true,
+
+    )
+    render layout: "application"
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_receipt
-    @receipt = Receipt.find(params[:id])
+    @receipt = Receipt.includes(:school, :fee).find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
