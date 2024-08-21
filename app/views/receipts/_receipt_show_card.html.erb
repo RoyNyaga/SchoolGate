@@ -7,16 +7,16 @@
     <div style="width: 650px;" class="mx-auto white-section-div receipt-div">
       <div class="row">
         <div class="col-2">
-          <%= render partial: "schools/logo", locals: { school: current_school }%>
+          <%= render partial: "schools/logo", locals: { school: school }%>
         </div>
-        <div class="col-10">
-          <h4 class="text-center"><%= receipt.school.full_name %></h4>
-          <p class="text-center">Hand Work Brings Success</p>
+        <div class="col-10 px-3">
+          <h4 class="text-center"><%= school.full_name %></h4>
+          <p class="text-center"><%= school.moto %></p>
           <p>School fees receipt</p>
           <p class="d-flex justify-content-between">Transaction Date: <span class="text-color-grey-2"><%= @receipt.readable_date %></span></p>
           <p class="margin-zero d-flex justify-content-between">Reference No: <span class="text-color-grey-2"><%= @receipt.transaction_reference %></span></p>
           <p class="margin-zero d-flex justify-content-between">Student: <span class="text-color-grey-2"><%= @receipt.student.full_name %></span></p>
-          <p class="margin-zero d-flex justify-content-between">Amuont Payed: <span class="text-color-grey-2"><%= @receipt.amount %></span> frs</p>
+          <p class="margin-zero d-flex justify-content-between">Amuont Payed: <span class="text-color-grey-2"><%= number_to_currency(@receipt.amount, unit: "", precision: 0) %> frs</span></p>
         </div>
       </div>
       <div class="receipt-show-table-section">
