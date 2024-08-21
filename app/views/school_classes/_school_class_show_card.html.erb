@@ -3,6 +3,7 @@
     <h5 class="text-center">Class Info</h5>
     <p class="margin-zero">Name: <span class="text-color-grey"><%= school_class.name %></span></p>
     <p class="margin-zero">Level: <span class="text-color-grey"><%= school_class.level %></span></p>
+    <p class="margin-zero">Level: <span class="text-color-grey"> <%= number_to_currency(school_class.required_fee, unit: "frs", precision: 0, format: "%n %u") %></span></p>
     <div class="d-flex justify-content-between">
       <p>Students: <span class="text-color-grey"><%= school_class.students.size%></span></p>
       <p>Teachers <span class="text-color-grey"><%= school_class.teachers.size%></span></p>

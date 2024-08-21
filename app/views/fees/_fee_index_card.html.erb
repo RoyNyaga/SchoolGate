@@ -4,7 +4,7 @@
           class: "grey-link-text", data: { bs_toggle: "offcanvas" },
           role: "button", aria: {controls: "#{generate_drawer_id("fee_show", record: fee)}_drawer"} %>
   </td>
-  <td class="table-row-data table-row-data-small-fonts"><%= fee.school_class.name %> / <%= fee.school.send(fee.school_class.generate_fee_string) %></td>
+  <td class="table-row-data table-row-data-small-fonts"><%= fee.school_class.name %> / <%= fee.school_class.required_fee %></td>
   <td class="table-row-data table-row-data-small-fonts"><%= fee.academic_year_text %></td>
   <td class="table-row-data table-row-data-small-fonts">
     <div class="text-center"><%= number_to_currency(fee.total_fee_paid, unit: "frs", precision: 0, format: "%n %u") %></div>

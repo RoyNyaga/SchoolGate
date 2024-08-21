@@ -1,7 +1,7 @@
 <%= form_with(model: fee) do |form| %>
   <% if fee.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(fee.errors.count, "error") %> prohibited this fee from being saved:</h2>
+    <div class="form-error-div">
+      <p><%= pluralize(fee.errors.count, "error") %> prohibited this fee from being saved:</p>
       <ul>
         <% fee.errors.each do |error| %>
           <li><%= error.full_message %></li>

@@ -23,6 +23,9 @@ class Student < ApplicationRecord
   before_save do
     set_full_name
   end # this method is defined in the application_record
+
+  after_update :update_fee_if_school_class_change
+
   enum status: { active: 0, dropout: 1, dismissed: 2 }
 
   delegate :name, to: :school_class, prefix: true
@@ -104,6 +107,15 @@ class Student < ApplicationRecord
   def contact_check_for_higher_education_student
     if higher_education?
       errors.add(:contact, "Must be present") unless contact
+    end
+  end
+
+  def update_fee_if_school_class_change
+    if saved_change_to_school_class_id?
+      fee = fees.where(academic_year_id: school.active_academic_year.id)
+      if fee
+        fee.update(school_class_id: school_class_id)
+      end
     end
   end
 end

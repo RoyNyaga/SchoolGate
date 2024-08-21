@@ -12,9 +12,9 @@ class WhatsappNotificationService
     end
   end
 
-  def self.send_fees_alert_message(receipt, school, school_admin_info, template_name)
+  def self.send_fees_alert_message(receipt, school, school_admin_user_info, template_name)
     student = receipt.student
-    super_admin_users_info.each do |user|
+    school_admin_user_info.each do |user|
       response = conn.post do |req|
         req.headers["Authorization"] = "Bearer #{ACCESS_TOKEN}"
         req.headers["Content-Type"] = "application/json"

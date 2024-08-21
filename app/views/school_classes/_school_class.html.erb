@@ -1,6 +1,7 @@
 <div class="light-grey-card p-2" id="<%= dom_id school_class %>">
   <p class="margin-zero">Name: <span class="text-color-grey-2"><%= school_class.name %></span></p>
   <p class="margin-zero">Level: <span class="text-color-grey-2"><%= school_class.level %></span></p>
+  <p class="margin-zero">Required Fee <span class="text-color-grey-2"><%= number_to_currency(school_class.required_fee, unit: "frs", precision: 0, format: "%n %u") %></span></p>
   <div class="d-flex justify-content-between">
     <p>Students: <span class="text-color-grey-2"><%= school_class.students.size%></span></p>
     <p>Teachers <span class="text-color-grey-2"><%= school_class.teachers.size%></span></p>

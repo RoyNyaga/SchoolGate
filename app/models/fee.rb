@@ -60,7 +60,7 @@ class Fee < ApplicationRecord
   end
 
   def calc_percentage_complete
-    percent = (total_fee_paid.to_f / school.send(school_class.generate_fee_string).to_f) * 100
+    percent = (total_fee_paid.to_f / required_fee.to_f) * 100
     percent.round(2)
   end
 
@@ -69,7 +69,7 @@ class Fee < ApplicationRecord
   end
 
   def required_fee
-    school.send(school_class.generate_fee_string).to_i
+    school_class.required_fee.to_i
   end
 
   private
@@ -77,8 +77,7 @@ class Fee < ApplicationRecord
   def fee_not_above_required_fee
     errors.add(:installment, "total fee paid is above the required class fee which is 
     #{required_fee} 
-    fcfa. We hope you know what you are doing?, please visit the school 
-    seting page under school fees setting for this class to update this toal fee.") if calc_total_fees > required_fee
+    fcfa. We hope you know what you are doing?, please visit the class edit page to update the required fee.") if calc_total_fees > required_fee
   end
 
   def create_receipt
