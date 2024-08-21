@@ -10,6 +10,10 @@ Rails.application.routes.draw do
     collection do
       get :verification
     end
+
+    member do
+      get :parents
+    end
   end
   resources :course_results
   resources :assessments do
