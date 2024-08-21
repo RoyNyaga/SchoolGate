@@ -97,7 +97,7 @@ class Fee < ApplicationRecord
                                  update_history: last_update_record, amount: amount.to_f, total_fees_paid_at_this_point: self.total_fee_paid,
                                  installment_num: self.installment_num)
 
-        FeesAlertWhatsappJob.perform_later(receipt.id, ["principal", "buster"], template_name)
+        FeesAlertWhatsappJob.perform_later(receipt.id, ["principal", "buster"], "fees_instant_pay_template")
       end
     else
       last_update_record_amounts.each do |amount|
@@ -106,7 +106,7 @@ class Fee < ApplicationRecord
                                  update_history: last_update_record, amount: amount.to_f, total_fees_paid_at_this_point: self.total_fee_paid,
                                  installment_num: self.installment_num)
 
-        FeesAlertWhatsappJob.perform_later(receipt.id, ["principal", "buster"], template_name)
+        FeesAlertWhatsappJob.perform_later(receipt.id, ["principal", "buster"], "fees_instant_pay_template")
       end
     end
 
