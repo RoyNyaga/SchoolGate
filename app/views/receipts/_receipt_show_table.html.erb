@@ -8,7 +8,7 @@
   <tbody>
     <tr>
       <td>Amount Payed</td>
-      <td><%= receipt.amount %> frs</td>
+      <td><%= number_to_currency(receipt.amount, unit: "", precision: 0) %> frs</td>
     </tr>
     <tr>
       <td>Installment No</td>
@@ -16,15 +16,15 @@
     </tr>
     <tr>
       <td>Total Fee payed</td>
-      <td><%= receipt.total_fees_paid_at_this_point %> frs</td>
+      <td><%= number_to_currency(receipt.total_fees_paid_at_this_point, unit: "", precision: 0) %> frs</td>
     </tr>
     <tr>
       <td>Required Fee</td>
-      <td><%= fee.required_fee %> frs</td>
+      <td><%= number_to_currency(fee.required_fee, unit: "", precision: 0) %> frs</td>
     </tr>
     <tr>
       <td>Balance</td>
-      <td><%= receipt.balance %> frs</td>
+      <td><%= number_to_currency(receipt.balance, unit: "", precision: 0) %> frs</td>
     </tr>
   </tbody>
 </table>
