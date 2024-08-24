@@ -4,6 +4,8 @@ class SchoolsController < ApplicationController
   before_action :set_school, only: %i[ show edit update destroy update_logo ]
   before_action :check_for_current_school, except: %i[show index new create]
   before_action :check_administrator, except: %i[show index new create]
+  before_action :check_active_current_year, only: [:students]
+  before_action :check_active_current_year, only: [:classes]
 
   # GET /schools or /schools.json
   def index

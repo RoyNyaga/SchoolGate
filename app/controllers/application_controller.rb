@@ -97,6 +97,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def check_active_current_year
+    unless current_school.active_academic_year.present?
+      flash[:error] = "Please Setup an active academic year"
+      redirect_to academic_years_path
+    end
+  end
+
   private
 
   def configure_permitted_parameters

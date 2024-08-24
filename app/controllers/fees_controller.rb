@@ -2,6 +2,7 @@ class FeesController < ApplicationController
   layout "school_layout"
   before_action :check_for_current_school
   before_action :set_fee, only: %i[ show edit update destroy ]
+  before_action :check_active_current_year, only: [:index]
 
   # GET /fees or /fees.json
   def index
