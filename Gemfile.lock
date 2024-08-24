@@ -403,7 +403,7 @@ DEPENDENCIES
   figaro (~> 1.2)
   font_awesome5_rails
   friendly_id (~> 5.5, >= 5.5.1)
-  importmap-rails
+  importmap-rails (>= 2)
   irb (~> 1.12)
   jbuilder
   mission_control-jobs (~> 0.1.1)

@@ -15,7 +15,7 @@ gem "pg", "~> 1.1"
 gem "puma", ">= 5.0"
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails"
+gem "importmap-rails", ">=2"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
@@ -74,7 +74,7 @@ gem "bootstrap"
 gem "sassc-rails"
 gem "prawn", "~> 2.4"
 gem "prawn-table", "~> 0.2.2"
-gem 'prawn-svg', '~> 0.25.1'
+gem "prawn-svg", "~> 0.25.1"
 gem "faker", "~> 3.2", ">= 3.2.2"
 gem "chartkick", "~> 5.0", ">= 5.0.5"
 gem "figaro", "~> 1.2"
@@ -83,11 +83,11 @@ gem "solid_queue", "~> 0.2.2"
 gem "mission_control-jobs", "~> 0.1.1"
 gem "rqrcode", "~> 2.0"
 gem "chunky_png", "~> 1.4"
-gem 'rexml'
+gem "rexml"
 gem "aws-sdk-s3", require: false
-gem 'irb', '~> 1.12'
-gem 'will_paginate', '~> 4.0'
+gem "irb", "~> 1.12"
+gem "will_paginate", "~> 4.0"
 # gem 'newrelic_rpm'
-gem 'activeadmin', '~> 3.2', '>= 3.2.1'
-gem 'faraday', '~> 2.9', '>= 2.9.2'
-gem 'friendly_id', '~> 5.5', '>= 5.5.1'
+gem "activeadmin", "~> 3.2", ">= 3.2.1"
+gem "faraday", "~> 2.9", ">= 2.9.2"
+gem "friendly_id", "~> 5.5", ">= 5.5.1"
