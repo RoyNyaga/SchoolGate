@@ -76,6 +76,10 @@ class School < ApplicationRecord
     Teacher.joins(:workings).where(workings: { school_id: id, permission: permissions, status: "active" })
   end
 
+  def currency
+    "FCFA"
+  end
+
   private
 
   def set_school_identifier

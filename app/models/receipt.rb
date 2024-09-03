@@ -17,5 +17,9 @@ class Receipt < ApplicationRecord
     fee.required_fee - total_fees_paid_at_this_point
   end
 
+  def whatsapp_parent_header_message
+    "Electronic Receipt from #{school.abbreviation}"
+  end
+
   private
 end

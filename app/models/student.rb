@@ -102,6 +102,34 @@ class Student < ApplicationRecord
     Department.find(department_id)
   end
 
+  def self.format_contact(name, contact, title)
+    return nil if name.nil? || name.strip.empty? || contact.nil? || contact.strip.empty?
+
+    # Prepend title and country code if necessary
+    formatted_name = "#{title} #{name}"
+    formatted_contact = contact.length <= 9 ? "237#{contact}" : contact
+
+    { name: formatted_name, phone_number: formatted_contact }
+  end
+
+  def extract_contacts
+    contacts = []
+
+    # Process father's contact
+    father_contact = Student.format_contact(self.fathers_name, self.fathers_contact, "Mr")
+    contacts << father_contact if father_contact
+
+    # Process mother's contact
+    mother_contact = Student.format_contact(self.mothers_name, self.mothers_contact, "Mrs")
+    contacts << mother_contact if mother_contact
+
+    # Process guidance's contact
+    guidance_contact = Student.format_contact(self.guidance_name, self.guidance_contact, "Mrs")
+    contacts << guidance_contact if guidance_contact
+
+    contacts
+  end
+
   private
 
   def contact_check_for_higher_education_student
