@@ -140,9 +140,9 @@ class Student < ApplicationRecord
 
   def update_fee_if_school_class_change
     if saved_change_to_school_class_id?
-      fee = fees.where(academic_year_id: school.active_academic_year.id)
+      fee = fees.where(academic_year_id: school.active_academic_year.id).first
       if fee
-        fee.update(school_class_id: school_class_id)
+        fee.update_columns(school_class_id: school_class_id)
       end
     end
   end
