@@ -13,6 +13,7 @@ class SchoolClass < ApplicationRecord
 
   validates :required_fee, presence: true
   before_save :name_to_lowercase
+  default_scope { order(:level) }
 
   def generate_fee_string
     "level_#{level}_fees"
