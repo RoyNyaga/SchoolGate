@@ -1,9 +1,10 @@
 <div class="container">
+  <%= render "shared/buttons/back_btn" %>
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3 my-3">
       <%= render partial: "school_classes/school_class_show_card", locals: { school_class: @school_class }%>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-9 my-3">
       <h5 class="text-center light-grey-card py-2">Students</h5>
       <div class="students-list-div white-section-div my-2 scrollable-tbody">
         <%= render partial: "students/table", locals: { students: @school_class.students } %>
