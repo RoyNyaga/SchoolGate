@@ -10,7 +10,7 @@
             <div class="row">
               <div class="col-md-6 field my-2">
                 <%= f.label :last_name %><br />
-                <%= f.text_field :last_name, class: "sign-in-inputs" %>
+                <%= f.text_field :last_name, class: "sign-in-inputs", required: true %>
               </div>
               <div class="col-md-6 field my-2">
                 <%= f.label :first_name %><br />
@@ -19,18 +19,18 @@
             </div>
             <div class="field my-3">
               <%= f.label :phone %><br />
-              <%= f.number_field :phone_number, autofocus: true, autocomplete: "phone-number", class: "sign-in-inputs" %>
+              <%= f.number_field :phone_number, autofocus: true, autocomplete: "phone-number", class: "sign-in-inputs", required: true %>
             </div>
             <div class="field my-3">
               <%= f.label :password %>
               <% if @minimum_password_length %>
                 <em>(<%= @minimum_password_length %> characters minimum)</em>
               <% end %><br />
-              <%= f.password_field :password, autocomplete: "new-password", class: "sign-in-inputs" %>
+              <%= f.password_field :password, autocomplete: "new-password", class: "sign-in-inputs", required: true %>
             </div>
             <div class="field my-3">
               <%= f.label :password_confirmation %><br />
-              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "sign-in-inputs" %>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "sign-in-inputs", required: true %>
             </div>
             <div class="actions my-3">
               <%= f.submit "Sign up", class: "sign-in-btn" %>

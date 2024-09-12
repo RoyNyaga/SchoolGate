@@ -20,6 +20,9 @@ class Teacher < ApplicationRecord
   has_many :assessments
 
   validates :first_name, presence: true
+  validates :phone_number, uniqueness: {
+                             message: "An account with this phone number already exist.",
+                           }
   validate :phone_number_digits_validation
 
   before_save :set_full_name #This method is defined int he application_record
