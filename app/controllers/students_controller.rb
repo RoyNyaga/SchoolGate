@@ -78,7 +78,7 @@ class StudentsController < ApplicationController
   end
 
   def id_card
-    qrcode = RQRCode::QRCode.new("https://school-gate-0e6fc8fcd208.herokuapp.com/students/#{@student.id}")
+    qrcode = RQRCode::QRCode.new("#{ENV["PRODUCTION_DOMAIN"]}/students/#{@student.id}")
     @svg = qrcode.as_svg(
       color: "000",
       shape_rendering: "crispEdges",

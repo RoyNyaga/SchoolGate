@@ -82,8 +82,16 @@ class SchoolsController < ApplicationController
 
   def students
     @student = Student.new
-    @students = current_school.students.includes(:school_class, photo_attachment: :blob).paginate(page: params[:page], per_page: 20)
     @school_classes = current_school.school_classes.includes(:students)
+
+    if params[:is_search].present?
+      sql = "students.school_id = #{current_school.id}"
+      sql += " AND lower(students.matricule) like '%#{params[:matricule].downcase}%'" if params[:matricule].present?
+      sql += " AND lower(students.full_name) like '%#{params[:student_name].downcase}%'" if params[:student_name].present?
+      @students = Student.includes(:school_class, photo_attachment: :blob).where(sql).order(updated_at: :desc).paginate(page: params[:page], per_page: 20)
+    else
+      @students = current_school.students.includes(:school_class, photo_attachment: :blob).order(updated_at: :desc).paginate(page: params[:page], per_page: 20)
+    end
   end
 
   def teachers

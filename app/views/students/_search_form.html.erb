@@ -1,0 +1,15 @@
+<%= form_with url: students_schools_path, method: :get, html: { class: "light-grey-card inline-form" } do |form| %>
+  <%= form.hidden_field :is_search, value: true %>
+  <%= link_to "reset", students_schools_path, class: "grey-link-text dashboard-normal-font-size" %>
+  <div class="row section-div" id="main-search-section">
+    <div class="col-5 p-0">
+      <%= form.text_field :student_name, value: params[:student_name], class: "general-input-styles", placeholder: "Student Name" %>
+    </div>
+    <div class="col-5 p-0">
+      <%= form.text_field :matricule, value: params[:matricule], class: "general-input-styles", placeholder: "Student Matricule" %>
+    </div>
+    <div class="col-2 p-0">
+      <%= form.submit "Apply", class: "general-link inline-btn", style: "padding: 5px 0px" %>
+    </div>
+  </div>
+<% end %>

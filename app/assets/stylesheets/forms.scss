@@ -85,16 +85,26 @@
   font-size: 0.9em;
 }
 
-.invitation-accept-link{
+.invitation-accept-link {
   border: none;
   background: white;
   text-decoration: underline;
 }
 
-.invitation-decline-link{
+.invitation-decline-link {
   border: none;
   background: white;
   text-decoration: underline;
+}
+
+.inline-btn {
+  position: relative;
+  top: 8px;
+  width: 100%;
+}
+
+.inline-form{
+  padding: 15px 30px;
 }
 
 @media screen and (max-width: 425px) {

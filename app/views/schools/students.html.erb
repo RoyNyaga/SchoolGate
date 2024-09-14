@@ -2,6 +2,12 @@
   <% if current_school.testing_mode? %>
     <%= render "shared/school_approval_notification" %>
   <% else %>
+    <div>
+      <%= render partial: "students/form", 
+          layout: "layouts/modal_layout", 
+          locals: { student: @student, action_name: "Add Student", action_title: "Create A New Student",
+          modal_id: generate_modal_id("students_create_form") }%>
+    </div>
     <div class="students-class-info row">
       <% @school_classes.each do |school_class| %>
         <div class="col-6 col-md-2 my-2">
@@ -12,11 +18,10 @@
         </div>
       <% end %>
     </div>
-    <div>
-      <%= render partial: "students/form", 
-          layout: "layouts/modal_layout", 
-          locals: { student: @student, action_name: "Add Student", action_title: "Create A New Student",
-          modal_id: generate_modal_id("students_create_form") }%>
+    <div class="student-search-form row my-5">
+      <div class="col-md-7 mx-auto">
+        <%= render "students/search_form" %>
+      </div>
     </div>
     <div class="students-list-div white-section-div my-5">
       <%= render partial: "students/table", locals: { students: @students } %>

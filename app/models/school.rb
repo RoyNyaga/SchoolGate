@@ -80,6 +80,16 @@ class School < ApplicationRecord
     "FCFA"
   end
 
+  def ministry_type_letter_head
+    if education_level == "secondary_education"
+      "Ministery Of Secondary Education"
+    elsif education_level == "basic_education"
+      "Ministry Of Basic Education"
+    else
+      "Ministry Of Higher Education"
+    end
+  end
+
   private
 
   def set_school_identifier
