@@ -1,11 +1,12 @@
 <%= form_with url: fees_path, method: :get do |form| %>
   <%= form.hidden_field :is_search, value: true %>
+  <%= link_to "reset", fees_path, class: "grey-link-text dashboard-normal-font-size" %>
   <div class="row section-div" id="main-search-section">
     <div class="col-md-3">
-      <%= form.select :academic_year_id, @current_school.academic_years.map{ |y| [y.year, y.id]}, { prompt: "Year" }, { class: "general-input-styles" } %>
+      <%= form.select :academic_year_id, @current_school.academic_years.map{ |y| [y.year, y.id]}, { prompt: "Year", selected: params[:academic_year_id] }, { class: "general-input-styles" } %>
     </div>
     <div class="col-md-6">
-      <%= form.text_field :student_name, class: "general-input-styles", placeholder: "Enter Student Name" %>
+      <%= form.text_field :student_name, value: params[:student_name], class: "general-input-styles", placeholder: "Enter Student Name" %>
     </div>
     <div class="col-md-3 p-2 text-center" data-controller="fees">
       <span id="more-option-search-btn" class="edit-link" data-action="click->fees#moreSearchOptions">More Options</span>
