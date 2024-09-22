@@ -107,8 +107,35 @@
   padding: 15px 30px;
 }
 
+.contact-us-btn {
+  position: fixed;
+  left: 90%;
+  bottom: 50px;
+  color: white;
+  font-weight: 900;
+  padding: 20px 10px;
+  background: #182238;
+  border-width: 3px;
+  border-style: solid;
+  border-color: white;
+  border-image: initial;
+  border-radius: 20px;
+  text-decoration: none;
+}
+
 @media screen and (max-width: 425px) {
   #sign-in-colum-div {
     padding-left: 15px;
   }
+
+  .contact-us-btn {
+    left: 75%;
+    bottom: 30px;
+    font-size: 0.8em;
+    border-width: 2px;
+    border-style: solid;
+    border-color: white;
+    border-image: initial;
+    padding: 10px 5px;
+}
 }

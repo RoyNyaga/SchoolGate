@@ -1,8 +1,25 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-5 mx-auto my-5">
+    <div class="col-md-5 my-5">
       <h5>Please Leave Us A Message</h5>
       <%= render partial: "pages/forms/contact_form", locals: { message: Message.new } %>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-6 my-3">
+      <div>
+        <%= image_tag("contact-page.png", alt: "missing", class: "img-fluid") %>
+      </div>
+      <div class="light-grey-card px-2 py-1 my-3">
+        <p class="dashboard-normal-font-size">
+          <span class="px-2">Phone 1:</span> <span class="px-2 text-color-grey-2"> (+237) 671 172 775</span>
+        </p>
+        <p class="dashboard-normal-font-size">
+          <span class="px-2">Phone 2:</span> <span class="px-2 text-color-grey-2"> (+237) 735 115 96</span>
+        </p>
+        <p class="dashboard-normal-font-size">
+          <span class="px-2">Email:</span> <span class="px-2 text-color-grey-2"> schoolgate237@gmail.com</span>
+        </p>
+      </div>
     </div>
   </div>
 </div>
