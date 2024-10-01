@@ -36,7 +36,8 @@ class School < ApplicationRecord
   enum education_level: { basic_education: 1, secondary_education: 2, higher_education: 3 }
   enum approval_state: { no_approval: 0, in_review: 1, rejected_approval: 2, accepted_approval: 3 }
   enum environment_mode: { testing_mode: 0, school_gate_testing_mode: 1, live_mode: 2 }
-
+  enum report_card_format: { old_report_card_format: 0, old_with_photo_report_card_format: 1,
+                             new_report_card_format: 2, new_with_photo_report_card_format: 3 }
   delegate :full_name, to: :teacher, prefix: true
 
   scope :without_settings_attr, -> {
