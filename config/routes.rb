@@ -75,6 +75,7 @@ Rails.application.routes.draw do
       get :pdf_download
       get :auto_generate
       get :manually_create
+      get :pdf_testing
     end
   end
   resources :terms

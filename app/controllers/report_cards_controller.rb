@@ -86,6 +86,18 @@ class ReportCardsController < ApplicationController
     send_data(pdf_file.generate_pdf.render, filename: "test-file", type: "application/pdf", disposition: "inline")
   end
 
+  def pdf_testing #http://localhost:3000/report_cards/pdf_testing.pdf
+    respond_to do |format|
+      format.html # regular HTML response
+      format.pdf do
+        pdf = PdfTestingService.generate_pdf
+        send_data pdf.render, filename: "report.pdf",
+                              type: "application/pdf",
+                              disposition: "inline" # or 'attachment' to force download
+      end
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

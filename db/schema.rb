@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_01_201605) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_02_230619) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -438,6 +438,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_01_201605) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "required_fee"
+    t.integer "report_card_format", default: 0
     t.index ["school_id"], name: "index_school_classes_on_school_id"
   end
 
@@ -456,7 +457,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_01_201605) do
     t.string "phone_number", default: "{}"
     t.integer "approval_state", default: 0
     t.integer "environment_mode", default: 0
-    t.integer "report_card_format", default: 0
     t.index ["teacher_id"], name: "index_schools_on_teacher_id"
   end
 
