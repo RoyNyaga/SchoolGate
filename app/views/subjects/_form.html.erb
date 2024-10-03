@@ -51,6 +51,23 @@
       <%= form.text_field :less_than_equal_to_20,  class: "general-input-styles" %>
     </div>
   </div>
+  <div class="my-4">
+    <h4 class="my-3">Competences Settings</h4>
+    <div>
+      <%= form.label :competences_average, style: "display: block" %>
+      <%= form.number_field :competences_average, class: "general-input-styles" %>
+    </div>
+    <h5 class="my-5">Competences</h5>
+    <div class="competences-inputs">
+      <% if subject.competences.empty? %>
+        <%= generate_competence_input_field(form, "") %>
+      <% else %>
+        <% fee.competences.each_with_index do |competence, i| %>
+          <%= generate_competence_input_field(form, competence) %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
   <div class="py-3">
     <%= form.submit class: "general-btn" %>
   </div>
