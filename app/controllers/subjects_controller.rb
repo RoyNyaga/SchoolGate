@@ -80,6 +80,7 @@ class SubjectsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def subject_params
+    params[:subject][:competences] = params[:subject][:competences].select { |v| v.present? }
     params.require(:subject).permit(:school_id, :school_class_id, :name, :coefficient, :less_than_equal_to_5, :less_than_equal_to_9, :less_than_equal_to_12,
                                     :less_than_equal_to_15, :less_than_equal_to_18, :less_than_equal_to_20)
   end
