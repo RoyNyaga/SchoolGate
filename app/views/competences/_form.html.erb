@@ -1,0 +1,37 @@
+<%= form_with(model: competence) do |form| %>
+  <% if competence.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(competence.errors.count, "error") %> prohibited this competence from being saved:</h2>
+
+      <ul>
+        <% competence.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :school_id, style: "display: block" %>
+    <%= form.text_field :school_id %>
+  </div>
+
+  <div>
+    <%= form.label :school_class_id, style: "display: block" %>
+    <%= form.text_field :school_class_id %>
+  </div>
+
+  <div>
+    <%= form.label :suubject_id, style: "display: block" %>
+    <%= form.text_field :suubject_id %>
+  </div>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

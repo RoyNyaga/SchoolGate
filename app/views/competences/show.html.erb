@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @competence %>
+
+<div>
+  <%= link_to "Edit this competence", edit_competence_path(@competence) %> |
+  <%= link_to "Back to competences", competences_path %>
+
+  <%= button_to "Destroy this competence", @competence, method: :delete %>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_02_230619) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_03_230729) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -110,6 +110,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_02_230619) do
     t.index ["school_id"], name: "index_assessments_on_school_id"
     t.index ["semester_id"], name: "index_assessments_on_semester_id"
     t.index ["teacher_id"], name: "index_assessments_on_teacher_id"
+  end
+
+  create_table "competences", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "school_class_id", null: false
+    t.bigint "subject_id", null: false
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_class_id"], name: "index_competences_on_school_class_id"
+    t.index ["school_id"], name: "index_competences_on_school_id"
+    t.index ["subject_id"], name: "index_competences_on_subject_id"
   end
 
   create_table "course_registrations", force: :cascade do |t|
@@ -740,6 +752,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_02_230619) do
   add_foreign_key "assessments", "schools"
   add_foreign_key "assessments", "semesters"
   add_foreign_key "assessments", "teachers"
+  add_foreign_key "competences", "school_classes"
+  add_foreign_key "competences", "schools"
+  add_foreign_key "competences", "subjects"
   add_foreign_key "course_registrations", "academic_years"
   add_foreign_key "course_registrations", "schools"
   add_foreign_key "course_registrations", "semesters"

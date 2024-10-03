@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :competences
   resources :school_approval_requests
   resources :tutorials
   mount MissionControl::Jobs::Engine, at: "/jobs"
