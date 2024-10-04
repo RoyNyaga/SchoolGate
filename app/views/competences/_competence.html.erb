@@ -1,18 +1,6 @@
-<div id="<%= dom_id competence %>">
-  <p>
-    <strong>School:</strong>
-    <%= competence.school_id %>
-  </p>
-  <p>
-    <strong>School class:</strong>
-    <%= competence.school_class_id %>
-  </p>
-  <p>
-    <strong>subject:</strong>
-    <%= competence.suubject_id %>
-  </p>
-  <p>
-    <strong>Title:</strong>
-    <%= competence.title %>
-  </p>
-</div>
+ <%= turbo_frame_tag custom_id_generator("competence", record: competence) do %>
+  <div class="d-flex justify-content-between">
+    <p><%= competence.title %></p>
+    <%= link_to "Edit", edit_competence_path(competence), class: "edit-link" %>
+  </div>
+<% end %>

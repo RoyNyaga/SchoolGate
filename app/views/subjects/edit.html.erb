@@ -1,14 +1,22 @@
 <div class="container">
-  <h5 class="text-center">Editing subject</h5>
-  <%= turbo_frame_tag custom_id_generator("edit", record: @subject) do %>
-    <%= link_to "Cancel", @subject, class: "grey-link-text" %>
-    <div class="light-grey-card p-2 my-3">
-      <%= render "form", subject: @subject %>
+  <h5 class="text-center">Subject Settings</h5>
+  <%= link_to "Cancel", @subject, class: "grey-link-text" %>
+  <div class="row">
+    <div class="col-md-7">
+      <div class="light-grey-card p-2 my-3">
+        <%= render "form", subject: @subject %>
+      </div>
     </div>
-  <% end %>
-  <br>
-  <div>
-    <%= link_to "Show this subject", @subject %> |
-    <%= link_to "Back to subjects", subjects_path %>
+    <div class="col-md-5">
+      <div class="light-grey-card p-2 my-3">
+        <h5 class="text-center my-3">Competences</h5>
+        <div id="competences-list">
+          <% @subject.competences.each do |competence| %>
+            <%= render partial: "competences/competence", locals: { competence: competence } %>
+          <% end %>
+        </div>
+        <%= render partial: "competences/add_btn", locals: { subject: @subject } %>
+      </div>
+    </div>
   </div>
 </div>
