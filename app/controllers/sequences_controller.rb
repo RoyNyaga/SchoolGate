@@ -88,16 +88,18 @@ class SequencesController < ApplicationController
     school_class = SchoolClass.find_by(id: params[:sequence][:school_class_id])
     if school_class.should_evaluate_multiple_competences_per_subject
       params.require(:sequence).permit(
-        :school_id, :academic_year_id, :school_class_id, :teacher_id, :subject_id, :evaluation_method, :term_id, :seq_num,
+        :school_id, :academic_year_id, :school_class_id, :teacher_id, :subject_id, :evaluation_method,
+        :term_id, :seq_num, :teachers_name,
         marks: [
-          :id, :name, :is_enrolled,
-          mark: [
-            :competence_id, :competence_title, :competence_mark,
+          :id, :name, :is_enrolled, :mark,
+          competence: [
+            :id, :title, :mark,
           ],
         ],
       )
     else
-      params.require(:sequence).permit(:school_id, :school_class_id, :academic_year_id, :term_id, :evaluation_method, :teacher_id, :seq_num, :subject_id,
+      params.require(:sequence).permit(:school_id, :school_class_id, :academic_year_id, :term_id, :evaluation_method,
+                                       :teacher_id, :seq_num, :subject_id, :teachers_name,
                                        :academic_year_start, :academic_year_end, marks: [:id, :name, :mark, :is_enrolled])
     end
   end

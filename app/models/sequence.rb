@@ -1,4 +1,5 @@
 class Sequence < ApplicationRecord
+  include DataTrans
   belongs_to :school
   belongs_to :school_class
   belongs_to :teacher
@@ -15,7 +16,12 @@ class Sequence < ApplicationRecord
   enum evaluation_method: { first_and_second_sequence_evaluation_method: 0, single_competence_based_evaluation_method: 1 }
 
   # validate :sequences_per_term
-  validate :enrollment_num_not_zero
+  # validate :enrollment_num_not_zero
+
+  before_save do
+    set_evaluation_method # please this order is important, set_evaluation_method should come first
+    update_marks_with_total
+  end
 
   def self.allowed_seq_nums(school_class)
     if school_class.should_evaluate_multiple_competences_per_subject
@@ -27,16 +33,30 @@ class Sequence < ApplicationRecord
     end
   end
 
-  def self.determine_evaluation_method(school_class)
-    school_class.should_evaluate_multiple_competences_per_subject ? 1 : 0
-  end
-
   def hashed_marks
-    # parsing marks to ruby hash and converting the mark value to float
-    self.marks.map { |m| eval(m) }.map { |a|
-      { "id" => a["id"].to_i, "name" => a["name"], "mark" => a[
-        "mark"].to_f, "is_enrolled" => string_to_boolean(a["is_enrolled"]) }
-    }
+    if first_and_second_sequence_evaluation_method?
+      # parsing marks to ruby hash and converting the mark value to float
+      Sequence.string_to_hash_arr(marks).map { |student|
+        { "id" => student["id"].to_i, "name" => student["name"], "mark" => student[
+          "mark"].to_f, "is_enrolled" => string_to_boolean(student["is_enrolled"]) }
+      }
+    else
+      Sequence.string_to_hash_arr(marks).map do |student|
+        {
+          "id" => student["id"].to_i,
+          "name" => student["name"],
+          "is_enrolled" => string_to_boolean(student["is_enrolled"]), # Convert to boolean
+          "mark" => student["mark"].to_f,
+          "competence" => student["competence"].map do |competence|
+            {
+              "id" => competence["id"],
+              "title" => competence["title"],
+              "mark" => competence["mark"].to_f, # Convert to float
+            }
+          end,
+        }
+      end
+    end
   end
 
   def string_to_boolean(str)
@@ -84,7 +104,27 @@ class Sequence < ApplicationRecord
   #   end
   # end
 
-  def enrollment_num_not_zero
-    errors.add(:enrollment, "should exist atleast for one student") if enrolled_students.size == 0
+  # def enrollment_num_not_zero
+  #   errors.add(:enrollment, "should exist atleast for one student") if enrolled_students.size == 0
+  # end
+
+  def set_evaluation_method
+    if school_class.should_evaluate_multiple_competences_per_subject
+      self.evaluation_method = 1
+    else
+      self.evaluation_method = 0
+    end
+  end
+
+  def update_marks_with_total
+    if self.single_competence_based_evaluation_method?
+      self.marks = hashed_marks.each do |student|
+        # Calculate the total mark by summing up the competence marks
+        total_mark = student["competence"].sum { |competence| competence["mark"].to_f }
+
+        # Update the student hash's "mark" key with the calculated total
+        student["mark"] = total_mark
+      end
+    end
   end
 end

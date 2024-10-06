@@ -497,6 +497,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_06_141554) do
     t.bigint "academic_year_id", default: 1, null: false
     t.integer "status", default: 0
     t.integer "evaluation_method", default: 0
+    t.string "teachers_name"
     t.index ["academic_year_id"], name: "index_sequences_on_academic_year_id"
     t.index ["school_class_id"], name: "index_sequences_on_school_class_id"
     t.index ["school_id"], name: "index_sequences_on_school_id"
