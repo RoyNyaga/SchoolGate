@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_03_230729) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_04_032153) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -451,6 +451,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_03_230729) do
     t.datetime "updated_at", null: false
     t.integer "required_fee"
     t.integer "report_card_format", default: 0
+    t.boolean "should_evaluate_multiple_competences_per_subject", default: false
     t.index ["school_id"], name: "index_school_classes_on_school_id"
   end
 
