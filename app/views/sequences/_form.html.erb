@@ -32,7 +32,7 @@
   </div>
   <div>
     <%= form.label :seq_num, style: "display: block" %>
-    <%= form.select :seq_num, Sequence.seq_nums.map { |k,v| [k.humanize, k] }, {include_blank: 'Select Sequence Number'}, { class: "general-input-styles" } %>
+    <%= form.select :seq_num, Sequence.allowed_seq_nums(@school_class).map { |k,v| [k.humanize, k] }, {include_blank: 'Select Sequence Number'}, { class: "general-input-styles" } %>
   </div>
   <table class="table table-hover my-3">
     <thead>

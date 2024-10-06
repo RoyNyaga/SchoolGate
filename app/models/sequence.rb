@@ -9,11 +9,22 @@ class Sequence < ApplicationRecord
   delegate :term_type, to: :term
   delegate :name, to: :school_class
 
-  enum seq_num: { first_sequence: 1, second_sequence: 2, third_sequence: 3, forth_sequence: 4, fifth_sequence: 5, sith_sequence: 6 }
+  enum seq_num: { first_sequence: 1, second_sequence: 2, third_sequence: 3, forth_sequence: 4,
+                  fifth_sequence: 5, sith_sequence: 6, first_term_sequence: 7, second_term_sequence: 8, third_term_sequence: 9 }
   enum status: { in_progress: 0, submitted: 1, rejected: 2, approved: 3 }
 
   # validate :sequences_per_term
   validate :enrollment_num_not_zero
+
+  def self.allowed_seq_nums(school_class)
+    if school_class.should_evaluate_multiple_competences_per_subject
+      # Return only keys containing "term" if multiple competences should be evaluated
+      seq_nums.select { |key, _| key.include?("term") }
+    else
+      # Exclude keys containing "term" if multiple competences should not be evaluated
+      seq_nums.reject { |key, _| key.include?("term") }
+    end
+  end
 
   def hashed_marks
     # parsing marks to ruby hash and converting the mark value to float
