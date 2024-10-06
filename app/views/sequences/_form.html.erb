@@ -24,6 +24,9 @@
   <div>
     <%= form.hidden_field :subject_id, value: @subject.id %>
   </div>
+  <div>
+    <%= form.hidden_field :evaluation_method, value: Sequence.determine_evaluation_method(@school_class)%>
+  </div>
   <div class="my-2">
     <%= form.label :term, style: "display: block" %>
     <%= form.collection_select :term_id, 
@@ -51,7 +54,20 @@
         <tr>
           <td><%= num %></td>
           <td><%= student.full_name %></td>
-          <td><%= generate_student_marks_input(form, sequence, student) %></td>
+          <% if @school_class.should_evaluate_multiple_competences_per_subject %>
+            <td>
+              <% @competences.each do |c| %>
+                <div>
+                  <h6><%= c.title %></h6>
+                  <%= form.hidden_field :marks, name: "sequence[marks][][mark][][competence_id]", value: c.id %>
+                  <%= form.hidden_field :marks, name: "sequence[marks][][mark][][competence_title]", value: c.title %>
+                  <%= generate_student_competence_based_marks(form, sequence, student, c) %>
+                </div>
+              <% end %>
+            </td>
+          <% else %>
+            <td><%= generate_student_marks_input(form, sequence, student) %></td>
+          <% end %>
           <td>
             <span>Enrolled</span>
             <div>
