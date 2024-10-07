@@ -9,6 +9,8 @@ class ReportCard < ApplicationRecord
   validates :student_id, uniqueness: { scope: :term_id,
                                        message: "This student already has a report for this term" }
 
+  enum evaluation_method: { first_and_second_sequence_evaluation_method: 0, single_competence_based_evaluation_method: 1 }
+
   def generate_chart_data
     arr = ReportCard.string_to_hash_arr(details)
     main_data = [
