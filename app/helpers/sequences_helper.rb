@@ -9,8 +9,10 @@ module SequencesHelper
 
   def generate_student_competence_based_marks(form, sequence, student, competence)
     if sequence.persisted?
+      marks = sequence.get_competence_data(competence.id)
+      form.number_field :mark, name: "sequence[marks][][competences][][mark]", value: student.sequence_mark_per_subject(marks, is_competence_based: true), step: "any", class: "sequence-mark-input"
     else
-      form.number_field :mark, name: "sequence[marks][][competence][][mark]", value: "10.5", step: "any", class: "sequence-mark-input"
+      form.number_field :mark, name: "sequence[marks][][competences][][mark]", step: "any", class: "sequence-mark-input"
     end
   end
 

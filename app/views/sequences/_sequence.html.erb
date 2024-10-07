@@ -1,17 +1,5 @@
-<div class="light-grey-card p-2 dashboard-normal-font-size my-3">
-  <h6><%= sequence.seq_title %></h6>
-  <p class="margin-zero">Subject <span class="text-color-grey-2 px-3"><%= sequence.subject.name %></span></p>
-  <p class="margin-zero">Class <span class="text-color-grey-2 px-3"><%= sequence.school_class.name %></span></p>
-  <p class="margin-zero">Student enrolled: <span class="text-color-grey-2 px-3"><%= sequence.enrolled_num %></span></p>
-  <p class="margin-zero">Percent success: <span class="text-color-grey-2 px-3"><%= sequence.percent_success %> %</span></p>
-  <p class="margin-zero">Teacher: <span class="text-color-grey-2 px-3"><%= sequence.teacher.full_name %></span></p>
-  <div class="d-flex justify-content-between align-items-start">
-    <%= render partial: "sequences/preview", 
-        layout: "layouts/drawer_layout", 
-        locals: { sequence: sequence, title: sequence.seq_title,
-        item_id: generate_drawer_id("preview_sequence", record: sequence), 
-        position: "end", btn_text: "View", btn_visibility: true }%>
-    <span class="text-white p-1 badge <%= status_badge_color(sequence) %>"><%= sequence.status.humanize %></span>
-    <%= link_to "Edit", edit_sequence_path(sequence), class: "general-link" %>
-  </div>
-</div>
+<% if sequence.first_and_second_sequence_evaluation_method? %>
+  <%= render partial: "sequences/first_and_second_sequence_evaluation_method", locals: { sequence: sequence }%>
+<% else sequence.single_competence_based_evaluation_method? %>
+  <%= render partial: "sequences/single_competence_based_evaluation_method", locals: { sequence: sequence } %>
+<% end %>

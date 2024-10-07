@@ -61,8 +61,8 @@
               <% @competences.each do |c| %>
                 <div>
                   <h6><%= c.title %></h6>
-                  <%= form.hidden_field :marks, name: "sequence[marks][][competence][][id]", value: c.id %>
-                  <%= form.hidden_field :marks, name: "sequence[marks][][competence][][title]", value: c.title %>
+                  <%= form.hidden_field :marks, name: "sequence[marks][][competences][][id]", value: c.id %>
+                  <%= form.hidden_field :marks, name: "sequence[marks][][competences][][title]", value: c.title %>
                   <%= generate_student_competence_based_marks(form, sequence, student, c) %>
                 </div>
               <% end %>

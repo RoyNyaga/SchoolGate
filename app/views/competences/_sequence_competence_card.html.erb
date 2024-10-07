@@ -1,0 +1,9 @@
+<div class="d-flex justify-content-between">
+  <%= link_to "#{competence.title}", "##{generate_drawer_id("preview", record: competence)}", 
+    class: "grey-link-text dashboard-normal-font-size", data: { bs_toggle: "offcanvas" },
+     role: "button", aria: {controls: "#{generate_drawer_id("preview", record: competence)}_drawer"} %>
+  <p class="text-color-grey-2 px-3">% success</p>
+</div>
+<%= render partial: "competences/preview", layout: "layouts/drawer_layout", 
+              locals: { competence: competence, title: competence.title, sequence: sequence,
+              item_id: generate_drawer_id("preview", record: competence) , position: "end", btn_text: "View", btn_visibility: false } %>

@@ -24,6 +24,7 @@ class SequencesController < ApplicationController
   def edit
     @school_class = @sequence.school_class
     @subject = @sequence.subject
+    @competences = @subject.competences
   end
 
   # POST /sequences or /sequences.json
@@ -92,7 +93,7 @@ class SequencesController < ApplicationController
         :term_id, :seq_num, :teachers_name,
         marks: [
           :id, :name, :is_enrolled, :mark,
-          competence: [
+          competences: [
             :id, :title, :mark,
           ],
         ],
