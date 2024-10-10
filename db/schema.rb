@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_07_231236) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_10_115000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -419,6 +419,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_07_231236) do
     t.bigint "academic_year_id", null: false
     t.bigint "report_card_generator_id", default: 3, null: false
     t.integer "evaluation_method", default: 0
+    t.integer "class_enrollment"
+    t.float "success_rate"
     t.index ["academic_year_id"], name: "index_report_cards_on_academic_year_id"
     t.index ["report_card_generator_id"], name: "index_report_cards_on_report_card_generator_id"
     t.index ["school_class_id"], name: "index_report_cards_on_school_class_id"
