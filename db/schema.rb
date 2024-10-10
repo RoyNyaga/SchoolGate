@@ -421,6 +421,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_10_115000) do
     t.integer "evaluation_method", default: 0
     t.integer "class_enrollment"
     t.float "success_rate"
+    t.integer "student_passed_num"
     t.index ["academic_year_id"], name: "index_report_cards_on_academic_year_id"
     t.index ["report_card_generator_id"], name: "index_report_cards_on_report_card_generator_id"
     t.index ["school_class_id"], name: "index_report_cards_on_school_class_id"

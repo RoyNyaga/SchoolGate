@@ -68,7 +68,7 @@ class PdfSingleReportCardGeneratorService
       ["Unjustified Abs. (h)", "", "Conduct Warning", "", "TOTAL SCORE", "#{@report_card.total_score}", "REMARK", "Class Average", "#{@report_card.class_average}"],
       ["Justified Abs. (h)", "", "Reprimand", "", "Coef", "", nested_two_cols("CVWA", "CWA"), "[Min - Max]", ""],
       ["Late", "", "Suspension", "", "Term average", "#{@report_card.average}", nested_two_cols("CA ", "CAA..."), "Number Passed", ""],
-      ["Punishment", "", "", "", "Grade", "", nested_one_col("CNA..."), "Success rate (%)", ""],
+      ["Punishment", "", "", "", "Grade", "", nested_one_col("CNA..."), "Success rate (%)", "#{@report_card.success_rate} %"],
     ]
     column_widths = [
       @pdf.bounds.width * 0.13, # abs
@@ -130,9 +130,9 @@ class PdfSingleReportCardGeneratorService
     # Define the personal information content (two columns, six rows)
     personal_info = [
       ["Name of student: #{@student.full_name}", "Class: #{@student.school_class.name}"],
-      ["Date and place of birth: #{@student.date_of_birth}", "Class enrollment: #{@report_card_generator.student_num}"],
+      ["Date and place of birth: #{@student.date_of_birth}", "Class enrollment: #{@report_card.class_enrollment}"],
       ["Gender: #{@student.gender}", "Number of subjects: #{@report_card.details.size}"],
-      ["Repeater: Yes - No", "Number passed: #{@report_card.passed_subjects}"],
+      ["Repeater: Yes - No", "Number passed: #{@report_card.student_passed_num}"],
       ["Parent - #{@student.report_card_contact}", "Class master:"],
     ]
 

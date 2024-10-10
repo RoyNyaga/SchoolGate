@@ -31,12 +31,6 @@ class ReportCardGenerator < ApplicationRecord
   def self.generate_school_class_report_cards(report_card_generator)
     school_class = report_card_generator.school_class
     if school_class.should_evaluate_multiple_competences_per_subject
-      puts "We entered here"
-      puts "We entered here"
-      puts "We entered here"
-      puts "We entered here"
-      puts "We entered here"
-
       single_competence_based_evaluation_method_format(report_card_generator)
     else
       first_and_second_sequence_evaluation_method_format(report_card_generator)
@@ -56,6 +50,7 @@ class ReportCardGenerator < ApplicationRecord
     @failed_errors = []
     @has_unapproved_sequence = false
     @warning_messages = []
+    @enrollment = @school_class.students.active.size
     check_sequences_status
     unless @has_unapproved_sequence
       @students.each do |student|
@@ -109,7 +104,7 @@ class ReportCardGenerator < ApplicationRecord
     end
 
     rank_report_card
-    add_class_average
+    add_other_attributes
 
     if @failed_errors.present?
       process_duration = Time.now - start_time
@@ -122,7 +117,7 @@ class ReportCardGenerator < ApplicationRecord
       reports_to_be_deleted.destroy_all if reports_to_be_deleted.present?
       ReportCard.insert_all @bulk_report
       @report_card_generator.update(is_successful: true, warning_messages: @warning_messages,
-                                    process_duration: process_duration, student_num: @school_class.students.active.size,
+                                    process_duration: process_duration, student_num: @enrollment,
                                     student_passed_num: calc_student_passed_num, class_average: calc_class_average,
                                     most_performed_students: get_most_performed_students, failed_errors: @failed_errors,
                                     least_performed_students: get_least_performed_students)
@@ -155,6 +150,7 @@ class ReportCardGenerator < ApplicationRecord
     @failed_errors = []
     @has_unapproved_sequence = false
     @warning_messages = []
+    @enrollment = @school_class.students.active.size
     check_sequences_status
     unless @has_unapproved_sequence
       @students.each do |student|
@@ -212,7 +208,7 @@ class ReportCardGenerator < ApplicationRecord
     end
 
     rank_report_card
-    add_class_average
+    add_other_attributes
 
     if @failed_errors.present?
       process_duration = Time.now - start_time
@@ -225,7 +221,7 @@ class ReportCardGenerator < ApplicationRecord
       reports_to_be_deleted.destroy_all if reports_to_be_deleted.present?
       ReportCard.insert_all @bulk_report
       @report_card_generator.update(is_successful: true, warning_messages: @warning_messages,
-                                    process_duration: process_duration, student_num: @school_class.students.active.size,
+                                    process_duration: process_duration, student_num: @enrollment,
                                     student_passed_num: calc_student_passed_num, class_average: calc_class_average,
                                     most_performed_students: get_most_performed_students, failed_errors: @failed_errors,
                                     least_performed_students: get_least_performed_students)
@@ -276,6 +272,11 @@ class ReportCardGenerator < ApplicationRecord
     @bulk_report.select { |r| r[:average] >= 10 }.count
   end
 
+  def self.calc_success_rate
+    rate = (calc_student_passed_num.to_f / @enrollment.to_f) * 100
+    rate.round(2)
+  end
+
   def self.sort_reports_increasing_order #1,2,3,4,5
     @bulk_report.sort_by { |r| r[:average] }
   end
@@ -297,8 +298,20 @@ class ReportCardGenerator < ApplicationRecord
     class_avg.round(2)
   end
 
-  def self.add_class_average
-    @bulk_report.each { |r| r[:class_average] = calc_class_average }
+  # def self.add_class_average
+  #   @bulk_report.each { |r| r[:class_average] = calc_class_average }
+  # end
+
+  def self.add_other_attributes
+    average = calc_class_average
+    student_pased_num = calc_student_passed_num
+    success_rate = calc_success_rate
+    @bulk_report.each do |report|
+      report[:class_average] = average
+      report[:class_enrollment] = @enrollment
+      report[:student_passed_num] = student_pased_num
+      report[:success_rate] = success_rate
+    end
   end
 
   def self.error_name_list(error_code)
