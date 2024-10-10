@@ -127,6 +127,10 @@ class Sequence < ApplicationRecord
     end
   end
 
+  def teachers_name
+    super ? super : teacher.full_name
+  end
+
   private
 
   # def sequences_per_term
@@ -154,7 +158,7 @@ class Sequence < ApplicationRecord
         average_competence_mark = student["competences"].sum { |competence| competence["mark"].to_f } / subject.competences.length
 
         # Update the student hash's "mark" key with the calculated total
-        student["mark"] = average_competence_mark
+        student["mark"] = average_competence_mark.round(2)
       end
     end
   end

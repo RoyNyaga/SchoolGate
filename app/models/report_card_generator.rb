@@ -29,6 +29,120 @@ class ReportCardGenerator < ApplicationRecord
   end
 
   def self.generate_school_class_report_cards(report_card_generator)
+    school_class = report_card_generator.school_class
+    if school_class.should_evaluate_multiple_competences_per_subject
+      puts "We entered here"
+      puts "We entered here"
+      puts "We entered here"
+      puts "We entered here"
+      puts "We entered here"
+
+      single_competence_based_evaluation_method_format(report_card_generator)
+    else
+      first_and_second_sequence_evaluation_method_format(report_card_generator)
+    end
+  end
+
+  def self.single_competence_based_evaluation_method_format(report_card_generator)
+    @report_card_generator = report_card_generator
+    start_time = Time.now
+    @school_class = @report_card_generator.school_class
+    @school = @school_class.school
+    @term = @report_card_generator.term
+    @academic_year = @report_card_generator.academic_year
+    @students = @school_class.students
+    @subjects = @school_class.subjects
+    @bulk_report = []
+    @failed_errors = []
+    @has_unapproved_sequence = false
+    @warning_messages = []
+    check_sequences_status
+    unless @has_unapproved_sequence
+      @students.each do |student|
+        next unless student.active?
+        total_score = 0
+        total_coefficient = 0
+        report_card_object = { school_id: @school.id, school_class_id: @school_class.id, term_id: @term.id,
+                               student_id: student.id, academic_year_id: @academic_year.id,
+                               report_card_generator_id: @report_card_generator.id, evaluation_method: 1 }
+        details = []
+        passed_subjects = 0
+        @subjects.each do |subject|
+          subject_detail = {}
+          sequence = subject.sequences.approved.where(term_id: @term.id, academic_year_id: @academic_year.id).first
+          if sequence.present?
+            sequence_marks = sequence.hashed_marks
+            if student.was_enrolled?(sequence_marks)
+              student_marks = student.get_mark_object(sequence_marks)
+              competences_mark = student_marks["competences"] # an array of competence object
+              total_coefficient += subject.coefficient
+              average_mark = (student_marks["mark"]).round(2)
+              score = (average_mark * subject.coefficient).round(2)
+              total_score += score
+              passed_subjects += 1 if average_mark >= 10 # assuming that we are working on 20. In the future, passed mark could be a setting at the level of the school and class
+              subject_detail["name"] = subject.name
+              subject_detail["id"] = subject.id
+              subject_detail["competences"] = competences_mark
+              subject_detail["average_mark"] = average_mark
+              subject_detail["coefficient"] = subject.coefficient
+              subject_detail["score"] = score
+              subject_detail["grade"] = "To Do"
+              subject_detail["teacher"] = sequence.teachers_name
+              subject_detail["remark"] = subject.add_remarks(average_mark)
+              # binding.break
+              details << subject_detail.to_s
+            else
+              @warning_messages << generate_warning_message("Missing enrollment for student #{student.full_name}", sequence, sequence.seq_title(with_class_name: false))
+            end
+          else
+            @failed_errors << generate_error_message("Missing Sequence for subject #{subject.title}", subject, subject.title)
+          end
+        end
+
+        report_card_object[:total_score] = total_score
+        report_card_object[:total_coefficient] = total_coefficient
+        report_card_object[:average] = total_coefficient > 0 ? (total_score / total_coefficient).round(2) : 0
+        report_card_object[:passed_subjects] = passed_subjects
+        report_card_object[:details] = details
+        @bulk_report << report_card_object
+      end
+    end
+
+    rank_report_card
+    add_class_average
+
+    if @failed_errors.present?
+      process_duration = Time.now - start_time
+      @report_card_generator.update(failed_errors: @failed_errors.uniq,
+                                    warning_messages: @warning_messages.uniq, process_duration: process_duration,
+                                    is_successful: false)
+    else
+      process_duration = Time.now - start_time
+      reports_to_be_deleted = ReportCard.where(school_class_id: @school_class.id, term_id: @term.id, academic_year_id: @academic_year.id)
+      reports_to_be_deleted.destroy_all if reports_to_be_deleted.present?
+      ReportCard.insert_all @bulk_report
+      @report_card_generator.update(is_successful: true, warning_messages: @warning_messages,
+                                    process_duration: process_duration, student_num: @school_class.students.active.size,
+                                    student_passed_num: calc_student_passed_num, class_average: calc_class_average,
+                                    most_performed_students: get_most_performed_students, failed_errors: @failed_errors,
+                                    least_performed_students: get_least_performed_students)
+
+      @report_card_generator.update(progress_state: 2)
+
+      # pdf_generator = PdfGeneratorService.new(@report_card_generator)
+      # pdf_data = pdf_generator.generate_pdf
+      # file_name = pdf_generator.file_name
+      # @report_card_generator.update(progress_state: 3)
+      # pdf_generator.save_file
+      # pdf_path = pdf_generator.access_file
+      # @report_card_generator.report_card_file.attach(io: pdf_path, filename: file_name)
+      # pdf_generator.delete_pdf_file
+      # process_duration = Time.now - start_time
+      # @report_card_generator.update(progress_state: 4, process_duration: process_duration)
+    end
+  end
+
+  def self.first_and_second_sequence_evaluation_method_format(report_card_generator)
     @report_card_generator = report_card_generator
     start_time = Time.now
     @school_class = @report_card_generator.school_class
@@ -179,7 +293,8 @@ class ReportCardGenerator < ApplicationRecord
   end
 
   def self.calc_class_average
-    @bulk_report.map { |r| r[:average] }.sum / @bulk_report.size
+    class_avg = @bulk_report.map { |r| r[:average] }.sum / @bulk_report.size
+    class_avg.round(2)
   end
 
   def self.add_class_average

@@ -134,6 +134,12 @@ class Student < ApplicationRecord
     contacts
   end
 
+  def report_card_contact
+    unless extract_contacts.empty?
+      "#{extract_contacts.first[:name].split(" ")[0..1].join(" ")}: #{extract_contacts.first[:phone_number]}"
+    end
+  end
+
   private
 
   def contact_check_for_higher_education_student

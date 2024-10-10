@@ -1,4 +1,5 @@
 <div>
+  <%= link_to "view pdf", pdf_view_report_card_path(report_card) %>
   <div class="light-grey-card d-flex justify-content-around my-2">
     <p class="margin-zero">Average: <span class="text-color-grey-2"><%= report_card.average.round(2) %></span></p>
     <p class="margin-zero">Class Average: <span class="text-color-grey-2"><%= report_card.class_average.round(2) %></span></p>

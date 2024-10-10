@@ -1,6 +1,6 @@
 class ReportCardsController < ApplicationController
   layout "school_layout"
-  before_action :set_report_card, only: %i[ show edit update destroy ]
+  before_action :set_report_card, only: %i[ show edit update destroy pdf_view ]
 
   # GET /report_cards or /report_cards.json
   def index
@@ -91,6 +91,19 @@ class ReportCardsController < ApplicationController
       format.html # regular HTML response
       format.pdf do
         pdf = PdfTestingService.generate_pdf
+        send_data pdf.render, filename: "report.pdf",
+                              type: "application/pdf",
+                              disposition: "inline" # or 'attachment' to force download
+      end
+    end
+  end
+
+  def pdf_view
+    respond_to do |format|
+      pdf_gen = PdfSingleReportCardGeneratorService.new(@report_card)
+      format.html # regular HTML response
+      format.pdf do
+        pdf = pdf_gen.generate_pdf
         send_data pdf.render, filename: "report.pdf",
                               type: "application/pdf",
                               disposition: "inline" # or 'attachment' to force download

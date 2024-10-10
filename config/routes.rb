@@ -78,6 +78,9 @@ Rails.application.routes.draw do
       get :manually_create
       get :pdf_testing
     end
+    member do
+      get :pdf_view
+    end
   end
   resources :terms
   resources :sequences do
