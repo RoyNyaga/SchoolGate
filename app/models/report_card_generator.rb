@@ -124,16 +124,16 @@ class ReportCardGenerator < ApplicationRecord
 
       @report_card_generator.update(progress_state: 2)
 
-      # pdf_generator = PdfGeneratorService.new(@report_card_generator)
-      # pdf_data = pdf_generator.generate_pdf
-      # file_name = pdf_generator.file_name
-      # @report_card_generator.update(progress_state: 3)
-      # pdf_generator.save_file
-      # pdf_path = pdf_generator.access_file
-      # @report_card_generator.report_card_file.attach(io: pdf_path, filename: file_name)
-      # pdf_generator.delete_pdf_file
-      # process_duration = Time.now - start_time
-      # @report_card_generator.update(progress_state: 4, process_duration: process_duration)
+      pdf_generator = PdfCompetenceBasedGeneratorService.new(report_card_generator: @report_card_generator, is_bulk_create: true)
+      pdf_data = pdf_generator.generate_bulk_pdf
+      file_name = pdf_generator.file_name
+      @report_card_generator.update(progress_state: 3)
+      pdf_generator.save_file
+      pdf_path = pdf_generator.access_file
+      @report_card_generator.report_card_file.attach(io: pdf_path, filename: file_name)
+      pdf_generator.delete_pdf_file
+      process_duration = Time.now - start_time
+      @report_card_generator.update(progress_state: 4, process_duration: process_duration)
     end
   end
 

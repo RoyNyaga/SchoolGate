@@ -100,10 +100,10 @@ class ReportCardsController < ApplicationController
 
   def pdf_view
     respond_to do |format|
-      pdf_gen = PdfSingleReportCardGeneratorService.new(@report_card)
+      pdf_gen = PdfCompetenceBasedGeneratorService.new(report_card: @report_card, is_bulk_create: false)
       format.html # regular HTML response
       format.pdf do
-        pdf = pdf_gen.generate_pdf
+        pdf = pdf_gen.generate_single_pdf(is_bulk_create: false)
         send_data pdf.render, filename: "report.pdf",
                               type: "application/pdf",
                               disposition: "inline" # or 'attachment' to force download

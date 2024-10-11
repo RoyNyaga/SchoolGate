@@ -1,17 +1,36 @@
-class PdfSingleReportCardGeneratorService
-  attr_accessor :report_card, :file_name
+class PdfCompetenceBasedGeneratorService
+  attr_accessor :report_card, :file_name, :report_card_generator
 
-  def initialize(report_card)
+  def initialize(report_card: nil, report_card_generator: nil, is_bulk_create: false)
     @pdf = Prawn::Document.new
-    @report_card = report_card
-    @report_card_generator = report_card.report_card_generator
-    @file_name = "#{@report_card.student.full_name.gsub(" ", "_")}.pdf"
-    @school = @report_card.school
-    @student = @report_card.student
-    @term = @report_card.term
+    if is_bulk_create
+      # @document_width = @pdf.bounds.width
+      @report_card_generator = report_card_generator
+      @file_name = "#{@report_card_generator.title(with_school: true).gsub(" ", "_").gsub("-", "_").gsub("/", "_")}_#{@report_card_generator.id}.pdf"
+      @report_cards = @report_card_generator.report_cards
+      @school = @report_card_generator.school
+      @term = @report_card_generator.term
+    else
+      @report_card = report_card
+      @report_card_generator = report_card.report_card_generator
+      @file_name = "#{@report_card.student.full_name.gsub(" ", "_")}.pdf"
+      @school = @report_card.school
+      @student = @report_card.student
+      @term = @report_card.term
+    end
   end
 
-  def generate_pdf
+  def generate_bulk_pdf
+    @report_cards.each do |report_card|
+      @report_card = report_card
+      @student = report_card.student
+
+      generate_single_pdf(is_bulk_create: true)
+    end
+    @pdf
+  end
+
+  def generate_single_pdf(is_bulk_create: false)
     # Add logo first
     add_logo
 
@@ -33,7 +52,12 @@ class PdfSingleReportCardGeneratorService
 
     decipline_section_header
     decipline_section_body
-    @pdf
+
+    if is_bulk_create
+      @pdf.start_new_page
+    else
+      @pdf
+    end
   end
 
   def add_logo
@@ -220,5 +244,25 @@ class PdfSingleReportCardGeneratorService
   # Competences marks (return marks as separate lines)
   def competences_mark(subject)
     subject["competences"].map { |competence| "#{competence["mark"]}" }
+  end
+
+  def save_file
+    @pdf.render_file Rails.root.join("public", @file_name)
+  end
+
+  def access_file
+    File.open Rails.root.join("public/#{@file_name}")
+  end
+
+  def delete_pdf_file
+    file_path = Rails.root.join("public", @file_name)
+
+    # Check if the file exists before attempting to delete it
+    if File.exist?(file_path)
+      File.delete(file_path)
+      puts "PDF file deleted successfully."
+    else
+      puts "PDF file does not exist."
+    end
   end
 end
