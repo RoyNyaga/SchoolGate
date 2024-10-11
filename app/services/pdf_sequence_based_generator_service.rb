@@ -1,25 +1,38 @@
-class PdfGeneratorService
+class PdfSequenceBasedGeneratorService
   attr_accessor :report_cards, :file_name
 
-  def initialize(report_card_generator)
+  def initialize(report_card: nil, report_card_generator: nil, is_bulk_create: false)
     @pdf = Prawn::Document.new
-
-    # @document_width = @pdf.bounds.width
-    @report_card_generator = report_card_generator
-    @file_name = "#{@report_card_generator.title(with_school: true).gsub(" ", "_").gsub("-", "_").gsub("/", "_")}_#{@report_card_generator.id}.pdf"
-    @report_cards = @report_card_generator.report_cards
-    @school = @report_card_generator.school
+    if is_bulk_create
+      # @document_width = @pdf.bounds.width
+      @report_card_generator = report_card_generator
+      @file_name = "#{@report_card_generator.title(with_school: true).gsub(" ", "_").gsub("-", "_").gsub("/", "_")}_#{@report_card_generator.id}.pdf"
+      @report_cards = @report_card_generator.report_cards
+      @school = @report_card_generator.school
+      @term = @report_card_generator.term
+    else
+      @report_card = report_card
+      @report_card_generator = report_card.report_card_generator
+      @file_name = "#{@report_card.student.full_name.gsub(" ", "_")}.pdf"
+      @school = @report_card.school
+      @student = @report_card.student
+      @term = @report_card.term
+    end
   end
 
   def table_head
     ["", "<b>subject</b>", "<b>Seq1</b>", "<b>Seq2</b>", "<b>Avg/20</b>", "<b>Coef</b>", "<b>Score</b>", "<b>Grads</b>", "<b>Rank</b>", "<b>Teacher</b>", "<b>Remark</b>"]
   end
 
-  def add_subject_info
-  end
-
   def parse_subject_info(subject_info)
     subject_info.map { |s| eval(s) }
+  end
+
+  def generate_single_pdf(is_bulk_create: false)
+    @pdf.bounding_box([2, 730], width: 550) do
+      letter_head
+    end
+    @pdf
   end
 
   def generate_pdf
@@ -97,6 +110,16 @@ class PdfGeneratorService
     end
 
     @pdf
+  end
+
+  def letter_head
+    @pdf.font "Times-Roman" do
+      @pdf.text @school.full_name, size: 13, style: :bold, align: :center
+    end
+    @pdf.font("Courier") do
+      @pdf.text "Ministry Of Secondary Education", align: :center, size: 10
+      @pdf.text "#{@school.address}", align: :center, size: 10
+    end
   end
 
   def save_file

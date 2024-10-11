@@ -13,7 +13,7 @@ class Sequence < ApplicationRecord
   enum seq_num: { first_sequence: 1, second_sequence: 2, third_sequence: 3, forth_sequence: 4,
                   fifth_sequence: 5, sith_sequence: 6, first_term_sequence: 7, second_term_sequence: 8, third_term_sequence: 9 }
   enum status: { in_progress: 0, submitted: 1, rejected: 2, approved: 3 }
-  enum evaluation_method: { first_and_second_sequence_evaluation_method: 0, single_competence_based_evaluation_method: 1 }
+  enum evaluation_method: { sequence_based_evaluation_method: 0, competence_based_evaluation_method: 1 }
 
   # validate :sequences_per_term
   # validate :enrollment_num_not_zero
@@ -37,7 +37,7 @@ class Sequence < ApplicationRecord
   end
 
   def hashed_marks
-    if first_and_second_sequence_evaluation_method?
+    if sequence_based_evaluation_method?
       # parsing marks to ruby hash and converting the mark value to float
       Sequence.string_to_hash_arr(marks).map { |student|
         { "id" => student["id"].to_i, "name" => student["name"], "mark" => student[
@@ -67,7 +67,7 @@ class Sequence < ApplicationRecord
   end
 
   def sort_by_mark_desc(is_competence_based: false, competence_id: nil)
-    if single_competence_based_evaluation_method? && is_competence_based
+    if competence_based_evaluation_method? && is_competence_based
       get_competence_data(competence_id).sort_by { |student| -student["competence"]["mark"] }
     else
       enrolled_students.sort_by { |item| -item["mark"] }
@@ -84,7 +84,7 @@ class Sequence < ApplicationRecord
   end
 
   def student_num_above_average(is_competence_based: false, competence_id: nil)
-    if single_competence_based_evaluation_method? && is_competence_based
+    if competence_based_evaluation_method? && is_competence_based
       get_competence_data(competence_id).count { |student| student["competence"]["mark"] >= 10 }
     else
       enrolled_students.count { |student| student["mark"] >= 10 }
@@ -92,7 +92,7 @@ class Sequence < ApplicationRecord
   end
 
   def highest_mark(is_competence_based: false, competence_id: nil)
-    if single_competence_based_evaluation_method? && is_competence_based
+    if competence_based_evaluation_method? && is_competence_based
       get_competence_data(competence_id).max_by { |student| student["competence"]["mark"] }["competence"]["mark"]
     else
       enrolled_students.max_by { |student| student["mark"] }["mark"]
@@ -100,7 +100,7 @@ class Sequence < ApplicationRecord
   end
 
   def student_with_highest_mark(is_competence_based: false, competence_id: nil) # returns an array
-    if single_competence_based_evaluation_method? && is_competence_based
+    if competence_based_evaluation_method? && is_competence_based
       get_competence_data(competence_id).select { |student| student["competence"]["mark"] == highest_mark(is_competence_based: is_competence_based, competence_id: competence_id) }
     else
       enrolled_students.select { |student| student["mark"] == highest_mark }
@@ -108,7 +108,7 @@ class Sequence < ApplicationRecord
   end
 
   def percent_success(is_competence_based: false, competence_id: nil)
-    if single_competence_based_evaluation_method? && is_competence_based
+    if competence_based_evaluation_method? && is_competence_based
       ((student_num_above_average(is_competence_based: is_competence_based, competence_id: competence_id).to_f / enrolled_num.to_f) * 100).round(2)
     else
       ((student_num_above_average.to_f / enrolled_num.to_f) * 100).round(2)
@@ -152,7 +152,7 @@ class Sequence < ApplicationRecord
   end
 
   def update_marks_with_total
-    if self.single_competence_based_evaluation_method?
+    if self.competence_based_evaluation_method?
       self.marks = hashed_marks.each do |student|
         # Calculate the total mark by summing up the competence marks
         average_competence_mark = student["competences"].sum { |competence| competence["mark"].to_f } / subject.competences.length

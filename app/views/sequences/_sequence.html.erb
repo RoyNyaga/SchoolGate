@@ -1,5 +1,5 @@
-<% if sequence.first_and_second_sequence_evaluation_method? %>
-  <%= render partial: "sequences/first_and_second_sequence_evaluation_method", locals: { sequence: sequence }%>
-<% else sequence.single_competence_based_evaluation_method? %>
-  <%= render partial: "sequences/single_competence_based_evaluation_method", locals: { sequence: sequence } %>
+<% if sequence.sequence_based_evaluation_method? %>
+  <%= render partial: "sequences/sequence_based_evaluation_method", locals: { sequence: sequence }%>
+<% else sequence.competence_based_evaluation_method? %>
+  <%= render partial: "sequences/competence_based_evaluation_method", locals: { sequence: sequence } %>
 <% end %>

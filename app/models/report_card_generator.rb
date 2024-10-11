@@ -31,13 +31,13 @@ class ReportCardGenerator < ApplicationRecord
   def self.generate_school_class_report_cards(report_card_generator)
     school_class = report_card_generator.school_class
     if school_class.should_evaluate_multiple_competences_per_subject
-      single_competence_based_evaluation_method_format(report_card_generator)
+      competence_based_evaluation_method_format(report_card_generator)
     else
-      first_and_second_sequence_evaluation_method_format(report_card_generator)
+      sequence_based_evaluation_method_format(report_card_generator)
     end
   end
 
-  def self.single_competence_based_evaluation_method_format(report_card_generator)
+  def self.competence_based_evaluation_method_format(report_card_generator)
     @report_card_generator = report_card_generator
     start_time = Time.now
     @school_class = @report_card_generator.school_class
@@ -137,7 +137,7 @@ class ReportCardGenerator < ApplicationRecord
     end
   end
 
-  def self.first_and_second_sequence_evaluation_method_format(report_card_generator)
+  def self.sequence_based_evaluation_method_format(report_card_generator)
     @report_card_generator = report_card_generator
     start_time = Time.now
     @school_class = @report_card_generator.school_class
