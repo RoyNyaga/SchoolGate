@@ -24,6 +24,10 @@ class ReportCardGeneratorsController < ApplicationController
   # POST /report_card_generators or /report_card_generators.json
   def create
     @report_card_generator = ReportCardGenerator.new(report_card_generator_params)
+    @school_class = @report_card_generator.school_class
+    if @school_class.should_evaluate_multiple_competences_per_subject
+      @report_card_generator.evaluation_method = 1
+    end
 
     respond_to do |format|
       if @report_card_generator.save

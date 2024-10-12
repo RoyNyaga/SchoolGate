@@ -100,7 +100,11 @@ class ReportCardsController < ApplicationController
 
   def pdf_view
     respond_to do |format|
-      pdf_gen = PdfCompetenceBasedGeneratorService.new(report_card: @report_card, is_bulk_create: false)
+      pdf_gen = if @report_card.sequence_based_evaluation_method?
+          PdfSequenceBasedGeneratorService.new(report_card: @report_card, is_bulk_create: false)
+        else
+          PdfCompetenceBasedGeneratorService.new(report_card: @report_card, is_bulk_create: false)
+        end
       format.html # regular HTML response
       format.pdf do
         pdf = pdf_gen.generate_single_pdf(is_bulk_create: false)

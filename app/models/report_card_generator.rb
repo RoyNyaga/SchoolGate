@@ -8,6 +8,7 @@ class ReportCardGenerator < ApplicationRecord
   has_many :report_cards
 
   enum progress_state: { initializing: 0, report_card_creation: 1, generating_pdf: 2, attach_pdf_to_generator: 3, completed: 4 }
+  enum evaluation_method: { sequence_based_evaluation_method: 0, competence_based_evaluation_method: 1 }
 
   validate :student_presence_check
 
@@ -29,8 +30,7 @@ class ReportCardGenerator < ApplicationRecord
   end
 
   def self.generate_school_class_report_cards(report_card_generator)
-    school_class = report_card_generator.school_class
-    if school_class.should_evaluate_multiple_competences_per_subject
+    if report_card_generator.competence_based_evaluation_method?
       competence_based_evaluation_method_format(report_card_generator)
     else
       sequence_based_evaluation_method_format(report_card_generator)
@@ -228,8 +228,8 @@ class ReportCardGenerator < ApplicationRecord
 
       @report_card_generator.update(progress_state: 2)
 
-      pdf_generator = PdfGeneratorService.new(@report_card_generator)
-      pdf_data = pdf_generator.generate_pdf
+      pdf_generator = PdfSequenceBasedGeneratorService.new(report_card_generator: @report_card_generator, is_bulk_create: true)
+      pdf_data = pdf_generator.generate_bulk_pdf
       file_name = pdf_generator.file_name
       @report_card_generator.update(progress_state: 3)
       pdf_generator.save_file
