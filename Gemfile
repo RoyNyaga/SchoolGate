@@ -91,3 +91,4 @@ gem "will_paginate", "~> 4.0"
 gem "activeadmin", "~> 3.2", ">= 3.2.1"
 gem "faraday", "~> 2.9", ">= 2.9.2"
 gem "friendly_id", "~> 5.5", ">= 5.5.1"
+gem 'rack-cors', '~> 2.0', '>= 2.0.2'
