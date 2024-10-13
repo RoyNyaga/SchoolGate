@@ -93,6 +93,7 @@
   try {
     const canvas = await html2canvas(frontSection, {
       scale: window.devicePixelRatio, // improve quality on mobile devices
+      useCORS: true,
     });
 
     const dataUrl = canvas.toDataURL("image/png");
