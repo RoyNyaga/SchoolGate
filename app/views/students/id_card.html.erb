@@ -71,6 +71,7 @@
             </div>
           </div>
         </div>
+        <button onclick="captureAndDownloadBack()">Download</button>
       </div>
     </div>
   </div>
@@ -99,6 +100,42 @@
     const dataUrl = canvas.toDataURL("image/png");
     const link = document.createElement('a');
     link.href = dataUrl;
+    console.log(link)
+    link.download = `${Date.now()}.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    console.log("Image download triggered");
+  } catch (error) {
+    console.error("Error capturing the image:", error);
+  }
+  }
+
+   async function captureAndDownloadBack() {
+    // const frontSection = document.querySelector('.id-card-front-section')
+    // html2canvas(frontSection).then(function (canvas) {
+    //   console.log("ready");
+    //   var dataUrl = canvas.toDataURL("image/png");
+    //   download(dataUrl, `${Date.now()}.png`, 'image/png');
+    // })
+
+    const frontSection = document.querySelector('.id-card-back-section');
+  if (!frontSection) {
+    console.error('Element not found!');
+    return;
+  }
+
+  try {
+    const canvas = await html2canvas(frontSection, {
+      scale: window.devicePixelRatio, // improve quality on mobile devices
+      useCORS: true,
+    });
+
+    const dataUrl = canvas.toDataURL("image/png");
+    const link = document.createElement('a');
+    link.href = dataUrl;
+    console.log(link)
     link.download = `${Date.now()}.png`;
     document.body.appendChild(link);
     link.click();
