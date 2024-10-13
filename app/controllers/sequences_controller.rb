@@ -17,12 +17,14 @@ class SequencesController < ApplicationController
     @school_class = SchoolClass.find(params[:school_class_id])
     @subject = Subject.find(params[:subject_id])
     @sequence = Sequence.new
+    @competences = @subject.competences
   end
 
   # GET /sequences/1/edit
   def edit
     @school_class = @sequence.school_class
     @subject = @sequence.subject
+    @competences = @subject.competences
   end
 
   # POST /sequences or /sequences.json
@@ -84,7 +86,22 @@ class SequencesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def sequence_params
-    params.require(:sequence).permit(:school_id, :school_class_id, :academic_year_id, :term_id, :teacher_id, :seq_num, :subject_id,
-                                     :academic_year_start, :academic_year_end, marks: [:id, :name, :mark, :is_enrolled])
+    school_class = SchoolClass.find_by(id: params[:sequence][:school_class_id])
+    if school_class.should_evaluate_multiple_competences_per_subject
+      params.require(:sequence).permit(
+        :school_id, :academic_year_id, :school_class_id, :teacher_id, :subject_id, :evaluation_method,
+        :term_id, :seq_num, :teachers_name,
+        marks: [
+          :id, :name, :is_enrolled, :mark,
+          competences: [
+            :id, :title, :mark,
+          ],
+        ],
+      )
+    else
+      params.require(:sequence).permit(:school_id, :school_class_id, :academic_year_id, :term_id, :evaluation_method,
+                                       :teacher_id, :seq_num, :subject_id, :teachers_name,
+                                       :academic_year_start, :academic_year_end, marks: [:id, :name, :mark, :is_enrolled])
+    end
   end
 end

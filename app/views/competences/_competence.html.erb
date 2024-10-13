@@ -1,0 +1,6 @@
+ <%= turbo_frame_tag custom_id_generator("competence", record: competence) do %>
+  <div class="d-flex justify-content-between">
+    <p><%= competence.title %></p>
+    <%= link_to "Edit", edit_competence_path(competence), class: "edit-link" %>
+  </div>
+<% end %>

@@ -7,6 +7,7 @@ class Subject < ApplicationRecord
   has_many :progresses
   has_many :curriculums
   has_many :topics, dependent: :destroy
+  has_many :competences, dependent: :destroy
 
   store_accessor :remarks, :less_than_equal_to_5, :less_than_equal_to_9, :less_than_equal_to_12,
                  :less_than_equal_to_15, :less_than_equal_to_18, :less_than_equal_to_20

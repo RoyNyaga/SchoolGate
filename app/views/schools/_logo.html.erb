@@ -1,7 +1,7 @@
 <div>
   <% if school.photo.attached? %>
-    <%= image_tag url_for(school.photo), class: "img-fluid", data: { photoUploads_target: "image" } %>
+    <%= image_tag url_for(school.photo), class: "img-fluid", crossOrigin: "anonymous", data: { photoUploads_target: "image" } %>
   <% else %>
-    <%= image_tag "user_photo.webp", class: "img-fluid", data: { photoUploads_target: "image" }, alt: "your photo is missing" %>
+    <%= image_tag "user_photo.webp", class: "img-fluid", crossOrigin: "anonymous", data: { photoUploads_target: "image" }, alt: "your photo is missing" %>
   <% end %>
 </div>

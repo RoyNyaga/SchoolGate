@@ -33,9 +33,13 @@ class Student < ApplicationRecord
   enum education_level: { not_assigned: 0, basic_education: 1, secondary_education: 2, higher_education: 3 }
   enum gender: { female: 0, male: 1 }
 
-  def sequence_mark_per_subject(marks) # marks should be hashed
+  def sequence_mark_per_subject(marks, is_competence_based: false) # marks should be hashed
     mark = get_mark_object(marks)
-    mark["mark"] unless mark.nil?
+    if is_competence_based
+      mark["competence"]["mark"] unless mark.nil?
+    else
+      mark["mark"] unless mark.nil?
+    end
   end
 
   def assessment_mark_per_subject(marks) # marks should be hashed
@@ -128,6 +132,12 @@ class Student < ApplicationRecord
     contacts << guidance_contact if guidance_contact
 
     contacts
+  end
+
+  def report_card_contact
+    unless extract_contacts.empty?
+      "#{extract_contacts.first[:name].split(" ")[0..1].join(" ")}: #{extract_contacts.first[:phone_number]}"
+    end
   end
 
   private

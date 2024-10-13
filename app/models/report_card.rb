@@ -5,9 +5,11 @@ class ReportCard < ApplicationRecord
   belongs_to :term
   belongs_to :student
   belongs_to :academic_year
-  belongs_to :report_card_generators
+  belongs_to :report_card_generator
   validates :student_id, uniqueness: { scope: :term_id,
                                        message: "This student already has a report for this term" }
+
+  enum evaluation_method: { sequence_based_evaluation_method: 0, competence_based_evaluation_method: 1 }
 
   def generate_chart_data
     arr = ReportCard.string_to_hash_arr(details)

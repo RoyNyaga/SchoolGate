@@ -32,7 +32,11 @@
   </div>
   <div>
     <%= form.label :seq_num, style: "display: block" %>
-    <%= form.select :seq_num, Sequence.seq_nums.map { |k,v| [k.humanize, k] }, {include_blank: 'Select Sequence Number'}, { class: "general-input-styles" } %>
+    <%= form.select :seq_num, Sequence.allowed_seq_nums(@school_class).map { |k,v| [k.humanize, k] }, {include_blank: 'Select Sequence Number'}, { class: "general-input-styles" } %>
+  </div>
+  <div>
+    <%= form.label :teachers_name, style: "display: block" %>
+    <%= form.text_field :teachers_name, class: "general-input-styles", required: true %>
   </div>
   <table class="table table-hover my-3">
     <thead>
@@ -51,7 +55,21 @@
         <tr>
           <td><%= num %></td>
           <td><%= student.full_name %></td>
-          <td><%= generate_student_marks_input(form, sequence, student) %></td>
+          <% if @school_class.should_evaluate_multiple_competences_per_subject %>
+            <%= form.hidden_field :id, name: "sequence[marks][][mark]", value: "" %>
+            <td>
+              <% @competences.each do |c| %>
+                <div>
+                  <h6><%= c.title %></h6>
+                  <%= form.hidden_field :marks, name: "sequence[marks][][competences][][id]", value: c.id %>
+                  <%= form.hidden_field :marks, name: "sequence[marks][][competences][][title]", value: c.title %>
+                  <%= generate_student_competence_based_marks(form, sequence, student, c) %>
+                </div>
+              <% end %>
+            </td>
+          <% else %>
+            <td><%= generate_student_marks_input(form, sequence, student) %></td>
+          <% end %>
           <td>
             <span>Enrolled</span>
             <div>

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Competences</h1>
+
+<div id="competences">
+  <% @competences.each do |competence| %>
+    <%= render competence %>
+    <p>
+      <%= link_to "Show this competence", competence %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New competence", new_competence_path %>

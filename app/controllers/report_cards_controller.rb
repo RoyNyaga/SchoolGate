@@ -1,6 +1,6 @@
 class ReportCardsController < ApplicationController
   layout "school_layout"
-  before_action :set_report_card, only: %i[ show edit update destroy ]
+  before_action :set_report_card, only: %i[ show edit update destroy pdf_view ]
 
   # GET /report_cards or /report_cards.json
   def index
@@ -84,6 +84,35 @@ class ReportCardsController < ApplicationController
     pdf_file = PdfGeneratorService.new(@report_cards)
     # binding.break
     send_data(pdf_file.generate_pdf.render, filename: "test-file", type: "application/pdf", disposition: "inline")
+  end
+
+  def pdf_testing #http://localhost:3000/report_cards/pdf_testing.pdf
+    respond_to do |format|
+      format.html # regular HTML response
+      format.pdf do
+        pdf = PdfTestingService.generate_pdf
+        send_data pdf.render, filename: "report.pdf",
+                              type: "application/pdf",
+                              disposition: "inline" # or 'attachment' to force download
+      end
+    end
+  end
+
+  def pdf_view
+    respond_to do |format|
+      pdf_gen = if @report_card.sequence_based_evaluation_method?
+          PdfSequenceBasedGeneratorService.new(report_card: @report_card, is_bulk_create: false)
+        else
+          PdfCompetenceBasedGeneratorService.new(report_card: @report_card, is_bulk_create: false)
+        end
+      format.html # regular HTML response
+      format.pdf do
+        pdf = pdf_gen.generate_single_pdf(is_bulk_create: false)
+        send_data pdf.render, filename: "report.pdf",
+                              type: "application/pdf",
+                              disposition: "inline" # or 'attachment' to force download
+      end
+    end
   end
 
   private

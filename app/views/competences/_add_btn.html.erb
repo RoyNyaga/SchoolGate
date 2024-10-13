@@ -1,0 +1,5 @@
+ <%= turbo_frame_tag custom_id_generator("new", record: Competence.new) do %>
+  <div class="text-center">
+    <%= link_to "Add", new_competence_path(subject_id: subject.id) , class: "general-link" %>
+  </div>
+<% end %>

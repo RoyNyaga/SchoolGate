@@ -1,0 +1,4 @@
+<%= turbo_frame_tag custom_id_generator("new", record: Competence.new) do %>
+  <%= render "form", competence: @competence %>
+  <%= link_to "Cancel", edit_subject_path(@subject.id), class: "edit-link" %>
+<% end %>

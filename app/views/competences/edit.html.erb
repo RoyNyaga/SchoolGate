@@ -1,0 +1,9 @@
+ <%= turbo_frame_tag custom_id_generator("competence", record: @competence) do %>
+  <div class="white-section-div my-3">
+    <%= render "form", competence: @competence %>
+    <div class="d-flex justify-content-around mt-2">
+      <%= link_to "Cancel", edit_subject_path(@subject.id), class: "edit-link" %>
+      <%= button_to "Delete", competence_path(@competence), method: :delete, class: "delete-text-link" %>
+    </div>
+  </div>
+<% end %>

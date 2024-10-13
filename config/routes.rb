@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :competences
   resources :school_approval_requests
   resources :tutorials
   mount MissionControl::Jobs::Engine, at: "/jobs"
@@ -75,6 +76,10 @@ Rails.application.routes.draw do
       get :pdf_download
       get :auto_generate
       get :manually_create
+      get :pdf_testing
+    end
+    member do
+      get :pdf_view
     end
   end
   resources :terms

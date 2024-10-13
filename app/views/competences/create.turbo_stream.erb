@@ -1,0 +1,3 @@
+<%= turbo_stream.replace custom_id_generator("new", record: Competence.new), partial: "competences/add_btn", locals: { subject: @competence.subject} %>
+<%= turbo_stream.append "competences-list", partial: "competences/competence", locals: { competence: @competence } %>
+<%#= turbo_stream.prepend "#{generate_drawer_id("curriculum_show")}_drawer_flash_message", partial: "shared/flash_messages" %>

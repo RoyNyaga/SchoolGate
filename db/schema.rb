@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_04_134157) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_12_094824) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -110,6 +110,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_04_134157) do
     t.index ["school_id"], name: "index_assessments_on_school_id"
     t.index ["semester_id"], name: "index_assessments_on_semester_id"
     t.index ["teacher_id"], name: "index_assessments_on_teacher_id"
+  end
+
+  create_table "competences", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "school_class_id", null: false
+    t.bigint "subject_id", null: false
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_class_id"], name: "index_competences_on_school_class_id"
+    t.index ["school_id"], name: "index_competences_on_school_id"
+    t.index ["subject_id"], name: "index_competences_on_subject_id"
   end
 
   create_table "course_registrations", force: :cascade do |t|
@@ -384,6 +396,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_04_134157) do
     t.text "least_performed_students", default: [], array: true
     t.integer "student_num"
     t.boolean "is_processing", default: false
+    t.integer "evaluation_method", default: 0
     t.index ["academic_year_id"], name: "index_report_card_generators_on_academic_year_id"
     t.index ["school_class_id"], name: "index_report_card_generators_on_school_class_id"
     t.index ["school_id"], name: "index_report_card_generators_on_school_id"
@@ -406,6 +419,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_04_134157) do
     t.float "total_coefficient", default: 0.0
     t.bigint "academic_year_id", null: false
     t.bigint "report_card_generator_id", default: 3, null: false
+    t.integer "evaluation_method", default: 0
+    t.integer "class_enrollment"
+    t.float "success_rate"
+    t.integer "student_passed_num"
     t.index ["academic_year_id"], name: "index_report_cards_on_academic_year_id"
     t.index ["report_card_generator_id"], name: "index_report_cards_on_report_card_generator_id"
     t.index ["school_class_id"], name: "index_report_cards_on_school_class_id"
@@ -438,6 +455,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_04_134157) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "required_fee"
+    t.integer "report_card_format", default: 0
+    t.boolean "should_evaluate_multiple_competences_per_subject", default: false
     t.index ["school_id"], name: "index_school_classes_on_school_id"
   end
 
@@ -482,6 +501,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_04_134157) do
     t.bigint "term_id"
     t.bigint "academic_year_id", default: 1, null: false
     t.integer "status", default: 0
+    t.integer "evaluation_method", default: 0
+    t.string "teachers_name"
     t.index ["academic_year_id"], name: "index_sequences_on_academic_year_id"
     t.index ["school_class_id"], name: "index_sequences_on_school_class_id"
     t.index ["school_id"], name: "index_sequences_on_school_id"
@@ -739,6 +760,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_04_134157) do
   add_foreign_key "assessments", "schools"
   add_foreign_key "assessments", "semesters"
   add_foreign_key "assessments", "teachers"
+  add_foreign_key "competences", "school_classes"
+  add_foreign_key "competences", "schools"
+  add_foreign_key "competences", "subjects"
   add_foreign_key "course_registrations", "academic_years"
   add_foreign_key "course_registrations", "schools"
   add_foreign_key "course_registrations", "semesters"

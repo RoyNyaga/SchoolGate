@@ -24,6 +24,13 @@
     <%= form.label :required_fee %>
     <%= form.number_field :required_fee, required: true, class: "general-input-styles" %>
   </div>
+  <div class="report-card-settings my-3">
+    <h5 class="text-center">Report Card Settings</h5>
+    <div class="my-2 d-flex">
+      <%= form.check_box :should_evaluate_multiple_competences_per_subject %>
+      <%= form.label :should_evaluate_multiple_competences_per_subject?, class: "px-3" %>
+    </div>
+  </div>
   <div class="py-4">
     <%= form.submit class: "general-btn" %>
   </div>

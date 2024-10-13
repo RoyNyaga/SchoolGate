@@ -7,6 +7,15 @@ module SequencesHelper
     end
   end
 
+  def generate_student_competence_based_marks(form, sequence, student, competence)
+    if sequence.persisted?
+      marks = sequence.get_competence_data(competence.id)
+      form.number_field :mark, name: "sequence[marks][][competences][][mark]", value: student.sequence_mark_per_subject(marks, is_competence_based: true), step: "any", class: "sequence-mark-input"
+    else
+      form.number_field :mark, name: "sequence[marks][][competences][][mark]", step: "any", class: "sequence-mark-input"
+    end
+  end
+
   def generate_is_enrolled_input(form, sequence, student)
     options = [["Yes", true], ["No", false]]
     if sequence.persisted?
