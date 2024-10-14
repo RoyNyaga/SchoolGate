@@ -107,6 +107,7 @@ Rails.application.routes.draw do
     member do
       put :update_photo
       get :id_card
+      get :id_card_pdf_download
     end
   end
   resources :school_classes
