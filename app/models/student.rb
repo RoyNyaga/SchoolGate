@@ -1,5 +1,6 @@
 class Student < ApplicationRecord
   include TimeManipulation
+  include StudentPdfConcern
   has_one_attached :photo
 
   belongs_to :school
