@@ -5,7 +5,7 @@
   <div class="id-cards-div">
     <div class="row">
       <div class="col-md-5 mx-auto">
-        <div class="id-card-front-section p-3">
+        <div class="id-card-front-section p-3 my-3">
           <div class="row id-card-header">
             <div class="col-3 pb-3">
               <%= render partial: "schools/logo", locals: { school: current_school }%>
@@ -45,8 +45,10 @@
             </div>
           </div>
         </div>
-        <button onclick="captureAndDownload()">Download</button>
-        <div class="id-card-back-section p-3 my-5">
+        <div class="mb-5">
+          <%= link_to "Download front view", id_card_pdf_download_student_path(view: "front", format: :pdf), class: "general-link" %>
+        </div>
+        <div class="id-card-back-section p-3 my-3">
           <div class="row">
             <div class="col-5">
               <%= raw @svg %>
@@ -71,79 +73,10 @@
             </div>
           </div>
         </div>
-        <button onclick="captureAndDownloadBack()">Download</button>
+        <div>
+          <%= link_to "Download back view", id_card_pdf_download_student_path(view: "back", format: :pdf), class: "general-link" %>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<script>
-  async function captureAndDownload() {
-    // const frontSection = document.querySelector('.id-card-front-section')
-    // html2canvas(frontSection).then(function (canvas) {
-    //   console.log("ready");
-    //   var dataUrl = canvas.toDataURL("image/png");
-    //   download(dataUrl, `${Date.now()}.png`, 'image/png');
-    // })
-
-    const frontSection = document.querySelector('.id-card-front-section');
-  if (!frontSection) {
-    console.error('Element not found!');
-    return;
-  }
-
-  try {
-    const canvas = await html2canvas(frontSection, {
-      scale: window.devicePixelRatio, // improve quality on mobile devices
-      useCORS: true,
-    });
-
-    const dataUrl = canvas.toDataURL("image/png");
-    const link = document.createElement('a');
-    link.href = dataUrl;
-    console.log(link)
-    link.download = `${Date.now()}.png`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    console.log("Image download triggered");
-  } catch (error) {
-    console.error("Error capturing the image:", error);
-  }
-  }
-
-   async function captureAndDownloadBack() {
-    // const frontSection = document.querySelector('.id-card-front-section')
-    // html2canvas(frontSection).then(function (canvas) {
-    //   console.log("ready");
-    //   var dataUrl = canvas.toDataURL("image/png");
-    //   download(dataUrl, `${Date.now()}.png`, 'image/png');
-    // })
-
-    const frontSection = document.querySelector('.id-card-back-section');
-  if (!frontSection) {
-    console.error('Element not found!');
-    return;
-  }
-
-  try {
-    const canvas = await html2canvas(frontSection, {
-      scale: window.devicePixelRatio, // improve quality on mobile devices
-      useCORS: true,
-    });
-
-    const dataUrl = canvas.toDataURL("image/png");
-    const link = document.createElement('a');
-    link.href = dataUrl;
-    console.log(link)
-    link.download = `${Date.now()}.png`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    console.log("Image download triggered");
-  } catch (error) {
-    console.error("Error capturing the image:", error);
-  }
-  }
-</script>
