@@ -2,7 +2,7 @@ class StudentsController < ApplicationController
   include ApplicationHelper # this is to enable us access the generate_modal_id helper method from this controller
   layout "school_layout"
   before_action :check_for_current_school
-  before_action :set_student, only: %i[ show edit update destroy update_photo id_card ]
+  before_action :set_student, only: %i[ show edit update destroy update_photo id_card id_card_pdf_download ]
 
   # GET /students or /students.json
   def index
@@ -87,6 +87,30 @@ class StudentsController < ApplicationController
       use_path: true,
 
     )
+  end
+
+  # def id_card_pdf_view
+  #   pdf = params[:view] == "front" ? @student.generate_id_card(is_front_section: true) : @student.generate_id_card(is_front_section: false)
+  #   respond_to do |format|
+  #     format.html # regular HTML response
+  #     format.pdf do
+  #       send_data pdf.render, filename: "report.pdf",
+  #                             type: "application/pdf",
+  #                             disposition: "inline" # or 'attachment' to force download
+  #     end
+  #   end
+  # end
+
+  def id_card_pdf_download
+    pdf = params[:view] == "front" ? @student.generate_id_card(is_front_section: true) : @student.generate_id_card(is_front_section: false)
+
+    respond_to do |format|
+      format.pdf do
+        send_data pdf.render, filename: "#{@student.full_name.gsub(" ", "-")}-#{params[:view]}.pdf",
+                              type: "application/pdf",
+                              disposition: "attachment" # Forces the file to download
+      end
+    end
   end
 
   private
