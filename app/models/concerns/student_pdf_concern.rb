@@ -5,6 +5,7 @@ module StudentPdfConcern
     def generate_id_card(is_front_section: false)
       width = 525 * 0.75 # conversion from pixel to points
       height = 300 * 0.75 # conversion from pixel to points
+      @school = school
       @pdf = Prawn::Document.new(page_size: [width, height], margin: [15, 10, 10, 15])
       is_front_section ? generate_front_section : generate_back_section
       @pdf
@@ -55,19 +56,19 @@ module StudentPdfConcern
           @pdf.text "Peace - Work - Fatherland", align: :center, size: 10
           @pdf.move_down 3
 
-          @pdf.text "Ministery Of Secondary Education", align: :center, size: 10
+          @pdf.text @school.ministry_type_letter_head, align: :center, size: 10
         end
         @pdf.move_down 3
         @pdf.font "Times-Roman" do
-          @pdf.text school.full_name, size: 13, style: :bold, align: :center
+          @pdf.text @school.full_name, size: 13, style: :bold, align: :center
         end
       end
     end
 
     def add_school_logo_to_pdf
       # Get the logo URL from ActiveStorage
-      if school.photo.attached?
-        logo = StringIO.open(school.photo.download)
+      if @school.photo.attached?
+        logo = StringIO.open(@school.photo.download)
         @pdf.image logo, fit: [60, 60], position: :center, at: [30, @pdf.bounds.top]
       end
     end
@@ -101,7 +102,7 @@ module StudentPdfConcern
         ["Mother's cont", "#{mothers_contact}"],
         ["Other cont", "#{guidance_name}"],
         ["Other cont", "#{guidance_contact}"],
-        ["School cont", "+#{school.phone_number}"],
+        ["School cont", "+#{@school.phone_number}"],
       ]
 
       # Indent to shift the table to the right (20% of the PDF width)
