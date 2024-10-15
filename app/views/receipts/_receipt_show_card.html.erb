@@ -1,7 +1,6 @@
 <div class="container">
-  <div class="text-center">
-    <span onclick="captureAndDownload()">Print</span>
-    <span onclick="captureAndPrint()">Download</span>
+  <div class="text-center my-4">
+    <%= link_to "Download", id_card_pdf_view_receipt_path, class: "general-link" %>
   </div>
   <div class="horizontal-scroll">
     <div style="width: 650px;" class="mx-auto white-section-div receipt-div">
@@ -28,34 +27,3 @@
     </div>
   </div>
 </div>
-<script>
-  async function captureAndDownload() {
-    const frontSection = document.querySelector('.receipt-div')
-    html2canvas(frontSection).then(function (canvas) {
-      console.log("ready");
-      var dataUrl = canvas.toDataURL("image/png");
-      download(dataUrl, `${Date.now()}.png`, 'image/png');
-    })
-  }
-
-  async function captureAndPrint() {
-    const frontSection = document.querySelector('.receipt-div');
-
-    html2canvas(frontSection).then(function (canvas) {
-      console.log("ready");
-      var dataUrl = canvas.toDataURL("image/png");
-
-      // Create a new window and add the image to it
-      var printWindow = window.open('', '_blank');
-      printWindow.document.write('<html><head><title>Print Receipt</title></head><body>');
-      printWindow.document.write('<img src="' + dataUrl + '" />');
-      printWindow.document.write('</body></html>');
-      printWindow.document.close();
-
-      // Wait for the image to load before printing
-      printWindow.onload = function() {
-        printWindow.print();
-      };
-    });
-  }
-</script>
