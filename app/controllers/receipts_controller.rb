@@ -1,7 +1,7 @@
 class ReceiptsController < ApplicationController
   layout "school_layout"
   skip_before_action :authenticate_teacher!, only: [:parents]
-  before_action :set_receipt, only: %i[ show edit update destroy parents ]
+  before_action :set_receipt, only: %i[ show edit update destroy parents id_card_pdf_view ]
 
   # GET /receipts or /receipts.json
   def index
@@ -86,6 +86,18 @@ class ReceiptsController < ApplicationController
 
     )
     render layout: "application"
+  end
+
+  def id_card_pdf_view
+    pdf = @receipt.generate_receipt
+    respond_to do |format|
+      format.html # regular HTML response
+      format.pdf do
+        send_data pdf.render, filename: "receipt.pdf",
+                              type: "application/pdf",
+                              disposition: "inline" # or 'attachment' to force download
+      end
+    end
   end
 
   private
