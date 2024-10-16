@@ -83,7 +83,7 @@ module StudentPdfConcern
 
     def student_personal_info(is_front_section: false)
       @pdf.move_down 15
-      # Define the width to occupy 70% of the PDF
+      # Define the width to occupy 60% of the PDF
       total_width = @pdf.bounds.width * 0.6
       column_widths = [total_width / 2, total_width / 1.62] # the total width should sum to the value of total_with
 

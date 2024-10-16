@@ -184,7 +184,7 @@ class ReportCardGenerator < ApplicationRecord
               subject_detail["score"] = score
               subject_detail["grade"] = "To Do"
               subject_detail["rank"] = student.sequence_rank(sequence_averages)
-              subject_detail["teacher"] = subject.teachers.first.full_name
+              subject_detail["teacher"] = second_seq.teachers_name
               subject_detail["remark"] = subject.add_remarks(average_mark)
               # binding.break
               details << subject_detail.to_s

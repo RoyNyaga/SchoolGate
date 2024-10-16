@@ -1,5 +1,6 @@
 class Receipt < ApplicationRecord
   include TimeManipulation
+  include ReceiptPdfConcern
   belongs_to :school
   belongs_to :teacher
   belongs_to :academic_year

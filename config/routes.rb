@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
     member do
       get :parents
+      get :pdf_view
+      get :pdf_download
     end
   end
   resources :course_results
