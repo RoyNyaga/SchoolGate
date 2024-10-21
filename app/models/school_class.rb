@@ -1,13 +1,13 @@
 class SchoolClass < ApplicationRecord
   belongs_to :school
-  has_many :students, dependent: :destroy
-  has_many :subjects, dependent: :destroy
-  has_many :sequences, dependent: :destroy
-  has_many :report_cards, dependent: :destroy
-  has_many :fees, dependent: :destroy
-  has_many :teachings, dependent: :destroy
+  has_many :students
+  has_many :subjects
+  has_many :sequences
+  has_many :report_cards
+  has_many :fees
+  has_many :teachings
   has_many :teachers, through: :teachings
-  has_many :competences, dependent: :destroy
+  has_many :competences
 
   validates :name, presence: true, uniqueness: { scope: :school_id,
                                                  message: ": Every Class Should be Unique" }
