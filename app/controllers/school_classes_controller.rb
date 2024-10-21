@@ -1,7 +1,7 @@
 class SchoolClassesController < ApplicationController
   layout "school_layout"
   before_action :check_for_current_school
-  before_action :set_school_class, only: %i[ show edit update destroy ]
+  before_action :set_school_class, only: %i[ show edit update destroy list fees ]
   before_action :check_for_current_school
 
   # GET /school_classes or /school_classes.json
@@ -64,6 +64,26 @@ class SchoolClassesController < ApplicationController
       format.html { redirect_to school_classes_url, notice: "School class was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def list
+    @students = @school_class.students
+    if params[:status] == "active"
+      @students = @students.active
+    elsif params[:status] == "dropout"
+      @students = @students.dropout
+    elsif params[:status] == "dismissed"
+      @students = @students.dismissed
+    end
+  end
+
+  def fees
+    @fees = @school_class.fees
+      .where(academic_year_id: current_school.active_academic_year.id)
+      .includes(:school, :school_class, :student)
+      .joins(:student)
+      .order("students.full_name ASC")
+      .paginate(page: params[:page], per_page: 20)
   end
 
   private

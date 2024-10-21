@@ -1,0 +1,7 @@
+<ul class="sub-navbar-list">
+  <li class="sub-navbar-list-items"><%= link_to "All", list_school_class_path(school_class), class: "sub-navbar-links" %></li>
+  <li class="sub-navbar-list-items"><%= link_to "Active", list_school_class_path(school_class, status: "active"), class: "sub-navbar-links" %></li>
+  <li class="sub-navbar-list-items"><%= link_to "drop out", list_school_class_path(school_class, status: "dropout"), class: "sub-navbar-links" %></li>
+  <li class="sub-navbar-list-items"><%= link_to "Dismissed", list_school_class_path(school_class, status: "dismissed"), class: "sub-navbar-links" %></li>
+  <li class="sub-navbar-list-items"><%= link_to "Fees", fees_school_class_path(school_class), class: "sub-navbar-links" %></li>
+</ul>

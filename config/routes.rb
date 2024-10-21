@@ -112,7 +112,12 @@ Rails.application.routes.draw do
       get :id_card_pdf_download
     end
   end
-  resources :school_classes
+  resources :school_classes do
+    member do
+      get :list
+      get :fees
+    end
+  end
   devise_for :teachers
   resources :teachers do
     collection do
