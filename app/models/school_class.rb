@@ -1,4 +1,7 @@
 class SchoolClass < ApplicationRecord
+  include TimeManipulation
+  include SchoolClassPdfConcern
+
   belongs_to :school
   has_many :students
   has_many :subjects

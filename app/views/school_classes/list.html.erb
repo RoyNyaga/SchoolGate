@@ -43,5 +43,12 @@
         <% end %>
       </tbody>
     </table>
+    <div class="my-5">
+      <%= link_to "Download", list_school_class_path(
+        format: :pdf, 
+        download: "true",
+         school_class_id: @school_class.id,
+         status: params[:status]), class: "general-link" %>
+    </div>
   </div>
 </div>

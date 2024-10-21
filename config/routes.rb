@@ -116,6 +116,7 @@ Rails.application.routes.draw do
     member do
       get :list
       get :fees
+      get :view_class_list_pdf
     end
   end
   devise_for :teachers
