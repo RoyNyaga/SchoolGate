@@ -1,0 +1,54 @@
+<div class="container">
+  <%= render partial: "school_classes/list_nav_links", 
+        layout: "layouts/sub_navbar", 
+        locals: { school_class: @school_class } %>
+  <div class="white-section-div">
+    <table class="table table-hover">
+      <thead class="table-head-styles">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Matricule</th>
+          <th scope="col">Gender</th>
+          <th scope="col" class="d-none d-md-table-cell">Birth</th>
+          <th scope="col" class="d-none d-md-table-cell">Father</th>
+          <th scope="col" class="d-none d-md-table-cell">Mother</th>
+          <th scope="col" class="d-none d-md-table-cell">Other Contacts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @students.each do |student| %>
+          <tr>
+            <td class="d-flex justify-content-between align-items-center">
+              <%= link_to student.two_names, "##{generate_drawer_id("preview", record: student)}", 
+          class: "grey-link-text", data: { bs_toggle: "offcanvas" },
+          role: "button", aria: {controls: "#{generate_drawer_id("preview", record: student)}_drawer"} %>
+              <span style="font-size: 0.5em;" class="text-white p-1 badge <%= student_status_color_badge(student) %>">
+                <%= student.status.first.upcase %>
+              </span>
+            </td>
+            <td class="table-row-data table-row-data-small-fonts"><%= student.matricule %></td>
+            <td class="table-row-data table-row-data-small-fonts"><%= student.gender %></td>
+            <td class="table-row-data table-row-data-small-fonts d-none d-md-table-cell"><%= student.date_of_birth %></td>
+            <td class="table-row-data table-row-data-small-fonts d-none d-md-table-cell"><%= student.fathers_name %></td>
+            <td class="table-row-data table-row-data-small-fonts d-none d-md-table-cell"><%= student.mothers_name %></td>
+            <td class="table-row-data table-row-data-small-fonts d-none d-md-table-cell">
+              <p class="margin-zero">Father: <%= student.fathers_contact %></p>
+              <p class="margin-zero">Mother: <%= student.mothers_contact %></p>
+            </td>
+          </tr>
+          <%= render partial: "students/preview", layout: "layouts/drawer_layout", 
+              locals: { student: student, title: student.full_name, 
+              item_id: generate_drawer_id("preview", record: student) , position: "end", 
+              btn_text: "View", btn_visibility: false } %>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="my-5">
+      <%= link_to "Download", list_school_class_path(
+        format: :pdf, 
+        download: "true",
+         school_class_id: @school_class.id,
+         status: params[:status]), class: "general-link" %>
+    </div>
+  </div>
+</div>

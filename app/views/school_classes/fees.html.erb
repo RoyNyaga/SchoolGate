@@ -1,0 +1,41 @@
+<div class="container">
+  <%= render partial: "school_classes/list_nav_links", 
+        layout: "layouts/sub_navbar", 
+        locals: { school_class: @school_class } %>
+  <div class="white-section-div">
+    <table class="table table-hover table-head-styles">
+      <thead>
+        <tr>
+          <th scope="col">St names</th>
+          <th scope="col">class / fee</th>
+          <th scope="col">Year</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @fees.each do |fee| %>
+          <tr id="<%= fee.id %>_fee_index_card">
+            <td class="table-row-data table-row-data-small-fonts">
+              <%= link_to fee.student.full_name, "##{generate_drawer_id("fee_show", record: fee)}", 
+          class: "grey-link-text", data: { bs_toggle: "offcanvas" },
+          role: "button", aria: {controls: "#{generate_drawer_id("fee_show", record: fee)}_drawer"} %>
+            </td>
+            <td class="table-row-data table-row-data-small-fonts"><%= fee.school_class.name %> / <%= fee.school_class.required_fee %></td>
+            <td class="table-row-data table-row-data-small-fonts"><%= fee.academic_year_text %></td>
+            <td class="table-row-data table-row-data-small-fonts">
+              <div class="text-center"><%= number_to_currency(fee.total_fee_paid, unit: "frs", precision: 0, format: "%n %u") %></div>
+              <div class="progress">
+                <% percentage_complete =  fee.percentage_complete %>
+                <%= generate_progress_bar(percentage_complete) %>
+              </div>
+            </td>
+          </tr>
+          <% # keeping the drawer out of the table to avoid issues when rerendering the card after updating a fee%>
+          <%= render partial: "fees/fee", layout: "layouts/drawer_layout", 
+              locals: { fee: fee, percentage_complete: percentage_complete, title: "Fee History of #{fee.student.full_name}", 
+              item_id: generate_drawer_id("fee_show", record: fee), position: "end", btn_text: "View", btn_visibility: false } %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

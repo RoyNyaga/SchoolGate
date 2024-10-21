@@ -5,17 +5,17 @@ class Teacher < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :schools
-  has_many :teachings, dependent: :destroy
+  has_many :teachings
   has_many :class_subjects, through: :teachings, source: "subject"
-  has_many :workings, dependent: :destroy
-  has_many :employers, through: :workings, dependent: :destroy, source: "school"
+  has_many :workings
+  has_many :employers, through: :workings, source: "school"
   has_many :invitations, dependent: :destroy
   has_many :sent_invitations, class_name: "Invitation", foreign_key: "sender_id"
-  has_many :sequences, dependent: :destroy
-  has_many :fees, dependent: :destroy
-  has_many :curriculums, dependent: :destroy
-  has_many :progresses, dependent: :destroy
-  has_many :lecturings, dependent: :destroy
+  has_many :sequences
+  has_many :fees
+  has_many :curriculums
+  has_many :progresses
+  has_many :lecturings
   has_many :courses, through: :lecturings
   has_many :assessments
 

@@ -1,5 +1,8 @@
 <div class="container">
   <%= render "shared/buttons/back_btn" %>
+  <%= render partial: "school_classes/nav_links", 
+        layout: "layouts/sub_navbar", 
+        locals: { school_class: @school_class } %>
   <div class="row">
     <div class="col-md-3 my-3">
       <%= render partial: "school_classes/school_class_show_card", locals: { school_class: @school_class }%>

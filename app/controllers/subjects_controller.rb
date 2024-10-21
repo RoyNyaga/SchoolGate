@@ -55,10 +55,11 @@ class SubjectsController < ApplicationController
 
   # DELETE /subjects/1 or /subjects/1.json
   def destroy
+    @school_class = @subject.school_class
     @subject.destroy!
 
     respond_to do |format|
-      format.html { redirect_to subjects_url, notice: "Subject was successfully destroyed." }
+      format.html { redirect_to @school_class, notice: "Subject was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -80,7 +81,6 @@ class SubjectsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def subject_params
-    params[:subject][:competences] = params[:subject][:competences].select { |v| v.present? }
     params.require(:subject).permit(:school_id, :school_class_id, :name, :coefficient, :less_than_equal_to_5, :less_than_equal_to_9, :less_than_equal_to_12,
                                     :less_than_equal_to_15, :less_than_equal_to_18, :less_than_equal_to_20)
   end

@@ -18,7 +18,7 @@
 
 .school-manager-nav-links {
   color: #000000;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: var(--general-font);
   font-size: 1.1em;
 }
 
@@ -121,6 +121,28 @@
 
 .footer-logo{
   width: 40%;
+}
+
+#sub-navbar{
+  ul{
+    list-style: none;
+    display: flex;
+    margin: 15px 0;
+    border-bottom: 2px solid grey;
+    padding: 3px 0px;
+
+    li{
+      margin-right: 13px;
+      a{
+        text-decoration: none;
+        color: #3d3f41;
+        font-weight: 600;
+      }
+      a:hover{
+        text-decoration: underline;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 768px) {

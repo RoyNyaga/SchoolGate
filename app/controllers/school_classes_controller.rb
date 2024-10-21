@@ -1,7 +1,7 @@
 class SchoolClassesController < ApplicationController
   layout "school_layout"
   before_action :check_for_current_school
-  before_action :set_school_class, only: %i[ show edit update destroy ]
+  before_action :set_school_class, only: %i[ show edit update destroy list fees view_class_list_pdf ]
   before_action :check_for_current_school
 
   # GET /school_classes or /school_classes.json
@@ -66,6 +66,42 @@ class SchoolClassesController < ApplicationController
     end
   end
 
+  def list
+    @students = @school_class.students
+    if params[:status] == "active"
+      @students = @students.active
+      download_response(params[:status]) if params[:download] == "true"
+    elsif params[:status] == "dropout"
+      @students = @students.dropout
+      download_response(params[:status]) if params[:download] == "true"
+    elsif params[:status] == "dismissed"
+      @students = @students.dismissed
+      download_response(params[:status]) if params[:download] == "true"
+    else
+      download_response(params[:status]) if params[:download] == "true"
+    end
+  end
+
+  def fees
+    @fees = @school_class.fees
+      .where(academic_year_id: current_school.active_academic_year.id)
+      .includes(:school, :school_class, :student)
+      .joins(:student)
+      .order("students.full_name ASC")
+      .paginate(page: params[:page], per_page: 20)
+  end
+
+  def view_class_list_pdf # for testing purposes
+    pdf = @school_class.generate_class_list
+    respond_to do |format|
+      format.pdf do
+        send_data pdf.render, filename: "#{@school_class.name.gsub(" ", "-")}-#{SchoolClass.generate_time_stamp}.pdf",
+                              type: "application/pdf",
+                              disposition: "inline" # Forces the file to download
+      end
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -76,5 +112,16 @@ class SchoolClassesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def school_class_params
     params.require(:school_class).permit(:school_id, :name, :level, :required_fee, :should_evaluate_multiple_competences_per_subject)
+  end
+
+  def download_response(status)
+    pdf = @school_class.generate_class_list(status: status)
+    respond_to do |format|
+      format.pdf do
+        send_data pdf.render, filename: "#{@school_class.name.gsub(" ", "-")}-#{status}-students-class-list-#{SchoolClass.generate_time_stamp}.pdf",
+                              type: "application/pdf",
+                              disposition: "attachement" # or inline, to view online
+      end
+    end
   end
 end

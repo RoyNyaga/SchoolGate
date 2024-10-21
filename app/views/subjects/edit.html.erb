@@ -1,10 +1,17 @@
 <div class="container">
   <h5 class="text-center">Subject Settings</h5>
-  <%= link_to "Cancel", @subject, class: "grey-link-text" %>
+  <div class="my-2">
+    <%= link_to @subject.school_class.name, @subject.school_class, class: "edit-link" %>
+    / <%= link_to @subject.name, @subject, class: "edit-link" %>
+    / <%= link_to "Edit", edit_subject_path(@subject), class: "edit-link" %>
+  </div>
   <div class="row">
     <div class="col-md-7">
       <div class="light-grey-card p-2 my-3">
         <%= render "form", subject: @subject %>
+        <div class="my-5">
+          <%= button_to "Delete Subject", subject_path(@subject), method: :delete, class: "delete-text-link" %>
+        </div>
       </div>
     </div>
     <div class="col-md-5">

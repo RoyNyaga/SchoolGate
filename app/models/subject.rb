@@ -3,10 +3,10 @@ class Subject < ApplicationRecord
   belongs_to :school_class
   has_many :teachings, dependent: :destroy
   has_many :teachers, through: :teachings, source: "teacher"
-  has_many :sequences, dependent: :destroy
+  has_many :sequences
   has_many :progresses
   has_many :curriculums
-  has_many :topics, dependent: :destroy
+  has_many :topics
   has_many :competences, dependent: :destroy
 
   store_accessor :remarks, :less_than_equal_to_5, :less_than_equal_to_9, :less_than_equal_to_12,
