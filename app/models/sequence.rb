@@ -128,7 +128,9 @@ class Sequence < ApplicationRecord
   end
 
   def teachers_name
-    super ? super : teacher.full_name
+    if teacher # avoiding nil errors
+      super ? super : teacher.full_name
+    end
   end
 
   private
