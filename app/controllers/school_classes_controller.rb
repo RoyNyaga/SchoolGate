@@ -67,7 +67,7 @@ class SchoolClassesController < ApplicationController
   end
 
   def list
-    @students = @school_class.students
+    @students = @school_class.students.order(full_name: :asc)
     if params[:status] == "active"
       @students = @students.active
       download_response(params[:status]) if params[:download] == "true"
