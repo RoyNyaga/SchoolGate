@@ -7,7 +7,7 @@
   <% sequence.subject.competences.each do |competence| %>
     <%= render partial: "competences/sequence_competence_card", locals: { competence: competence, sequence: sequence } %>
   <% end %>
-  <p class="margin-zero">Teacher: <span class="text-color-grey-2 px-3 my-2"><%= sequence.teacher.full_name %></span></p>
+  <p class="margin-zero">Teacher: <span class="text-color-grey-2 px-3 my-2"><%= sequence.teachers_name %></span></p>
   <div class="d-flex justify-content-between align-items-start my-3">
     <%= render partial: "sequences/combined_competence_stats_preview", 
         layout: "layouts/drawer_layout", 
