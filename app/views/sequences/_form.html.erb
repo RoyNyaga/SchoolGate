@@ -36,7 +36,7 @@
   </div>
   <div>
     <%= form.label :teachers_name, style: "display: block" %>
-    <%= form.text_field :teachers_name, class: "general-input-styles", required: true %>
+    <%= form.text_field :teachers_name, value: current_teacher.full_name, class: "general-input-styles", required: true %>
   </div>
   <table class="table table-hover my-3">
     <thead>
@@ -55,7 +55,7 @@
         <tr>
           <td><%= num %></td>
           <td><%= student.full_name %></td>
-          <% if @school_class.should_evaluate_multiple_competences_per_subject %>
+          <% if multiple_competence?(@school_class, sequence)  %>
             <%= form.hidden_field :id, name: "sequence[marks][][mark]", value: "" %>
             <td>
               <% @competences.each do |c| %>
