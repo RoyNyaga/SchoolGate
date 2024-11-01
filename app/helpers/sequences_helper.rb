@@ -65,4 +65,12 @@ module SequencesHelper
       form.select :marks, [["Yes", true, { selected: true }], ["No", false]], {}, { name: "assessment[marks][][is_present]" }
     end
   end
+
+  def multiple_competence?(school_class, sequence)
+    if sequence.persisted?
+      sequence.competence_based_evaluation_method?
+    else
+      school_class.should_evaluate_multiple_competences_per_subject
+    end
+  end
 end
