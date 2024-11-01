@@ -1,6 +1,16 @@
 <div class="container">
-  <%= render "shared/buttons/back_btn" %>
-  <div class="row">
+  <div class="d-flex justify-content-between">
+    <% if current_teacher.can_access_admin?(current_school) %>
+      <%= link_to "back", sequences_path, class: "general-link" %>
+      <%= render partial: "layouts/confirm_modal_layout", locals: { text: "Delete Sequence", text_color: "text-danger",
+             action_url: sequence_path(@sequence), action_text: "Yes, delete this sequence",
+             confirmation_text: "Are you sure to delete this sequence",
+             modal_id: generate_modal_id("delete", record: @sequence), method: "delete"  } %>
+    <% else %>
+      <%= link_to "back", for_teacher_subject_path(@sequence.subject), class: "general-link" %>
+    <% end %>
+  </div>
+  <div class="row my-5">
     <div class="mx-auto col-md-8 light-grey-card">
       <h4 class="my-3 text-center">Edit sequence</h4>
       <%= render "form", sequence: @sequence %>
