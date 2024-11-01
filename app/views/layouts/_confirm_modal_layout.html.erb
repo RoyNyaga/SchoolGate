@@ -10,7 +10,11 @@
         <%= confirmation_text %>
       </div>
       <div class="modal-footer">
-        <%= button_to action_text, action_url, method: :put, class: "general-btn" %>
+        <% if method == "update" %>
+          <%= button_to action_text, action_url, method: :put, class: "general-btn" %>
+        <% elsif method == "delete" %>
+          <%= button_to action_text, action_url, method: :delete, class: "general-btn" %>
+        <% end %>
         <button type="button" class="general-btn" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
