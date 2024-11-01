@@ -5,7 +5,7 @@ module SchoolClassPdfConcern
     def generate_class_list(status: nil)
       @school = school
       @status = status
-      @students = @status.present? ? students.send(status).order(full_name: :asc) : students
+      @students = @status.present? ? students.send(status).order(full_name: :asc) : students.order(full_name: :asc)
       @pdf = Prawn::Document.new
 
       add_school_logo_to_pdf
