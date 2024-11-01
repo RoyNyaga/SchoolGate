@@ -15,8 +15,10 @@ class Sequence < ApplicationRecord
   enum status: { in_progress: 0, submitted: 1, rejected: 2, approved: 3 }
   enum evaluation_method: { sequence_based_evaluation_method: 0, competence_based_evaluation_method: 1 }
 
-  # validate :sequences_per_term
-  # validate :enrollment_num_not_zero
+  # validate :validate_sequences_per_term
+  validate :validate_enrollment_num_not_zero
+  validate :validate_student_presence
+  validate :validate_single_sequence_num_type_per_term
 
   before_save do
     update_marks_with_total
@@ -127,23 +129,21 @@ class Sequence < ApplicationRecord
     end
   end
 
-  def teachers_name
-    if teacher # avoiding nil errors
-      super ? super : teacher.full_name
-    end
-  end
-
   private
 
-  # def sequences_per_term
+  # def validate_sequences_per_term
   #   unless self.persisted?
-  #     errors.add(:term, "Can not have more than 2 sequences per term") if term.sequences.count == 2
+  #     errors.add(:term, "Can not have more than 2 sequences per term for a subject") if subject.sequences.size == 2
   #   end
   # end
 
-  # def enrollment_num_not_zero
-  #   errors.add(:enrollment, "should exist atleast for one student") if enrolled_students.size == 0
-  # end
+  def validate_student_presence
+    errors.add(:students, "Student must exist in a class.") if marks.blank?
+  end
+
+  def validate_enrollment_num_not_zero
+    errors.add(:enrollment, "should exist atleast for one student") if enrolled_students.size == 0
+  end
 
   def set_evaluation_method
     if school_class.should_evaluate_multiple_competences_per_subject
@@ -164,4 +164,12 @@ class Sequence < ApplicationRecord
       end
     end
   end
+
+  def validate_single_sequence_num_type_per_term # One subject should not have 2 same sequences for one term
+    unless self.persisted?
+      errors.add(:sequence, "duplicate sequence type for One term") if term.sequences.where(subject_id: subject_id, seq_num: seq_num).size == 1
+    end
+  end
+
+  # check if terms in term dropdown are mapped to academic year
 end
