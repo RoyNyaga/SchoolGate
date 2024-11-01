@@ -21,7 +21,7 @@
             <p class="float-end"><%= render partial: "layouts/confirm_modal_layout", locals: { text: "Unassign", text_color: "text-danger",
              action_url: toggle_status_teaching_path(id: teaching.id, status: "false"), action_text: "Yes",
              confirmation_text: "Are you sure to Unassign #{teacher.full_name} from #{@subject.name}",
-             modal_id: generate_modal_id("update", record: teaching) } %></p>
+             modal_id: generate_modal_id("update", record: teaching),  method: "update" } %></p>
           </div>
         <% end %>
         <br>
@@ -34,7 +34,7 @@
             <p class="float-end"><%= render partial: "layouts/confirm_modal_layout", locals: { text: "Re-assign", text_color: "text-primary",
              action_url: toggle_status_teaching_path(id: teaching.id, status: "true"), action_text: "Yes",
              confirmation_text: "Are you sure to Re-assign #{teacher.full_name} to #{@subject.name}",
-             modal_id: generate_modal_id("update", record: teaching) } %></p>
+             modal_id: generate_modal_id("update", record: teaching), method: "update"  } %></p>
           </div>
         <% end %>
       </div>
