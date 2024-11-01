@@ -1,3 +1,14 @@
-<%= button_to "Reject", toggle_approval_sequence_path(id: sequence.id, status: 2), method: :put, class: "general-link" %>
-<%= button_to "Approve", toggle_approval_sequence_path(id: sequence.id, status: 3), method: :put, class: "general-link" %>
-<%= link_to "Edit", edit_sequence_path(sequence), class: "general-link" %>
+<% if current_teacher.can_access_admin?(current_school) %>
+  <% if sequence.approved? %>
+    <%= button_to "Reject", toggle_approval_sequence_path(id: sequence.id, status: 2), method: :put, class: "general-link" %>
+  <% elsif sequence.rejected? %>
+    <%= button_to "Approve", toggle_approval_sequence_path(id: sequence.id, status: 3), method: :put, class: "general-link" %>
+  <% else %>
+    <%= button_to "Reject", toggle_approval_sequence_path(id: sequence.id, status: 2), method: :put, class: "general-link" %>
+    <%= button_to "Approve", toggle_approval_sequence_path(id: sequence.id, status: 3), method: :put, class: "general-link" %>
+  <% end %>
+  <%#= button_to "Delete", sequence_path(sequence), method: :delete, class: "delete-text-link" %>
+<% end %>
+<% unless sequence.approved? %>
+  <%= link_to "Edit", edit_sequence_path(sequence), class: "general-link" %>
+<% end %>
