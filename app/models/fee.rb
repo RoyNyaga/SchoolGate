@@ -47,12 +47,12 @@ class Fee < ApplicationRecord
     installments.map(&:to_i).sum
   end
 
-  def complete?
-    total_fee_paid >= required_fee
-  end
-
   def required_fee
     school_class.required_fee
+  end
+
+  def complete?
+    total_fee_paid >= required_fee
   end
 
   def balance
