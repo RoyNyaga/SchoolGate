@@ -22,6 +22,7 @@ module SchoolClassPdfConcern
         .where(academic_year_id: school.active_academic_year.id)
         .includes(:school, :school_class, :student)
         .joins(:student)
+        .order("students.full_name ASC")
       @pdf = Prawn::Document.new
       add_school_logo_to_pdf
       letter_head("Students Fees List \n Required Fee: #{number_to_currency(required_fee, unit: "frs", precision: 0, format: "%n %u")}")

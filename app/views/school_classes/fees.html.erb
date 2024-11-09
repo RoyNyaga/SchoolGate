@@ -1,4 +1,8 @@
 <div class="container">
+  <div class="my-3">
+    <%= link_to "<- #{@school_class.name}", school_class_path(@school_class), class: "edit-link" %> / 
+    <%= link_to "student list", list_school_class_path(@school_class), class: "edit-link" %>
+  </div>
   <%= render partial: "school_classes/list_nav_links", 
         layout: "layouts/sub_navbar", 
         locals: { school_class: @school_class } %>
