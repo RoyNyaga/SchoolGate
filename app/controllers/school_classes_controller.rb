@@ -89,6 +89,16 @@ class SchoolClassesController < ApplicationController
       .joins(:student)
       .order("students.full_name ASC")
       .paginate(page: params[:page], per_page: 20)
+    if params[:download] == "true"
+      pdf = @school_class.generate_fees_based_class_list
+      respond_to do |format|
+        format.pdf do
+          send_data pdf.render, filename: "#{@school_class.name.gsub(" ", "-")}--students-Fees-class-list-#{SchoolClass.generate_time_stamp}.pdf",
+                                type: "application/pdf",
+                                disposition: "attachement" # or inline, to view online
+        end
+      end
+    end
   end
 
   def view_class_list_pdf # for testing purposes
