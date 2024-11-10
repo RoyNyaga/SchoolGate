@@ -71,6 +71,10 @@ Rails.application.routes.draw do
       post :search
       get :pdf_download
     end
+
+    member do
+      get :receipts
+    end
   end
   resources :report_cards do
     collection do
