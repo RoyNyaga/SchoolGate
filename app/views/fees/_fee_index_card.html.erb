@@ -3,6 +3,9 @@
     <%= link_to fee.student.full_name, "##{generate_drawer_id("fee_show", record: fee)}", 
           class: "grey-link-text", data: { bs_toggle: "offcanvas" },
           role: "button", aria: {controls: "#{generate_drawer_id("fee_show", record: fee)}_drawer"} %>
+    <span style="font-size: 0.5em;" class="text-white p-1 badge <%= confliting_fee_color_badge(fee) %>">
+      <%= fee.is_receipt_and_fee_amount_in_phase ? "OK" : "IS" %>
+    </span>
   </td>
   <td class="table-row-data table-row-data-small-fonts"><%= fee.school_class.name %> / <%= fee.school_class.required_fee %></td>
   <td class="table-row-data table-row-data-small-fonts"><%= fee.academic_year_text %></td>
