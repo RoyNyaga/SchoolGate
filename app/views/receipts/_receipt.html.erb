@@ -1,37 +1,10 @@
-<div id="<%= dom_id receipt %>">
-  <p>
-    <strong>School:</strong>
-    <%= receipt.school_id %>
-  </p>
-
-  <p>
-    <strong>Teacher:</strong>
-    <%= receipt.teacher_id %>
-  </p>
-
-  <p>
-    <strong>Academic year:</strong>
-    <%= receipt.academic_year_id %>
-  </p>
-
-  <p>
-    <strong>Student:</strong>
-    <%= receipt.student_id %>
-  </p>
-
-  <p>
-    <strong>Fee:</strong>
-    <%= receipt.fee_id %>
-  </p>
-
-  <p>
-    <strong>Transaction reference:</strong>
-    <%= receipt.transaction_reference %>
-  </p>
-
-  <p>
-    <strong>Has error:</strong>
-    <%= receipt.has_error %>
-  </p>
-
+<div id="<%= dom_id receipt %>" class=" light-grey-card my-2 p-2">
+  <div class="">
+    <p class="margin-zero">Date: <span class="text-color-grey-2"><%= receipt.readable_date(with_time: true) %></span></p>
+    <p class="margin-zero">Amount: <span class="text-color-grey-2"><%= number_to_currency(receipt.amount, unit: "", precision: 0) %> frs</span></p>
+    <div class="d-flex justify-content-between">
+      <%= link_to "View", receipt_path(receipt), data: { turbo: false }, class: "grey-link-text" %>
+      <%= link_to "Download", pdf_download_receipt_path(receipt, format: :pdf), class: "grey-link-text" %>
+    </div>
+  </div>
 </div>
