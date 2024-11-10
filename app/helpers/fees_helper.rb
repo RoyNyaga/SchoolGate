@@ -11,4 +11,12 @@ module FeesHelper
   def generate_installment_input_field(form, value)
     form.number_field :installments, name: "fee[installments][]", value: value, class: "general-input-styles", data: { action: "fees#calculateSum" }
   end
+
+  def confliting_fee_color_badge(fee)
+    if fee.is_receipt_and_fee_amount_in_phase
+      "bg-primary"
+    else
+      "bg-danger"
+    end
+  end
 end
