@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="my-3">
+    <%= link_to "<- Back", fees_path, class: "general-link" %>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <h5 class="text-center my-2">Receipts</h5>
+      <div class="row">
+        <div class="col-6">
+          <div class="light-grey-card p-2">
+            <h6 class="text-center">
+              <span class="text-white p-1 badge <%= confliting_fee_color_badge(@fee) %>">
+                <%= number_to_currency(@fee.receipt_amount, unit: "", precision: 0) %> frs
+              </span>
+            </h6>
+            <p class="text-center">Total Receipt Amt</p>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="light-grey-card p-2">
+            <h6 class="text-center"><%= number_to_currency(@fee.total_fee_paid, unit: "", precision: 0) %> frs</h6>
+            <p class="text-center">Total Fee Paid</p>
+          </div>
+        </div>
+      </div>
+      <% @receipts.each do |receipt| %>
+        <%= render partial: "receipts/receipt", locals: { receipt: receipt } %>
+      <% end %>
+    </div>
+    <div class="col-md-8">
+      <%= render partial: "fees/fee", locals: {fee: @fee } %>
+    </div>
+  </div>
+</div>
