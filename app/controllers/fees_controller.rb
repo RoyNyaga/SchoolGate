@@ -1,7 +1,7 @@
 class FeesController < ApplicationController
   layout "school_layout"
   before_action :check_for_current_school
-  before_action :set_fee, only: %i[ show edit update destroy ]
+  before_action :set_fee, only: %i[ show edit update destroy receipts ]
   before_action :check_active_current_year, only: [:index]
 
   # GET /fees or /fees.json
@@ -113,6 +113,10 @@ class FeesController < ApplicationController
 
     # binding.break
     send_data(pdf_file.generate_pdf(@qrcode_svg).render, filename: "test-file", type: "application/pdf", disposition: "inline")
+  end
+
+  def receipts
+    @receipts = @fee.receipts
   end
 
   private
