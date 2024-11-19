@@ -6,7 +6,7 @@ class CreatePerformanceSheets < ActiveRecord::Migration[7.1]
       t.references :teacher, null: false, foreign_key: true
       t.references :school_class, null: false, foreign_key: true
       t.references :term, null: false, foreign_key: true
-      t.integer :seq_num
+      t.integer :seq_num, null: true
       t.string :processing_time
 
       t.timestamps

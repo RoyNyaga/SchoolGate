@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_11_203916) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_19_233637) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -333,6 +333,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_11_203916) do
     t.integer "total_visit_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "performance_sheets", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "academic_year_id", null: false
+    t.bigint "teacher_id", null: false
+    t.bigint "school_class_id", null: false
+    t.bigint "term_id", null: false
+    t.integer "seq_num"
+    t.string "processing_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["academic_year_id"], name: "index_performance_sheets_on_academic_year_id"
+    t.index ["school_class_id"], name: "index_performance_sheets_on_school_class_id"
+    t.index ["school_id"], name: "index_performance_sheets_on_school_id"
+    t.index ["teacher_id"], name: "index_performance_sheets_on_teacher_id"
+    t.index ["term_id"], name: "index_performance_sheets_on_term_id"
   end
 
   create_table "progresses", force: :cascade do |t|
@@ -818,6 +835,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_11_203916) do
   add_foreign_key "main_topics", "curriculums"
   add_foreign_key "main_topics", "subjects"
   add_foreign_key "main_topics", "teachers"
+  add_foreign_key "performance_sheets", "academic_years"
+  add_foreign_key "performance_sheets", "school_classes"
+  add_foreign_key "performance_sheets", "schools"
+  add_foreign_key "performance_sheets", "teachers"
+  add_foreign_key "performance_sheets", "terms"
   add_foreign_key "progresses", "school_classes"
   add_foreign_key "progresses", "schools"
   add_foreign_key "progresses", "subjects"
