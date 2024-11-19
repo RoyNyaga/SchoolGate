@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :deposits
   resources :competences
   resources :school_approval_requests
   resources :tutorials
@@ -162,6 +163,7 @@ Rails.application.routes.draw do
       get :faculties
       get :departments
       get :levels
+      get :account_dashboard
     end
     member do
       put :update_logo

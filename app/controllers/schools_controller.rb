@@ -2,7 +2,7 @@ class SchoolsController < ApplicationController
   include ApplicationHelper # this is to enable us access the generate_modal_id helper method from this controller
   layout "school_layout"
   before_action :set_school, only: %i[ show edit update destroy update_logo ]
-  before_action :check_for_current_school, except: %i[show index new create]
+  before_action :check_for_current_school, except: %i[show index new create account_dashboard]
   before_action :check_administrator, except: %i[show index new create]
   before_action :check_active_current_year, only: [:students]
   before_action :check_active_current_year, only: [:classes]
@@ -140,6 +140,9 @@ class SchoolsController < ApplicationController
     else
       render json: { message: @teacher.errors.full_messages, success: false }, status: :unprocessable_entity
     end
+  end
+
+  def account_dashboard
   end
 
   private

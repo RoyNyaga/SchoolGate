@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_12_094824) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_11_203916) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -204,6 +204,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_12_094824) do
     t.datetime "updated_at", null: false
     t.index ["faculty_id"], name: "index_departments_on_faculty_id"
     t.index ["school_id"], name: "index_departments_on_school_id"
+  end
+
+  create_table "deposits", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "teacher_id", null: false
+    t.bigint "academic_year_id", null: false
+    t.integer "origin", default: 0
+    t.integer "approval", default: 0
+    t.float "amount", null: false
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["academic_year_id"], name: "index_deposits_on_academic_year_id"
+    t.index ["school_id"], name: "index_deposits_on_school_id"
+    t.index ["teacher_id"], name: "index_deposits_on_teacher_id"
   end
 
   create_table "enrollments", force: :cascade do |t|
@@ -782,6 +797,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_12_094824) do
   add_foreign_key "curriculums", "teachers"
   add_foreign_key "departments", "faculties"
   add_foreign_key "departments", "schools"
+  add_foreign_key "deposits", "academic_years"
+  add_foreign_key "deposits", "schools"
+  add_foreign_key "deposits", "teachers"
   add_foreign_key "enrollments", "academic_years"
   add_foreign_key "enrollments", "course_registrations"
   add_foreign_key "enrollments", "courses"
