@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @performance_sheet %>
+
+<div>
+  <%= link_to "Edit this performance sheet", edit_performance_sheet_path(@performance_sheet) %> |
+  <%= link_to "Back to performance sheets", performance_sheets_path %>
+
+  <%= button_to "Destroy this performance sheet", @performance_sheet, method: :delete %>
+</div>

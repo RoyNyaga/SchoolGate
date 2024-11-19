@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :performance_sheets
   resources :deposits
   resources :competences
   resources :school_approval_requests

@@ -1,0 +1,52 @@
+<%= form_with(model: performance_sheet) do |form| %>
+  <% if performance_sheet.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(performance_sheet.errors.count, "error") %> prohibited this performance_sheet from being saved:</h2>
+
+      <ul>
+        <% performance_sheet.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :school_id, style: "display: block" %>
+    <%= form.text_field :school_id %>
+  </div>
+
+  <div>
+    <%= form.label :academic_year_id, style: "display: block" %>
+    <%= form.text_field :academic_year_id %>
+  </div>
+
+  <div>
+    <%= form.label :teacher_id, style: "display: block" %>
+    <%= form.text_field :teacher_id %>
+  </div>
+
+  <div>
+    <%= form.label :school_class_id, style: "display: block" %>
+    <%= form.text_field :school_class_id %>
+  </div>
+
+  <div>
+    <%= form.label :term_id, style: "display: block" %>
+    <%= form.text_field :term_id %>
+  </div>
+
+  <div>
+    <%= form.label :seq_num, style: "display: block" %>
+    <%= form.number_field :seq_num %>
+  </div>
+
+  <div>
+    <%= form.label :processing_time, style: "display: block" %>
+    <%= form.text_field :processing_time %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

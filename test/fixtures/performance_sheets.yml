@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  school: one
+  academic_year: one
+  teacher: one
+  school_class: one
+  term: one
+  seq_num: 1
+  processing_time: MyString
+
+two:
+  school: two
+  academic_year: two
+  teacher: two
+  school_class: two
+  term: two
+  seq_num: 1
+  processing_time: MyString
