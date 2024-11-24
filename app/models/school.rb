@@ -20,6 +20,7 @@ class School < ApplicationRecord
   has_many :departments
   has_many :courses
   has_one :school_approval_request
+  has_many :performance_sheets
 
   validates :full_name, presence: true, uniqueness: { scope: :teacher_id,
                                                       message: "You already have a school with this name" }
