@@ -123,6 +123,7 @@ Rails.application.routes.draw do
       get :list
       get :fees
       get :view_class_list_pdf
+      get :performance_sheets
     end
   end
   devise_for :teachers
@@ -164,7 +165,7 @@ Rails.application.routes.draw do
       get :faculties
       get :departments
       get :levels
-      get :account_dashboard
+      get :accounting_dashboard
     end
     member do
       put :update_logo
