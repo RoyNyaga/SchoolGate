@@ -11,6 +11,7 @@ class SchoolClass < ApplicationRecord
   has_many :teachings
   has_many :teachers, through: :teachings
   has_many :competences
+  has_many :performance_sheets
 
   validates :name, presence: true, uniqueness: { scope: :school_id,
                                                  message: ": Every Class Should be Unique" }
