@@ -1,7 +1,7 @@
 class SchoolClassesController < ApplicationController
   layout "school_layout"
   before_action :check_for_current_school
-  before_action :set_school_class, only: %i[ show edit update destroy list fees view_class_list_pdf ]
+  before_action :set_school_class, only: %i[ show edit update destroy list fees view_class_list_pdf performance_sheets]
   before_action :check_for_current_school
 
   # GET /school_classes or /school_classes.json
@@ -110,6 +110,9 @@ class SchoolClassesController < ApplicationController
                               disposition: "inline" # Forces the file to download
       end
     end
+  end
+
+  def performance_sheets
   end
 
   private
