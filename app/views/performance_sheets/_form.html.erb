@@ -2,7 +2,6 @@
   <% if performance_sheet.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(performance_sheet.errors.count, "error") %> prohibited this performance_sheet from being saved:</h2>
-
       <ul>
         <% performance_sheet.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,42 +9,38 @@
       </ul>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :school_id, style: "display: block" %>
-    <%= form.text_field :school_id %>
+  <div class="d-none">
+    <%= form.label :school_id %>
+    <%= form.hidden_field :school_id, value: current_school.id %>
   </div>
-
   <div>
     <%= form.label :academic_year_id, style: "display: block" %>
-    <%= form.text_field :academic_year_id %>
+    <%= form.collection_select :academic_year_id, 
+    current_school.academic_years, :id, :year, { prompt: "Select Academic Year" },
+     { class: "general-input-styles", required: true } %>
   </div>
-
-  <div>
+  <div class="d-none">
     <%= form.label :teacher_id, style: "display: block" %>
-    <%= form.text_field :teacher_id %>
+    <%= form.number_field :teacher_id, value: current_teacher.id %>
   </div>
-
-  <div>
+  <div class="d-none">
     <%= form.label :school_class_id, style: "display: block" %>
-    <%= form.text_field :school_class_id %>
+    <%= form.number_field :school_class_id, value: school_class.id %>
   </div>
-
   <div>
     <%= form.label :term_id, style: "display: block" %>
-    <%= form.text_field :term_id %>
+    <%= form.collection_select :term_id, 
+    current_school.terms, :id, :term_type, { prompt: "Select Term" },
+     { class: "general-input-styles", required: true } %>
   </div>
-
   <div>
-    <%= form.label :seq_num, style: "display: block" %>
-    <%= form.number_field :seq_num %>
+    <%= form.label :sequence, style: "display: block" %>
+    <%= form.select :seq_num, Sequence.allowed_seq_nums(school_class).map { |k,v| [k.humanize, k] }, {include_blank: 'Select Sequence Number'}, { class: "general-input-styles" } %>
   </div>
-
   <div>
-    <%= form.label :processing_time, style: "display: block" %>
-    <%= form.text_field :processing_time %>
+    <%= form.label :category, style: "display: block" %>
+    <%= form.select :category, PerformanceSheet.categories.map { |k,v| [k.humanize, k] }%>
   </div>
-
   <div>
     <%= form.submit %>
   </div>
