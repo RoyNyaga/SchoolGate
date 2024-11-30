@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_19_233637) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_26_222115) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -345,6 +345,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_19_233637) do
     t.string "processing_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "student_num"
+    t.integer "passed_student_num"
+    t.text "performance_data", default: [], array: true
+    t.integer "category"
     t.index ["academic_year_id"], name: "index_performance_sheets_on_academic_year_id"
     t.index ["school_class_id"], name: "index_performance_sheets_on_school_class_id"
     t.index ["school_id"], name: "index_performance_sheets_on_school_id"
