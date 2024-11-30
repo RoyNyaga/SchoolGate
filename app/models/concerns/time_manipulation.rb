@@ -8,6 +8,11 @@ module TimeManipulation
       date ||= created_at
       readable_date = with_time ? "#{date.strftime(format)} - #{date.strftime("%l:%M%P").strip.downcase}" : date.strftime(format)
     end
+
+    def ddmmyy_format(date: nil)
+      date || created_at
+      date.strftime("%d/%m/%Y")
+    end
   end
 
   class_methods do
