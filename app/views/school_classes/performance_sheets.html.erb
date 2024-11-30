@@ -6,11 +6,20 @@
   <%= render partial: "school_classes/nav_links", 
         layout: "layouts/sub_navbar", 
         locals: { school_class: @school_class } %>
-  <div class="d-flex justify-content-center align-items-center">
+  <div class="d-flex justify-content-center align-items-center my-3">
     <h5 class="text-center px-3 pt-2">Performance Sheets</h5>
     <%= render partial: "performance_sheets/form", 
         layout: "layouts/modal_layout", 
-        locals: { performance_sheet: PerformanceSheet.new, action_name: "New", action_title: "Generate A New Performance Sheet",
-        modal_id: generate_modal_id("new", record: PerformanceSheet.new) }%>
+        locals: { performance_sheet: PerformanceSheet.new, school_class: @school_class, action_name: "New", action_title: "Generate A New Performance Sheet",
+        modal_id: generate_modal_id("new", record: PerformanceSheet.new) } %>
+  </div>
+  <div>
+    <div class="row">
+      <% @performance_sheets.each do |p_s| %>
+        <div class="col-md-4">
+          <%= render partial: "performance_sheets/performance_sheet", locals: { performance_sheet: p_s } %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
