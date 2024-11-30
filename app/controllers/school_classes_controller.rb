@@ -1,7 +1,7 @@
 class SchoolClassesController < ApplicationController
   layout "school_layout"
   before_action :check_for_current_school
-  before_action :set_school_class, only: %i[ show edit update destroy list fees view_class_list_pdf performance_sheets]
+  before_action :set_school_class, only: %i[ show edit update destroy list fees view_class_list_pdf performance_sheets ]
   before_action :check_for_current_school
 
   # GET /school_classes or /school_classes.json
@@ -113,6 +113,7 @@ class SchoolClassesController < ApplicationController
   end
 
   def performance_sheets
+    @performance_sheets = @school_class.performance_sheets
   end
 
   private
