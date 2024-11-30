@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :performance_sheets
+  resources :performance_sheets do
+    member do
+      put :regenerate
+      get :download
+    end
+  end
   resources :deposits
   resources :competences
   resources :school_approval_requests
