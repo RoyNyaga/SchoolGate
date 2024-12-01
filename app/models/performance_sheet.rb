@@ -20,6 +20,9 @@ class PerformanceSheet < ApplicationRecord
   before_save :add_other_data
 
   def generate_performance_data
+    # Reinitializing the errors
+    self.sequences_with_issues = []
+    self.subjects_with_issues = []
     @term = term
     @academic_year = academic_year
     @data = []
@@ -36,10 +39,12 @@ class PerformanceSheet < ApplicationRecord
       @performance["subject_marks"] = []
       @subjects.each do |subject|
         @subject = subject
-        sequence_performance if sequence_category?
+        sequence_category? ? sequence_performance : term_performance
       end
-
-      @performance["total_avg_mark"] = (@performance["subject_marks"].sum { |subject| subject["mark"] } / @num_of_subjects).round(2)
+      total_score = @performance["subject_marks"].sum { |subject| subject["score"] }
+      total_coefficient = @performance["subject_marks"].sum { |subject| subject["coef"] }
+      total_avg_mark = total_score / total_coefficient
+      @performance["total_avg_mark"] = total_avg_mark.round(2)
       @data << @performance
     end
     @data = @data.sort_by { |student| -student["total_avg_mark"] }
@@ -47,10 +52,45 @@ class PerformanceSheet < ApplicationRecord
   end
 
   def sequence_performance
-    sequence = @subject.sequences.approved.where(term_id: @term.id, academic_year_id: @academic_year.id, seq_num: seq_num).first
-    mark = @student.sequence_mark_per_subject(sequence.hashed_marks) || 0
+    sequence = @subject.sequences.where(term_id: @term.id, academic_year_id: @academic_year.id, seq_num: seq_num).first
+    if sequence.present?
+      if sequence.approved?
+        @mark = @student.sequence_mark_per_subject(sequence.hashed_marks) || 0
+        @coef = @subject.coefficient
+        @score = @mark * @coef
+        @performance["subject_marks"] << subject_marks_obj
+      else
+        sequences_with_issues << { "sequence_id" => sequence.id, "message" => "Unapproved Sequence" }
+      end
+    else
+      subjects_with_issues << { "subject_id" => @subject.id, "message" => "Missing Sequence for this subject." }
+    end
+  end
 
-    @performance["subject_marks"] << { "id" => @subject.id, "subject_name" => @subject.name, "mark" => mark }
+  def term_performance
+    sequences = @subject.sequences.where(term_id: @term.id, academic_year_id: @academic_year.id).order(seq_num: :asc)
+    total_mark = 0
+    if sequences.size == 2
+      sequences.each do |s|
+        if s.approved?
+          total_mark += @student.sequence_mark_per_subject(s.hashed_marks) || 0 # calculating the total mark for the two sequencces
+        else
+          sequences_with_issues << { "sequence_id" => sequence.id, "message" => "Unapproved Sequence" }
+        end
+      end
+      @mark = total_mark.to_f / 2 # getting the average of first and second sequence mark
+      @coef = @subject.coefficient
+      @score = @mark * @coef
+
+      @performance["subject_marks"] << subject_marks_obj
+    elsif sequences.size < 2
+      subjects_with_issues << { "subject_id" => @subject.id, "message" => "Missing Sequence for this subject." }
+    end
+  end
+
+  def subject_marks_obj
+    { "id" => @subject.id, "subject_name" => @subject.name,
+      "mark" => @mark, "coef" => @coef, "score" => @score }
   end
 
   def title
@@ -69,6 +109,10 @@ class PerformanceSheet < ApplicationRecord
     ((passed_student_num.to_f / student_num.to_f) * 100).round(2)
   end
 
+  def issues_count
+    sequences_with_issues.size + subjects_with_issues.size
+  end
+
   private
 
   def add_other_data
@@ -80,5 +124,7 @@ class PerformanceSheet < ApplicationRecord
     self.performance_data = performance_data
     self.student_num = student_num
     self.passed_student_num = passed_student_num
+    self.sequences_with_issues = sequences_with_issues.uniq
+    self.subjects_with_issues = subjects_with_issues.uniq
   end
 end
