@@ -60,10 +60,10 @@ class PerformanceSheet < ApplicationRecord
         @score = @mark * @coef
         @performance["subject_marks"] << subject_marks_obj
       else
-        sequences_with_issues << { "sequence_id" => sequence.id, "message" => "Unapproved Sequence" }
+        sequences_with_issues << error_mess_obj(sequence)
       end
     else
-      subjects_with_issues << { "subject_id" => @subject.id, "message" => "Missing Sequence for this subject." }
+      subjects_with_issues << error_mess_obj(@subject)
     end
   end
 
@@ -75,7 +75,7 @@ class PerformanceSheet < ApplicationRecord
         if s.approved?
           total_mark += @student.sequence_mark_per_subject(s.hashed_marks) || 0 # calculating the total mark for the two sequencces
         else
-          sequences_with_issues << { "sequence_id" => sequence.id, "message" => "Unapproved Sequence" }
+          sequences_with_issues << error_mess_obj(s)
         end
       end
       @mark = total_mark.to_f / 2 # getting the average of first and second sequence mark
@@ -84,7 +84,15 @@ class PerformanceSheet < ApplicationRecord
 
       @performance["subject_marks"] << subject_marks_obj
     elsif sequences.size < 2
-      subjects_with_issues << { "subject_id" => @subject.id, "message" => "Missing Sequence for this subject." }
+      subjects_with_issues << error_mess_obj(@subject)
+    end
+  end
+
+  def error_mess_obj(resource)
+    if resource.class.name == "Sequence"
+      { "sequence_id" => resource.id, "message" => "Unapproved Sequence: #{resource.subject.name} #{resource.seq_title}" }
+    elsif resource.class.name == "Subject"
+      { "subject_id" => resource.id, "message" => "Missing Sequence for subject: #{resource.name}" }
     end
   end
 
