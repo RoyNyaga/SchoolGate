@@ -1,5 +1,6 @@
 class ReceiptsController < ApplicationController
   layout "school_layout"
+  before_action :check_for_current_school, except: [:parents, :pdf_view, :pdf_download]
   skip_before_action :authenticate_teacher!, only: [:parents]
   before_action :set_receipt, only: %i[ show edit update destroy parents pdf_view pdf_download ]
 
