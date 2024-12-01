@@ -1,4 +1,9 @@
 <div class="container py-5">
+  <div class="my-3">
+    <%= link_to "<- #{@performance_sheet.school_class.name}", school_class_path(@performance_sheet.school_class), class: "edit-link" %> / 
+    <%= link_to "Performance Sheets", performance_sheets_school_class_path(@performance_sheet.school_class), class: "edit-link" %> /
+    <%= link_to "#{@performance_sheet.title}", performance_sheet_path(@performance_sheet), class: "edit-link" %> /
+  </div>
   <div class="row">
     <div class="col-md-6 mx-auto">
       <%= render @performance_sheet %>
