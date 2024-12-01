@@ -41,7 +41,7 @@ class PerformanceSheetsController < ApplicationController
       format.pdf do
         send_data pdf.render, filename: "receipt.pdf",
                               type: "application/pdf",
-                              disposition: "inline" # or 'attachment' to force download
+                              disposition: "attachment" # or 'inline' to veiw
       end
     end
   end
