@@ -2,6 +2,18 @@
   <div class="row">
     <div class="col-md-6 mx-auto">
       <%= render @performance_sheet %>
+      <div class="subject-issues light-grey-card my-3">
+        <h6 class="my-2 text-center">Subjects With Issues</h6>
+        <% PerformanceSheet.string_to_hash_arr(@performance_sheet.subjects_with_issues).uniq.each do |i| %>
+          <p><%= link_to i["message"], subject_path(i["subject_id"]) %></p>
+        <% end %>
+      </div>
+      <div class="subject-issues light-grey-card">
+        <h6 class="my-2 text-center">Sequences With Issues</h6>
+        <% PerformanceSheet.string_to_hash_arr(@performance_sheet.sequences_with_issues).uniq.each do |i| %>
+          <p><%= link_to i["message"], sequence_path(i["sequence_id"]) %></p>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
