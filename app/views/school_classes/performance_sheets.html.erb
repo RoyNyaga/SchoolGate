@@ -1,7 +1,7 @@
 <div class="container">
   <div class="my-3">
     <%= link_to "<- #{@school_class.name}", school_class_path(@school_class), class: "edit-link" %> / 
-    <%= link_to "Performance Sheet", performance_sheets_school_class_path(@school_class), class: "edit-link" %>
+    <%= link_to "Performance Sheets", performance_sheets_school_class_path(@school_class), class: "edit-link" %>
   </div>
   <%= render partial: "school_classes/nav_links", 
         layout: "layouts/sub_navbar", 
@@ -16,7 +16,7 @@
   <div>
     <div class="row">
       <% @performance_sheets.each do |p_s| %>
-        <div class="col-md-4">
+        <div class="col-md-4 my-3">
           <%= render partial: "performance_sheets/performance_sheet", locals: { performance_sheet: p_s } %>
         </div>
       <% end %>
