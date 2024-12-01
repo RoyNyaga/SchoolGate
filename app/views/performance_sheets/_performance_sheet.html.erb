@@ -5,6 +5,7 @@
       <p class="margin-zero text-color-grey-2">Number of student above average: <span class="text-color-grey-2"><%= performance_sheet.passed_student_num %></span></p>
       <p class="margin-zero text-color-grey-2">Number of student below average: <span class="text-color-grey-2"><%= performance_sheet.student_num_below_avg %></span></p>
       <p class="margin-zero text-color-grey-2">Percentage Success: <span class="text-color-grey-2"><%= performance_sheet.percentage_success %> %</span></p>
+      <p class="margin-zero text-color-grey-2">Error Count <span class="text-color-grey-2"><%= performance_sheet.issues_count %> </span></p>
     </div>
     <div class="d-flex justify-content-center">
       <%= button_to "Regenerate", regenerate_performance_sheet_path(performance_sheet), method: :put, class: "general-btn" %>
