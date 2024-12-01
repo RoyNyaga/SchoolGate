@@ -62,7 +62,7 @@ class WhatsappNotificationService
                 parameters: [
                   {
                     type: "text",
-                    text: "#{receipt.id}?",
+                    text: "#{receipt.id}?current_school_id=#{school.id}",
                   },
                 ],
               },
