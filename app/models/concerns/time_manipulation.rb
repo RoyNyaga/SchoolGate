@@ -10,8 +10,8 @@ module TimeManipulation
     end
 
     def ddmmyy_format(date: nil)
-      date || created_at
-      date.strftime("%d/%m/%Y")
+      date = date || created_at
+      date ? date.strftime("%d/%m/%Y") : "--"
     end
   end
 
