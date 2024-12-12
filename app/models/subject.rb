@@ -20,20 +20,37 @@ class Subject < ApplicationRecord
 
   def add_remarks(average)
     case average
-    when (0..5)
+    when (0..5.99)
       less_than_equal_to_5
-    when (6..9)
+    when (6..9.99)
       less_than_equal_to_9
-    when (10..12)
+    when (10..12.99)
       less_than_equal_to_12
-    when (13..15)
+    when (13..15.99)
       less_than_equal_to_15
-    when (16..18)
+    when (16..18.99)
       less_than_equal_to_18
     when (19..20)
       less_than_equal_to_20
     else
       "Out of range"
+    end
+  end
+
+  def self.grading(marks)
+    case marks
+    when (0..5.99)
+      "U"
+    when (6..9.99)
+      "D"
+    when (10..13.99)
+      "C"
+    when (14..16.99)
+      "B"
+    when (17..20)
+      "A"
+    else
+      "H"
     end
   end
 
