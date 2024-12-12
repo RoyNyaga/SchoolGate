@@ -1,3 +1,5 @@
+include ActionView::Helpers::NumberHelper
+
 class PdfSequenceBasedGeneratorService
   attr_accessor :report_cards, :file_name
 
@@ -10,6 +12,8 @@ class PdfSequenceBasedGeneratorService
       @report_cards = @report_card_generator.report_cards
       @school = @report_card_generator.school
       @term = @report_card_generator.term
+      @school_class = @report_card_generator.school_class
+      @academic_year = @report_card_generator.academic_year
     else
       @report_card = report_card
       @report_card_generator = report_card.report_card_generator
@@ -17,6 +21,8 @@ class PdfSequenceBasedGeneratorService
       @school = @report_card.school
       @student = @report_card.student
       @term = @report_card.term
+      @school_class = @report_card.school_class
+      @academic_year = @report_card.academic_year
     end
   end
 
@@ -30,6 +36,7 @@ class PdfSequenceBasedGeneratorService
 
   def generate_single_pdf(is_bulk_create: false)
     @pdf.bounding_box([2, 730], width: 550) do
+      add_logo
       letter_head
       report_card_title
       subject_details
@@ -49,39 +56,55 @@ class PdfSequenceBasedGeneratorService
     @report_cards.each do |report_card|
       @report_card = report_card
       @student = report_card.student
-
       generate_single_pdf(is_bulk_create: true)
     end
     @pdf
   end
 
-  def letter_head
-    @pdf.font "Times-Roman" do
-      @pdf.text @school.full_name, size: 11, style: :bold, align: :center
+  def add_logo
+    # Get the logo URL from ActiveStorage
+    if @school.photo.attached?
+      @logo = StringIO.open(@school.photo.download)
+      @pdf.image @logo, fit: [70, 70], position: :center, at: [@pdf.bounds.width / 2.4, @pdf.cursor]
     end
-    @pdf.font("Courier") do
-      @pdf.text "Ministry Of Secondary Education", align: :center, size: 9
-      @pdf.text "#{@school.address}", align: :center, size: 9
+  end
+
+  def letter_head
+    column_widths = [@pdf.bounds.width / 3.0] * 3 # Assuming 3 columns
+    # get student fees for this class and academic year
+    student_fee = @student.fees.find_by(school_class_id: @school_class.id, academic_year_id: @academic_year.id)
+    content = [
+      ["REPUBLIC OF CAMEROON
+        Peace – Work – Fatherland
+        *************
+        MINISTRY OF SECONDARY EDUCATION
+        *************
+        #{@school.full_name.upcase}
+       #{@school.address.downcase}
+       Contact: #{@school.phone_number}
+       ",
+
+       "",
+
+       "Student: #{@student.full_name.upcase}
+        Matricule: #{@student.matricule}
+        Gender: #{@student.gender}
+        Class: #{@school_class.name}
+        Year: #{@academic_year.year}
+        Balance Fee: #{number_to_currency(student_fee.balance, unit: " ", precision: 0)} frs
+     "],
+    ]
+    @pdf.table(content,
+               cell_style: { borders: [], size: 9, valign: :center, align: :center },
+               column_widths: column_widths) do
     end
   end
 
   def report_card_title
-    @pdf.float do
-      @pdf.move_down 7
-      @pdf.bounding_box([150, @pdf.cursor], width: 250) do
-        @pdf.stroke_horizontal_rule
-        @pdf.font "Times-Roman" do
-          @pdf.pad(5) { @pdf.text "#{@report_card.term.term_type.humanize.upcase} PROGRESS REPORT", align: :center, size: 9, style: :bold }
-        end
-        @pdf.stroke_horizontal_rule
-      end
-    end
+    @pdf.text "#{@term.term_type.humanize.upcase} PROGRESS RECORD", style: :bold, align: :center, size: 10
+    @pdf.text "School Year: #{@term.academic_year.year}", align: :center, size: 10
 
-    @pdf.move_down 40
-
-    @pdf.font "Times-Roman" do
-      @pdf.pad(7) { @pdf.text "<b>Name Of Student:</b> #{@report_card.student.full_name.upcase}", size: 10, inline_format: true, indent_paragraphs: 10 }
-    end
+    @pdf.move_down 10
   end
 
   def subject_details
@@ -93,7 +116,7 @@ class PdfSequenceBasedGeneratorService
 
     table_data << ["", "", "", "", "Total", @report_card.total_coefficient, @report_card.total_score, "", "", "", ""]
 
-    @pdf.table(table_data, width: 549, cell_style: { :font => "Times-Roman", :size => 10, inline_format: true, inline_format: true })
+    @pdf.table(table_data, width: 549, cell_style: { :font => "Times-Roman", :size => 9, inline_format: true, inline_format: true })
   end
 
   def average_section
@@ -104,8 +127,8 @@ class PdfSequenceBasedGeneratorService
     ], cell_style: { :font => "Times-Roman", :size => 10, inline_format: true })
     @pdf.table([
       ["1st Term Average #{@report_card.average.round(2)} / 20 \n Passed In  #{@report_card.passed_subjects} subjects",
-       "2nd Term Average #{@report_card.average.round(2)} / 20 \n Passed In  #{@report_card.passed_subjects} subjects",
-       "3rd Term Average #{@report_card.average.round(2)} / 20 \n Passed In  #{@report_card.passed_subjects} subjects"],
+       "",
+       ""],
     ], width: 549, cell_style: { :font => "Times-Roman", :size => 10, inline_format: true })
   end
 
