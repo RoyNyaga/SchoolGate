@@ -121,7 +121,7 @@ class PdfSequenceBasedGeneratorService
 
   def two_names(name)
     if name.present?
-      name.split(" ")[0..1]
+      name.split(" ")[0..1].join(" ")
     end
   end
 
