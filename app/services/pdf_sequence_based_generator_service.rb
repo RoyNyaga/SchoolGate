@@ -111,7 +111,7 @@ class PdfSequenceBasedGeneratorService
     table_data = [] << ["", "<b>subject</b>", "<b>Seq1</b>", "<b>Seq2</b>", "<b>Avg/20</b>", "<b>Coef</b>", "<b>Score</b>", "<b>Grads</b>", "<b>Rank</b>", "<b>Teacher</b>", "<b>Remark</b>"]
 
     ReportCard.string_to_hash_arr(@report_card.details).each_with_index do |info, index|
-      table_data << [index + 1, info["name"], info["first_seq_mark"], info["second_seq_mark"], info["average_mark"], info["coefficient"], info["score"], info["grade"], info["rank"], two_names(info["teacher"]), info["remark"]]
+      table_data << [index + 1, trim_subject_name(info["name"]), info["first_seq_mark"], info["second_seq_mark"], info["average_mark"], info["coefficient"], info["score"], info["grade"], info["rank"], trim_teachers_name(info["teacher"]), info["remark"]]
     end
 
     table_data << ["", "", "", "", "Total", @report_card.total_coefficient, @report_card.total_score, "", "", "", ""]
@@ -119,9 +119,15 @@ class PdfSequenceBasedGeneratorService
     @pdf.table(table_data, width: 549, cell_style: { :font => "Times-Roman", :size => 8, inline_format: true, inline_format: true })
   end
 
-  def two_names(name)
+  def trim_teachers_name(name)
     if name.present?
-      name.split(" ")[0..1].join(" ")
+      name.length > 15 ? name.split(" ")[0] : name.split(" ")[0..1].join(" ")
+    end
+  end
+
+  def trim_subject_name(name)
+    if name.present?
+      name.split(" ").length > 2 ? name.split(" ")[0..1].join(" ") : name
     end
   end
 
