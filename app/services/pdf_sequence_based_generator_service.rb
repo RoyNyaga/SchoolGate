@@ -127,7 +127,7 @@ class PdfSequenceBasedGeneratorService
 
   def trim_subject_name(name)
     if name.present?
-      name.split(" ").length > 2 ? name.split(" ")[0..1].join(" ") : name
+      name.length > 25 ? name.split(" ")[0..1].join(" ") : name
     end
   end
 
