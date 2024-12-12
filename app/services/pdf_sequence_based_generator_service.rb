@@ -40,7 +40,7 @@ class PdfSequenceBasedGeneratorService
       letter_head
       report_card_title
       subject_details
-      @pdf.move_down 10
+      # @pdf.move_down 10
       average_section
       desciplinary_section
     end
@@ -101,10 +101,10 @@ class PdfSequenceBasedGeneratorService
   end
 
   def report_card_title
-    @pdf.text "#{@term.term_type.humanize.upcase} PROGRESS RECORD", style: :bold, align: :center, size: 10
-    @pdf.text "School Year: #{@term.academic_year.year}", align: :center, size: 10
+    @pdf.text "#{@term.term_type.humanize.upcase} PROGRESS RECORD", style: :bold, align: :center, size: 9
+    @pdf.text "School Year: #{@term.academic_year.year}", align: :center, size: 9
 
-    @pdf.move_down 10
+    @pdf.move_down 8
   end
 
   def subject_details
@@ -116,7 +116,7 @@ class PdfSequenceBasedGeneratorService
 
     table_data << ["", "", "", "", "Total", @report_card.total_coefficient, @report_card.total_score, "", "", "", ""]
 
-    @pdf.table(table_data, width: 549, cell_style: { :font => "Times-Roman", :size => 9, inline_format: true, inline_format: true })
+    @pdf.table(table_data, width: 549, cell_style: { :font => "Times-Roman", :size => 8, inline_format: true, inline_format: true })
   end
 
   def average_section
@@ -124,12 +124,12 @@ class PdfSequenceBasedGeneratorService
       ["<b>Terminal Average</b>", "#{@report_card.average.round(2)} / 20"],
       ["<b>Rank</b>", "#{@report_card.rank} Out of #{@report_card.class_enrollment}"],
       ["<b>Class Average</b>", "#{@report_card.class_average.round(2)} / 20"],
-    ], cell_style: { :font => "Times-Roman", :size => 10, inline_format: true })
+    ], cell_style: { :font => "Times-Roman", :size => 9, inline_format: true })
     @pdf.table([
       ["1st Term Average #{@report_card.average.round(2)} / 20 \n Passed In  #{@report_card.passed_subjects} subjects",
        "",
        ""],
-    ], width: 549, cell_style: { :font => "Times-Roman", :size => 10, inline_format: true })
+    ], width: 549, cell_style: { :font => "Times-Roman", :size => 9, inline_format: true })
   end
 
   def desciplinary_section
@@ -138,11 +138,11 @@ class PdfSequenceBasedGeneratorService
       ["Absences", "___", "Attended DIS", "___"],
       ["Warned", "___", "Suspended", "___"],
       ["Might be Expelled", "___", "Expelled", "___"],
-    ], cell_style: { :font => "Times-Roman", :size => 10, inline_format: true })
+    ], cell_style: { :font => "Times-Roman", :size => 9, inline_format: true })
 
     @pdf.table([
       [nested_table, "Class Council Decision", "Class Master's Signature", "Principal's Remarks & Signature"],
-    ], :width => 549, cell_style: { :font => "Times-Roman", :font_style => :italic })
+    ], :width => 549, cell_style: { :font => "Times-Roman", :size => 8, :font_style => :italic })
   end
 
   def save_file
