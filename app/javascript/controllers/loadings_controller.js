@@ -16,9 +16,9 @@ export default class extends Controller {
         const response = await fetch(url);
         const data = await response.json();
         this.loadingTextTarget.innerText = data.progress_state
-        console.log(data.is_processing )
-        console.log(data.progress_state)
-        if (data.is_processing === false) {
+        console.log("data processing", data.is_processing )
+        console.log("daata progress_state", data.progress_state)
+        if (!data.is_processing) {
           window.location.href = data.redirect_url;
           break; // Exit the loop if process has ended
         } else {
