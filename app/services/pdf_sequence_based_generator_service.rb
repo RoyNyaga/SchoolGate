@@ -73,6 +73,8 @@ class PdfSequenceBasedGeneratorService
     column_widths = [@pdf.bounds.width / 3.0] * 3 # Assuming 3 columns
     # get student fees for this class and academic year
     student_fee = @student.fees.find_by(school_class_id: @school_class.id, academic_year_id: @academic_year.id)
+    balance = student_fee&.balance
+    balance_text = balance ? "#{number_to_currency(balance, unit: " ", precision: 0)} frs" : "N/A"
     content = [
       ["REPUBLIC OF CAMEROON
         Peace – Work – Fatherland
@@ -91,11 +93,11 @@ class PdfSequenceBasedGeneratorService
         Gender: #{@student.gender}
         Class: #{@school_class.name}
         Year: #{@academic_year.year}
-        Balance Fee: #{number_to_currency(student_fee.balance, unit: " ", precision: 0)} frs
+        Balance Fee: #{balance_text} frs
      "],
     ]
     @pdf.table(content,
-               cell_style: { borders: [], size: 9, valign: :center, align: :center },
+               cell_style: { borders: [], size: 10, valign: :center, align: :center },
                column_widths: column_widths) do
     end
   end
