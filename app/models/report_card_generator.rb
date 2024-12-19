@@ -384,7 +384,7 @@ class ReportCardGenerator < ApplicationRecord
                 # binding.break
                 details << subject_detail.to_s
               else
-                [test_result, second_seq].each do |s|
+                [test_result, exam_result].each do |s|
                   @warning_messages << generate_warning_message("Missing enrollment for Pupil #{student.full_name}", s, s.seq_title(with_class_name: false)) unless student.was_enrolled?(s.hashed_marks)
                 end
               end
