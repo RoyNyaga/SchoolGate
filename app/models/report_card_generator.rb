@@ -314,7 +314,7 @@ class ReportCardGenerator < ApplicationRecord
 
       @report_card_generator.update(progress_state: 2)
 
-      pdf_generator = PdfSequenceBasedGeneratorService.new(report_card_generator: @report_card_generator, is_bulk_create: true)
+      pdf_generator = PdfNurseryReportCardFormatService.new(report_card_generator: @report_card_generator, is_bulk_create: true)
       pdf_data = pdf_generator.generate_bulk_pdf
       file_name = pdf_generator.file_name
       @report_card_generator.update(progress_state: 3)
