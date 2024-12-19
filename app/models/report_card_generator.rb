@@ -58,59 +58,58 @@ class ReportCardGenerator < ApplicationRecord
     @subjects = @school_class.subjects
     @bulk_report = []
     @failed_errors = []
-    @has_unapproved_sequence = false
     @warning_messages = []
     @enrollment = @school_class.students.active.size
-    check_sequences_status
-    unless @has_unapproved_sequence
-      @students.each do |student|
-        next unless student.active?
-        total_score = 0
-        total_coefficient = 0
-        report_card_object = { school_id: @school.id, school_class_id: @school_class.id, term_id: @term.id,
-                               student_id: student.id, academic_year_id: @academic_year.id,
-                               report_card_generator_id: @report_card_generator.id, evaluation_method: 1 }
-        details = []
-        passed_subjects = 0
-        @subjects.each do |subject|
-          subject_detail = {}
-          sequence = subject.sequences.approved.where(term_id: @term.id, academic_year_id: @academic_year.id).first
-          if sequence.present?
-            sequence_marks = sequence.hashed_marks
-            if student.was_enrolled?(sequence_marks)
-              student_marks = student.get_mark_object(sequence_marks)
-              competences_mark = student_marks["competences"] # an array of competence object
-              total_coefficient += subject.coefficient
-              average_mark = (student_marks["mark"]).round(2)
-              score = (average_mark * subject.coefficient).round(2)
-              total_score += score
-              passed_subjects += 1 if average_mark >= 10 # assuming that we are working on 20. In the future, passed mark could be a setting at the level of the school and class
-              subject_detail["name"] = subject.name
-              subject_detail["id"] = subject.id
-              subject_detail["competences"] = competences_mark
-              subject_detail["average_mark"] = average_mark
-              subject_detail["coefficient"] = subject.coefficient
-              subject_detail["score"] = score
-              subject_detail["grade"] = "To Do"
-              subject_detail["teacher"] = sequence.teachers_name
-              subject_detail["remark"] = subject.add_remarks(average_mark)
-              # binding.break
-              details << subject_detail.to_s
-            else
-              @warning_messages << generate_warning_message("Missing enrollment for student #{student.full_name}", sequence, sequence.seq_title(with_class_name: false))
-            end
-          else
-            @failed_errors << generate_error_message("Missing Sequence for subject #{subject.title}", subject, subject.title)
-          end
-        end
 
-        report_card_object[:total_score] = total_score
-        report_card_object[:total_coefficient] = total_coefficient
-        report_card_object[:average] = total_coefficient > 0 ? (total_score / total_coefficient).round(2) : 0
-        report_card_object[:passed_subjects] = passed_subjects
-        report_card_object[:details] = details
-        @bulk_report << report_card_object
+    check_sequences_status
+
+    @students.each do |student|
+      next unless student.active?
+      total_score = 0
+      total_coefficient = 0
+      report_card_object = { school_id: @school.id, school_class_id: @school_class.id, term_id: @term.id,
+                             student_id: student.id, academic_year_id: @academic_year.id,
+                             report_card_generator_id: @report_card_generator.id, evaluation_method: 1 }
+      details = []
+      passed_subjects = 0
+      @subjects.each do |subject|
+        subject_detail = {}
+        sequence = subject.sequences.approved.where(term_id: @term.id, academic_year_id: @academic_year.id).first
+        if sequence.present?
+          sequence_marks = sequence.hashed_marks
+          if student.was_enrolled?(sequence_marks)
+            student_marks = student.get_mark_object(sequence_marks)
+            competences_mark = student_marks["competences"] # an array of competence object
+            total_coefficient += subject.coefficient
+            average_mark = (student_marks["mark"]).round(2)
+            score = (average_mark * subject.coefficient).round(2)
+            total_score += score
+            passed_subjects += 1 if average_mark >= 10 # assuming that we are working on 20. In the future, passed mark could be a setting at the level of the school and class
+            subject_detail["name"] = subject.name
+            subject_detail["id"] = subject.id
+            subject_detail["competences"] = competences_mark
+            subject_detail["average_mark"] = average_mark
+            subject_detail["coefficient"] = subject.coefficient
+            subject_detail["score"] = score
+            subject_detail["grade"] = "To Do"
+            subject_detail["teacher"] = sequence.teachers_name
+            subject_detail["remark"] = subject.add_remarks(average_mark)
+            # binding.break
+            details << subject_detail.to_s
+          else
+            @warning_messages << generate_warning_message("Missing enrollment for student #{student.full_name}", sequence, sequence.seq_title(with_class_name: false))
+          end
+        else
+          @failed_errors << generate_error_message("Missing Sequence for subject #{subject.title}", subject, subject.title)
+        end
       end
+
+      report_card_object[:total_score] = total_score
+      report_card_object[:total_coefficient] = total_coefficient
+      report_card_object[:average] = total_coefficient > 0 ? (total_score / total_coefficient).round(2) : 0
+      report_card_object[:passed_subjects] = passed_subjects
+      report_card_object[:details] = details
+      @bulk_report << report_card_object
     end
 
     rank_report_card
@@ -158,66 +157,63 @@ class ReportCardGenerator < ApplicationRecord
     @subjects = @school_class.subjects
     @bulk_report = []
     @failed_errors = []
-    @has_unapproved_sequence = false
     @warning_messages = []
     @enrollment = @school_class.students.active.size
 
     begin
       check_sequences_status
 
-      unless @has_unapproved_sequence
-        @students.each do |student|
-          next unless student.active?
-          total_score = 0
-          total_coefficient = 0
-          report_card_object = { school_id: @school.id, school_class_id: @school_class.id, term_id: @term.id,
-                                 student_id: student.id, academic_year_id: @academic_year.id, report_card_generator_id: @report_card_generator.id, evaluation_method: 0 }
-          details = []
-          passed_subjects = 0
-          @subjects.each do |subject|
-            subject_detail = {}
-            first_seq, second_seq = subject.sequences.approved.where(term_id: @term.id, academic_year_id: @academic_year.id).order(:seq_num)
-            if first_seq.present? && second_seq.present?
-              if student.was_enrolled?(first_seq.hashed_marks) && student.was_enrolled?(second_seq.hashed_marks)
-                sequence_marks = @term.sum_sequence_subject_marks(subject.id)
-                sequence_averages = @term.calc_sequence_averages(sequence_marks)
-                first_seq_mark = student.sequence_mark_per_subject(first_seq.hashed_marks)
-                second_seq_mark = student.sequence_mark_per_subject(second_seq.hashed_marks)
-                total_coefficient += subject.coefficient
-                average_mark = (first_seq_mark + second_seq_mark) / 2
-                score = average_mark * subject.coefficient
-                total_score += score
-                passed_subjects += 1 if average_mark >= 10 # assuming that we are working on 20. In the future, passed mark could be a setting at the level of the school and class
-                subject_detail["name"] = subject.name
-                subject_detail["id"] = subject.id
-                subject_detail["first_seq_mark"] = first_seq_mark
-                subject_detail["second_seq_mark"] = second_seq_mark
-                subject_detail["average_mark"] = average_mark
-                subject_detail["coefficient"] = subject.coefficient
-                subject_detail["score"] = score
-                subject_detail["grade"] = Subject.grading(average_mark)
-                subject_detail["rank"] = student.sequence_rank(sequence_averages)
-                subject_detail["teacher"] = second_seq.teachers_name
-                subject_detail["remark"] = subject.add_remarks(average_mark)
-                # binding.break
-                details << subject_detail.to_s
-              else
-                [first_seq, second_seq].each do |s|
-                  @warning_messages << generate_warning_message("Missing enrollment for student #{student.full_name}", s, s.seq_title(with_class_name: false)) unless student.was_enrolled?(s.hashed_marks)
-                end
-              end
+      @students.each do |student|
+        next unless student.active?
+        total_score = 0
+        total_coefficient = 0
+        report_card_object = { school_id: @school.id, school_class_id: @school_class.id, term_id: @term.id,
+                               student_id: student.id, academic_year_id: @academic_year.id, report_card_generator_id: @report_card_generator.id, evaluation_method: 0 }
+        details = []
+        passed_subjects = 0
+        @subjects.each do |subject|
+          subject_detail = {}
+          first_seq, second_seq = subject.sequences.approved.where(term_id: @term.id, academic_year_id: @academic_year.id).order(:seq_num)
+          if first_seq.present? && second_seq.present?
+            if student.was_enrolled?(first_seq.hashed_marks) && student.was_enrolled?(second_seq.hashed_marks)
+              sequence_marks = @term.sum_sequence_subject_marks(subject.id)
+              sequence_averages = @term.calc_sequence_averages(sequence_marks)
+              first_seq_mark = student.sequence_mark_per_subject(first_seq.hashed_marks)
+              second_seq_mark = student.sequence_mark_per_subject(second_seq.hashed_marks)
+              total_coefficient += subject.coefficient
+              average_mark = (first_seq_mark + second_seq_mark) / 2
+              score = average_mark * subject.coefficient
+              total_score += score
+              passed_subjects += 1 if average_mark >= 10 # assuming that we are working on 20. In the future, passed mark could be a setting at the level of the school and class
+              subject_detail["name"] = subject.name
+              subject_detail["id"] = subject.id
+              subject_detail["first_seq_mark"] = first_seq_mark
+              subject_detail["second_seq_mark"] = second_seq_mark
+              subject_detail["average_mark"] = average_mark
+              subject_detail["coefficient"] = subject.coefficient
+              subject_detail["score"] = score
+              subject_detail["grade"] = Subject.grading(average_mark)
+              subject_detail["rank"] = student.sequence_rank(sequence_averages)
+              subject_detail["teacher"] = second_seq.teachers_name
+              subject_detail["remark"] = subject.add_remarks(average_mark)
+              # binding.break
+              details << subject_detail.to_s
             else
-              @warning_messages << generate_warning_message("Missing Sequence for subject #{subject.title}", subject, subject.title)
+              [first_seq, second_seq].each do |s|
+                @warning_messages << generate_warning_message("Missing enrollment for student #{student.full_name}", s, s.seq_title(with_class_name: false)) unless student.was_enrolled?(s.hashed_marks)
+              end
             end
+          else
+            @warning_messages << generate_warning_message("Missing Sequence for subject #{subject.title}", subject, subject.title)
           end
-
-          report_card_object[:total_score] = total_score
-          report_card_object[:total_coefficient] = total_coefficient
-          report_card_object[:average] = total_coefficient > 0 ? (total_score / total_coefficient) : 0
-          report_card_object[:passed_subjects] = passed_subjects
-          report_card_object[:details] = details
-          @bulk_report << report_card_object
         end
+
+        report_card_object[:total_score] = total_score
+        report_card_object[:total_coefficient] = total_coefficient
+        report_card_object[:average] = total_coefficient > 0 ? (total_score / total_coefficient) : 0
+        report_card_object[:passed_subjects] = passed_subjects
+        report_card_object[:details] = details
+        @bulk_report << report_card_object
       end
 
       rank_report_card
@@ -263,46 +259,43 @@ class ReportCardGenerator < ApplicationRecord
     @subjects = @school_class.subjects
     @bulk_report = []
     @failed_errors = []
-    @has_unapproved_sequence = false
     @warning_messages = []
     @enrollment = @school_class.students.active.size
 
     begin
       check_sequences_status
 
-      unless @has_unapproved_sequence
-        @students.each do |student|
-          next unless student.active?
-          report_card_object = { school_id: @school.id, school_class_id: @school_class.id, term_id: @term.id,
-                                 student_id: student.id, academic_year_id: @academic_year.id,
-                                 report_card_generator_id: @report_card_generator.id, evaluation_method: 3 }
-          details = []
-          @subjects.each do |subject|
-            subject_detail = {}
-            sequence = subject.sequences.approved.find_by(term_id: @term.id, academic_year_id: @academic_year.id)
-            mark = student.sequence_mark_per_subject(sequence.hashed_marks)
+      @students.each do |student|
+        next unless student.active?
+        report_card_object = { school_id: @school.id, school_class_id: @school_class.id, term_id: @term.id,
+                               student_id: student.id, academic_year_id: @academic_year.id,
+                               report_card_generator_id: @report_card_generator.id, evaluation_method: 3 }
+        details = []
+        @subjects.each do |subject|
+          subject_detail = {}
+          sequence = subject.sequences.approved.find_by(term_id: @term.id, academic_year_id: @academic_year.id)
+          mark = student.sequence_mark_per_subject(sequence.hashed_marks)
 
-            if sequence.present?
-              if student.was_enrolled?(sequence.hashed_marks)
-                subject_detail["name"] = subject.name
-                subject_detail["id"] = subject.id
-                subject_detail["mark"] = mark
-                subject_detail["teacher"] = sequence.teachers_name
-                # binding.break
-                details << subject_detail.to_s
-              else
-                [first_seq, second_seq].each do |s|
-                  @warning_messages << generate_warning_message("Missing enrollment for student #{student.full_name}", s, s.seq_title(with_class_name: false)) unless student.was_enrolled?(s.hashed_marks)
-                end
-              end
+          if sequence.present?
+            if student.was_enrolled?(sequence.hashed_marks)
+              subject_detail["name"] = subject.name
+              subject_detail["id"] = subject.id
+              subject_detail["mark"] = mark
+              subject_detail["teacher"] = sequence.teachers_name
+              # binding.break
+              details << subject_detail.to_s
             else
-              @warning_messages << generate_warning_message("Missing Sequence for subject #{subject.title}", subject, subject.title)
+              [first_seq, second_seq].each do |s|
+                @warning_messages << generate_warning_message("Missing enrollment for student #{student.full_name}", s, s.seq_title(with_class_name: false)) unless student.was_enrolled?(s.hashed_marks)
+              end
             end
+          else
+            @warning_messages << generate_warning_message("Missing Sequence for subject #{subject.title}", subject, subject.title)
           end
-
-          report_card_object[:details] = details
-          @bulk_report << report_card_object
         end
+
+        report_card_object[:details] = details
+        @bulk_report << report_card_object
       end
 
       process_duration = Time.now - start_time
