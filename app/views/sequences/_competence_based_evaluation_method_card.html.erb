@@ -1,0 +1,20 @@
+<div class="light-grey-card p-2 dashboard-normal-font-size my-3">
+  <h6><%= sequence.seq_title %></h6>
+  <p class="margin-zero">Subject <span class="text-color-grey-2 px-3"><%= sequence.subject.name %></span></p>
+  <p class="margin-zero">Class <span class="text-color-grey-2 px-3"><%= sequence.school_class.name %></span></p>
+  <p class="margin-zero">Student enrolled: <span class="text-color-grey-2 px-3"><%= sequence.enrolled_num %></span></p>
+  <h6 class="text-center my-3">Competences</h6>
+  <% sequence.subject.competences.each do |competence| %>
+    <%= render partial: "competences/sequence_competence_card", locals: { competence: competence, sequence: sequence } %>
+  <% end %>
+  <p class="margin-zero">Teacher: <span class="text-color-grey-2 px-3 my-2"><%= sequence.teachers_name %></span></p>
+  <div class="d-flex justify-content-between align-items-start my-3">
+    <%= render partial: "sequences/preview", 
+        layout: "layouts/drawer_layout", 
+        locals: { sequence: sequence, title: sequence.seq_title,
+        item_id: generate_drawer_id("combined_competence_stats", record: sequence), 
+        position: "end", btn_text: "View", btn_visibility: true }%>
+    <span class="text-white p-1 badge <%= status_badge_color(sequence) %>"><%= sequence.status.humanize %></span>
+    <%= link_to "Edit", edit_sequence_path(sequence), class: "general-link" %>
+  </div>
+</div>

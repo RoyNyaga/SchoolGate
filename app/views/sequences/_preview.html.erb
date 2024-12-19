@@ -1,39 +1,16 @@
 <div class="d-flex justify-content-around my-3">
   <%= render partial: "sequences/action_links", locals: { sequence: sequence } %>
 </div>
-<div class="light-grey-card p-3">
-  <p class="margin-zero">Status <span class="text-white p-1 badge <%= status_badge_color(sequence) %>"><%= sequence.status.humanize %></span></p>
-  <p class="margin-zero">Subject <span class="text-color-grey-2 px-3"><%= sequence.subject.name %></span></p>
-  <p class="margin-zero">Class <span class="text-color-grey-2 px-3"><%= sequence.school_class.name %></span></p>
-  <p class="margin-zero">Student enrolled: <span class="text-color-grey-2 px-2"><%= sequence.enrolled_num %></span></p>
-  <p class="margin-zero">Number of students above average: <span class="text-color-grey-2 px-2"><%= sequence.student_num_above_average %></span> </p>
-  <p class="margin-zero">Percent success: <span class="text-color-grey-2 px-2"><%= sequence.percent_success %> %</span></p>
-  <p class="margin-zero">Highest marks: <span class="text-color-grey-2 px-2"><%= sequence.highest_mark %></span></p>
-  <h6 class="text-center my-2">Student With highest Mark</h6>
-  <% sequence.student_with_highest_mark.each do |student| %>
-    <p class="margin-zero text-color-grey-2 text-center"><%= student["name"]%> - <%= student["mark"] %></p>
+<% if current_school.secondary_education? %>
+  <% if sequence.competence_based_evaluation_method? %>
+    <%= render partial: "sequences/combined_competence_preview_content", locals: { sequence: sequence } %>
+  <% elsif sequence.sequence_based_evaluation_method? %>
+    <%= render partial: "sequences/sequence_based_preview_content", locals: { sequence: sequence }%>
   <% end %>
-  <p class="margin-zero">Add Lowest Marks</p>
-  <p class="margin-zero">Add Class Average</p>
-  <p class="margin-zero">Teacher: <span class="text-color-grey-2 px-3"><%= sequence.teachers_name %></span></p>
-</div>
-<table class="table table-hover my-3">
-  <thead>
-    <tr>
-      <th scope="col">Rank</th>
-      <th scope="col">Name</th>
-      <th scope="col">mark</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% num = 1%>
-    <% sequence.sort_by_mark_desc.each do |mark| %>
-      <tr>
-        <td><%= num %></td>
-        <td><%= mark["name"] %></td>
-        <td><%= mark["mark"] %></td>
-      </tr>
-      <% num += 1 %>
-    <% end %>
-  </tbody>
-</table>
+<% elsif current_school.basic_education? %>
+  <% if sequence.nursery_evaluation_method? %>
+    <%= render partial: "sequences/nursery/nursery_preview_content", locals: {sequence: sequence } %>
+  <% elsif sequence.primary_evaluation_method? %>
+    <%= render partial: "sequences/primary/primary_preview_content", locals: {sequence: sequence } %>
+  <% end %>
+<% end %>

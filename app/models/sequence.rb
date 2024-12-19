@@ -11,9 +11,11 @@ class Sequence < ApplicationRecord
   delegate :name, to: :school_class
 
   enum seq_num: { first_sequence: 1, second_sequence: 2, third_sequence: 3, forth_sequence: 4,
-                  fifth_sequence: 5, sith_sequence: 6, first_term_sequence: 7, second_term_sequence: 8, third_term_sequence: 9 }
+                  fifth_sequence: 5, sith_sequence: 6, first_term_sequence: 7, second_term_sequence: 8,
+                  third_term_sequence: 9, test_primary_sequence: 10, exam_primary_sequence: 11, exam_nursery_sequence: 12 }
   enum status: { in_progress: 0, submitted: 1, rejected: 2, approved: 3 }
-  enum evaluation_method: { sequence_based_evaluation_method: 0, competence_based_evaluation_method: 1 }
+  enum evaluation_method: { sequence_based_evaluation_method: 0, competence_based_evaluation_method: 1,
+                            nursery_evaluation_method: 2, primary_evaluation_method: 3 }
 
   # validate :validate_sequences_per_term
   validate :validate_enrollment_num_not_zero
@@ -29,12 +31,21 @@ class Sequence < ApplicationRecord
   end
 
   def self.allowed_seq_nums(school_class)
-    if school_class.should_evaluate_multiple_competences_per_subject
-      # Return only keys containing "term" if multiple competences should be evaluated
-      seq_nums.select { |key, _| key.include?("term") }
-    else
-      # Exclude keys containing "term" if multiple competences should not be evaluated
-      seq_nums.reject { |key, _| key.include?("term") }
+    school = school_class.school
+    if school.secondary_education?
+      if school_class.should_evaluate_multiple_competences_per_subject
+        # Return only keys containing "term" if multiple competences should be evaluated
+        seq_nums.select { |key, _| key.include?("term") }
+      else
+        # Exclude keys containing "term" if multiple competences should not be evaluated
+        seq_nums.reject { |key, _| key.include?("term") }
+      end
+    elsif school.basic_education?
+      if school_class.nursery_report_card_format?
+        seq_nums.select { |key, _| key.include?("nursery") }
+      elsif school_class.primary_report_card_format?
+        seq_nums.select { |key, _| key.include?("primary") }
+      end
     end
   end
 
@@ -45,7 +56,7 @@ class Sequence < ApplicationRecord
         { "id" => student["id"].to_i, "name" => student["name"], "mark" => student[
           "mark"].to_f, "is_enrolled" => ActiveRecord::Type::Boolean.new.cast(student["is_enrolled"]) }
       }
-    else
+    elsif competence_based_evaluation_method?
       Sequence.string_to_hash_arr(marks).map do |student|
         {
           "id" => student["id"].to_i,
@@ -61,6 +72,16 @@ class Sequence < ApplicationRecord
           end,
         }
       end
+    elsif nursery_evaluation_method?
+      Sequence.string_to_hash_arr(marks).map { |student|
+        { "id" => student["id"].to_i, "name" => student["name"], "mark" => student[
+          "mark"], "is_enrolled" => ActiveRecord::Type::Boolean.new.cast(student["is_enrolled"]) }
+      }
+    elsif primary_evaluation_method?
+      Sequence.string_to_hash_arr(marks).map { |student|
+        { "id" => student["id"].to_i, "name" => student["name"], "mark" => student[
+          "mark"].to_f, "is_enrolled" => ActiveRecord::Type::Boolean.new.cast(student["is_enrolled"]) }
+      }
     end
   end
 
@@ -74,6 +95,10 @@ class Sequence < ApplicationRecord
     else
       enrolled_students.sort_by { |item| -item["mark"] }
     end
+  end
+
+  def sort_by_student_name_desc
+    enrolled_students.sort_by { |item| -item["name"] }
   end
 
   def seq_title(with_class_name: false)
@@ -146,10 +171,19 @@ class Sequence < ApplicationRecord
   end
 
   def set_evaluation_method
-    if school_class.should_evaluate_multiple_competences_per_subject
-      self.evaluation_method = 1
-    else
-      self.evaluation_method = 0
+    school = school_class.school
+    if school.secondary_education?
+      if school_class.should_evaluate_multiple_competences_per_subject
+        self.evaluation_method = 1
+      else
+        self.evaluation_method = 0
+      end
+    elsif school.basic_education?
+      if school_class.nursery_report_card_format?
+        self.evaluation_method = 2
+      elsif school_class.primary_report_card_format?
+        self.evaluation_method = 3
+      end
     end
   end
 

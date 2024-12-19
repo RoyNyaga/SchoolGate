@@ -43,7 +43,7 @@
       <tr>
         <th scope="col">No</th>
         <th scope="col">Name</th>
-        <th scope="col">mark</th>
+        <th scope="col"><%= @school_class.nursery_report_card_format? ? "Comments" : "Marks/20" %></th>
         <th scope="col">Enrolled</th>
       </tr>
     </thead>
@@ -55,20 +55,28 @@
         <tr>
           <td><%= num %></td>
           <td><%= student.full_name %></td>
-          <% if multiple_competence?(@school_class, sequence)  %>
-            <%= form.hidden_field :id, name: "sequence[marks][][mark]", value: "" %>
-            <td>
-              <% @competences.each do |c| %>
-                <div>
-                  <h6><%= c.title %></h6>
-                  <%= form.hidden_field :marks, name: "sequence[marks][][competences][][id]", value: c.id %>
-                  <%= form.hidden_field :marks, name: "sequence[marks][][competences][][title]", value: c.title %>
-                  <%= generate_student_competence_based_marks(form, sequence, student, c) %>
-                </div>
-              <% end %>
-            </td>
-          <% else %>
-            <td><%= generate_student_marks_input(form, sequence, student) %></td>
+          <% if current_school.basic_education? %>
+            <% if @school_class.nursery_report_card_format? %>
+              <td><%= generate_nursery_student_marks_input(form, sequence, student) %></td>
+            <% elsif @school_class.primary_report_card_format? %>
+              <td><%= generate_primary_student_marks_input(form, sequence, student) %></td>
+            <% end %>
+          <% elsif @school_class.secondary_education? %>
+            <% if multiple_competence?(@school_class, sequence)  %>
+              <%= form.hidden_field :id, name: "sequence[marks][][mark]", value: "" %>
+              <td>
+                <% @competences.each do |c| %>
+                  <div>
+                    <h6><%= c.title %></h6>
+                    <%= form.hidden_field :marks, name: "sequence[marks][][competences][][id]", value: c.id %>
+                    <%= form.hidden_field :marks, name: "sequence[marks][][competences][][title]", value: c.title %>
+                    <%= generate_student_competence_based_marks(form, sequence, student, c) %>
+                  </div>
+                <% end %>
+              </td>
+            <% else %>
+              <td><%= generate_student_marks_input(form, sequence, student) %></td>
+            <% end %>
           <% end %>
           <td>
             <span>Enrolled</span>

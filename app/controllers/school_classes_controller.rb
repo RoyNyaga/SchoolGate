@@ -125,7 +125,8 @@ class SchoolClassesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def school_class_params
-    params.require(:school_class).permit(:school_id, :name, :level, :required_fee, :should_evaluate_multiple_competences_per_subject)
+    params.require(:school_class).permit(:school_id, :name, :level, :required_fee,
+                                         :should_evaluate_multiple_competences_per_subject, :report_card_format)
   end
 
   def download_response(status)

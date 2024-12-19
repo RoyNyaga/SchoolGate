@@ -99,15 +99,24 @@ class ReportCardsController < ApplicationController
   end
 
   def pdf_view
-    respond_to do |format|
-      pdf_gen = if @report_card.sequence_based_evaluation_method?
+    @pdf_gen = if current_school.secondary_education?
+        if @report_card.sequence_based_evaluation_method?
           PdfSequenceBasedGeneratorService.new(report_card: @report_card, is_bulk_create: false)
         else
           PdfCompetenceBasedGeneratorService.new(report_card: @report_card, is_bulk_create: false)
         end
+      elsif current_school.basic_education?
+        if @report_card.nursery_report_card_format?
+          PdfNurseryReportCardFormatService.new(report_card: @report_card, is_bulk_create: false)
+        elsif @report_card.primary_report_card_format?
+          PdfPrimaryReportCardFormatService.new(report_card: @report_card, is_bulk_create: false)
+        end
+      end
+
+    respond_to do |format|
       format.html # regular HTML response
       format.pdf do
-        pdf = pdf_gen.generate_single_pdf(is_bulk_create: false)
+        pdf = @pdf_gen.generate_single_pdf(is_bulk_create: false)
         send_data pdf.render, filename: "report.pdf",
                               type: "application/pdf",
                               disposition: "inline" # or 'attachment' to force download

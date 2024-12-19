@@ -25,8 +25,18 @@ class ReportCardGeneratorsController < ApplicationController
   def create
     @report_card_generator = ReportCardGenerator.new(report_card_generator_params)
     @school_class = @report_card_generator.school_class
-    if @school_class.should_evaluate_multiple_competences_per_subject
-      @report_card_generator.evaluation_method = 1
+    if current_school.secondary_education?
+      if @school_class.should_evaluate_multiple_competences_per_subject
+        @report_card_generator.evaluation_method = 1
+      else
+        @report_card_generator.evaluation_method = 0
+      end
+    elsif current_school.basic_education?
+      if @school_class.nursery_report_card_format?
+        @report_card_generator.evaluation_method = 3
+      elsif @school_class.primary_report_card_format?
+        @report_card_generator.evaluation_method = 2
+      end
     end
 
     respond_to do |format|

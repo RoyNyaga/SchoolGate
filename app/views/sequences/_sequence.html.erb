@@ -1,5 +1,13 @@
-<% if sequence.sequence_based_evaluation_method? %>
-  <%= render partial: "sequences/sequence_based_evaluation_method", locals: { sequence: sequence }%>
-<% else sequence.competence_based_evaluation_method? %>
-  <%= render partial: "sequences/competence_based_evaluation_method", locals: { sequence: sequence } %>
+<% if current_school.secondary_education? %>
+  <% if sequence.sequence_based_evaluation_method? %>
+    <%= render partial: "sequences/sequence_based_evaluation_method_card", locals: { sequence: sequence }%>
+  <% else sequence.competence_based_evaluation_method? %>
+    <%= render partial: "sequences/competence_based_evaluation_method_card", locals: { sequence: sequence } %>
+  <% end %>
+<% elsif current_school.basic_education? %>
+  <% if sequence.nursery_evaluation_method? %>
+    <%= render partial: "sequences/nursery/sequence_nursery_card", locals: { sequence: sequence } %>
+  <% elsif sequence.primary_evaluation_method? %>
+    <%= render partial: "sequences/primary/sequence_primary_card", locals: { sequence: sequence } %>
+  <% end %>
 <% end %>

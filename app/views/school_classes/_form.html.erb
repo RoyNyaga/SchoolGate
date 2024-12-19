@@ -26,9 +26,15 @@
   </div>
   <div class="report-card-settings my-3">
     <h5 class="text-center">Report Card Settings</h5>
-    <div class="my-2 d-flex">
-      <%= form.check_box :should_evaluate_multiple_competences_per_subject %>
-      <%= form.label :should_evaluate_multiple_competences_per_subject?, class: "px-3" %>
+    <% if current_school.secondary_education? %>
+      <div class="my-2 d-flex">
+        <%= form.check_box :should_evaluate_multiple_competences_per_subject %>
+        <%= form.label :should_evaluate_multiple_competences_per_subject?, class: "px-3" %>
+      </div>
+    <% end %>
+    <div class="my-2">
+      <%= form.label :report_card_format %>
+      <%= form.select :report_card_format, SchoolClass.allowed_report_card_formats(current_school).map { |k,v| [k.humanize, k] }, {}, { class: "general-input-styles" } %>
     </div>
   </div>
   <div class="py-4">

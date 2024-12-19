@@ -1,0 +1,26 @@
+<div class="light-grey-card p-3">
+  <p class="margin-zero">Subject <span class="text-color-grey-2 px-3"><%= sequence.subject.name %></span></p>
+  <p class="margin-zero">Class <span class="text-color-grey-2 px-3"><%= sequence.school_class.name %></span></p>
+  <h6 class="text-center my-2">Student With highest Mark</h6>
+  <p class="margin-zero">Teacher: <span class="text-color-grey-2 px-3"><%= sequence.teachers_name %></span></p>
+</div>
+<table class="table table-hover my-3">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Comment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% num = 1 %>
+    <% sequence.sort_by_student_name_desc.each do |mark| %>
+      <tr>
+        <td><%= num %></td>
+        <td><%= mark["name"] %></td>
+        <td><%= mark["mark"] %></td>
+      </tr>
+      <% num += 1 %>
+    <% end %>
+  </tbody>
+</table>

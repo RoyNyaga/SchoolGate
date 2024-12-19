@@ -19,14 +19,20 @@ class SchoolClass < ApplicationRecord
   validates :required_fee, presence: true
   before_save :name_to_lowercase
 
-  enum report_card_format: { nursery_one_report_card_format: 0, nursery_two_report_card_format: 1,
-                             primary_one_report_card_format: 2, primary_two_report_card_format: 3,
-                             secondary_one_report_card_format: 4, secondary_two_report_card_format: 5 }
+  enum report_card_format: { nursery_report_card_format: 0, primary_report_card_format: 1, secondary_one_report_card_format: 2 }
 
   default_scope { order(:level) }
 
   def generate_fee_string
     "level_#{level}_fees"
+  end
+
+  def self.allowed_report_card_formats(school)
+    if school.basic_education?
+      report_card_formats.select { |key, _| key.include?("nursery") || key.include?("primary") }
+    elsif school.secondary_education?
+      report_card_format.select { |key, _| key.include?("secondary") }
+    end
   end
 
   private

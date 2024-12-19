@@ -8,7 +8,8 @@ class ReportCardGenerator < ApplicationRecord
   has_many :report_cards
 
   enum progress_state: { initializing: 0, report_card_creation: 1, generating_pdf: 2, attach_pdf_to_generator: 3, completed: 4 }
-  enum evaluation_method: { sequence_based_evaluation_method: 0, competence_based_evaluation_method: 1 }
+  enum evaluation_method: { sequence_based_evaluation_method: 0, competence_based_evaluation_method: 1, primary_report_card_format: 2,
+                            nursery_report_card_format: 3 }
 
   validate :student_presence_check
 
@@ -30,10 +31,19 @@ class ReportCardGenerator < ApplicationRecord
   end
 
   def self.generate_school_class_report_cards(report_card_generator)
-    if report_card_generator.competence_based_evaluation_method?
-      competence_based_evaluation_method_format(report_card_generator)
-    else
-      sequence_based_evaluation_method_format(report_card_generator)
+    @school = report_card_generator.school
+    if @school.secondary_education?
+      if report_card_generator.competence_based_evaluation_method?
+        competence_based_evaluation_method_format(report_card_generator)
+      else
+        sequence_based_evaluation_method_format(report_card_generator)
+      end
+    elsif @school.basic_education?
+      if report_card_generator.primary_report_card_format?
+        primary_report_card_format(report_card_generator)
+      elsif report_card_generator.nursery_report_card_format?
+        nursery_report_evaluation_format(report_card_generator)
+      end
     end
   end
 
@@ -161,7 +171,7 @@ class ReportCardGenerator < ApplicationRecord
           total_score = 0
           total_coefficient = 0
           report_card_object = { school_id: @school.id, school_class_id: @school_class.id, term_id: @term.id,
-                                 student_id: student.id, academic_year_id: @academic_year.id, report_card_generator_id: @report_card_generator.id }
+                                 student_id: student.id, academic_year_id: @academic_year.id, report_card_generator_id: @report_card_generator.id, evaluation_method: 0 }
           details = []
           passed_subjects = 0
           @subjects.each do |subject|
@@ -226,6 +236,187 @@ class ReportCardGenerator < ApplicationRecord
       @report_card_generator.update(progress_state: 2)
 
       pdf_generator = PdfSequenceBasedGeneratorService.new(report_card_generator: @report_card_generator, is_bulk_create: true)
+      pdf_data = pdf_generator.generate_bulk_pdf
+      file_name = pdf_generator.file_name
+      @report_card_generator.update(progress_state: 3)
+      pdf_generator.save_file
+      pdf_path = pdf_generator.access_file
+      @report_card_generator.report_card_file.attach(io: pdf_path, filename: file_name)
+      pdf_generator.delete_pdf_file
+      process_duration = Time.now - start_time
+      @report_card_generator.update(is_processing: false, progress_state: 4, process_duration: process_duration, is_successful: true)
+    rescue => exception
+      p exception
+      process_duration = Time.now - start_time
+      @report_card_generator.update(is_processing: false, process_duration: process_duration, is_successful: false)
+    end
+  end
+
+  def self.nursery_report_evaluation_format(report_card_generator)
+    @report_card_generator = report_card_generator
+    start_time = Time.now
+    @school_class = @report_card_generator.school_class
+    @school = @school_class.school
+    @term = @report_card_generator.term
+    @academic_year = @report_card_generator.academic_year
+    @students = @school_class.students
+    @subjects = @school_class.subjects
+    @bulk_report = []
+    @failed_errors = []
+    @has_unapproved_sequence = false
+    @warning_messages = []
+    @enrollment = @school_class.students.active.size
+
+    begin
+      check_sequences_status
+
+      unless @has_unapproved_sequence
+        @students.each do |student|
+          next unless student.active?
+          report_card_object = { school_id: @school.id, school_class_id: @school_class.id, term_id: @term.id,
+                                 student_id: student.id, academic_year_id: @academic_year.id,
+                                 report_card_generator_id: @report_card_generator.id, evaluation_method: 3 }
+          details = []
+          @subjects.each do |subject|
+            subject_detail = {}
+            sequence = subject.sequences.approved.find_by(term_id: @term.id, academic_year_id: @academic_year.id)
+            mark = student.sequence_mark_per_subject(sequence.hashed_marks)
+
+            if sequence.present?
+              if student.was_enrolled?(sequence.hashed_marks)
+                subject_detail["name"] = subject.name
+                subject_detail["id"] = subject.id
+                subject_detail["mark"] = mark
+                subject_detail["teacher"] = sequence.teachers_name
+                # binding.break
+                details << subject_detail.to_s
+              else
+                [first_seq, second_seq].each do |s|
+                  @warning_messages << generate_warning_message("Missing enrollment for student #{student.full_name}", s, s.seq_title(with_class_name: false)) unless student.was_enrolled?(s.hashed_marks)
+                end
+              end
+            else
+              @warning_messages << generate_warning_message("Missing Sequence for subject #{subject.title}", subject, subject.title)
+            end
+          end
+
+          report_card_object[:details] = details
+          @bulk_report << report_card_object
+        end
+      end
+
+      process_duration = Time.now - start_time
+      reports_to_be_deleted = ReportCard.where(school_class_id: @school_class.id, term_id: @term.id, academic_year_id: @academic_year.id)
+      reports_to_be_deleted.destroy_all if reports_to_be_deleted.present?
+      ReportCard.insert_all @bulk_report
+      @report_card_generator.update(is_successful: true, warning_messages: @warning_messages.uniq,
+                                    process_duration: process_duration, student_num: @enrollment, failed_errors: @failed_errors)
+
+      @report_card_generator.update(progress_state: 2)
+
+      pdf_generator = PdfSequenceBasedGeneratorService.new(report_card_generator: @report_card_generator, is_bulk_create: true)
+      pdf_data = pdf_generator.generate_bulk_pdf
+      file_name = pdf_generator.file_name
+      @report_card_generator.update(progress_state: 3)
+      pdf_generator.save_file
+      pdf_path = pdf_generator.access_file
+      @report_card_generator.report_card_file.attach(io: pdf_path, filename: file_name)
+      pdf_generator.delete_pdf_file
+      process_duration = Time.now - start_time
+      @report_card_generator.update(is_processing: false, progress_state: 4, process_duration: process_duration, is_successful: true)
+    rescue => exception
+      p exception
+      process_duration = Time.now - start_time
+      @report_card_generator.update(is_processing: false, process_duration: process_duration, is_successful: false)
+    end
+  end
+
+  def self.primary_report_card_format(report_card_generator)
+    @report_card_generator = report_card_generator
+    start_time = Time.now
+    @school_class = @report_card_generator.school_class
+    @school = @school_class.school
+    @term = @report_card_generator.term
+    @academic_year = @report_card_generator.academic_year
+    @students = @school_class.students
+    @subjects = @school_class.subjects
+    @bulk_report = []
+    @failed_errors = []
+    @has_unapproved_sequence = false
+    @warning_messages = []
+    @enrollment = @school_class.students.active.size
+
+    begin
+      check_sequences_status
+
+      unless @has_unapproved_sequence
+        @students.each do |student|
+          next unless student.active?
+          total_average = 0
+          subject_num = 0
+          report_card_object = { school_id: @school.id, school_class_id: @school_class.id, term_id: @term.id,
+                                 student_id: student.id, academic_year_id: @academic_year.id, report_card_generator_id: @report_card_generator.id, evaluation_method: 2 }
+          details = []
+          passed_subjects = 0
+          @subjects.each do |subject|
+            subject_detail = {}
+            exam_result, test_result = subject.sequences.approved.where(term_id: @term.id, academic_year_id: @academic_year.id).order(:seq_num)
+            if exam_result.present? && test_result.present?
+              if student.was_enrolled?(test_result.hashed_marks) && student.was_enrolled?(exam_result.hashed_marks)
+                subject_num += 1
+                sequence_marks = @term.sum_sequence_subject_marks(subject.id)
+                sequence_averages = @term.calc_sequence_averages(sequence_marks)
+                test_result_mark = student.sequence_mark_per_subject(test_result.hashed_marks)
+                exam_result_mark = student.sequence_mark_per_subject(exam_result.hashed_marks)
+                average_mark = (test_result_mark + exam_result_mark) / 2
+                total_average += average_mark
+                passed_subjects += 1 if average_mark >= 10 # assuming that we are working on 20. In the future, passed mark could be a setting at the level of the school and class
+                subject_detail["name"] = subject.name
+                subject_detail["id"] = subject.id
+                subject_detail["test_result_mark"] = test_result_mark
+                subject_detail["exam_result_mark"] = exam_result_mark
+                subject_detail["average_mark"] = (exam_result_mark + test_result_mark) / 2
+                subject_detail["average_mark"] = average_mark
+                subject_detail["grade"] = Subject.grading(average_mark)
+                subject_detail["rank"] = student.sequence_rank(sequence_averages)
+                subject_detail["teacher"] = exam_result.teachers_name
+                subject_detail["remark"] = subject.add_remarks(average_mark)
+                # binding.break
+                details << subject_detail.to_s
+              else
+                [test_result, second_seq].each do |s|
+                  @warning_messages << generate_warning_message("Missing enrollment for Pupil #{student.full_name}", s, s.seq_title(with_class_name: false)) unless student.was_enrolled?(s.hashed_marks)
+                end
+              end
+            else
+              @warning_messages << generate_warning_message("Missing test/exam for subject #{subject.title}", subject, subject.title)
+            end
+          end
+
+          report_card_object[:average] = total_average.to_f / subject_num.to_f || 0
+          report_card_object[:passed_subjects] = passed_subjects
+          report_card_object[:details] = details
+          @bulk_report << report_card_object
+        end
+      end
+
+      rank_report_card
+      add_other_attributes
+
+      p @bulk_report
+      process_duration = Time.now - start_time
+      reports_to_be_deleted = ReportCard.where(school_class_id: @school_class.id, term_id: @term.id, academic_year_id: @academic_year.id)
+      reports_to_be_deleted.destroy_all if reports_to_be_deleted.present?
+      ReportCard.insert_all @bulk_report
+      @report_card_generator.update(is_successful: true, warning_messages: @warning_messages.uniq,
+                                    process_duration: process_duration, student_num: @enrollment,
+                                    student_passed_num: calc_student_passed_num, class_average: calc_class_average,
+                                    most_performed_students: get_most_performed_students, failed_errors: @failed_errors,
+                                    least_performed_students: get_least_performed_students)
+
+      @report_card_generator.update(progress_state: 2)
+
+      pdf_generator = PdfPrimaryReportCardFormatService.new(report_card_generator: @report_card_generator, is_bulk_create: true)
       pdf_data = pdf_generator.generate_bulk_pdf
       file_name = pdf_generator.file_name
       @report_card_generator.update(progress_state: 3)

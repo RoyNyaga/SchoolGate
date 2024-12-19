@@ -16,6 +16,22 @@ module SequencesHelper
     end
   end
 
+  def generate_nursery_student_marks_input(form, sequence, student)
+    if sequence.persisted?
+      form.text_field :mark, name: "sequence[marks][][mark]", class: "sequence-mark-input", value: student.sequence_mark_per_subject(sequence.hashed_marks)
+    else
+      form.text_field :mark, name: "sequence[marks][][mark]", class: "sequence-mark-input"
+    end
+  end
+
+  def generate_primary_student_marks_input(form, sequence, student)
+    if sequence.persisted?
+      form.number_field :mark, name: "sequence[marks][][mark]", step: "any", max: "20", class: "sequence-mark-input", value: student.sequence_mark_per_subject(sequence.hashed_marks)
+    else
+      form.number_field :mark, name: "sequence[marks][][mark]", step: "any", max: "20", class: "sequence-mark-input"
+    end
+  end
+
   def generate_is_enrolled_input(form, sequence, student)
     options = [["Yes", true], ["No", false]]
     if sequence.persisted?
